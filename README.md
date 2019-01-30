@@ -9,13 +9,18 @@ This project aims to identify and classify real bat calls according to the purpo
 
 [Hadi Soufi](https://github.com/HadiSoufi)
 
-[Yang Peng](https://github.com/yangp18)
-
-[Bety Rostandy](https://github.com/brostandy)
-
 [Thien Le](https://github.com/InsertGitHubUsernameHere)
 
 [Kevin Keomalaythong](https://github.com/kkeomalaythong)
+
+[Rahim Jawaid](https://github.com/aRahimIqbal)
+
+[David Massey](https://github.com/dlmassey)
+
+---2018
+[Yang Peng](https://github.com/yangp18)
+
+[Bety Rostandy](https://github.com/brostandy)
 
 ## Goals
 
