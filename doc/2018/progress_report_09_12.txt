@@ -1,0 +1,88 @@
+#Progress Report September 12th 2018
+
+##Introduction to the project(2-3 paragraph)
+
+For future scientific research the UNCG Bat & Mouse Lab records bat calls from over 100 sites across North Carolina, including the UNCG wetlands. This generates hundreds of thousands of recordings which are stored as .wav files. In order to save space and preserve relevant information, these .wav files are processed into Zero Crossing (ZC) form. Each file may contain anywhere from 1 to 50 individual bat calls (pulses), with some containing none and others with many more. A pulse may be used for any number of purpose, ranging from echolocation to mating. The Lab is interested in discovering and categorizing new kinds of pulses, however sorting through all of those files by hand would take years. We have been asked to write an algorithm that can categorize pulses for easy labeling by the Lab.
+
+While a .wav file stores a digitized sound wave, ZC form stores the dominant frequencies of that sound wave. For researchers, this form is advantageous because it allows us to easily see the dominant frequency sweep, or shape, of a given pulse. The shape of the pulse indicates it's purpose, with an echolocation call looking drastically different from a hunting call. ZC form provides a couple of other advantages as well, including saving space and aiding in gathering statistics. 
+
+Our algorithm has several hurdles to overcome, as outlined in the next section:
+
+##Goals:
+1.Extraction:
+Extract meaningful signal from noise.
+
+2.Clustering:
+Categorize the extracted calls into different types using clustering techniques.
+
+3.Classification:
+Classify if a Bat Echolocation(zero-crossing files) contains abnormal calls(i.e. social calls, foraging calls).
+
+
+##Outlined tasks for each team member
+
+###Yang Peng
+
+Completed:
+1. Did background study about Bat Echolocation and raw data;
+2. Learned AnalookW and Anabat format 132;
+3. Decoded the sample raw data using R and import to python. 
+
+To-do:
+1. Data preprocessing: 
+May include generate the readable raw data files from Anabat ZC files(zero-crossing files) and batch import to Python. Deal with noises, outliers. Split or merge data.
+2. Bat Echolocation Clustering:
+Categorize bat calls into different types using machine learning techniques;
+3. Classification:
+Classify if a Bat Echolocation contains abnormal calls using machine learning techniques.
+
+
+###Bety Rostandy
+Completed:
+1. Research background information about raw data;
+2. Research data processing with automated algorithm;
+3. Create workflow for tasks requirement.
+
+To-do
+1. Perform available R-package and AnalookW data extraction;
+2. Comparison of extracted information to make proceeding suggestions;
+3. Automate the data extraction procedure or generate best practice procedure.
+
+###Kevin Keomalaythong
+Completed:
+1. Brainstormed and analyzed all available algorithms for sorting through the data
+2. Compared between algorithms based on the time taken to implement
+3. Selected a suitable algorithm
+
+To-do: 
+1. Determine the x- and y-axes of the data
+2. Use a mathematical model based on slope calculation to determine a general direction of a curve
+3. Use slope information to sort each curve into normal and abnormal groups
+
+###Hadi Soufi
+Completed:
+1. Learned AnalookW
+2. Got familiar with Github and Python
+3. Designed an algorithm for noise removal
+
+To-do:
+1. Implement noise removal algorithm
+2. Research classification algorithms
+
+###Thien Le
+Completed:
+
+1. Get familiar with Python and Github;
+2. Do background study about the dataset;
+3. Observed the raw data
+
+To-do:
+1. Prototype of what a prototype should look like
+2. Front end Designer
+3. GUI
+
+
+
+
+
+

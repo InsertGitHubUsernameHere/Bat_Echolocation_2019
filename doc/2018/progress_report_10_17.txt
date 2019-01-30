@@ -1,0 +1,70 @@
+#Progress Report October 17th 2018
+
+##Introduction to the project(2-3 paragraph)
+
+For future scientific research the UNCG Bat & Mouse Lab records bat calls from over 100 sites across North Carolina, including the UNCG wetlands. This generates hundreds of thousands of recordings which are stored as .wav files. In order to save space and preserve relevant information, these .wav files are processed into Zero Crossing (ZC) form. Each file may contain anywhere from 1 to 50 individual bat calls (pulses), with some containing none and others with many more. A pulse may be used for any number of purpose, ranging from echolocation to mating. The Lab is interested in discovering and categorizing new kinds of pulses, however sorting through all of those files by hand would take years. We have been asked to write an algorithm that can categorize pulses for easy labeling by the Lab.
+
+While a .wav file stores a digitized sound wave, ZC form stores the dominant frequencies of that sound wave. For researchers, this form is advantageous because it allows us to easily see the dominant frequency sweep, or shape, of a given pulse. The shape of the pulse indicates it's purpose, with an echolocation call looking drastically different from a hunting call. ZC form provides a couple of other advantages as well, including saving space and aiding in gathering statistics. 
+
+We have issued each members to a specific task to do and here is the the progress for each members:
+
+##Outlined tasks for each team member
+
+###Kevin K - Create & implement mathematical algorithm enhancement
+Completed:
+1. Implemented a database in Python using SQLite to store 2-dimensional version of data into tables
+2. Applied a least-squares regression algorithm to compute and plot a regression line for a table based on its points
+
+To-do:
+1. Store individual sweeps into separate tables within the database
+2. Apply least-squares algorithm to indivdual sweeps and obtain slope information
+3. Use slope information to diffrentiate between normal and abnormal sweeps
+
+###Yang P 
+Completed:
+1. Built a bat.py module including 4 utility functions for data extraction, preprocessing and visualization:
+ a.extract_anabat:read original zero-crossing file and return time, frequency, amplitude and metadata(modified from ZCANT).
+ b.remove_noise:read time and frequency and return noise-removed pulses(based on Hadi's approach 3)
+ c.display_pulses: visualize extracted pulses
+ d.get_labeled_file: search the abnormal labeled file names in a folder.
+2. Performed descriptive analysis for dataset
+3. Wrote data dictionary and README.md
+4. Did an initial clustering analysis
+
+To-do:
+1.Improve noise removed method
+2.Improve clustering analysis
+3.Research on classification
+
+###Thien L - Create a user-friendly platform
+
+Completed:
+
+1. Initialized the Website using Django
+2. Create Models and Use Django Admin
+3. Integrated Chart.js with Django to display a more user friendly views for the user.
+
+To-do:
+1. Incorporate the  extracted data and present it through the use of Django and Chart.js
+2. Allow the user to be able to customize the graph(rename, edit, favorite)
+3.  Integrate and communicate to a smalll local database. 
+
+###Bety R - Data Extraction
+Completed:
+1. Multiprocessing zero crossing files using R-package;
+2. Feed in multiple .csv to Python; 
+3. Create workflow for procedure.
+
+To-do:
+1. Perform multiprocessing with ZCANT in Python;
+2. Baseline normalization to allow one-file analysis;
+3. Automate workflow.
+
+
+###Hadi S - Data Preprocessing
+Completed:
+1. Prototype noise removal process
+
+To-do:
+1. Refine noise removal
+2. Research clustering algorithms

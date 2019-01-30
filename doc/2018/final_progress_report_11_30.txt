@@ -1,0 +1,60 @@
+#Progress Report November 30th 2018
+
+##Introduction to the project
+
+For future scientific research the UNCG Bat & Mouse Lab records bat calls from over 100 sites across North Carolina, including the UNCG wetlands. This generates hundreds of thousands of recordings which are stored as .wav files. In order to save space and preserve relevant information, these .wav files are processed into Zero Crossing (ZC) form. Each file may contain anywhere from 1 to 50 individual bat calls (pulses), with some containing none and others with many more. A pulse may be used for any number of purpose, ranging from echolocation to mating. The Lab is interested in discovering and categorizing new kinds of pulses, however sorting through all of those files by hand would take years. We have been asked to write an algorithm that can categorize pulses for easy labeling by the Lab.
+
+While a .wav file stores a digitized sound wave, ZC form stores the dominant frequencies of that sound wave. For researchers, this form is advantageous because it allows us to easily see the dominant frequency sweep, or shape, of a given pulse. The shape of the pulse indicates it's purpose, with an echolocation call looking drastically different from a hunting call. ZC form provides a couple of other advantages as well, including saving space and aiding in gathering statistics. 
+
+##Goals:
+1.Extraction:
+Extract meaningful signal from noise.
+
+2.Clustering:
+Categorize the extracted calls into different types using clustering techniques.
+
+3.Classification:
+Classify if a Bat Echolocation(zero-crossing files) contains abnormal calls(i.e. social calls, foraging calls).
+
+
+##Outlined tasks for each team member
+
+###Kevin K
+
+Overall progress:
+1. Created a database server to store our data
+2. Created a Python/SQL module to allow GUI-database communication
+
+###Yang P 
+
+Overall progress:
+1. Created bat time, frequency and metadata extraction, bulk processing, pulses and clustering results visualization and labeled data searching utility methods. Improved noise removal method.
+2. Did statistical analysis of features and dataset.
+3. Implemented feature extraction method and performed K-Means clustering to categorize the extracted calls into different types.
+4. Classified if a Bat Echolocation(zero-crossing files) contains abnormal calls using Random Forest after trying different feature combination(90.32% classification accuracy).
+5. Graduate paper: Abnormal Bat Echolocation Detection
+
+
+###Thien L
+
+Overall progress:
+1. Created a more user friendly website application.
+2. The website now have an informative home page with albums that represents our step process for this project.
+3. Within each album will be all the images.
+4. Within each image there is several options to download, enlarge the image, and share the images. 
+5. You can now easily add new album and images to the website using Admin Django Backend.
+
+###Bety R
+
+Overall progress:
+1. Performed probability simulation for sample dataset to answer the probability of success in obtaining abnormal calls containing file given a processed folder;
+2. Produced a dataframe in .csv format with Filename, Time, Frequency and Pulse columns for zero-crossing files in a given data directory after noise filtering;
+3. Created get_summary() function to summarize Time and Frequency information for pulses. This function is expandable based on methodology used in future analysis;
+4. Graduate paper: Abnormal Bat Echolocation Detection.
+
+###Hadi S
+
+Overall progress:
+1. Designed and implemented several algorithms for noise removal
+2. Developed bulk processing to convert all ZC files into pulses & images
+3. Manually classified images and pulses
