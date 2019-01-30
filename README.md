@@ -17,7 +17,7 @@ This project aims to identify and classify real bat calls according to the purpo
 
 [David Massey](https://github.com/dlmassey)
 
----2018
+######2018
 [Yang Peng](https://github.com/yangp18)
 
 [Bety Rostandy](https://github.com/brostandy)
