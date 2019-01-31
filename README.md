@@ -5,7 +5,9 @@ This project aims to identify and classify real bat calls according to the purpo
 
 <img width="600" alt="bat echolocation" src="https://www.batconservationireland.org/wp-content/uploads/2013/10/EcholocationII.jpg">
 ## Presentations and Docs
+
 [Presentation One](https://github.com/InsertGitHubUsernameHere/Bat_Echolocation_2019/blob/master/doc/2019/presentation1.pdf)
+
 [BatalogProjectDocument](https://docs.google.com/document/d/1jJgxoAWclTfXR5WuWl7eNxvBmqgRZZZUhYIx0BMW1Hs/edit?usp=sharing)
 
 ## Members
