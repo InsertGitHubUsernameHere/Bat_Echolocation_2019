@@ -1,7 +1,7 @@
 # Bat_Echolocation
 
 ## Introduction
-This project aims to identify and classify real bat calls according to the purpose of that call, ranging from echolocation to mating. The calls are stored in Zero Crossing format; the data will have to be cleaned up as it contains a significant amount of noise. Once the data is cleaned, the bat calls will be clustered according to their shapes, and then classified for future scientific research. If all goes well, we will also be able to predict the nature of the calls based on metadata such as the time, location, and season that the calls were recorded in. The project is written in Python.
+Bat scientists at UNCG record bat calls from all over the state. Doing research on these calls can require years of manual work. Batalog seeks to do that automatically in a web interface, using deep learning techniques to catalog bat calls. The calls are stored in Zero Crossing format. Once the data is cleaned of noise, the bat calls will be clustered according to their shapes, and then classified for future scientific research. If all goes well, we will also be able to predict the nature of the calls based on metadata such as the time, location, and season that the calls were recorded in. The project is written in Python.
 
 <img width="600" alt="bat echolocation" src="https://www.batconservationireland.org/wp-content/uploads/2013/10/EcholocationII.jpg">
 
@@ -9,7 +9,7 @@ This project aims to identify and classify real bat calls according to the purpo
 
 [Presentation One](https://github.com/InsertGitHubUsernameHere/Bat_Echolocation_2019/blob/master/doc/2019/presentation1.pdf)
 
-[BatalogProjectDocument](https://docs.google.com/document/d/1jJgxoAWclTfXR5WuWl7eNxvBmqgRZZZUhYIx0BMW1Hs/edit?usp=sharing)
+[Batalog Project Document](https://docs.google.com/document/d/1jJgxoAWclTfXR5WuWl7eNxvBmqgRZZZUhYIx0BMW1Hs/edit?usp=sharing)
 
 ## Members
 
@@ -23,7 +23,7 @@ This project aims to identify and classify real bat calls according to the purpo
 
 [David Massey](https://github.com/dlmassey)
 
-2018<br/>
+###2018<br/>
 [Yang Peng](https://github.com/yangp18)
 
 [Bety Rostandy](https://github.com/brostandy)
