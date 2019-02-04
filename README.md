@@ -23,7 +23,7 @@ Bat scientists at UNCG record bat calls from all over the state. Doing research 
 
 [David Massey](https://github.com/dlmassey)
 
-###2018<br/>
+### 2018
 [Yang Peng](https://github.com/yangp18)
 
 [Bety Rostandy](https://github.com/brostandy)
