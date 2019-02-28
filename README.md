@@ -9,13 +9,13 @@ Bat scientists at UNCG record bat calls from all over the state. Doing research 
 
 [Progress Report 1](https://github.com/InsertGitHubUsernameHere/Bat_Echolocation_2019/tree/master/doc/2019/Slides/presentation1.pdf)
 
-[Progress Report 1.5](https://github.com/InsertGitHubUsernameHere/Bat_Echolocation_2019/tree/master/doc/2019/Slides/presentation1.5.pdf)
+* [Progress Report 1.5](https://github.com/InsertGitHubUsernameHere/Bat_Echolocation_2019/tree/master/doc/2019/Slides/presentation1.5.pdf)
 
 [Progress Report 2](https://github.com/InsertGitHubUsernameHere/Bat_Echolocation_2019/tree/master/doc/2019/Slides/presentation2.pdf)
 
-[Progress Report 2.1](https://github.com/InsertGitHubUsernameHere/Bat_Echolocation_2019/tree/master/doc/2019/Slides/presentation2.1.pdf)
+* [Progress Report 2.1](https://github.com/InsertGitHubUsernameHere/Bat_Echolocation_2019/tree/master/doc/2019/Slides/presentation2.1.pdf)
 
-[Progress Report 2.2](https://docs.google.com/presentation/d/1wq229-x5hRvf6A8AKn8MXCq1HauLx43L18w4EComRlw/edit#slide=id.g4f924e4f3e_2_110)
+* [Progress Report 2.2](https://docs.google.com/presentation/d/1wq229-x5hRvf6A8AKn8MXCq1HauLx43L18w4EComRlw/edit#slide=id.g4f924e4f3e_2_110)
 
 [Batalog Project Document](https://docs.google.com/document/d/1jJgxoAWclTfXR5WuWl7eNxvBmqgRZZZUhYIx0BMW1Hs/edit?usp=sharing)
 
