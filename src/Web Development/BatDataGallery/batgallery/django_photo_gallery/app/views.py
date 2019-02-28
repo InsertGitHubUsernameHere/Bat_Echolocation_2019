@@ -4,20 +4,22 @@ from django.shortcuts import render
 from django.http import HttpRequest
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import DetailView
+from django.core.files.storage import FileSystemStorage
 
 from app.models import Album, AlbumImage
 
 
 def upload(request):
+    context = {}
     if request.method == 'POST':
-        uploaded_file = request.FILES["document"]
-        print(uploaded_file.name)
-        print(uploaded_file.size)
-    return render(request, 'gallery.html')
+        uploaded_file = request.FILES['document']
+        fs = FileSystemStorage()
+        name = fs.save(uploaded_file.name, uploaded_file)
+        context['url'] = fs.url(name)
+    return render(request, 'upload.html', context)
 
 
 def gallery(request):
-    upload(request)
     list = Album.objects.filter(is_visible=True).order_by('-created')
     paginator = Paginator(list, 10)
 

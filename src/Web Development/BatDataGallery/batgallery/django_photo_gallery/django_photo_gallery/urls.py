@@ -13,6 +13,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = [
+    path('upload', app.views.upload, name='upload'),
     url(r'^$', app.views.gallery, name='gallery'),
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/icons/favicon.ico', permanent=True)),
     url(r'^(?P<slug>[-\w]+)$', app.views.AlbumDetail.as_view(),
@@ -28,5 +29,8 @@ urlpatterns = [
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'app.views.handler404'
