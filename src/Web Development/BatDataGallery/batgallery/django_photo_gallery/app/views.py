@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import DetailView
 from django.core.files.storage import FileSystemStorage
-
+from app.signupforms import SignUPForm
+from django.contrib.auth.models import User
 from app.models import Album, AlbumImage
 
 
@@ -49,3 +50,18 @@ class AlbumDetail(DetailView):
 def handler404(request):
     assert isinstance(request, HttpRequest)
     return render(request, 'handler404.html', None, None, 404)
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUPForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            return redirect('gallery')
+        else:
+            args = {'form': form}
+            return render(request, 'signup.html', args)
+    else:
+        form = SignUPForm()
+
+        args = {'form': form}
+        return render(request, 'signup.html', args)
