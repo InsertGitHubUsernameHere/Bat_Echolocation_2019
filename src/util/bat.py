@@ -17,7 +17,7 @@ from numpy.ma import masked_array
 from guano import GuanoFile, base64decode, base64encode
 import logging
 import csv
-from batcall import batcall
+#from batcall import batcall
 from scipy import interpolate
 from scipy.signal import savgol_filter
 import random
@@ -96,7 +96,7 @@ def extract_anabat(fdir, hpfilter_khz=8.0, **kwargs):
         int_i = 0  # interval index
 
         while i < size:
-            
+
             if int_i >= len(intervals_us):
                 # Anabat files were formerly capped at 16384 dots, but may now be larger; grow
                 intervals_us = np.concatenate((intervals_us, np.empty(2**14, np.dtype('uint32'))))
@@ -162,7 +162,7 @@ def extract_anabat(fdir, hpfilter_khz=8.0, **kwargs):
 
     intervals_s = intervals_us * 1e-6
     times_s = np.cumsum(intervals_s)
-    
+
     freqs_hz = 1 / (times_s[2:] - times_s[:-2]) * divratio
     freqs_hz[freqs_hz == np.inf] = 0  # TODO: fix divide-by-zero
     freqs_hz[freqs_hz < 4000] = 0
@@ -172,16 +172,16 @@ def extract_anabat(fdir, hpfilter_khz=8.0, **kwargs):
         n_offdots = sum(offdots.values())
         log.debug('Throwing out %d off-dots of %d (%.1f%%)', n_offdots, len(times_s), float(n_offdots)/len(times_s)*100)
         off_mask = np.zeros(len(intervals_us), dtype=bool)
-        
+
         for int_i, dotcount in offdots.items():
             off_mask[int_i:int_i+dotcount] = True
-            
+
         while(len(freqs_hz) < len(off_mask)):
             freqs_hz=np.append(freqs_hz,0)
-            
+
         times_s = masked_array(times_s, mask=off_mask).compressed()
         freqs_hz = masked_array(freqs_hz, mask=off_mask).compressed()
-        
+
     min_, max_ = min(freqs_hz) if any(freqs_hz) else 0, max(freqs_hz) if any(freqs_hz) else 0
     log.debug('%s\tDots: %d\tMinF: %.1f\tMaxF: %.1f', basename(fdir), len(freqs_hz), min_/1000.0, max_/1000.0)
 
@@ -194,7 +194,7 @@ def extract_anabat(fdir, hpfilter_khz=8.0, **kwargs):
 def remove_noise(time, freq, dy_cutoff = 100,cutoff = 2000,avg_d = 3000,pulse_size = 30):
     """
      Remove noises for bat echolocation and return pulses points.
-     Input: 
+     Input:
          time -- seconds
          frequency -- Khz
          dy_cutoff -- threshold of points vertical distance for smoothing holes
@@ -203,10 +203,10 @@ def remove_noise(time, freq, dy_cutoff = 100,cutoff = 2000,avg_d = 3000,pulse_si
          pulse_size -- threshold to determine how many points make up of a pulse
      Output:
          bcs -- a list of valid pulses with time and freqency
-     
+
      """
 
-    # Format zc_str to floats 
+    # Format zc_str to floats
     zc_x = time.astype(np.float)
     zc_y = freq.astype(np.float)
 
@@ -281,7 +281,7 @@ def remove_noise(time, freq, dy_cutoff = 100,cutoff = 2000,avg_d = 3000,pulse_si
 def remove_noise2(time, freq, dy_cutoff = 100,cutoff = 2000,avg_d = 3000,pulse_size = 30,pulse_dy_avg=500):
     """
      Remove noises for bat echolocation and return pulses points.
-     Input: 
+     Input:
          time -- seconds
          frequency -- Khz
          dy_cutoff -- threshold of points vertical distance for smoothing holes
@@ -290,10 +290,10 @@ def remove_noise2(time, freq, dy_cutoff = 100,cutoff = 2000,avg_d = 3000,pulse_s
          pulse_size -- threshold to determine how many points make up of a pulse
      Output:
          bcs -- a list of valid pulses with time and freqency
-     
+
      """
 
-    # Format zc_str to floats 
+    # Format zc_str to floats
     zc_x = time.astype(np.float)
     zc_y = freq.astype(np.float)
 
@@ -371,7 +371,7 @@ def remove_noise2(time, freq, dy_cutoff = 100,cutoff = 2000,avg_d = 3000,pulse_s
 #                     prev_y = y
 #                 i+=1
 #             bcs.append(bc)
-            
+
             if np.mean(pulse_dy)<pulse_dy_avg:
                 bcs.append(bc)
             pulse_dy=[]
@@ -386,17 +386,17 @@ def display_pulses(pulses, size, nrows=4,figsize=(10,8),rand_flag=True,cluster=N
     plot a few random sample of the valid pulses;
     If rand_flag is False,
     plot valid pulses by clusters
-     
+
      """
     # number of the pulses
     num = len(pulses)
     colors = cm.rainbow(np.linspace(0, 1, len(pd.Series(cluster).unique())))
-    
+
     idx = random.sample(range(0, num), size)
     if not rand_flag:
         idx=range(0,num)
     ix=0
-    
+
     fig, axes = plt.subplots(nrows=nrows, ncols=int(math.ceil(size*1.0/nrows)), figsize=figsize)
     if nrows==1:
         for ax in axes:
@@ -409,7 +409,7 @@ def display_pulses(pulses, size, nrows=4,figsize=(10,8),rand_flag=True,cluster=N
             else:
                 ax.set_title('cluster '+str(cluster[i])+' pulse: '+str(i))
                 ax.scatter([l[0] for l in pulses[i]], [l[1] for l in pulses[i]], s=2,c=colors[cluster[i]])
-            
+
             ix+=1
             if ix==size:
                 break
@@ -429,14 +429,14 @@ def display_pulses(pulses, size, nrows=4,figsize=(10,8),rand_flag=True,cluster=N
                 ix+=1
                 if ix==size:
                     break
-            
+
 
     fig.tight_layout()
-    
+
 # def get_labeled_file(datadir, label):
 #     """
 #      Given a folder directory and the abnormal label, return the filenames with abnormal label in metadata.
-     
+
 #      """
 #     info=list()
 #     lfiles=list()
@@ -448,21 +448,21 @@ def display_pulses(pulses, size, nrows=4,figsize=(10,8),rand_flag=True,cluster=N
 #             continue
 #         else:
 #             continue
-            
+
 #     for batinfo in info:
-#         if label in str(batinfo[3]['species']): 
-#             lfiles.append(batinfo[4]) 
+#         if label in str(batinfo[3]['species']):
+#             lfiles.append(batinfo[4])
 #     return lfiles
 
 
 def get_labeled_file(datadir, label):
     """
      Given a folder directory and the abnormal label, return the filenames with abnormal label in metadata.
-     
+
      """
     info=list()
     lfiles=list()
-    
+
     for root, dirs, files in os.walk(datadir):
         for filename in files:
             if filename.endswith("#"):
@@ -472,10 +472,10 @@ def get_labeled_file(datadir, label):
                 continue
             else:
                 continue
-            
+
     for batinfo in info:
-        if label in str(batinfo[3]['species']): 
-            lfiles.append(batinfo) 
+        if label in str(batinfo[3]['species']):
+            lfiles.append(batinfo)
     return lfiles
 
 def get_dy_dy2(pulses):
@@ -498,9 +498,9 @@ def get_dy_dy2(pulses):
                 dy2.append(cur_dy-prev_dy)
                 prev_y=dot[1]
                 prev_dy=cur_dy
-                
+
             i+=1
-        
+
         pulse_dy.append(dy)
         pulse_dy2.append(dy2)
     return pulse_dy,pulse_dy2
@@ -520,7 +520,7 @@ def bulk_processing(datadir):
     for root, dirs, files in os.walk(datadir):
         for filename in files:
             if filename.endswith("#"):
-                signal=list(extract_anabat(root+'\\'+filename))           
+                signal=list(extract_anabat(root+'\\'+filename))
                 signal.append(filename)
                 pulses=remove_noise2(signal[0],signal[1])
                 valid_pulses=valid_pulses+pulses
