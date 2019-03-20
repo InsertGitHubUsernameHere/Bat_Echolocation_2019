@@ -11,7 +11,7 @@
 <body>
     <nav role="navigation">
         <div class="nav-wrapper container">
-            <a id="logo-container" href="#" class="brand-logo">Bat Echolocation Data</a>
+            <a id="logo-container" href="{% url 'gallery' %}" class="brand-logo">Bat Echolocation Data</a>
             <ul class="right hide-on-med-and-down">
               <a href="https://github.com/InsertGitHubUsernameHere/Bat_Echolocation_2019" target="_blank">
                   <img src="{% static 'social/social-github.svg' %}" class="dpg-icon" alt="Django Photo Gallery Github" />
@@ -20,16 +20,16 @@
             <ul class="right hide-on-med-and-med">
             {% if user.is_authenticated %}
                 Hi {{ user.username }}!
-            <ul class="right hide-on-med-and-down">    
+            <ul class="right hide-on-med-and-down">
                 <a href="{% url 'logout' %}">Logout</a>
-            </ul>    
+            </ul>
             {% else %}
             <ul class="right hide-on-med-and-down">
                 <a href="{% url 'login' %}">Login</a>
-            </ul>    
+            </ul>
             <ul class="right hide-on-med-and-down">
                 <a href="{% url 'signup' %}">Signup</a>
-            </ul>        
+            </ul>
             {% endif %}
             </ul>
             <ul id="nav-mobile" class="sidenav" style="transform: translateX(-105%);">

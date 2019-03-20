@@ -4,6 +4,7 @@ from django.views.generic.base import RedirectView
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 import app.forms
 import app.views
@@ -14,6 +15,7 @@ admin.autodiscover()
 
 urlpatterns = [
     path('upload', app.views.upload, name='upload'),
+    path('display', app.views.displayImages, name='displayImages'),
     url(r'^$', app.views.gallery, name='gallery'),
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/icons/favicon.ico', permanent=True)),
     url(r'^(?P<slug>[-\w]+)$', app.views.AlbumDetail.as_view(),
@@ -30,7 +32,7 @@ urlpatterns = [
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'app.views.handler404'

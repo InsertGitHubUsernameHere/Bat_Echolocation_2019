@@ -7,6 +7,8 @@ from django.views.generic import DetailView
 from django.core.files.storage import FileSystemStorage
 from app.signupforms import SignUPForm
 from django.contrib.auth.models import User
+from os import listdir
+from os.path import isfile, join
 from app.models import Album, AlbumImage
 
 
@@ -17,7 +19,15 @@ def upload(request):
         fs = FileSystemStorage()
         name = fs.save(uploaded_file.name, uploaded_file)
         context['url'] = fs.url(name)
+    if request.POST.get('Next'):
+        return redirect('displayImages')
     return render(request, 'upload.html', context)
+
+
+def displayImages(request):
+    onlyfiles = [f for f in listdir("media/test_images/") if isfile(join("media/test_images/", f))]
+    print(onlyfiles)
+    return render(request, 'displayImages.html', {'onlyfiles': onlyfiles})
 
 
 def gallery(request):
@@ -50,6 +60,7 @@ class AlbumDetail(DetailView):
 def handler404(request):
     assert isinstance(request, HttpRequest)
     return render(request, 'handler404.html', None, None, 404)
+
 
 def signup(request):
     if request.method == 'POST':
