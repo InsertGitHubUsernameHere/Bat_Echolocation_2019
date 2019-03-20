@@ -28,10 +28,12 @@
 </div>
 
 <div style="text-align:center">
+{% if user.is_authenticated %}
   <h2 align='center'>File Analysis</h2>
   <form action="/upload">
       <input type="submit" value="Click Here to Began!" />
   </form>
+  {% endif %}
 </div>
 
 

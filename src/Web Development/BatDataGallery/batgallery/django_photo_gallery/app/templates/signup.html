@@ -1,7 +1,34 @@
+{% extends "formlayout.html" %}
+{% load staticfiles %}
 
+{% block content %}
+
+<div class="slider">
+    <ul class="slides">
+        <li>
+            <img src="{% static 'images/bat1.jpg' %}" alt="Bat Data Gallery" class="opaque">
+            <div class="caption center-align">
+                <h1>
+                    Our Goals<br/>
+                    <small class="light text-lighten-3 hide-on-small-only">Extration, Clustering and Classification</small>
+                </h1>
+
+            </div>
+        </li>
+        <li>
+            <img src="{% static 'images/bat2.jpg' %}" alt="Bat Data Gallery" class="opaque">
+            <div class="caption left-align">
+                <h1>
+                    Members<br />
+                    <small class="light text-lighten-3 hide-on-small-only">Hadi Soufi,Thien Le, Kevin Keomalaythong, David Massey, Rahim Jawaid(Yang Peng, Bety Rostandy)</small>
+                </h1>
+            </div>
+        </li>
+    </ul>
+</div>
 
 <div class="container">
-	<h1>Signup Form</h1>
+	<h2>Signup Form</h2>
 
 	<form method="post">
 		{% csrf_token %}
@@ -11,3 +38,5 @@
 		<button type="reset">Reset Field</button>
 	</form>	
 </div>	
+</br>
+{% endblock %}
