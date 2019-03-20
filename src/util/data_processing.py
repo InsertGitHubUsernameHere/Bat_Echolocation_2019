@@ -121,9 +121,12 @@ def zc_prc(indir, outdir):
             y = [point[1] for point in pulse]
             plyft = polyfit(x=x, y=y, deg=1)
             classification = '/echolocation/' if plyft[1] < 0 else '/abnormal/'
-            filename_split = filename.rsplit(".", 1)[0].rsplit("\\", 1)[-1]
+            if indir.startswith('/'):
+                filename_split = filename.rsplit(".", 1)[0].rsplit("/", 1)[-1]
+            else:
+                filename_split = filename.rsplit(".", 1)[0].rsplit("\\", 1)[-1]
             save_path = f'{outdir}{classification}{filename_split}_{i}.png'
-
+            #print(save_path)
             # create and save PNG files of pulses
             ax.axis('off')
             ax.scatter(x, y)
@@ -148,7 +151,7 @@ def png_to_binary(dir):
         name = path[path.rfind('\\')+1:]
         with open(path, 'rb') as binfile:
             raw = sqlite3.Binary(binfile.read())
-        os.remove(path)
+        #os.remove(path)
         return name, raw
 
     if len(paths_echo) > 0:

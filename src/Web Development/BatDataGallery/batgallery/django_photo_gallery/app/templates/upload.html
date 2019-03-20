@@ -32,11 +32,8 @@
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <input type="file" name="document">
-    <button type="submit">Upload file</button>
+    <button type="submit" value='Next' name='Next'>Upload file</button>
   </form>
-  {% if url %}
-    <p>View the Uploaded File: <a href="{{ url }}">Here</a></p>
-  {% endif %}
 </div>
 
 <div class="container">

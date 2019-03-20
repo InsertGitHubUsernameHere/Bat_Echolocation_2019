@@ -1,5 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import os
+print(os.getcwd())
+path = os.getcwd()
+while path[path.rfind('/')+1:] != 'Bat_Echolocation_2019':
+    path = os.path.dirname(path)
+print(path)
+import sys
+import sqlite3
+sys.path.insert(0, path)
+from src.util.database import db_API
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -18,6 +28,10 @@ def upload(request):
         uploaded_file = request.FILES['document']
         fs = FileSystemStorage()
         name = fs.save(uploaded_file.name, uploaded_file)
+
+        with sqlite3.connect('../django_photo_gallery/db.sqlite3') as conn:
+            db_API.insert(conn, fs.location, os.path.realpath(f'{fs.location}/pulses'))
+
         context['url'] = fs.url(name)
     if request.POST.get('Next'):
         return redirect('displayImages')
