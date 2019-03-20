@@ -1,7 +1,8 @@
-import csv, glob, gc, pandas as pd, matplotlib.pyplot as plt, numpy as np
+import csv, glob, gc, pandas as pd, matplotlib.pyplot as plt, numpy as np, os, sqlite3
 from numpy.polynomial.polynomial import polyfit
 from scipy.signal import savgol_filter
-from util import bat
+from src.util import bat
+
 
 def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=20):
     if graph is None:
@@ -100,6 +101,7 @@ def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=2
 
     return cleaner_graph
 
+
 # fetch ZC file from GUI upload process located at indir
 # output pulses as PNG images and place them in outdir
 def zc_prc(indir, outdir):
@@ -131,3 +133,33 @@ def zc_prc(indir, outdir):
 
     s = pd.Series(zc_files)
     s.apply(lambda filename: extract_pulses(filename, outdir))
+
+
+# encode PNG images to binary
+def png_to_binary(dir):
+    png_echo = glob.glob(os.path.realpath(f'{dir}/echolocation/*.png'), recursive=True)
+    png_abnm = glob.glob(os.path.realpath(f'{dir}/abnormal/*.png'), recursive=True)
+
+    paths_echo = pd.Series(png_echo)
+    paths_abnm = pd.Series(png_abnm)
+    df_queries = pd.DataFrame()
+
+    def bin_prc(path):
+        name = path[path.rfind('\\')+1:]
+        with open(path, 'rb') as binfile:
+            raw = sqlite3.Binary(binfile.read())
+        os.remove(path)
+        return name, raw
+
+    if len(paths_echo) > 0:
+        df_queries['echolocation'] = paths_echo.apply(lambda p: bin_prc(p))
+
+    if len(paths_abnm) > 0:
+        df_queries['abnormal'] = paths_abnm.apply(lambda p: bin_prc(p))
+
+    return df_queries
+
+
+# decode incoming binary data into PNG file and save it to a directory - IN PROGRESS
+def binary_to_png():
+    pass

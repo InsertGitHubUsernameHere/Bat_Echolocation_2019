@@ -1,13 +1,10 @@
 """
 Module for data extraction, preprocessing and visulization.
-
 """
 
 from __future__ import division
-import io
 import mmap
 import struct
-import unicodedata
 import contextlib
 from os.path import basename
 from datetime import datetime
@@ -16,9 +13,6 @@ import numpy as np
 from numpy.ma import masked_array
 from guano import GuanoFile, base64decode, base64encode
 import logging
-import csv
-#from batcall import batcall
-from scipy import interpolate
 from scipy.signal import savgol_filter
 import random
 import matplotlib.pyplot as plt

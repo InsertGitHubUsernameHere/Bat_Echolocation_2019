@@ -1,55 +1,49 @@
 '''end goal of code is to send data from ZC file to database'''
+# next goal: send images to GUI
 
-from util import data_processing
-from numpy.polynomial.polynomial import polyfit
-import csv, glob, gc, pandas as pd, matplotlib.pyplot as plt, numpy as np, os, PIL, sqlite3
-from os.path import realpath
-from PIL import Image
+from src.util import data_processing
 
-#conn = sqlite3.connect('')
 
-# query handler module
-def query_handler(queries):
-    print(queries)
+def get_tables(conn):
+    c = conn.cursor()
+    c.execute('SELECT name FROM sqlite_master WHERE type=\'table\'')
+    tables = [i[0] for i in c.fetchall()]
+    return tables
 
-# PNG-binary conversion modules
-def png_to_binary(dir):
-    png_echo = glob.glob(realpath(f'{dir}/echolocation/*.png'), recursive=True)
-    png_abnm = glob.glob(realpath(f'{dir}/abnormal/*.png'), recursive=True)
 
-    df_echo = pd.DataFrame({'path': png_echo})
-    df_abnm = pd.DataFrame({'path': png_abnm})
+def create_table(conn, table):
+    c = conn.cursor()
 
-    # helper function for png_to_binary
-    # creates a list of queries for each image and corresponsing raw binary data
-    def create_query(names, raw_data_series):
-        print(len(raw_data_series.iloc[0]))
-        s = pd.Series(list(zip(names, raw_data_series)))
-        s = s.apply(lambda t: f'INSERT INTO Images VALUES ({t[0]}, {t[1]});')
-        return s
+    if table == 'images':
+        sql_query = f'CREATE TABLE {table} (name VARCHAR(255) PRIMARY KEY, classification VARCHAR(255), raw_data BLOB);'
+    elif table == 'users':
+            sql_query = f'CREATE TABLE {table} (username VARCHAR(255) PRIMARY KEY, password VARCHAR(255), ' \
+                'email VARCHAR(255), first_name VARCHAR(255), mid_init CHAR(1), last_name VARCHAR(255));'
 
-    if len(png_echo) > 0:
-        df_echo['name'] = df_echo['path'].apply(lambda p: p[p.rfind('\\')+1:])
-        df_echo['raw'] = df_echo['path'].apply(lambda p: (Image.open(p)).tobytes())
-        df_echo['query'] = create_query(df_echo['name'], df_echo['raw'])
-        query_handler(df_echo['query'])
-        df_echo['path'].apply(lambda p: os.remove(p))
+    with conn:
+        c.execute(sql_query)
 
-    if len(png_abnm) > 0:
-        df_abnm['name'] = df_abnm['path'].apply(lambda p: p[p.rfind('\\')+1:])
-        df_abnm['raw'] = df_abnm['path'].apply(lambda p: (Image.open(p)).tobytes())
-        df_abnm['query'] = create_query(df_abnm['name'], df_abnm['raw'])
-        query_handler(df_abnm['query'])
-        df_abnm['path'].apply(lambda p: os.remove(p))
 
-    # return query lists for both classes?
-
-# decode incoming binary data into PNG file and save it to a directory
-def binary_to_png(bin):
-    pass
-
-# fetch uploaded ZC files
-def fetch_zc(indir, outdir):
+# grab uploaded ZC file from GUI, get its cleaned pulses, convert them into PNG images, and insert them into DB
+def insert(conn, indir, outdir):
     data_processing.zc_prc(indir, outdir)
-    png_to_binary(outdir)
-    #pass
+    df_queries = data_processing.png_to_binary(outdir)
+
+    # get list of tables currently in DB
+    tables = get_tables(conn)
+
+    if 'images' not in tables:
+        create_table(conn, 'images')
+
+    def insert_image(conn, name, raw, classification):
+        c = conn.cursor()
+        with conn:
+            c.execute('INSERT INTO images VALUES (?, ?, ?);', (name, classification, raw))
+
+    for column in df_queries.columns:
+        df_queries[column].apply(lambda q: insert_image(conn, q[0], q[1], column))
+
+
+# fetch images from DB and pass them to GUI - IN PROGRESS
+def select(conn, table, fields=None):
+    pass
