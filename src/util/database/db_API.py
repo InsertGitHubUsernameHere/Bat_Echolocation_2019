@@ -2,6 +2,8 @@
 # next goal: send images to GUI
 
 from src.util import data_processing
+import pandas as pd
+import os
 
 
 def get_tables(conn):
@@ -45,5 +47,14 @@ def insert(conn, indir, outdir):
 
 
 # fetch images from DB and pass them to GUI - IN PROGRESS
-def select(conn, table, fields=None):
-    pass
+def fetch_images(conn, fields=None):
+    c = conn.cursor()
+    c.execute('SELECT * FROM images;')
+    df = pd.DataFrame.from_records(c.fetchall(), columns=['name', 'classification', 'raw'])
+
+    def decode_to_png(name, classification, raw):
+        path = os.path.realpath(f'../django_photo_gallery/media/pulses/{classification}/{name}')
+        with open(path, 'wb') as png_file:
+            png_file.write(raw)
+
+    df.apply(lambda r: decode_to_png(r[0], r[1], r[2]), axis=1)
