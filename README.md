@@ -19,7 +19,7 @@ Bat scientists at UNCG record bat calls from all over the state. Doing research 
 
 * [Progress Report 2.3](https://github.com/InsertGitHubUsernameHere/Bat_Echolocation_2019/tree/master/doc/2019/Slides/presentation2.3.pdf)
 
-* [Progress Report 2.4](https://github.com/InsertGitHubUsernameHere/Bat_Echolocation_2019/tree/master/doc/2019/Slides/presentation2.4.pdf)
+* [Progress Report 2.4](https://docs.google.com/presentation/d/1PnWJF2w1unStshIkm4f0KwYNk9qJu1a3GIUX_r6sfMY/edit?usp=sharing)
 
 [Batalog Project Document](https://docs.google.com/document/d/1jJgxoAWclTfXR5WuWl7eNxvBmqgRZZZUhYIx0BMW1Hs/edit?usp=sharing)
 
