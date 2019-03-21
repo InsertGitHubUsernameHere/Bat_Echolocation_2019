@@ -14,6 +14,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = [
+    path('', include('app.urls')),
     path('upload', app.views.upload, name='upload'),
     path('display', app.views.displayImages, name='displayImages'),
     url(r'^$', app.views.gallery, name='gallery'),

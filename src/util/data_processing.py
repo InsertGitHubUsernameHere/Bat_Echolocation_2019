@@ -1,4 +1,11 @@
-import csv, glob, gc, pandas as pd, matplotlib.pyplot as plt, numpy as np, os, sqlite3
+import csv
+import glob
+import gc
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import os
+import sqlite3
 from numpy.polynomial.polynomial import polyfit
 from scipy.signal import savgol_filter
 from src.util import bat
@@ -105,64 +112,61 @@ def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=2
 # fetch ZC file from GUI upload process located at indir
 # output pulses as PNG images and place them in outdir
 def zc_prc(indir, outdir):
-    path = f'{indir}/**/*#'
-    zc_files = glob.glob(path, recursive=True)
+    #print(f'indir: {indir}')
+    #print(f'outdir: {outdir}')
+    zc_filename = (glob.glob(f'{indir}/**/*#', recursive=True))[0]
+    #print(f'zc_file: {zc_file}')
+    sep = '/' if indir.startswith('/') else '\\'
 
-    # helper funtion for zc_prc
-    # cleans data and extracts pulses, then saves those pulses into PNG images
-    def extract_pulses(filename, outdir):
-        data = bat.extract_anabat(filename)
-        raw = list(data)
-        pulses = clean_graph(filename=filename, graph=[raw[0], raw[1]])
-        fig, ax = plt.subplots()
+    data = bat.extract_anabat(zc_filename)
+    raw = list(data)
+    pulses = clean_graph(filename=zc_filename, graph=[raw[0], raw[1]])
+    fig, ax = plt.subplots()
 
-        for i, pulse in enumerate(pulses):
-            x = [point[0] for point in pulse]
-            y = [point[1] for point in pulse]
-            plyft = polyfit(x=x, y=y, deg=1)
-            classification = '/echolocation/' if plyft[1] < 0 else '/abnormal/'
-            if indir.startswith('/'):
-                filename_split = filename.rsplit(".", 1)[0].rsplit("/", 1)[-1]
-            else:
-                filename_split = filename.rsplit(".", 1)[0].rsplit("\\", 1)[-1]
-            save_path = f'{outdir}{classification}{filename_split}_{i}.png'
-            #print(save_path)
-            # create and save PNG files of pulses
-            ax.axis('off')
-            ax.scatter(x, y)
-            fig.savefig(save_path, transparent=True, dpi=50)
-            plt.cla()
-            gc.collect()
+    for i, pulse in enumerate(pulses):
+        # get pulse points' coordinates
+        x = [point[0] for point in pulse]
+        y = [point[1] for point in pulse]
 
-    s = pd.Series(zc_files)
-    s.apply(lambda filename: extract_pulses(filename, outdir))
+        # obtain a linear fit and classify
+        plyft = polyfit(x=x, y=y, deg=1)
+        classification = '/echolocation/' if plyft[1] < 0 else '/abnormal/'
+
+        # create and save PNG files of pulses
+        zc_filename_split = zc_filename.rsplit(".", 1)[0].rsplit(sep, 1)[-1]
+        save_path = os.path.realpath(f'{outdir}{classification}{zc_filename_split}_{i}.png')
+        ax.axis('off')
+        ax.scatter(x, y)
+        fig.savefig(save_path, transparent=True, dpi=50)
+        plt.cla()
+        gc.collect()
 
 
 # encode PNG images to binary
 def png_to_binary(dir):
-    png_echo = glob.glob(os.path.realpath(f'{dir}/echolocation/*.png'), recursive=True)
-    png_abnm = glob.glob(os.path.realpath(f'{dir}/abnormal/*.png'), recursive=True)
-
-    paths_echo = pd.Series(png_echo)
-    paths_abnm = pd.Series(png_abnm)
-    df_queries = pd.DataFrame()
+    paths_echo = pd.Series(glob.glob(os.path.realpath(f'{dir}/echolocation/*.png'), recursive=True))
+    paths_abnm = pd.Series(glob.glob(os.path.realpath(f'{dir}/abnormal/*.png'), recursive=True))
+    df = pd.DataFrame()
 
     def bin_prc(path):
-        name = path[path.rfind('\\')+1:]
+        name = path[path.rfind('/' if dir.startswith('/') else '\\') + 1:]
         with open(path, 'rb') as binfile:
             raw = sqlite3.Binary(binfile.read())
-        #os.remove(path)
+        os.remove(path)
         return name, raw
 
     if len(paths_echo) > 0:
-        df_queries['echolocation'] = paths_echo.apply(lambda p: bin_prc(p))
+        df['echolocation'] = paths_echo.apply(lambda p: bin_prc(p))
 
     if len(paths_abnm) > 0:
-        df_queries['abnormal'] = paths_abnm.apply(lambda p: bin_prc(p))
+        df['abnormal'] = paths_abnm.apply(lambda p: bin_prc(p))
 
-    return df_queries
+    return df
 
 
-# decode incoming binary data into PNG file and save it to a directory - IN PROGRESS
-def binary_to_png():
-    pass
+# decode incoming binary data into PNG file and save it to a directory
+def binary_to_png(name, raw, classification):
+    path = os.path.realpath(f'../django_photo_gallery/media/pulses/{classification}/{name}')
+    with open(path, 'wb') as png_file:
+        png_file.write(raw)
+    os.remove(path)  # -> TESTING ONLY - REMOVES PNG FILES IN /pulses/... FOLDER
