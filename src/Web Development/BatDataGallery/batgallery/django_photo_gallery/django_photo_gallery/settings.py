@@ -10,8 +10,8 @@ SECRET_KEY = '8ace3072-47a0-4910-b522-dc3601f38c35'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1','localhost','django-photo-gallery.velingeorgiev.pro']
-INTERNAL_IPS = ('0.0.0.0','127.0.0.1','localhost',)
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost', 'django-photo-gallery.velingeorgiev.pro']
+INTERNAL_IPS = ('0.0.0.0', '127.0.0.1', 'localhost',)
 
 INSTALLED_APPS = [
     'app',
@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
     'django.contrib.sites'
-    ]
+]
 
 SITE_ID = 1
 
@@ -102,12 +102,16 @@ STATIC_URL = '/static/'
 
 # https://docs.djangoproject.com/en/1.8/howto/static-files/deployment/
 # python manage.py collectstatic
-#STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static/']))
-STATIC_ROOT = BASE_DIR + '/static/'
+# STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static/']))
+# STATIC_ROOT = BASE_DIR + '/static/'
+STATICFILES_DIR = [
+    os.path.join(BASE_DIR, 'app/static')
+]
 
 MEDIA_URL = '/media/'
-#MEDIA_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['media/']))
-MEDIA_ROOT = BASE_DIR + '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['media/']))
+# MEDIA_ROOT = BASE_DIR + '/media/'
 
 LOGGING = {
     'version': 1,
@@ -146,4 +150,3 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder'
 )
-

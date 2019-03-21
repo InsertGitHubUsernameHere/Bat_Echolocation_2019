@@ -11,16 +11,30 @@
 <body>
     <nav role="navigation">
         <div class="nav-wrapper container">
-            <a id="logo-container" href="#" class="brand-logo">CSC 505 Bat Echolocation Data</a>
+            <a id="logo-container" href="/" class="brand-logo">Bat Echolocation Data</a>
             <ul class="right hide-on-med-and-down">
-              <a href="https://github.com/UNCG-CSE/Bat_Echolocation" target="_blank">
+              <a href="https://github.com/InsertGitHubUsernameHere/Bat_Echolocation_2019" target="_blank">
                   <img src="{% static 'social/social-github.svg' %}" class="dpg-icon" alt="Django Photo Gallery Github" />
               </a>
             </ul>
-
+            <ul class="right hide-on-med-and-med">
+            {% if user.is_authenticated %}
+                Hi {{ user.username }}!
+            <ul class="right hide-on-med-and-down">    
+                <a href="{% url 'logout' %}">Logout</a>
+            </ul>    
+            {% else %}
+            <ul class="right hide-on-med-and-down">
+                <a href="{% url 'login' %}">Login</a>
+            </ul>    
+            <ul class="right hide-on-med-and-down">
+                <a href="{% url 'signup' %}">Signup</a>
+            </ul>        
+            {% endif %}
+            </ul>
             <ul id="nav-mobile" class="sidenav" style="transform: translateX(-105%);">
                 <li>
-                    <a href="https://github.com/UNCG-CSE/Bat_Echolocation">GitHub</a>
+                    <a href="https://github.com/InsertGitHubUsernameHere/Bat_Echolocation_2019">GitHub</a>
                 </li>
             </ul>
             <a href="#" data-target="nav-mobile" class="sidenav-trigger">
@@ -34,9 +48,9 @@
     <footer class="page-footer">
         <div class="footer-copyright">
             <div class="container">
-                Fall 2018 UNCG
+                Fall 2018/Spring 2019 UNCG
                 <a href="https://drive.google.com/file/d/1P1CmdfE1jpIdIrNz4O4QAAwQivVcs3jP/view?usp=sharing">(For More Infomation)</a>
-                <a class="grey-text text-lighten-4 right" href="#!">Thien Le, Hadi Soufi, Bety Rostandy, Kevin Keomalaythong, Yang Peng</a>
+                <a class="grey-text text-lighten-4 right" href="#!">Hadi S.,Thien L., Kevin K., David M., Rahim J.(Yang P., Bety R.)</a>
             </div>
         </div>
     </footer>

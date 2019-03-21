@@ -2,6 +2,7 @@
 {% load staticfiles %}
 
 {% block content %}
+
 <div class="slider">
     <ul class="slides">
         <li>
@@ -26,12 +27,15 @@
     </ul>
 </div>
 
-<h2>Upload</h2>
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  <input type="file" name="document">
-  <button type="submit">Upload file</button>
-</form>
+<div style="text-align:center">
+{% if user.is_authenticated %}
+  <h2 align='center'>File Analysis</h2>
+  <form action="/upload">
+      <input type="submit" value="Click Here to Began!" />
+  </form>
+  {% endif %}
+</div>
+
 
 <div class="container">
     <div class="row">
@@ -49,7 +53,7 @@
                 <div class="card-action">
                     <a href="{% url 'album' album.slug %}">
                         More Images
-                    </a>
+                    </a> 
                 </div>
             </div>
         </div>
