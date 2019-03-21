@@ -30,6 +30,8 @@ def upload(request):
         name = fs.save(uploaded_file.name, uploaded_file)
 
         with sqlite3.connect('../django_photo_gallery/db.sqlite3') as conn:
+            c = conn.cursor()
+            c.execute('DROP TABLE images;')
             db_API.insert(conn, fs.location, os.path.realpath(f'{fs.location}/pulses'))
 
         context['url'] = fs.url(name)
