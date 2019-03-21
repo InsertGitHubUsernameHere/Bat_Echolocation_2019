@@ -28,33 +28,37 @@ def create_table(conn, table):
 
 # grab uploaded ZC file from GUI, get its cleaned pulses, convert them into PNG images, and insert them into DB
 def insert(conn, indir, outdir):
+    # get list of tables currently in DB and check whether table "images" exists in DB
+    if 'images' not in get_tables(conn):
+        c = conn.cursor()
+        with conn:
+            c.execute('CREATE TABLE images (name VARCHAR(255) PRIMARY KEY, raw BLOB, classification VARCHAR(255));')
+
+    # process the ZC file
     data_processing.zc_prc(indir, outdir)
-    df_queries = data_processing.png_to_binary(outdir)
 
-    # get list of tables currently in DB
-    tables = get_tables(conn)
-
-    if 'images' not in tables:
-        create_table(conn, 'images')
+    # get the INSERT query params
+    df_query_params = data_processing.png_to_binary(outdir)
 
     def insert_image(conn, name, raw, classification):
         c = conn.cursor()
         with conn:
-            c.execute('INSERT INTO images VALUES (?, ?, ?);', (name, classification, raw))
+            c.execute('INSERT INTO images VALUES (?, ?, ?);', (name, raw, classification))
 
-    for column in df_queries.columns:
-        df_queries[column].apply(lambda q: insert_image(conn, q[0], q[1], column))
+    for column in df_query_params.columns:
+        df_query_params[column].apply(lambda q: insert_image(conn, q[0], q[1], column))
 
 
 # fetch images from DB and pass them to GUI - IN PROGRESS
 def fetch_images(conn, fields=None):
     c = conn.cursor()
     c.execute('SELECT * FROM images;')
-    df = pd.DataFrame.from_records(c.fetchall(), columns=['name', 'classification', 'raw'])
+    df = pd.DataFrame.from_records(c.fetchall(), columns=['name', 'raw', 'classification'])
 
-    def decode_to_png(name, classification, raw):
+    def decode_to_png(name, raw, classification):
         path = os.path.realpath(f'../django_photo_gallery/media/pulses/{classification}/{name}')
         with open(path, 'wb') as png_file:
             png_file.write(raw)
+        #os.remove(path)  #-> TESTING ONLY - REMOVES PNG FILES in /pulses/... folder
 
     df.apply(lambda r: decode_to_png(r[0], r[1], r[2]), axis=1)
