@@ -1,15 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import os
+
+# Kevin's code
+'''import os
+import sys
 print(os.getcwd())
 path = os.getcwd()
-while path[path.rfind('/')+1:] != 'Bat_Echolocation_2019':
+while path[path.rfind('/' if path.startswith('/') else '\\') + 1:] != 'Bat_Echolocation_2019':
     path = os.path.dirname(path)
-print(path)
-import sys
-import sqlite3
 sys.path.insert(0, path)
-from src.util.database import db_API
+import sqlite3
+from src.util.database import db_API'''
+# End Kevin's code
+
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -21,6 +24,13 @@ from os import listdir
 from os.path import isfile, join
 from app.models import Album, AlbumImage
 
+# Kevin's code
+'''with sqlite3.connect('../django_photo_gallery/db.sqlite3') as conn:
+    c = conn.cursor()
+    c.execute('DELETE FROM images;')
+    db_API.fetch_images(conn)'''
+# End Kevin's code
+
 
 def upload(request):
     context = {}
@@ -29,8 +39,10 @@ def upload(request):
         fs = FileSystemStorage()
         name = fs.save(uploaded_file.name, uploaded_file)
 
-        with sqlite3.connect('../django_photo_gallery/db.sqlite3') as conn:
-            db_API.insert(conn, fs.location, os.path.realpath(f'{fs.location}/pulses'))
+        # Kevin's code
+        '''        with sqlite3.connect('../django_photo_gallery/db.sqlite3') as conn:
+            db_API.insert(conn, fs.location, os.path.realpath(f'{fs.location}/pulses'))'''
+        # End Kevin's code
 
         context['url'] = fs.url(name)
     if request.POST.get('Next'):
