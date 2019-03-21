@@ -19,24 +19,29 @@ Bat scientists at UNCG record bat calls from all over the state. Doing research 
 
 * [Progress Report 2.3](https://github.com/InsertGitHubUsernameHere/Bat_Echolocation_2019/tree/master/doc/2019/Slides/presentation2.3.pdf)
 
+* [Progress Report 2.4](https://github.com/InsertGitHubUsernameHere/Bat_Echolocation_2019/tree/master/doc/2019/Slides/presentation2.4.pdf)
+
 [Batalog Project Document](https://docs.google.com/document/d/1jJgxoAWclTfXR5WuWl7eNxvBmqgRZZZUhYIx0BMW1Hs/edit?usp=sharing)
 
 ## Members
 
-[Hadi Soufi](https://github.com/HadiSoufi)
+Current:
 
-[Thien Le](https://github.com/InsertGitHubUsernameHere)
+* [Hadi Soufi](https://github.com/HadiSoufi)
 
-[Kevin Keomalaythong](https://github.com/kkeomalaythong)
+* [Thien Le](https://github.com/InsertGitHubUsernameHere)
 
-[Rahim Jawaid](https://github.com/aRahimIqbal)
+* [Kevin Keomalaythong](https://github.com/kkeomalaythong)
 
-[David Massey](https://github.com/dlmassey)
+* [Rahim Jawaid](https://github.com/aRahimIqbal)
 
-### 2018
-[Yang Peng](https://github.com/yangp18)
+* [David Massey](https://github.com/dlmassey)
 
-[Bety Rostandy](https://github.com/brostandy)
+Former:
+
+* [Yang Peng](https://github.com/yangp18)
+
+* [Bety Rostandy](https://github.com/brostandy)
 
 ## Goals
 
@@ -47,4 +52,4 @@ Extract meaningful signal from noise.
 Categorize the extracted calls into different types using clustering techniques.
 
 3. [Classification](https://github.com/UNCG-CSE/Bat_Echolocation/blob/master/src/clustering_yang.ipynb):
-Classify if a Bat Echolocation(zero-crossing files) contains abnormal calls(i.e. social calls, foraging calls).
+Classify if a Bat Echolocation (zero-crossing files) contains abnormal calls (i.e. social calls, foraging calls).

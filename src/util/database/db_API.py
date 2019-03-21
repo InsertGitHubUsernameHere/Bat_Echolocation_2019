@@ -50,15 +50,18 @@ def insert(conn, indir, outdir):
 
 
 # fetch images from DB and pass them to GUI - IN PROGRESS
-def fetch_images(conn, fields=None):
+def fetch_images(conn, name=None, classification=None):
     c = conn.cursor()
-    c.execute('SELECT * FROM images;')
+    if name is not None and classification is not None:  # both name==... and classification==...
+        c.execute('SELECT * FROM images WHERE name=? AND classification=?;', (name, classification))
+    elif name is not None:  # name==...
+        c.execute('SELECT * FROM images WHERE name=?;', (name,))
+    elif classification is not None:  # classification==...
+        c.execute('SELECT * FROM images WHERE classification=?;', (classification,))
+    else:  # both name==None and classification==None
+        c.execute('SELECT * FROM images;')
+
     df = pd.DataFrame.from_records(c.fetchall(), columns=['name', 'raw', 'classification'])
+    print(df)  # temporary
 
-    def decode_to_png(name, raw, classification):
-        path = os.path.realpath(f'../django_photo_gallery/media/pulses/{classification}/{name}')
-        with open(path, 'wb') as png_file:
-            png_file.write(raw)
-        #os.remove(path)  #-> TESTING ONLY - REMOVES PNG FILES in /pulses/... folder
-
-    df.apply(lambda r: decode_to_png(r[0], r[1], r[2]), axis=1)
+    df.apply(lambda r: data_processing.binary_to_png(r[0], r[1], r[2]), axis=1)

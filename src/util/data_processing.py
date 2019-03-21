@@ -164,6 +164,9 @@ def png_to_binary(dir):
     return df
 
 
-# decode incoming binary data into PNG file and save it to a directory - IN PROGRESS
-def binary_to_png():
-    pass
+# decode incoming binary data into PNG file and save it to a directory
+def binary_to_png(name, raw, classification):
+    path = os.path.realpath(f'../django_photo_gallery/media/pulses/{classification}/{name}')
+    with open(path, 'wb') as png_file:
+        png_file.write(raw)
+    os.remove(path)  # -> TESTING ONLY - REMOVES PNG FILES IN /pulses/... FOLDER
