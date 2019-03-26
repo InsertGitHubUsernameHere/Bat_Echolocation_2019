@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Kevin's code
-'''import os
+import os
 import sys
 print(os.getcwd())
 path = os.getcwd()
@@ -10,7 +10,7 @@ while path[path.rfind('/' if path.startswith('/') else '\\') + 1:] != 'Bat_Echol
     path = os.path.dirname(path)
 sys.path.insert(0, path)
 import sqlite3
-from src.util.database import db_API'''
+from src.util.database import db_API
 # End Kevin's code
 
 from django.shortcuts import render, redirect
@@ -39,11 +39,8 @@ def upload(request):
         fs = FileSystemStorage()
         name = fs.save(uploaded_file.name, uploaded_file)
 
-        # Kevin's code
-        '''        with sqlite3.connect('../django_photo_gallery/db.sqlite3') as conn:
-            db_API.insert(conn, fs.location, os.path.realpath(f'{fs.location}/pulses'))'''
-        # End Kevin's code
-
+        with sqlite3.connect('../django_photo_gallery/db.sqlite3') as conn:
+            db_API.insert(conn, fs.location, os.path.realpath(f'{fs.location}/pulses'))
         context['url'] = fs.url(name)
     if request.POST.get('Next'):
         return redirect('displayImages')
