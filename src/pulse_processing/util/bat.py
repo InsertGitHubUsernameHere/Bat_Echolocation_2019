@@ -17,7 +17,6 @@ from numpy.ma import masked_array
 from guano import GuanoFile, base64decode, base64encode
 import logging
 import csv
-from batcall import batcall
 from scipy import interpolate
 from scipy.signal import savgol_filter
 import random
