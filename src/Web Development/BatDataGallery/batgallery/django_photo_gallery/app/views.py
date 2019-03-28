@@ -31,10 +31,18 @@ from app.models import Album, AlbumImage
     db_API.fetch_images(conn, name='')
     db_API.fetch_images(conn)
     c.execute('DROP TABLE images;')
+    c.execute('DROP TABLE users;')
+    c.execute('CREATE TABLE users (username VARCHAR(255) PRIMARY KEY, password VARCHAR(255), ' \
+              'email VARCHAR(255), first_name VARCHAR(255), last_name VARCHAR(255));')
     
-    # activate below line for messing w/ metadata
+    c.execute('CREATE TABLE images (username VARCHAR(255), name VARCHAR(255) PRIMARY KEY, raw BLOB,'
+              ' classification VARCHAR(255), metadata VARCHAR(255), FOREIGN KEY (username) REFERENCES users(username))')
+    
     c.execute('CREATE TABLE images (name VARCHAR(255) PRIMARY KEY, raw BLOB,'
               ' classification VARCHAR(255), metadata VARCHAR(255))')
+              
+    c.execute('INSERT INTO users VALUES (\'numberone\', \'*********\', \'sodadrinker@bikinibottom.gov\', \'smitty\', \'werbenjagermanjensen\');')
+    c.execute('INSERT INTO users VALUES (\'imnotbatman\', \'*************\', \'wayne.bruce@wayneenterprises.com\', \'bruce\', \'wayne\');')
     
 with open('/home/kevin/CSC 490/P7052155_18.txt', 'r') as f:
     str = f.read()
@@ -100,8 +108,10 @@ def handler404(request):
 
 
 def signup(request):
+    print('in signup')
     if request.method == 'POST':
         form = SignUPForm(request.POST or None)
+        print(form)
         if form.is_valid():
             form.save()
             return redirect('gallery')
