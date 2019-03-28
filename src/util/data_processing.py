@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 import sqlite3
+import ast
 from numpy.polynomial.polynomial import polyfit
 from scipy.signal import savgol_filter
 from src.util import bat
@@ -111,16 +112,48 @@ def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=2
 
 # fetch ZC file from GUI upload process located at indir
 # output pulses as PNG images and place them in outdir
+# also obtain metadata from ZC file
+# PROGRESS TAG 2019-03-27
 def zc_prc(indir, outdir):
+    sep = '/' if indir.startswith('/') else '\\'
     #print(f'indir: {indir}')
     #print(f'outdir: {outdir}')
-    zc_filename = (glob.glob(f'{indir}/**/*#', recursive=True))[0]
-    #print(f'zc_file: {zc_file}')
-    sep = '/' if indir.startswith('/') else '\\'
+    zc_path = (glob.glob(f'{indir}/**/*#', recursive=True))[0]
+    #print(f'zc_path: {zc_path}')
 
-    data = bat.extract_anabat(zc_filename)
+    data = bat.extract_anabat(zc_path)
     raw = list(data)
-    pulses = clean_graph(filename=zc_filename, graph=[raw[0], raw[1]])
+
+    '''zc_name = zc_path[zc_path.rfind(sep)+1:]
+    #print(f'zc_name: {zc_name[:8]}')
+    
+    # obtain metadata from raw ZC file (here, it's a dict)
+    metadata = raw[3]
+    metadata['date'] = ''
+    #print(f'metadata: {metadata}')
+    #timestamp = metadata['timestamp']
+    #ts = [timestamp.year, timestamp.month, timestamp.day, timestamp.hour, timestamp.minute, timestamp.second, timestamp.microsecond]
+    #print(ts)
+    #metadata['timestamp'] = ts
+    #print(f'metadata: {metadata}')
+    metadata_str = ','.join((f'{key}={value}' for key, value in metadata.items()))
+    #print(metadata_str)
+    # ...and then pass this metadata into DB...
+
+    # assuming that GUI requests images w/ tagged metadata...
+    metadata_split = metadata_str.split(',')
+    print(metadata_split)
+    metadata_split = [str.split('=') for str in metadata_split]
+    print(metadata_split)
+    dct = {key: value for (key, value) in metadata_split}
+    print(dct)
+    dct['species'] = ast.literal_eval(dct['species'])
+    print(dct)
+    
+    with open(f'{indir}/metadata/{zc_name}.txt', 'r+') as f:
+        f.write()'''
+
+    pulses = clean_graph(filename=zc_path, graph=[raw[0], raw[1]])
     fig, ax = plt.subplots()
 
     for i, pulse in enumerate(pulses):
@@ -133,7 +166,7 @@ def zc_prc(indir, outdir):
         classification = '/echolocation/' if plyft[1] < 0 else '/abnormal/'
 
         # create and save PNG files of pulses
-        zc_filename_split = zc_filename.rsplit(".", 1)[0].rsplit(sep, 1)[-1]
+        zc_filename_split = zc_path.rsplit(".", 1)[0].rsplit(sep, 1)[-1]
         save_path = os.path.realpath(f'{outdir}{classification}{zc_filename_split}_{i}.png')
         ax.axis('off')
         ax.scatter(x, y)
