@@ -10,6 +10,7 @@ while path[path.rfind('/' if path.startswith('/') else '\\') + 1:] != 'Bat_Echol
 sys.path.insert(0, path)
 import sqlite3
 from src.util.database import db_API
+import pandas as pd
 # End Kevin's code
 
 from django.shortcuts import render, redirect
@@ -41,14 +42,9 @@ from app.models import Album, AlbumImage
     c.execute('CREATE TABLE images (name VARCHAR(255) PRIMARY KEY, raw BLOB,'
               ' classification VARCHAR(255), metadata VARCHAR(255))')
               
-    c.execute('INSERT INTO users VALUES (\'numberone\', \'*********\', \'sodadrinker@bikinibottom.gov\', \'smitty\', \'werbenjagermanjensen\');')
-    c.execute('INSERT INTO users VALUES (\'imnotbatman\', \'*************\', \'wayne.bruce@wayneenterprises.com\', \'bruce\', \'wayne\');')
-    
-with open('/home/kevin/CSC 490/P7052155_18.txt', 'r') as f:
-    str = f.read()
-    str = str.replace(str[9:20], '\'date\'')
-    str = str.replace('\'', '\"')
-    print(str)'''
+    c.execute('SELECT * FROM users;')
+    df = pd.DataFrame.from_records(c.fetchall(), columns=['username', 'password', 'email', 'first_name', 'last_name'])
+    print(df)'''
 # End Kevin's code
 
 
@@ -108,10 +104,9 @@ def handler404(request):
 
 
 def signup(request):
-    print('in signup')
     if request.method == 'POST':
         form = SignUPForm(request.POST or None)
-        print(form)
+
         if form.is_valid():
             form.save()
             return redirect('gallery')
