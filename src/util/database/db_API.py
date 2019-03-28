@@ -13,7 +13,7 @@ def get_tables(conn):
     return tables
 
 
-def create_table(conn, table):
+'''def create_table(conn, table):
     c = conn.cursor()
 
     if table == 'images':
@@ -23,7 +23,7 @@ def create_table(conn, table):
                 'email VARCHAR(255), first_name VARCHAR(255), mid_init CHAR(1), last_name VARCHAR(255));'
 
     with conn:
-        c.execute(sql_query)
+        c.execute(sql_query)'''
 
 
 # grab uploaded ZC file from GUI, get its cleaned pulses, convert them into PNG images, and insert them into DB
@@ -49,7 +49,6 @@ def insert(conn, indir, outdir):
         df_query_params[column].apply(lambda q: insert_image(conn, q[0], q[1], column))
 
 
-# fetch images from DB and pass them to GUI - IN PROGRESS
 def fetch_images(conn, name=None, classification=None):
     c = conn.cursor()
     if name is not None and classification is not None:  # both name==... and classification==...

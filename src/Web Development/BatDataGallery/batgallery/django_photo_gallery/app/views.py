@@ -4,7 +4,6 @@
 # Kevin's code
 import os
 import sys
-print(os.getcwd())
 path = os.getcwd()
 while path[path.rfind('/' if path.startswith('/') else '\\') + 1:] != 'Bat_Echolocation_2019':
     path = os.path.dirname(path)
@@ -28,7 +27,20 @@ from app.models import Album, AlbumImage
 '''with sqlite3.connect('../django_photo_gallery/db.sqlite3') as conn:
     c = conn.cursor()
     c.execute('DELETE FROM images;')
-    db_API.fetch_images(conn)'''
+    db_API.fetch_images(conn)
+    db_API.fetch_images(conn, name='')
+    db_API.fetch_images(conn)
+    c.execute('DROP TABLE images;')
+    
+    # activate below line for messing w/ metadata
+    c.execute('CREATE TABLE images (name VARCHAR(255) PRIMARY KEY, raw BLOB,'
+              ' classification VARCHAR(255), metadata VARCHAR(255))')
+    
+with open('/home/kevin/CSC 490/P7052155_18.txt', 'r') as f:
+    str = f.read()
+    str = str.replace(str[9:20], '\'date\'')
+    str = str.replace('\'', '\"')
+    print(str)'''
 # End Kevin's code
 
 
@@ -39,8 +51,10 @@ def upload(request):
         fs = FileSystemStorage()
         name = fs.save(uploaded_file.name, uploaded_file)
 
+        # send in uploaded ZC file to database
         with sqlite3.connect('../django_photo_gallery/db.sqlite3') as conn:
             db_API.insert(conn, fs.location, os.path.realpath(f'{fs.location}/pulses'))
+
         context['url'] = fs.url(name)
     if request.POST.get('Next'):
         return redirect('displayImages')
