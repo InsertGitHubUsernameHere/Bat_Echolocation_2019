@@ -1,4 +1,4 @@
-#!/Users/thienle/Desktop/Classes/Spring 2019/SeniorCapstone/Bat_Echolocation/src/Web Development/BatDataGallery/batgallery/env/bin/python
+#!/home/batalog/Bat_Echolocation_2019/src/web_development/batgallery/env/bin/python
 
 import sys
 import getopt
