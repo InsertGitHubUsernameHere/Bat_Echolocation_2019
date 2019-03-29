@@ -19,12 +19,11 @@ urlpatterns = [
     path('display', app.views.displayImages, name='displayImages'),
     url(r'^$', app.views.gallery, name='gallery'),
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/icons/favicon.ico', permanent=True)),
-    url(r'^(?P<slug>[-\w]+)$', app.views.AlbumDetail.as_view(),
-        name='album'),  # app.views.AlbumView.as_view()
+    url(r'^(?P<slug>[-\w]+)$', app.views.AlbumDetail.as_view(), name='album'),  # app.views.AlbumView.as_view()
 
     # Auth related urls
     url(r'^accounts/login/$', auth_views.login, name='login'),
-    url(r'^logout$', auth_views.logout, {'next_page': '/', }, name='logout'),
+    url(r'^accounts/logout/$', auth_views.logout, {'next_page': '/', }, name='logout'),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', admin.site.urls),
