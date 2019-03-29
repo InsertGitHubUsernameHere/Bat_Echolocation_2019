@@ -116,31 +116,22 @@ def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=2
 # PROGRESS TAG 2019-03-27
 def zc_prc(indir, outdir):
     sep = '/' if indir.startswith('/') else '\\'
-    #print(f'indir: {indir}')
-    #print(f'outdir: {outdir}')
     zc_path = (glob.glob(f'{indir}/**/*#', recursive=True))[0]
-    #print(f'zc_path: {zc_path}')
 
     data = bat.extract_anabat(zc_path)
     raw = list(data)
 
-    '''zc_name = zc_path[zc_path.rfind(sep)+1:]
-    #print(f'zc_name: {zc_name[:8]}')
-    
     # obtain metadata from raw ZC file (here, it's a dict)
     metadata = raw[3]
     metadata['date'] = ''
-    #print(f'metadata: {metadata}')
-    #timestamp = metadata['timestamp']
-    #ts = [timestamp.year, timestamp.month, timestamp.day, timestamp.hour, timestamp.minute, timestamp.second, timestamp.microsecond]
-    #print(ts)
-    #metadata['timestamp'] = ts
-    #print(f'metadata: {metadata}')
     metadata_str = ','.join((f'{key}={value}' for key, value in metadata.items()))
-    #print(metadata_str)
-    # ...and then pass this metadata into DB...
 
-    # assuming that GUI requests images w/ tagged metadata...
+    # create a txt file to hold this metadata temporarily
+    zc_name = zc_path[zc_path.rfind(sep)+1:].replace('.', '_')
+    with open(f'{indir}/metadata/{zc_name}_metadata.txt', 'w+') as f:
+        f.write(metadata_str)
+
+    '''# assuming that GUI requests images w/ tagged metadata...
     metadata_split = metadata_str.split(',')
     print(metadata_split)
     metadata_split = [str.split('=') for str in metadata_split]
@@ -148,10 +139,7 @@ def zc_prc(indir, outdir):
     dct = {key: value for (key, value) in metadata_split}
     print(dct)
     dct['species'] = ast.literal_eval(dct['species'])
-    print(dct)
-    
-    with open(f'{indir}/metadata/{zc_name}.txt', 'r+') as f:
-        f.write()'''
+    print(dct)'''
 
     pulses = clean_graph(filename=zc_path, graph=[raw[0], raw[1]])
     fig, ax = plt.subplots()
@@ -173,6 +161,8 @@ def zc_prc(indir, outdir):
         fig.savefig(save_path, transparent=True, dpi=50)
         plt.cla()
         gc.collect()
+
+    return zc_name
 
 
 # encode PNG images to binary

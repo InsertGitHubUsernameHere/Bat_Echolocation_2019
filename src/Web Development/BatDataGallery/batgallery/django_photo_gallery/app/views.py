@@ -10,6 +10,7 @@ while path[path.rfind('/' if path.startswith('/') else '\\') + 1:] != 'Bat_Echol
 sys.path.insert(0, path)
 import sqlite3
 from src.util.database import db_API
+import pandas as pd
 # End Kevin's code
 
 from django.shortcuts import render, redirect
@@ -31,16 +32,19 @@ from app.models import Album, AlbumImage
     db_API.fetch_images(conn, name='')
     db_API.fetch_images(conn)
     c.execute('DROP TABLE images;')
+    c.execute('DROP TABLE users;')
+    c.execute('CREATE TABLE users (username VARCHAR(255) PRIMARY KEY, password VARCHAR(255), ' \
+              'email VARCHAR(255), first_name VARCHAR(255), last_name VARCHAR(255));')
     
-    # activate below line for messing w/ metadata
+    c.execute('CREATE TABLE images (username VARCHAR(255), name VARCHAR(255) PRIMARY KEY, raw BLOB,'
+              ' classification VARCHAR(255), metadata VARCHAR(255), FOREIGN KEY (username) REFERENCES users(username))')
+    
     c.execute('CREATE TABLE images (name VARCHAR(255) PRIMARY KEY, raw BLOB,'
               ' classification VARCHAR(255), metadata VARCHAR(255))')
-    
-with open('/home/kevin/CSC 490/P7052155_18.txt', 'r') as f:
-    str = f.read()
-    str = str.replace(str[9:20], '\'date\'')
-    str = str.replace('\'', '\"')
-    print(str)'''
+              
+    c.execute('SELECT * FROM users;')
+    df = pd.DataFrame.from_records(c.fetchall(), columns=['username', 'password', 'email', 'first_name', 'last_name'])
+    print(df)'''
 # End Kevin's code
 
 
@@ -102,6 +106,7 @@ def handler404(request):
 def signup(request):
     if request.method == 'POST':
         form = SignUPForm(request.POST or None)
+
         if form.is_valid():
             form.save()
             return redirect('gallery')
