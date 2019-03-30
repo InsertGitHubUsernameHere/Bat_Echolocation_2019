@@ -52,12 +52,12 @@ def upload(request):
     context = {}
     if request.method == 'POST':
         uploaded_file = request.FILES['document']
-        fs = FileSystemStorage()
-        name = fs.save(uploaded_file.name, uploaded_file)
+        #fs = FileSystemStorage()
+        #name = fs.save(uploaded_file.name, uploaded_file)
 
         # send in uploaded ZC file to database
         with sqlite3.connect('../django_photo_gallery/db.sqlite3') as conn:
-            db_API.insert(conn, fs.location, os.path.realpath(f'{fs.location}/pulses'))
+            db_API.insert(conn, fs.location, uploaded_file.name, uploaded_file)
 
         context['url'] = fs.url(name)
     if request.POST.get('Next'):
