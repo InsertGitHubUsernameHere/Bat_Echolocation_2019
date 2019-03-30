@@ -10,17 +10,12 @@ import ast
 from numpy.polynomial.polynomial import polyfit
 from scipy.signal import savgol_filter
 from src.util import bat
+import json
 
 
 def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=20):
     if graph is None:
-        # Load file into 2d list
-        with open(filename, 'r') as f:
-            reader = csv.reader(f)
-            next(reader)
-            zc_str = list(reader)
-    else:
-        zc_str = graph
+        print('File is empty')
 
     zc_x, zc_y = graph[0], graph[1]
 
@@ -124,12 +119,11 @@ def zc_prc(indir, outdir):
     # obtain metadata from raw ZC file (here, it's a dict)
     metadata = raw[3]
     metadata['date'] = ''
-    metadata_str = ','.join((f'{key}={value}' for key, value in metadata.items()))
-
+    metadata_str = json.dumps(metadata)
     # create a txt file to hold this metadata temporarily
     zc_name = zc_path[zc_path.rfind(sep)+1:].replace('.', '_')
-    with open(f'{indir}/metadata/{zc_name}_metadata.txt', 'w+') as f:
-        f.write(metadata_str)
+    #with open(f'{indir}/metadata/{zc_name}_metadata.txt', 'w+') as f:
+    #    f.write(metadata_str)
 
     '''# assuming that GUI requests images w/ tagged metadata...
     metadata_split = metadata_str.split(',')
@@ -166,25 +160,25 @@ def zc_prc(indir, outdir):
 
 
 # encode PNG images to binary
-def png_to_binary(dir):
-    paths_echo = pd.Series(glob.glob(os.path.realpath(f'{dir}/echolocation/*.png'), recursive=True))
-    paths_abnm = pd.Series(glob.glob(os.path.realpath(f'{dir}/abnormal/*.png'), recursive=True))
-    df = pd.DataFrame()
+def png_to_binary(file):
+    #paths_echo = pd.Series(glob.glob(os.path.realpath(f'{dir}/echolocation/*.png'), recursive=True))
+    #paths_abnm = pd.Series(glob.glob(os.path.realpath(f'{dir}/abnormal/*.png'), recursive=True))
+    #df = pd.DataFrame()
 
-    def bin_prc(path):
-        name = path[path.rfind('/' if dir.startswith('/') else '\\') + 1:]
-        with open(path, 'rb') as binfile:
-            raw = sqlite3.Binary(binfile.read())
-        os.remove(path)
-        return name, raw
+    #def bin_prc(path):
+        #name = path[path.rfind('/' if dir.startswith('/') else '\\') + 1:]
+        #with open(path, 'rb') as binfile:
+    raw = sqlite3.Binary(file)
+        #os.remove(path)
+    return raw
 
-    if len(paths_echo) > 0:
-        df['echolocation'] = paths_echo.apply(lambda p: bin_prc(p))
+    #if len(paths_echo) > 0:
+        #df['echolocation'] = paths_echo.apply(lambda p: bin_prc(p))
 
-    if len(paths_abnm) > 0:
-        df['abnormal'] = paths_abnm.apply(lambda p: bin_prc(p))
+    #if len(paths_abnm) > 0:
+        #df['abnormal'] = paths_abnm.apply(lambda p: bin_prc(p))
 
-    return df
+    #return df
 
 
 # decode incoming binary data into PNG file and save it to a directory

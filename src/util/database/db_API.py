@@ -5,7 +5,12 @@ from src.util import data_processing
 import pandas as pd
 import os
 import glob
-
+import numpy as np 
+import json
+from src.util import bat
+import sqlite3
+import gc
+import matplotlib.pyplot as plt
 
 def get_tables(conn):
     c = conn.cursor()
@@ -26,35 +31,39 @@ def get_tables(conn):
     with conn:
         c.execute(sql_query)'''
 
-
 # grab uploaded ZC file from GUI, get its cleaned pulses, convert them into PNG images, and insert them into DB
-def insert(conn, indir, outdir):
+def insert(conn, indir, file_name, file):
     '''# get list of tables currently in DB and check whether table "images" exists in DB
     if 'images' not in get_tables(conn):
         c = conn.cursor()
         with conn:
             c.execute('CREATE TABLE images (name VARCHAR(255) PRIMARY KEY, raw BLOB, classification VARCHAR(255));')'''
 
-    # process the ZC file and extract its name
-    zc_name = data_processing.zc_prc(indir, outdir)
+    data = bat.extract_anabat(indir)
+    raw = list(data)
 
-    # get the INSERT query params
-    df_query_params = data_processing.png_to_binary(outdir)
+    # obtain metadata from raw ZC file (here, it's a dict)
+    metadata = raw[3]
+    metadata['date'] = ''
+    metadata['pos'] = 0
+    metadata_str = json.dumps(metadata)
 
-    # pull string metadata from newly-created txt file and delete text file
-    path = f'{indir}/metadata/{zc_name}_metadata.txt'
-    with open(path, 'r') as f:
-        metadata_str = f.read()
-    os.remove(path)
+    '''# assuming that GUI requests images w/ tagged metadata...
+    metadata_split = metadata_str.split(',')
+    print(metadata_split)
+    metadata_split = [str.split('=') for str in metadata_split]
+    print(metadata_split)
+    dct = {key: value for (key, value) in metadata_split}
+    print(dct)
+    dct['species'] = ast.literal_eval(dct['species'])
+    print(dct)'''
 
-    def insert_image(conn, name, raw, classification, metadata_str):
+    pulses = data_processing.clean_graph(graph=[raw[0], raw[1]])
+
+    for pulse in enumerate(pulses):
         c = conn.cursor()
         with conn:
-            #c.execute('INSERT INTO images VALUES (?, ?, ?);', (name, raw, classification))
-            c.execute('INSERT INTO images VALUES (?, ?, ?, ?);', (name, raw, classification, metadata_str))
-
-    for column in df_query_params.columns:
-        df_query_params[column].apply(lambda q: insert_image(conn, q[0], q[1], column, metadata_str))
+            c.execute('INSERT INTO images VALUES (?, ?, ?, ?);', (file_name, pulse, ' ', metadata_str))
 
 
 def select_images(conn, name=None, classification=None):
