@@ -60,6 +60,7 @@ def insert(conn, file_name, file):
     print(dct)'''
 
     pulses = data_processing.clean_graph(filename = '', graph=[raw[0], raw[1]])
+    print(file_name)
 
     for pulse in enumerate(pulses):
         c = conn.cursor()
