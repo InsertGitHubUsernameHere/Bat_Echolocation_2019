@@ -170,7 +170,7 @@ def extract_anabat_zc(m, hpfilter_khz=8.0, **kwargs):
         freqs_hz = masked_array(freqs_hz, mask=off_mask).compressed()
 
     min_, max_ = min(freqs_hz) if any(freqs_hz) else 0, max(freqs_hz) if any(freqs_hz) else 0
-    log.debug('%s\tDots: %d\tMinF: %.1f\tMaxF: %.1f', basename(fdir), len(freqs_hz), min_/1000.0, max_/1000.0)
+    #log.debug('%s\tDots: %d\tMinF: %.1f\tMaxF: %.1f', basename(fdir), len(freqs_hz), min_/1000.0, max_/1000.0)
 
     times_s, freqs_hz, amplitudes = hpf_zc(times_s, freqs_hz, amplitudes, hpfilter_khz*1000)
 
