@@ -61,12 +61,11 @@ def insert(conn, username, file_name, file):
     print(dct)'''
 
     pulses = data_processing.clean_graph(filename = '', graph=[raw[0], raw[1]])
-    print(file_name)
 
     for pulse in enumerate(pulses):
         c = conn.cursor()
         with conn:
-            c.execute('INSERT INTO images VALUES (?, ?, ?, ?);', (file_name, str(pulse), ' ', metadata_str,))
+            c.execute('INSERT INTO images VALUES (?, ?, ?, ?);', (file_name, json.dumps(pulses), ' ', metadata_str,))
 
 # 0: Source name, 1: Image data, 2: classification, 3: metadata, 4: username
 def load_images(conn, username, outdir):
@@ -75,24 +74,24 @@ def load_images(conn, username, outdir):
 
     fig, ax = plt.subplots()
     for row in c:
-        pulses = ast.literal_eval(row[1])
-        for i, pulse in enumerate(pulses):
-            # get pulse points' coordinates
-            x = [point[0] for point in pulse]
-            y = [point[1] for point in pulse]
+        pulse = json.loads(row[1])
+        
+        # get pulse points' coordinates
+        x = [point[0] for point in pulse]
+        y = [point[1] for point in pulse]
 
-            # obtain a linear fit and classify
-            #plyft = polyfit(x=x, y=y, deg=1)
-            #classification = '/echolocation/' if plyft[1] < 0 else '/abnormal/'
+        # obtain a linear fit and classify
+        #plyft = polyfit(x=x, y=y, deg=1)
+        #classification = '/echolocation/' if plyft[1] < 0 else '/abnormal/'
 
-            # create and save PNG files of pulses
-            #save_path = os.path.realpath(f'{outdir}{classification}{zc_filename_split}_{i}.png')
-            save_path = os.path.realpath(f'{outdir}{row[0]}_{i}.png')
-            ax.axis('off')
-            ax.scatter(x, y)
-            fig.savefig(save_path, transparent=True, dpi=50)
-            plt.cla()
-            gc.collect()
+        # create and save PNG files of pulses
+        #save_path = os.path.realpath(f'{outdir}{classification}{zc_filename_split}_{i}.png')
+        save_path = os.path.realpath(f'{outdir}{row[0]}_{i}.png')
+        ax.axis('off')
+        ax.scatter(x, y)
+        fig.savefig(save_path, transparent=True, dpi=50)
+        plt.cla()
+        gc.collect()
 
 def select_images(conn, name=None, classification=None):
     c = conn.cursor()

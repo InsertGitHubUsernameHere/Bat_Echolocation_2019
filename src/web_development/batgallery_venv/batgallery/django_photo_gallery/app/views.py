@@ -69,7 +69,7 @@ def upload(request):
                         with sqlite3.connect('../db.sqlite3') as conn:
                             db_API.insert(conn, username, name, f.read())
         # Single ZC file
-        else
+        else:
             with sqlite3.connect('../db.sqlite3') as conn:
                 db_API.insert(conn, username, file_name, file)
 
