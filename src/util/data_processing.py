@@ -12,7 +12,6 @@ from scipy.signal import savgol_filter
 from src.util import bat
 import json
 
-
 def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=20):
     if graph is None:
         print('File is empty')
