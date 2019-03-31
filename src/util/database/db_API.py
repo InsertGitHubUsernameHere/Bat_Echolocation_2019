@@ -38,8 +38,10 @@ def insert(conn, file_name, file):
     if 'images' not in get_tables(conn):
         c = conn.cursor()
         with conn:
-            c.execute('CREATE TABLE images (name VARCHAR(255) PRIMARY KEY, raw BLOB, classification VARCHAR(255), metadata VARCHAR);')
-
+            c.execute('CREATE TABLE images (name VARCHAR(255), raw BLOB, classification VARCHAR(255), metadata VARCHAR);')
+    else if 'images' in get_tables(conn) and e:
+        c = conn.cursor()
+        columns = [i[1] for i in cur.execute('PRAGMA table_info(main')]
     raw = list(bat.extract_anabat_zc(file))
 
     # obtain metadata from raw ZC file (here, it's a dict)
