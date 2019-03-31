@@ -11,6 +11,7 @@ sys.path.insert(0, path)
 import sqlite3
 from src.util.database import db_API
 import pandas as pd
+import fs
 # End Kevin's code
 
 from django.shortcuts import render, redirect
@@ -47,7 +48,6 @@ from app.models import Album, AlbumImage
     print(df)'''
 # End Kevin's code
 
-
 def upload(request):
     context = {}
     if request.method == 'POST':
@@ -56,13 +56,13 @@ def upload(request):
         #name = fs.save(uploaded_file.name, uploaded_file)
 
         # send in uploaded ZC file to database
-        with sqlite3.connect('../django_photo_gallery/db.sqlite3') as conn:
-            db_API.insert(conn, fs.location, uploaded_file.name, uploaded_file)
+        with sqlite3.connect('../db.sqlite3') as conn:
+            db_API.insert(conn, uploaded_file.name, uploaded_file)
 
-        context['url'] = fs.url(name)
+        #context['url'] = fs.url(uploaded_name)
     if request.POST.get('Next'):
         return redirect('displayImages')
-    return render(request, 'upload.html', context)
+    return render(request, 'upload.html')
 
 
 def displayImages(request):

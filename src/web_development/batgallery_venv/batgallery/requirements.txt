@@ -67,7 +67,6 @@ six==1.11.0
 sklearn==0.0
 sqlparse==0.2.4
 Twisted==17.9.0
-ufw==0.35
 urllib3==1.22
 virtualenv==15.1.0
 zope.component==4.3.0
