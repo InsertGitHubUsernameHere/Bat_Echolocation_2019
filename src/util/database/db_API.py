@@ -65,7 +65,7 @@ def insert(conn, username, file_name, file):
     for pulse in enumerate(pulses):
         c = conn.cursor()
         with conn:
-            c.execute('INSERT INTO images VALUES (?, ?, ?, ?);', (file_name, str(pulses), ' ', metadata_str,))
+            c.execute('INSERT INTO images VALUES (?, ?, ?, ?);', (file_name, str(pulse), ' ', metadata_str,))
 
 # 0: Source name, 1: Image data, 2: classification, 3: metadata, 4: username
 def load_images(conn, username, outdir):
@@ -73,9 +73,13 @@ def load_images(conn, username, outdir):
     c.execute('SELECT * FROM images')   # TODO update to check for username
 
     fig, ax = plt.subplots()
-    for row in c:
-        pulse = list(ast.literal_eval(row[1]))
-        
+    for i, row in enumerate(c):
+
+        # Convert DB string to list and handle AST weirdness
+        # Returns a tuple where t[0] = 0, t[1] = data
+        pulse = ast.literal_eval(row[1])
+        pulse = pulse[1]
+
         # get pulse points' coordinates
         x = [point[0] for point in pulse]
         y = [point[1] for point in pulse]
@@ -86,7 +90,7 @@ def load_images(conn, username, outdir):
 
         # create and save PNG files of pulses
         #save_path = os.path.realpath(f'{outdir}{classification}{zc_filename_split}_{i}.png')
-        save_path = os.path.realpath(f'{outdir}{row[0]}_{i}.png')
+        save_path = outdir + '/' + row[0].replace('#', '') + '_' + str(i) + '.png'
         ax.axis('off')
         ax.scatter(x, y)
         fig.savefig(save_path, transparent=True, dpi=50)

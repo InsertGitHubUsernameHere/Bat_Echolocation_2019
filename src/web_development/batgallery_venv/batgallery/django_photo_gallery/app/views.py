@@ -80,7 +80,7 @@ def upload(request):
 
 
 def displayImages(request):
-    outdir = os.path.join(os.getcwd(), '..', 'media', 'test_images')
+    outdir = os.path.join(os.getcwd(), 'media', 'test_images')
     if request.method == 'GET':
         with sqlite3.connect('../db.sqlite3') as conn:
             db_API.load_images(conn, username, outdir)
