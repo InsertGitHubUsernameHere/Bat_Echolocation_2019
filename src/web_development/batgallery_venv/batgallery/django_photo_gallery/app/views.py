@@ -50,6 +50,8 @@ import zipfile
     print(df)'''
 # End Kevin's code
 
+username = ''
+
 def upload(request):
     context = {}
     if request.method == 'POST':
@@ -65,11 +67,11 @@ def upload(request):
                     if not (name.endswith('.\d\d#') or name.endswith('.zc')):
                         f = z.open(name)
                         with sqlite3.connect('../db.sqlite3') as conn:
-                            db_API.insert(conn, name, f.read())
+                            db_API.insert(conn, username, name, f.read())
         # Single ZC file
         else
             with sqlite3.connect('../db.sqlite3') as conn:
-                db_API.insert(conn, file_name, file)
+                db_API.insert(conn, username, file_name, file)
 
         #context['url'] = fs.url(uploaded_name)
     if request.POST.get('Next'):
@@ -78,8 +80,14 @@ def upload(request):
 
 
 def displayImages(request):
+    outdir = ../media/test_images
+    outdir = os.path.join(os.getcwd(), '..', 'media', 'test_images')
+    print(outdir)
+    if request.method == 'GET':
+        with sqlite3.connect('../db.sqlite3') as conn:
+            db_API.load_images(conn, username, outdir)
+
     onlyfiles = [f for f in listdir("media/test_images/") if isfile(join("media/test_images/", f))]
-    print(onlyfiles)
     return render(request, 'displayImages.html', {'onlyfiles': onlyfiles})
 
 

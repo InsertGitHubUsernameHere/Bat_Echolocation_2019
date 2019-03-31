@@ -12,6 +12,7 @@ import sqlite3
 import gc
 import matplotlib.pyplot as plt
 import datetime
+import ast
 
 def get_tables(conn):
     c = conn.cursor()
@@ -33,7 +34,7 @@ def get_tables(conn):
         c.execute(sql_query)'''
 
 # grab uploaded ZC file from GUI, get its cleaned pulses, convert them into PNG images, and insert them into DB
-def insert(conn, file_name, file):
+def insert(conn, username, file_name, file):
     # get list of tables currently in DB and check whether table "images" exists in DB
     if 'images' not in get_tables(conn):
         c = conn.cursor()
@@ -67,6 +68,31 @@ def insert(conn, file_name, file):
         with conn:
             c.execute('INSERT INTO images VALUES (?, ?, ?, ?);', (file_name, str(pulse), ' ', metadata_str,))
 
+# 0: Source name, 1: Image data, 2: classification, 3: metadata, 4: username
+def load_images(conn, username, outdir):
+    c = conn.cursor()
+    c.execute('SELECT * FROM images')   # TODO update to check for username
+
+    fig, ax = plt.subplots()
+    for row in c:
+        pulses = ast.literal_eval(row[1])
+        for i, pulse in enumerate(pulses):
+            # get pulse points' coordinates
+            x = [point[0] for point in pulse]
+            y = [point[1] for point in pulse]
+
+            # obtain a linear fit and classify
+            #plyft = polyfit(x=x, y=y, deg=1)
+            #classification = '/echolocation/' if plyft[1] < 0 else '/abnormal/'
+
+            # create and save PNG files of pulses
+            #save_path = os.path.realpath(f'{outdir}{classification}{zc_filename_split}_{i}.png')
+            save_path = os.path.realpath(f'{outdir}{row[0]}_{i}.png')
+            ax.axis('off')
+            ax.scatter(x, y)
+            fig.savefig(save_path, transparent=True, dpi=50)
+            plt.cla()
+            gc.collect()
 
 def select_images(conn, name=None, classification=None):
     c = conn.cursor()
