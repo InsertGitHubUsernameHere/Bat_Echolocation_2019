@@ -56,6 +56,7 @@ def upload(request):
         #name = fs.save(uploaded_file.name, uploaded_file)
 
         name = uploaded_file.name
+        print(name)
         file = uploaded_file.read()
 
         # send in uploaded ZC file to database
