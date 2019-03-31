@@ -56,7 +56,7 @@ def upload(request):
         #fs = FileSystemStorage()
         #name = fs.save(uploaded_file.name, uploaded_file)
 
-        name = uploaded_file.name
+        name = str(uploaded_file.name)
         file = uploaded_file.read()
 
         # send in uploaded ZC file to database
