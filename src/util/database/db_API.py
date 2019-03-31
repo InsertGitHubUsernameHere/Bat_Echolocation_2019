@@ -65,6 +65,7 @@ def insert(conn, file_name, file):
     for pulse in enumerate(pulses):
         c = conn.cursor()
         with conn:
+            print(str(pulse))
             c.execute('INSERT INTO images VALUES (?, ?, ?, ?);', (file_name, pulse, ' ', metadata_str,))
 
 

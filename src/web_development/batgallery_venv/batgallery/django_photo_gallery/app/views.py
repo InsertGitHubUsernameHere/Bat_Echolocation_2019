@@ -53,15 +53,10 @@ def upload(request):
     context = {}
     if request.method == 'POST':
         uploaded_file = request.FILES['document']
-        #fs = FileSystemStorage()
-        #name = fs.save(uploaded_file.name, uploaded_file)
-
-        name = str(uploaded_file.name)
-        file = uploaded_file.read()
 
         # send in uploaded ZC file to database
         with sqlite3.connect('../db.sqlite3') as conn:
-            db_API.insert(conn, name, file)
+            db_API.insert(conn, uploaded_file.name, uploaded_file.read())
 
         #context['url'] = fs.url(uploaded_name)
     if request.POST.get('Next'):
