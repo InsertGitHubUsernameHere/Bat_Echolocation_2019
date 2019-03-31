@@ -59,7 +59,7 @@ def insert(conn, file_name, file):
     dct['species'] = ast.literal_eval(dct['species'])
     print(dct)'''
 
-    pulses = data_processing.clean_graph(graph=[raw[0], raw[1]])
+    pulses = data_processing.clean_graph(filename = '', graph=[raw[0], raw[1]])
 
     for pulse in enumerate(pulses):
         c = conn.cursor()
