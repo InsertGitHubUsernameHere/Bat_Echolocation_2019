@@ -62,10 +62,10 @@ def upload(request):
         if file_name.endswith('.zip'):
             with zipfile.ZipFile(file, 'r') as z:
                 for name in z.namelist():
-                    if not (name.endswith('.\d\d#') or name.endswith('.zc'))
-                    f = z.open(name)
-                    with sqlite3.connect('../db.sqlite3') as conn:
-                        db_API.insert(conn, name, f.read())
+                    if not (name.endswith('.\d\d#') or name.endswith('.zc')):
+                        f = z.open(name)
+                        with sqlite3.connect('../db.sqlite3') as conn:
+                            db_API.insert(conn, name, f.read())
         # Single ZC file
         else
             with sqlite3.connect('../db.sqlite3') as conn:
