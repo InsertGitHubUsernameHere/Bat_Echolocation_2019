@@ -191,7 +191,6 @@ code/django_photo_gallery/app/templates/handler404.html
 code/django_photo_gallery/app/templates/layout.html
 code/django_photo_gallery/app/templates/upload.html
 code/django_photo_gallery/app/views.py
-code/django_photo_gallery/db.sqlite3
 code/django_photo_gallery/debug.log
 code/django_photo_gallery/django_photo_gallery/__init__.py
 code/django_photo_gallery/django_photo_gallery/__pycache__/__init__.cpython-36.pyc
@@ -489,7 +488,6 @@ code/django_photo_gallery/static/social/social-youtube-black.svg
 code/django_photo_gallery/static/social/social-youtube.svg
 code/django_photo_gallery/static/Ubuntu-Italic.ttf
 code/django_photo_gallery/static/Ubuntu-Regular.ttf
-code/djangoproject/db.sqlite3
 code/djangoproject/manage.py
 code/djangoproject/mysite/__init__.py
 code/djangoproject/mysite/__pycache__/__init__.cpython-37.pyc
