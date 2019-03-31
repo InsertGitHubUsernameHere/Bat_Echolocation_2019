@@ -11,6 +11,7 @@ from src.util import bat
 import sqlite3
 import gc
 import matplotlib.pyplot as plt
+import datetime
 
 def get_tables(conn):
     c = conn.cursor()
@@ -39,13 +40,13 @@ def insert(conn, file_name, file):
         with conn:
             c.execute('CREATE TABLE images (name VARCHAR(255) PRIMARY KEY, raw BLOB, classification VARCHAR(255));')'''
 
-    data = bat.extract_anabat_zc(file)
-    raw = list(data)
+    raw = list(bat.extract_anabat_zc(file))
 
     # obtain metadata from raw ZC file (here, it's a dict)
     metadata = raw[3]
-    metadata['date'] = ''
+    metadata['date'] = metadata['date'].decode()
     metadata['pos'] = 0
+    metadata['timestamp'] = str(metadata['timestamp'])
     metadata_str = json.dumps(metadata)
 
     '''# assuming that GUI requests images w/ tagged metadata...
