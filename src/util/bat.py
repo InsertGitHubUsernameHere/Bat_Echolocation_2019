@@ -46,6 +46,8 @@ def hpf_zc(times_s, freqs_hz, amplitudes, cutoff_freq_hz):
     return times_s[hpf_mask], freqs_hz[hpf_mask], amplitudes[hpf_mask] if amplitudes is not None else None
 
 def extract_anabat_zc(m, hpfilter_khz=8.0, **kwargs):
+    amplitudes = None
+    
     size = len(m)
 
     # parse header
