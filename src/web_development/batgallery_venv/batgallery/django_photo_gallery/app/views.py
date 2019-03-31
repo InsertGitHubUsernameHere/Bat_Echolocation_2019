@@ -25,6 +25,7 @@ from os import listdir
 from os.path import isfile, join
 from app.models import Album, AlbumImage
 import logging
+import zipfile
 
 # Kevin's code
 '''with sqlite3.connect('../django_photo_gallery/db.sqlite3') as conn:
@@ -54,9 +55,21 @@ def upload(request):
     if request.method == 'POST':
         uploaded_file = request.FILES['document']
 
-        # send in uploaded ZC file to database
-        with sqlite3.connect('../db.sqlite3') as conn:
-            db_API.insert(conn, uploaded_file.name, uploaded_file.read())
+        file_name = uploaded_file.name
+        file = uploaded_file.read()
+
+        # Zip of ZC files
+        if file_name.endswith('.zip'):
+            with zipfile.ZipFile(file, 'r') as z:
+                for name in z.namelist():
+                    if not (name.endswith('.\d\d#') or name.endswith('.zc'))
+                    f = z.open(name)
+                    with sqlite3.connect('../db.sqlite3') as conn:
+                        db_API.insert(conn, name, f.read())
+        # Single ZC file
+        else
+            with sqlite3.connect('../db.sqlite3') as conn:
+                db_API.insert(conn, file_name, file)
 
         #context['url'] = fs.url(uploaded_name)
     if request.POST.get('Next'):
