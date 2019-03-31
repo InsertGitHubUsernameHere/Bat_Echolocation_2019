@@ -33,12 +33,12 @@ def get_tables(conn):
         c.execute(sql_query)'''
 
 # grab uploaded ZC file from GUI, get its cleaned pulses, convert them into PNG images, and insert them into DB
-def insert(conn, file_name, file):
+def insert(conn, file_namegit, file):
     # get list of tables currently in DB and check whether table "images" exists in DB
     if 'images' not in get_tables(conn):
         c = conn.cursor()
         with conn:
-            c.execute('CREATE TABLE images (name VARCHAR(255), raw BLOB, classification VARCHAR(255), metadata VARCHAR);')
+            c.execute('CREATE TABLE images (name VARCHAR(255), raw BLOB, classification VARCHAR(255), metadata VARCHAR(255));')
 
     raw = list(bat.extract_anabat_zc(file))
 
