@@ -59,15 +59,13 @@ def upload(request):
 
         file_name = uploaded_file.name
         file = uploaded_file.read()
-
+        
+        # TODO- extend list of acceptable/unacceptable filetypes
         # Zip of ZC files
         if file_name.endswith('.zip'):
-            with zipfile.ZipFile(file, 'r') as z:
-                for name in z.namelist():
-                    if not (name.endswith('.\d\d#') or name.endswith('.zc')):
-                        f = z.open(name)
-                        with sqlite3.connect('../db.sqlite3') as conn:
-                            db_API.insert(conn, username, name, f.read())
+            outdir = os.path.join(os.getcwd(), 'media', 'zip_results')
+            with sqlite3.connect('../db.sqlite3') as conn:
+                db_API.insert_zip(conn, username, outdir, file_name, file)
         # Single ZC file
         else:
             with sqlite3.connect('../db.sqlite3') as conn:

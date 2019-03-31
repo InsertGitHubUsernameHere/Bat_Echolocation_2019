@@ -1,6 +1,3 @@
-'''end goal of code is to send data from ZC file to database'''
-# next goal: send images to GUI
-
 from src.util import data_processing
 import pandas as pd
 import os
@@ -13,6 +10,7 @@ import gc
 import matplotlib.pyplot as plt
 import datetime
 import ast
+import zipfile
 
 def get_tables(conn):
     c = conn.cursor()
@@ -33,44 +31,74 @@ def get_tables(conn):
     with conn:
         c.execute(sql_query)'''
 
-# grab uploaded ZC file from GUI, get its cleaned pulses, convert them into PNG images, and insert them into DB
+# Clean ZC file and add to DB
 def insert(conn, username, file_name, file):
-    # get list of tables currently in DB and check whether table "images" exists in DB
+    # Get list of tables currently in DB and check whether table "images" exists in DB
     if 'images' not in get_tables(conn):
         c = conn.cursor()
         with conn:
             c.execute('CREATE TABLE images (name VARCHAR(255), raw BLOB, classification VARCHAR(255), metadata VARCHAR(255));')
 
+    # Extract data from ZC file
     raw = list(bat.extract_anabat_zc(file))
 
-    # obtain metadata from raw ZC file (here, it's a dict)
+    # Metadata from ZC
     metadata = raw[3]
     metadata['date'] = metadata['date'].decode()
     metadata['pos'] = 0
     metadata['timestamp'] = str(metadata['timestamp'])
     metadata_str = json.dumps(metadata)
 
-    '''# assuming that GUI requests images w/ tagged metadata...
-    metadata_split = metadata_str.split(',')
-    print(metadata_split)
-    metadata_split = [str.split('=') for str in metadata_split]
-    print(metadata_split)
-    dct = {key: value for (key, value) in metadata_split}
-    print(dct)
-    dct['species'] = ast.literal_eval(dct['species'])
-    print(dct)'''
-
+    # Get cleaned pulse data
     pulses = data_processing.clean_graph(filename = '', graph=[raw[0], raw[1]])
 
+    # Add each pulse and associated metadata to DB
     for pulse in enumerate(pulses):
         c = conn.cursor()
         with conn:
             c.execute('INSERT INTO images VALUES (?, ?, ?, ?);', (file_name, str(pulse), ' ', metadata_str,))
 
+# Add zip flie to DB
+def insert_zip(conn, username, outdir, file_name, file):
+    # get list of tables currently in DB and check whether table "images" exists in DB
+    if 'images' not in get_tables(conn):
+        c = conn.cursor()
+        with conn:
+            c.execute('CREATE TABLE images (name VARCHAR(255), raw BLOB, classification VARCHAR(255), metadata VARCHAR(255));')
+
+    # Extract zip folder
+    zip_data = zipfile.ZipFile(file, 'r')
+    zip_data.extractall(outdir)
+
+    # make global list of accepted extensions?
+    # TODO- extend with more filetypes
+    filenames = glob.glob(outdir + '/**/*#', recursive=True)
+    filenames.extend(glob.glob(outdir + '/**/*.zip', recursive=True))
+    filenames.extend(glob.glob(outdir + '/**/*.zca', recursive=True))
+
+    # Iterate through each file. Recursively handle other zip files, add others to database.
+    # TODO- extend with more filetypes
+    for file in filenames:
+        f = open(file)
+        f = f.read()
+        if file.endswith('.zip'):
+            insert_zip(conn, username, outdir, os.basename(file), f)
+        else:
+            insert(conn, username, os.basename(file), f)
+
+        f.close()
+
+    # Empty directory when finished
+    files = glob.glob(outdir)
+    for f in files:
+        os.remove('f')
+
+
+# Draw images from DB and load to website
 # 0: Source name, 1: Image data, 2: classification, 3: metadata, 4: username
 def load_images(conn, username, outdir):
     c = conn.cursor()
-    c.execute('SELECT * FROM images')   # TODO update to check for username
+    c.execute('SELECT * FROM images')   # TODO check for username
 
     fig, ax = plt.subplots()
     for i, row in enumerate(c):
@@ -80,16 +108,11 @@ def load_images(conn, username, outdir):
         pulse = ast.literal_eval(row[1])
         pulse = pulse[1]
 
-        # get pulse points' coordinates
+        # Get x/y from DB
         x = [point[0] for point in pulse]
         y = [point[1] for point in pulse]
 
-        # obtain a linear fit and classify
-        #plyft = polyfit(x=x, y=y, deg=1)
-        #classification = '/echolocation/' if plyft[1] < 0 else '/abnormal/'
-
-        # create and save PNG files of pulses
-        #save_path = os.path.realpath(f'{outdir}{classification}{zc_filename_split}_{i}.png')
+        # Create and save PNG files of pulses
         save_path = outdir + '/' + row[0].replace('#', '') + '_' + str(i) + '.png'
         ax.axis('off')
         ax.scatter(x, y)
