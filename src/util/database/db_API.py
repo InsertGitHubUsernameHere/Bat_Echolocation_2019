@@ -65,7 +65,7 @@ def insert(conn, username, file_name, file):
     for pulse in enumerate(pulses):
         c = conn.cursor()
         with conn:
-            c.execute('INSERT INTO images VALUES (?, ?, ?, ?);', (file_name, json.dumps(pulses), ' ', metadata_str,))
+            c.execute('INSERT INTO images VALUES (?, ?, ?, ?);', (file_name, str(pulses), ' ', metadata_str,))
 
 # 0: Source name, 1: Image data, 2: classification, 3: metadata, 4: username
 def load_images(conn, username, outdir):
@@ -74,7 +74,7 @@ def load_images(conn, username, outdir):
 
     fig, ax = plt.subplots()
     for row in c:
-        pulse = json.loads(row[1])
+        pulse = list(ast.literal_eval(row[1]))
         
         # get pulse points' coordinates
         x = [point[0] for point in pulse]
