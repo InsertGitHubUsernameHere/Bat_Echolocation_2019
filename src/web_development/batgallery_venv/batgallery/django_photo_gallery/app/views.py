@@ -24,6 +24,7 @@ from django.contrib.auth.models import User
 from os import listdir
 from os.path import isfile, join
 from app.models import Album, AlbumImage
+import logging
 
 # Kevin's code
 '''with sqlite3.connect('../django_photo_gallery/db.sqlite3') as conn:
@@ -56,7 +57,7 @@ def upload(request):
         #name = fs.save(uploaded_file.name, uploaded_file)
 
         name = uploaded_file.name
-        print(name)
+        logger.error(name)
         file = uploaded_file.read()
 
         # send in uploaded ZC file to database
