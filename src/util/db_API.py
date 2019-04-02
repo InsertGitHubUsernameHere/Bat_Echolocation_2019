@@ -11,7 +11,8 @@ import matplotlib.pyplot as plt
 import datetime
 import ast
 import zipfile
-
+import numpy as np
+from numpy.polynomial.polynomial import polyfit
 
 def get_tables(conn):
     c = conn.cursor()
@@ -32,16 +33,13 @@ def get_tables(conn):
     with conn:
         c.execute(sql_query)'''
 
-
 # Clean ZC file and add to DB
-def insert(conn, username, file_name, file):
+def insert(conn, uid, file_name, file):
     # Get list of tables currently in DB and check whether table "images" exists in DB
     if 'images' not in get_tables(conn):
         c = conn.cursor()
         with conn:
-            #c.execute('CREATE TABLE images (name VARCHAR(255), raw BLOB, classification VARCHAR(255), metadata VARCHAR(255));')
-            c.execute('CREATE TABLE images (username VARCHAR(255), img_name VARCHAR(255) PRIMARY KEY, raw BLOB,'
-                      ' classification VARCHAR(255), metadata VARCHAR(255), FOREIGN KEY (username) REFERENCES auth_user(username))')
+            c.execute('CREATE TABLE images (name VARCHAR(255), raw BLOB, classification VARCHAR(255), metadata VARCHAR(255));')
 
     # Extract data from ZC file
     raw = list(bat.extract_anabat_zc(file))
@@ -54,27 +52,27 @@ def insert(conn, username, file_name, file):
     metadata_str = json.dumps(metadata)
 
     # Get cleaned pulse data
-    pulses = data_processing.clean_graph(filename='', graph=[raw[0], raw[1]])
+    pulses = data_processing.clean_graph(filename = '', graph=[raw[0], raw[1]])
 
     # Add each pulse and associated metadata to DB
-    for pulse in enumerate(pulses):
+    with conn:
         c = conn.cursor()
-        with conn:
-            #c.execute('INSERT INTO images VALUES (?, ?, ?, ?);', (file_name, str(pulse), ' ', metadata_str,))
-            c.execute('INSERT INTO images VALUES (?, ?, ?, ?, ?);', (username, file_name, str(pulse), ' ', metadata_str,))
+        c.execute('SELECT * from images',)
+        found = c.fetchall()
+        if not any(i[0] == file_name for i in found):
+            for pulse in pulses:
+                c.execute('INSERT INTO images VALUES (?, ?, ?, ?);', (file_name, str(pulse), ' ', metadata_str))
 
-
-# Add zip flie to DB
-def insert_zip(conn, username, outdir, file_name, file):
-    # get list of tables currently in DB and check whether table "images" exists in DB
-    if 'images' not in get_tables(conn):
-        c = conn.cursor()
-        with conn:
-            c.execute('CREATE TABLE images (name VARCHAR(255), raw BLOB, classification VARCHAR(255), metadata VARCHAR(255));')
-
-    # Extract zip folder
-    zip_data = zipfile.ZipFile(file, 'r')
+# Add zip file to DB
+def insert_zip(conn, uid, outdir, file_name, file):
+    # Extract zip and delete it
+    z_name = outdir + '/' + uid + '_temp.zip'
+    z = open(z_name, 'wb')
+    z.write(file)
+    zip_data = zipfile.ZipFile(z_name, 'r')
     zip_data.extractall(outdir)
+    zip_data.close()
+    os.remove(z_name)
 
     # make global list of accepted extensions?
     # TODO- extend with more filetypes
@@ -82,51 +80,56 @@ def insert_zip(conn, username, outdir, file_name, file):
     filenames.extend(glob.glob(outdir + '/**/*.zip', recursive=True))
     filenames.extend(glob.glob(outdir + '/**/*.zca', recursive=True))
 
-    # Iterate through each file. Recursively handle other zip files, add others to database.
+    # Iterate through each file. Recursively handle zip files, insert others to database.
     # TODO- extend with more filetypes
     for file in filenames:
-        f = open(file)
-        f = f.read()
+        f = open(file, 'rb')
+        z = f.read()
         if file.endswith('.zip'):
-            insert_zip(conn, username, outdir, os.basename(file), f)
+            insert_zip(conn, uid, outdir, os.path.basename(file), z)
         else:
-            insert(conn, username, os.basename(file), f)
+            insert(conn, uid, os.path.basename(file), z)
 
         f.close()
+        os.remove(file)
 
     # Empty directory when finished
     files = glob.glob(outdir)
     for f in files:
-        os.remove('f')
+        print(f)
 
 
-# Draw images from DB and load to website
+# Load images from DB and render
 # 0: Source name, 1: Image data, 2: classification, 3: metadata, 4: username
-def load_images(conn, username, outdir):
+def load_images(conn, uid, outdir):
+
+    # Load image data
     c = conn.cursor()
-    #c.execute('SELECT * FROM images')   # TODO check for username
-    c.execute('SELECT * FROM images WHERE username=?;', (username,))
+    c.execute('SELECT * FROM images')
+    table = c.fetchall()
 
     fig, ax = plt.subplots()
-    for i, row in enumerate(c):
+    for i, row in enumerate(table):
 
-        # Convert DB string to list and handle AST weirdness
-        # Returns a tuple where t[0] = 0, t[1] = data
+        # Convert DB string to list
         pulse = ast.literal_eval(row[1])
-        pulse = pulse[1]
 
         # Get x/y from DB
         x = [point[0] for point in pulse]
         y = [point[1] for point in pulse]
 
+        if polyfit(x, y, 1)[1] < 0:
+            classification = 'e_'
+        else:
+            classification = 'a_'
+
         # Create and save PNG files of pulses
-        save_path = outdir + '/' + row[0].replace('#', '') + '_' + str(i) + '.png'
+        save_path = outdir + '/' + classification + row[0].replace('#', '') + '_' + str(i) + '.png'
         ax.axis('off')
         ax.scatter(x, y)
         fig.savefig(save_path, transparent=True, dpi=50)
         plt.cla()
         gc.collect()
-
 
 def select_images(conn, name=None, classification=None):
     c = conn.cursor()
