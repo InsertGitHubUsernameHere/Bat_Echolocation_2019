@@ -9,8 +9,8 @@ while path[path.rfind('/' if path.startswith('/') else '\\') + 1:] != 'Bat_Echol
     path = os.path.dirname(path)
 sys.path.insert(0, path)
 import sqlite3
-from src.util.database import db_API
-import pandas as pd
+from src.util import db_API
+#import pandas as pd
 # End Kevin's code
 
 from django.shortcuts import render, redirect
@@ -21,45 +21,47 @@ from django.core.files.storage import FileSystemStorage
 from app.signupforms import SignUPForm
 from django.contrib.auth.models import User
 from os import listdir
-from os.path import isfile, join
+from os.path import isfile, join, realpath
+import ast
 from app.models import Album, AlbumImage
 
-# Kevin's code
+# Test code
 '''
 with sqlite3.connect('../django_photo_gallery/db.sqlite3') as conn:
-    c = conn.cursor()
-    c.execute('DELETE FROM images;')
+    # use for calling the DB API
     db_API.fetch_images(conn)
     db_API.fetch_images(conn, name='')
     db_API.fetch_images(conn)
-    c.execute('DROP TABLE images;')
-    c.execute('DROP TABLE users;')
-    c.execute('CREATE TABLE users (username VARCHAR(255) PRIMARY KEY, password VARCHAR(255), ' \
-              'email VARCHAR(255), first_name VARCHAR(255), last_name VARCHAR(255));')
     
+    # use for querying the DB directly from here
+    c = conn.cursor()
+    c.execute('DELETE FROM images;')
+    c.execute('DROP TABLE images;')
     c.execute('CREATE TABLE images (username VARCHAR(255), name VARCHAR(255) PRIMARY KEY, raw BLOB,'
               ' classification VARCHAR(255), metadata VARCHAR(255), FOREIGN KEY (username) REFERENCES users(username))')
-    
     c.execute('CREATE TABLE images (name VARCHAR(255) PRIMARY KEY, raw BLOB,'
               ' classification VARCHAR(255), metadata VARCHAR(255))')
-              
     c.execute('SELECT * FROM users;')
     df = pd.DataFrame.from_records(c.fetchall(), columns=['username', 'password', 'email', 'first_name', 'last_name'])
     print(df)
 '''
-# End Kevin's code
+# End test code
 
 
 def upload(request):
     context = {}
     if request.method == 'POST':
         uploaded_file = request.FILES['document']
-        #fs = FileSystemStorage()
-        #name = fs.save(uploaded_file.name, uploaded_file)
+        fs = FileSystemStorage()
+        name = fs.save(uploaded_file.name, uploaded_file)
+
+        # acquire username from request
+        username = request.user
 
         # send in uploaded ZC file to database
         with sqlite3.connect('../django_photo_gallery/db.sqlite3') as conn:
-            db_API.insert(conn, fs.location, uploaded_file.name, uploaded_file)
+            #db_API.insert(conn, fs.location, uploaded_file.name, uploaded_file)
+            db_API.insert(conn, username, uploaded_file.name, uploaded_file)  # adjusted for new "images" table with "username" (foreign key from "auth-user")
 
         context['url'] = fs.url(name)
     if request.POST.get('Next'):

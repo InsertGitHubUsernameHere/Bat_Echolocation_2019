@@ -12,6 +12,8 @@ import sqlite3
 from src.util import db_API
 import pandas as pd
 import fs
+import zipfile
+import StringIO
 # End Kevin's code
 
 from django.shortcuts import render, redirect
@@ -26,6 +28,8 @@ from os.path import isfile, join
 from app.models import Album, AlbumImage
 import logging
 import zipfile
+from django.http import HttpResponse
+import StringIO
 
 # Kevin's code
 '''with sqlite3.connect('../django_photo_gallery/db.sqlite3') as conn:
@@ -38,18 +42,55 @@ import zipfile
     c.execute('DROP TABLE users;')
     c.execute('CREATE TABLE users (username VARCHAR(255) PRIMARY KEY, password VARCHAR(255), ' \
               'email VARCHAR(255), first_name VARCHAR(255), last_name VARCHAR(255));')
-    
+
     c.execute('CREATE TABLE images (username VARCHAR(255), name VARCHAR(255) PRIMARY KEY, raw BLOB,'
               ' classification VARCHAR(255), metadata VARCHAR(255), FOREIGN KEY (username) REFERENCES users(username))')
-    
+
     c.execute('CREATE TABLE images (name VARCHAR(255) PRIMARY KEY, raw BLOB,'
               ' classification VARCHAR(255), metadata VARCHAR(255))')
-              
+
     c.execute('SELECT * FROM users;')
     df = pd.DataFrame.from_records(c.fetchall(), columns=['username', 'password', 'email', 'first_name', 'last_name'])
     print(df)'''
 # End Kevin's code
 
+<<<<<<< HEAD
+=======
+username = ''
+
+
+def getfiles(request):
+    # Files (local path) to put in the .zip
+    # FIXME: Change this (get paths from DB etc)
+    # might loop through the whole folder to generate a list of images name.
+    filenames = ["media/file.png", "media/file2.png"]
+    zip_subdir = "media/zipfile"
+    zip_filename = "%s.zip" % zip_subdir
+
+    s = StringIO.StringIO()
+
+    zf = zipfile.ZipFile(s, "w")
+
+    for fpath in filenames:
+        # Calculate path for file in zip
+        fdir, fname = os.path.split(fpath)
+        zip_path = os.path.join(zip_subdir, fname)
+
+        # Add file, at correct path
+        zf.write(fpath, zip_path)
+
+    # Must close zip for all contents to be written
+    zf.close()
+
+    # Grab ZIP file from in-memory, make response with correct MIME-type
+    resp = HttpResponse(s.getvalue(), mimetype="application/x-zip-compressed")
+    # ..and correct content-disposition
+    resp['Content-Disposition'] = 'attachment; filename=%s' % zip_filename
+
+    return resp
+
+
+>>>>>>> c668ffbe840ea12edb0818e37702ff61b2b816eb
 def upload(request):
     context = {}
     if request.method == 'POST':
@@ -58,10 +99,13 @@ def upload(request):
         file_name = uploaded_file.name
         file = uploaded_file.read()
 
+<<<<<<< HEAD
         # Get user id
         uid = request.user.id
         
         # Upload file to database. Switches on filetype.
+=======
+>>>>>>> c668ffbe840ea12edb0818e37702ff61b2b816eb
         # TODO- extend list of acceptable/unacceptable filetypes
 
         # Upload ZIP containing ZC files
