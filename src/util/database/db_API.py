@@ -32,7 +32,7 @@ def get_tables(conn):
         c.execute(sql_query)'''
 
 # Clean ZC file and add to DB
-def insert(conn, username, file_name, file):
+def insert(conn, uid, file_name, file):
     # Get list of tables currently in DB and check whether table "images" exists in DB
     if 'images' not in get_tables(conn):
         c = conn.cursor()
@@ -56,19 +56,21 @@ def insert(conn, username, file_name, file):
     for pulse in enumerate(pulses):
         c = conn.cursor()
         with conn:
-            c.execute('INSERT INTO images VALUES (?, ?, ?, ?);', (file_name, str(pulse), ' ', metadata_str,))
+            c.execute('SELECT * from images where name = ' + file_name)
+            found = self.cur.fetchone() is None
+            if not found:
+                c.execute('INSERT INTO images VALUES (?, ?, ?, ?);', (file_name, str(pulse), ' ', metadata_str))
 
-# Add zip flie to DB
-def insert_zip(conn, username, outdir, file_name, file):
-    # get list of tables currently in DB and check whether table "images" exists in DB
-    if 'images' not in get_tables(conn):
-        c = conn.cursor()
-        with conn:
-            c.execute('CREATE TABLE images (name VARCHAR(255), raw BLOB, classification VARCHAR(255), metadata VARCHAR(255));')
-
-    # Extract zip folder
-    zip_data = zipfile.ZipFile(file, 'r')
+# Add zip file to DB
+def insert_zip(conn, uid, outdir, file_name, file):
+    # Extract zip and delete it
+    z_name = outdir + '/' + username + '_temp.zip'
+    z = open(z_name, 'wb')
+    z.write(file)
+    zip_data = zipfile.ZipFile(z_name, 'r')
     zip_data.extractall(outdir)
+    zip_data.close()
+    os.remove(z_name)
 
     # make global list of accepted extensions?
     # TODO- extend with more filetypes
@@ -76,29 +78,30 @@ def insert_zip(conn, username, outdir, file_name, file):
     filenames.extend(glob.glob(outdir + '/**/*.zip', recursive=True))
     filenames.extend(glob.glob(outdir + '/**/*.zca', recursive=True))
 
-    # Iterate through each file. Recursively handle other zip files, add others to database.
+    # Iterate through each file. Recursively handle zip files, insert others to database.
     # TODO- extend with more filetypes
     for file in filenames:
-        f = open(file)
-        f = f.read()
+        f = open(file, 'rb')
+        z = f.read()
         if file.endswith('.zip'):
-            insert_zip(conn, username, outdir, os.basename(file), f)
+            insert_zip(conn, uid, outdir, os.path.basename(file), z)
         else:
-            insert(conn, username, os.basename(file), f)
+            insert(conn, uid, os.path.basename(file), z)
 
         f.close()
+        os.remove(file)
 
     # Empty directory when finished
     files = glob.glob(outdir)
     for f in files:
-        os.remove('f')
+        print(f)
 
 
 # Draw images from DB and load to website
 # 0: Source name, 1: Image data, 2: classification, 3: metadata, 4: username
-def load_images(conn, username, outdir):
+def load_images(conn, uid, outdir):
     c = conn.cursor()
-    c.execute('SELECT * FROM images')   # TODO check for username
+    c.execute('SELECT * FROM images')
 
     fig, ax = plt.subplots()
     for i, row in enumerate(c):

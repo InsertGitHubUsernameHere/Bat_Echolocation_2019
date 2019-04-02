@@ -10,5 +10,4 @@ urlpatterns = [
    path('password_reset/done/', PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'),
    path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(template_name='registration/resetpasswordconfirm.html'), name='password_reset_confirm'),
    path('reset/done/', PasswordResetCompleteView.as_view(template_name='registration/resetpasswordcomplete.html'), name='password_reset_complete')
-
 ]
