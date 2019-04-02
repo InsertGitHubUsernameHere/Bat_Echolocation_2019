@@ -9,7 +9,7 @@ while path[path.rfind('/' if path.startswith('/') else '\\') + 1:] != 'Bat_Echol
     path = os.path.dirname(path)
 sys.path.insert(0, path)
 import sqlite3
-from src.util.database import db_API
+from src.util import db_API
 import pandas as pd
 import fs
 # End Kevin's code
@@ -50,40 +50,47 @@ import zipfile
     print(df)'''
 # End Kevin's code
 
-username = ''
-
 def upload(request):
     context = {}
     if request.method == 'POST':
+        # Get uploaded file & filename
         uploaded_file = request.FILES['document']
-
         file_name = uploaded_file.name
         file = uploaded_file.read()
+
+        # Get user id
+        uid = request.user.id
         
+        # Upload file to database. Switches on filetype.
         # TODO- extend list of acceptable/unacceptable filetypes
-        # Zip of ZC files
+
+        # Upload ZIP containing ZC files
         if file_name.endswith('.zip'):
-            outdir = os.path.join(os.getcwd(), 'media', 'zip_results')
+            outdir = os.path.join(os.getcwd(), 'media', str(uid), 'zip_results')
+            os.mkdir(outdir)
             with sqlite3.connect('../db.sqlite3') as conn:
-                db_API.insert_zip(conn, username, outdir, file_name, file)
-        # Single ZC file
+                db_API.insert_zip(conn, uid, outdir, file_name, file)
+        # Upload ZC file
         else:
             with sqlite3.connect('../db.sqlite3') as conn:
-                db_API.insert(conn, username, file_name, file)
+                db_API.insert(conn, uid, file_name, file)
 
-        #context['url'] = fs.url(uploaded_name)
     if request.POST.get('Next'):
         return redirect('displayImages')
     return render(request, 'upload.html')
 
 
 def displayImages(request):
-    outdir = os.path.join(os.getcwd(), 'media', 'test_images')
-    if request.method == 'GET':
-        with sqlite3.connect('../db.sqlite3') as conn:
-            db_API.load_images(conn, username, outdir)
+    outdir = os.path.join(os.getcwd(), 'media')
 
-    onlyfiles = [f for f in listdir("media/test_images/") if isfile(join("media/test_images/", f))]
+    if request.method == 'GET':
+        uid = request.user.id
+        outdir = os.path.join(outdir, str('uid'), 'test_images')
+        os.mkdir(outdir)
+        with sqlite3.connect('../db.sqlite3') as conn:
+            db_API.load_images(conn, uid, outdir)
+
+    onlyfiles = [f for f in listdir(outdir) if isfile(join(outdir, f))]
     return render(request, 'displayImages.html', {'onlyfiles': onlyfiles})
 
 

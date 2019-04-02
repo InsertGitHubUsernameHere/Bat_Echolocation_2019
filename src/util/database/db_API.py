@@ -39,7 +39,7 @@ def insert(conn, uid, file_name, file):
     if 'images' not in get_tables(conn):
         c = conn.cursor()
         with conn:
-            c.execute('CREATE TABLE images (name VARCHAR(255), raw BLOB, classification VARCHAR(255), metadata VARCHAR(255));')
+            c.execute('CREATE TABLE images (name VARCHAR(255), raw BLOB, classification VARCHAR(255), metadata VARCHAR(255), uid INTEGER;')
 
     # Extract data from ZC file
     raw = list(bat.extract_anabat_zc(file))
@@ -61,12 +61,13 @@ def insert(conn, uid, file_name, file):
         found = c.fetchall()
         if not any(i[0] == file_name for i in found):
             for pulse in pulses:    
-                c.execute('INSERT INTO images VALUES (?, ?, ?, ?);', (file_name, str(pulse), ' ', metadata_str))
+                c.execute('INSERT INTO images VALUES (?, ?, ?, ?);', (file_name, str(pulse), ' ', metadata_str, uid))
 
 # Add zip file to DB
 def insert_zip(conn, uid, outdir, file_name, file):
+
     # Extract zip and delete it
-    z_name = outdir + '/' + uid + '_temp.zip'
+    z_name = outdir + '/' + 'temp.zip'
     z = open(z_name, 'wb')
     z.write(file)
     zip_data = zipfile.ZipFile(z_name, 'r')
@@ -74,8 +75,8 @@ def insert_zip(conn, uid, outdir, file_name, file):
     zip_data.close()
     os.remove(z_name)
 
-    # make global list of accepted extensions?
-    # TODO- extend with more filetypes
+    # Select all valid files for processing
+    # TODO- extend with more filetypes. make global list of accepted extensions?
     filenames = glob.glob(outdir + '/**/*#', recursive=True)
     filenames.extend(glob.glob(outdir + '/**/*.zip', recursive=True))
     filenames.extend(glob.glob(outdir + '/**/*.zca', recursive=True))
@@ -86,7 +87,9 @@ def insert_zip(conn, uid, outdir, file_name, file):
         f = open(file, 'rb')
         z = f.read()
         if file.endswith('.zip'):
-            insert_zip(conn, uid, outdir, os.path.basename(file), z)
+            subdir = os.paths.join(outdir, os.path.basename(file))
+            os.mkdir(subdir)
+            insert_zip(conn, uid, subdir, os.path.basename(file), z)
         else:
             insert(conn, uid, os.path.basename(file), z)
 
@@ -103,28 +106,31 @@ def insert_zip(conn, uid, outdir, file_name, file):
 # 0: Source name, 1: Image data, 2: classification, 3: metadata, 4: username
 def load_images(conn, uid, outdir):
 
-    # Load image data
+    # Load users image data
     c = conn.cursor()
     c.execute('SELECT * FROM images')
     table = c.fetchall()
+    table = [row for row in table if row[4] == uid]
 
     fig, ax = plt.subplots()
     for i, row in enumerate(table):
 
-        # Convert DB string to list
+        # Convert DB string to 2d list
         pulse = ast.literal_eval(row[1])
 
-        # Get x/y from DB
+        # Split pulse into x and y coords
         x = [point[0] for point in pulse]
         y = [point[1] for point in pulse]
 
+        # Classify as normal or abnormal
+        # TODO- replace with CNN. perform at insert?
         if polyfit(x, y, 1)[1] < 0:
-            classification = 'e_'
+            classification = 'e'
         else:
-            classification = 'a_'
+            classification = 'a'
 
-        # Create and save PNG files of pulses
-        save_path = outdir + '/' + classification + row[0].replace('#', '') + '_' + str(i) + '.png'
+        # Render pulse as image
+        save_path = outdir + '/' + classification + '_' + row[0].replace('#', '') + '_' + str(i) + '.png'
         ax.axis('off')
         ax.scatter(x, y)
         fig.savefig(save_path, transparent=True, dpi=50)
