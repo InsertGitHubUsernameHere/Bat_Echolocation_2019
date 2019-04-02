@@ -61,7 +61,7 @@ def getfiles(request):
     filenames = ["media/file.png", "media/file2.png"]
     zip_subdir = "media/zipfile"
     zip_filename = "%s.zip" % zip_subdir
-
+    # getfiles
     s = StringIO.StringIO()
 
     zf = zipfile.ZipFile(s, "w")
