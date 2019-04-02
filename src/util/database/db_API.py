@@ -117,9 +117,9 @@ def load_images(conn, uid, outdir):
         y = [point[1] for point in pulse]
 
         if polyfit(x, y, 1)[1] < 0:
-                classification = 'e_'
-            else:
-                classification = 'a_'
+            classification = 'e_'
+        else:
+            classification = 'a_'
 
         # Create and save PNG files of pulses
         save_path = outdir + '/' + classification + row[0].replace('#', '') + '_' + str(i) + '.png'
