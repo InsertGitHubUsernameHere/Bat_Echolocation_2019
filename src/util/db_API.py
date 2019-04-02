@@ -39,7 +39,7 @@ def insert(conn, uid, file_name, file):
     if 'images' not in get_tables(conn):
         c = conn.cursor()
         with conn:
-            c.execute('CREATE TABLE images (name VARCHAR(255), raw BLOB, classification VARCHAR(255), metadata VARCHAR(255), uid INTEGER;')
+            c.execute('CREATE TABLE images (name VARCHAR(255), raw BLOB, classification VARCHAR(255), metadata VARCHAR(255), uid INTEGER);')
 
     # Extract data from ZC file
     raw = list(bat.extract_anabat_zc(file))

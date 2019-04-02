@@ -29,7 +29,7 @@ from app.models import Album, AlbumImage
 import logging
 import zipfile
 from django.http import HttpResponse
-import StringIO
+from io import StringIO
 
 # Kevin's code
 '''with sqlite3.connect('../django_photo_gallery/db.sqlite3') as conn:
@@ -118,7 +118,7 @@ def displayImages(request):
 
     if request.method == 'GET':
         uid = request.user.id
-        outdir = os.path.join(outdir, str('uid'), 'test_images')
+        outdir = os.path.join(outdir, str(uid), 'test_images')
         os.mkdir(outdir)
         with sqlite3.connect('../db.sqlite3') as conn:
             db_API.load_images(conn, uid, outdir)
