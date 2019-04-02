@@ -11,6 +11,8 @@ import matplotlib.pyplot as plt
 import datetime
 import ast
 import zipfile
+import numpy as np
+from numpy.polynomial.polynomial import polyfit
 
 def get_tables(conn):
     c = conn.cursor()
