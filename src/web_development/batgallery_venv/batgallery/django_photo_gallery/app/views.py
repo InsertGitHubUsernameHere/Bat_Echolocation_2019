@@ -54,11 +54,6 @@ import StringIO
     print(df)'''
 # End Kevin's code
 
-<<<<<<< HEAD
-=======
-username = ''
-
-
 def getfiles(request):
     # Files (local path) to put in the .zip
     # FIXME: Change this (get paths from DB etc)
@@ -89,8 +84,6 @@ def getfiles(request):
 
     return resp
 
-
->>>>>>> c668ffbe840ea12edb0818e37702ff61b2b816eb
 def upload(request):
     context = {}
     if request.method == 'POST':
@@ -99,13 +92,10 @@ def upload(request):
         file_name = uploaded_file.name
         file = uploaded_file.read()
 
-<<<<<<< HEAD
         # Get user id
         uid = request.user.id
         
         # Upload file to database. Switches on filetype.
-=======
->>>>>>> c668ffbe840ea12edb0818e37702ff61b2b816eb
         # TODO- extend list of acceptable/unacceptable filetypes
 
         # Upload ZIP containing ZC files
@@ -122,7 +112,6 @@ def upload(request):
     if request.POST.get('Next'):
         return redirect('displayImages')
     return render(request, 'upload.html')
-
 
 def displayImages(request):
     outdir = os.path.join(os.getcwd(), 'media')
