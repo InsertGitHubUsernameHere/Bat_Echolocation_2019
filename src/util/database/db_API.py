@@ -56,9 +56,9 @@ def insert(conn, uid, file_name, file):
     for pulse in enumerate(pulses):
         c = conn.cursor()
         with conn:
-            c.execute('SELECT * from images where name = ' + file_name)
-            found = self.cur.fetchone() is None
-            if not found:
+            c.execute('SELECT * from images',)
+            found = c.fetchall()
+            if not any(i[0] == file_name for i in found)
                 c.execute('INSERT INTO images VALUES (?, ?, ?, ?);', (file_name, str(pulse), ' ', metadata_str))
 
 # Add zip file to DB
@@ -104,7 +104,7 @@ def load_images(conn, uid, outdir):
     c.execute('SELECT * FROM images')
 
     fig, ax = plt.subplots()
-    for i, row in enumerate(c):
+    for i, row in enumerate(c.fetchall()):
 
         # Convert DB string to list and handle AST weirdness
         # Returns a tuple where t[0] = 0, t[1] = data
