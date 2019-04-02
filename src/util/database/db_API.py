@@ -64,7 +64,7 @@ def insert(conn, uid, file_name, file):
 # Add zip file to DB
 def insert_zip(conn, uid, outdir, file_name, file):
     # Extract zip and delete it
-    z_name = outdir + '/' + username + '_temp.zip'
+    z_name = outdir + '/' + uid + '_temp.zip'
     z = open(z_name, 'wb')
     z.write(file)
     zip_data = zipfile.ZipFile(z_name, 'r')
@@ -106,22 +106,23 @@ def load_images(conn, uid, outdir):
     c.execute('SELECT * FROM images')
     table = c.fetchall()
 
-    print (len(table))
-
     fig, ax = plt.subplots()
     for i, row in enumerate(table):
 
-        # Convert DB string to list and handle AST weirdness
-        # Returns a tuple where t[0] = 0, t[1] = data
+        # Convert DB string to list
         pulse = ast.literal_eval(row[1])
-        pulse = pulse[1]
 
         # Get x/y from DB
         x = [point[0] for point in pulse]
         y = [point[1] for point in pulse]
 
+        if polyfit(x, y, 1)[1] < 0:
+                classification = 'e_'
+            else:
+                classification = 'a_'
+
         # Create and save PNG files of pulses
-        save_path = outdir + '/' + row[0].replace('#', '') + '_' + str(i) + '.png'
+        save_path = outdir + '/' + classification + row[0].replace('#', '') + '_' + str(i) + '.png'
         ax.axis('off')
         ax.scatter(x, y)
         fig.savefig(save_path, transparent=True, dpi=50)
