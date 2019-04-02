@@ -53,12 +53,12 @@ def insert(conn, uid, file_name, file):
     pulses = data_processing.clean_graph(filename = '', graph=[raw[0], raw[1]])
 
     # Add each pulse and associated metadata to DB
-    for pulse in enumerate(pulses):
+    with conn:
         c = conn.cursor()
-        with conn:
-            c.execute('SELECT * from images',)
-            found = c.fetchall()
-            if not any(i[0] == file_name for i in found)
+        c.execute('SELECT * from images',)
+        found = c.fetchall()
+        if not any(i[0] == file_name for i in found):
+            for pulse in pulses:    
                 c.execute('INSERT INTO images VALUES (?, ?, ?, ?);', (file_name, str(pulse), ' ', metadata_str))
 
 # Add zip file to DB
@@ -97,14 +97,19 @@ def insert_zip(conn, uid, outdir, file_name, file):
         print(f)
 
 
-# Draw images from DB and load to website
+# Load images from DB and render
 # 0: Source name, 1: Image data, 2: classification, 3: metadata, 4: username
 def load_images(conn, uid, outdir):
+
+    # Load image data
     c = conn.cursor()
     c.execute('SELECT * FROM images')
+    table = c.fetchall()
+
+    print (len(table))
 
     fig, ax = plt.subplots()
-    for i, row in enumerate(c.fetchall()):
+    for i, row in enumerate(table):
 
         # Convert DB string to list and handle AST weirdness
         # Returns a tuple where t[0] = 0, t[1] = data
