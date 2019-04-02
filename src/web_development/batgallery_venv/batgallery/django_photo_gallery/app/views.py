@@ -58,10 +58,13 @@ username = ''
 
 
 def getfiles(request):
+    # Files (local path) to put in the .zip
+    # FIXME: Change this (get paths from DB etc)
+    # might loop through the whole folder to generate a list of images name.
     filenames = ["media/file.png", "media/file2.png"]
     zip_subdir = "media/zipfile"
     zip_filename = "%s.zip" % zip_subdir
-    # getfiles
+
     s = StringIO.StringIO()
 
     zf = zipfile.ZipFile(s, "w")
