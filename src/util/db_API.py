@@ -61,7 +61,7 @@ def insert(conn, uid, file_name, file):
         found = c.fetchall()
         if not any(i[0] == file_name for i in found):
             for pulse in pulses:    
-                c.execute('INSERT INTO images VALUES (?, ?, ?, ?);', (file_name, str(pulse), ' ', metadata_str, uid))
+                c.execute('INSERT INTO images VALUES (?, ?, ?, ?, ?);', (file_name, str(pulse), ' ', metadata_str, uid))
 
 # Add zip file to DB
 def insert_zip(conn, uid, outdir, file_name, file):
@@ -129,13 +129,20 @@ def load_images(conn, uid, outdir):
         else:
             classification = 'a'
 
-        # Render pulse as image
+        # Generate image path
         save_path = outdir + '/' + classification + '_' + row[0].replace('#', '') + '_' + str(i) + '.png'
-        ax.axis('off')
-        ax.scatter(x, y)
-        fig.savefig(save_path, transparent=True, dpi=50)
-        plt.cla()
-        gc.collect()
+
+        # Don't save the image if it already exists
+        if os.path.isfile(save_path):
+            continue
+
+        # Render the image if it doesn't
+        else:
+            ax.axis('off')
+            ax.scatter(x, y)
+            fig.savefig(save_path, transparent=True, dpi=50)
+            plt.cla()
+            gc.collect()
 
 def select_images(conn, name=None, classification=None):
     c = conn.cursor()

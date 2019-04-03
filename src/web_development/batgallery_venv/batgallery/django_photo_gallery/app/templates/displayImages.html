@@ -30,7 +30,7 @@
 <div style="text-align:center">
     <h2> Here are your images! </h2>
     {% for pic in onlyfiles %}
-       <img src="/media/test_images/{{ pic }}" >
+       <img src="/media/{{user.id}}/test_images/{{ pic }}" >
     {% endfor %}
 </div>
 

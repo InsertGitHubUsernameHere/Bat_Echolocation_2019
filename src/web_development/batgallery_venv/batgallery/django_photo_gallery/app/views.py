@@ -13,7 +13,7 @@ from src.util import db_API
 import pandas as pd
 import fs
 import zipfile
-import StringIO
+#import StringIO
 # End Kevin's code
 
 from django.shortcuts import render, redirect
@@ -29,7 +29,7 @@ from app.models import Album, AlbumImage
 import logging
 import zipfile
 from django.http import HttpResponse
-from io import StringIO
+#from io import StringIO
 
 # Kevin's code
 '''with sqlite3.connect('../django_photo_gallery/db.sqlite3') as conn:
@@ -101,7 +101,10 @@ def upload(request):
         # Upload ZIP containing ZC files
         if file_name.endswith('.zip'):
             outdir = os.path.join(os.getcwd(), 'media', str(uid), 'zip_results')
-            os.mkdir(outdir)
+            try:
+                os.makedirs(outdir)
+            except:
+                pass
             with sqlite3.connect('../db.sqlite3') as conn:
                 db_API.insert_zip(conn, uid, outdir, file_name, file)
         # Upload ZC file
@@ -117,14 +120,23 @@ def displayImages(request):
     outdir = os.path.join(os.getcwd(), 'media')
 
     if request.method == 'GET':
+
+        # Get user id
         uid = request.user.id
+        
+        # Make output directory if it doesn't exist already
         outdir = os.path.join(outdir, str(uid), 'test_images')
-        os.mkdir(outdir)
+        try:
+            os.makedirs(outdir)
+        except:
+            pass
+
+        # Load images from database
         with sqlite3.connect('../db.sqlite3') as conn:
             db_API.load_images(conn, uid, outdir)
 
-    onlyfiles = [f for f in listdir(outdir) if isfile(join(outdir, f))]
-    return render(request, 'displayImages.html', {'onlyfiles': onlyfiles})
+        onlyfiles = [f for f in listdir(outdir) if isfile(join(outdir, f))]
+        return render(request, 'displayImages.html', {'onlyfiles': onlyfiles})
 
 
 def gallery(request):
