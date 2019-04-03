@@ -20,7 +20,6 @@ def get_tables(conn):
     tables = [i[0] for i in c.fetchall()]
     return tables
 
-
 '''def create_table(conn, table):
     c = conn.cursor()
 
@@ -35,7 +34,8 @@ def get_tables(conn):
 
 # Clean ZC file and add to DB
 def insert(conn, uid, file_name, file):
-    # Get list of tables currently in DB and check whether table "images" exists in DB
+
+    # If images table doesn't exist yet, make it
     if 'images' not in get_tables(conn):
         c = conn.cursor()
         with conn:
@@ -98,9 +98,6 @@ def insert_zip(conn, uid, outdir, file_name, file):
 
     # Empty directory when finished
     files = glob.glob(outdir)
-    for f in files:
-        print(f)
-
 
 # Load images from DB and render
 # 0: Source name, 1: Image data, 2: classification, 3: metadata, 4: username
