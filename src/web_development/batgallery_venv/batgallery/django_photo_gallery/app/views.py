@@ -67,6 +67,7 @@ def getfiles(request):
 
     s = StringIO.StringIO()
 
+    # The zip compressor
     zf = zipfile.ZipFile(s, "w")
 
     for fpath in filenames:
@@ -84,7 +85,7 @@ def getfiles(request):
     resp = HttpResponse(s.getvalue(), mimetype="application/x-zip-compressed")
     # ..and correct content-disposition
     resp['Content-Disposition'] = 'attachment; filename=%s' % zip_filename
-
+    print(resp)
     return resp
 
 
