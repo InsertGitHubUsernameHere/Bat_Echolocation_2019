@@ -1,5 +1,5 @@
 import os
-import django_heroku
+#import django_heroku
 #import posixpath
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -157,4 +157,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'aasdsa203@gmail.com'
 EMAIL_HOST_PASSWORD = 'hitman007'
 
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
