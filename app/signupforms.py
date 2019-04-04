@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.validators import validate_email
 
-
-
 class SignUPForm(UserCreationForm):
 	email = forms.EmailField(required=True)
 	class Meta:
@@ -14,10 +12,10 @@ class SignUPForm(UserCreationForm):
 			'first_name',
 			'last_name',
 			'email',
-			'organization',
+		#	'organization',
 			'password1',
 			'password2',
-			)
+		)
 
 	def clean_username(self):
 		user = self.cleaned_data['username']
