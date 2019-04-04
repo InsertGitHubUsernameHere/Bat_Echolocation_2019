@@ -6,7 +6,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-import app.forms
+#import app.forms
 import app.views
 
 from django.conf.urls import include
@@ -22,8 +22,8 @@ urlpatterns = [
     url(r'^(?P<slug>[-\w]+)$', app.views.AlbumDetail.as_view(), name='album'),  # app.views.AlbumView.as_view()
 
     # Auth related urls
-    url(r'^accounts/login/$', auth_views.login, name='login'),
-    url(r'^accounts/logout/$', auth_views.logout, {'next_page': '/', }, name='logout'),
+    url(r'^accounts/login/$', auth_views.LoginView, name='login'),
+    url(r'^accounts/logout/$', auth_views.LogoutView, {'next_page': '/', }, name='logout'),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', admin.site.urls),

@@ -167,7 +167,8 @@ class AlbumDetail(DetailView):
         return context
 
 
-def handler404(request):
+def handler404(request, exception):
+    print(exception)
     assert isinstance(request, HttpRequest)
     return render(request, 'handler404.html', None, None, 404)
 
