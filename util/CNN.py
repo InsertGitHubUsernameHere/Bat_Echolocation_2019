@@ -13,14 +13,9 @@ input:
 output:
 - result - list of floats that represents the classification (~0 for abnormal, ~1 for echolocation)
 '''
-model = ' '
 
-def classifyCNN(file_name):
+def classifyCNN(file_name, model):
     image = Image.open(file_name)
-
-    # load CNN model for predictions
-    if model == ' ':
-        model = load_model('CNN200x300ep30.h5')
 
     # change image dimensions to desired values for resizing
     image_height, image_width = 200, 300
@@ -38,7 +33,12 @@ def classifyCNN(file_name):
     imagearray /= 255'''
 
     # convert image to array and add 4th dimension
-    image_array = np.expand_dims(img_to_array(image_resize), 0)
+   # image_array = np.expand_dims(img_to_array(image_resize), 0)
+    image_array = img_to_array(image_resize)
+
+    np.delete(image_array, 3, 2)
+
+    image_array = np.expand_dims(image_array,0)
 
     # rescale image array (have values b/t 0 and 1)
     image_array /= 255

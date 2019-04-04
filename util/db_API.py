@@ -14,6 +14,7 @@ import ast
 import zipfile
 import numpy as np
 from numpy.polynomial.polynomial import polyfit
+from keras.models import load_model
 
 
 def get_tables(conn):
@@ -102,6 +103,10 @@ def load_images(conn, uid, outdir):
     table = c.fetchall()
     table = [row for row in table if row[4] == uid]
 
+    # Load CNN
+    __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+    model = load_model(__location__ + '/CNN200x300ep30.h5')
+
     fig, ax = plt.subplots()
     for i, row in enumerate(table):
 
@@ -129,7 +134,7 @@ def load_images(conn, uid, outdir):
 
             # Classify as normal or abnormal
             # TODO- perform at insert?
-            if CNN.classifyCNN(save_path) == 0:
+            if True: #CNN.classifyCNN(save_path, model) == 0:
                 os.path.isfile(save_path.replace('^', 'e'))
             else:
                 os.path.isfile(save_path.replace('^', 'a'))
