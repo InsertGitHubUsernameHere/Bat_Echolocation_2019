@@ -4,7 +4,6 @@ import numpy as np
 from PIL import Image
 from skimage.transform import resize
 
-
 # Input is an image-CNN runs prediction on image-Returns image prediction as a list of float(s)
 '''
 function to restore CNN and run prediction on a particular image
@@ -14,11 +13,14 @@ input:
 output:
 - result - list of floats that represents the classification (~0 for abnormal, ~1 for echolocation)
 '''
+model = ' '
 
+def classifyCNN(file_name):
+    image = Image.open(file_name)
 
-def RestoreCNN(image):
     # load CNN model for predictions
-    model = load_model('CNN200x300ep30.h5')
+    if model == ' ':
+        model = load_model('CNN200x300ep30.h5')
 
     # change image dimensions to desired values for resizing
     image_height, image_width = 200, 300
@@ -48,6 +50,7 @@ def RestoreCNN(image):
     result = prediction[0]
 
     # TODO: if-statement cutoff: 0 for less than 0.9, 1 otherwise
+    result = (result < 0.9) ? 0 : 1
 
     # return value is a float that represents the classification: ~0 = abnormal,~1 = echolocation
     return result

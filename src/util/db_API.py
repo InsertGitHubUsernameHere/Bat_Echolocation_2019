@@ -1,4 +1,5 @@
 from src.util import data_processing
+from src.util import CNN
 import pandas as pd
 import os
 import glob
@@ -119,18 +120,11 @@ def load_images(conn, uid, outdir):
         x = [point[0] for point in pulse]
         y = [point[1] for point in pulse]
 
-        # Classify as normal or abnormal
-        # TODO- replace with CNN. perform at insert?
-        if polyfit(x, y, 1)[1] < 0:
-            classification = 'e'
-        else:
-            classification = 'a'
-
         # Generate image path
-        save_path = outdir + '/' + classification + '_' + row[0].replace('#', '') + '_' + str(i) + '.png'
+        save_path = outdir + '/' + '^_' + row[0].replace('#', '') + '_' + str(i) + '.png'
 
         # Don't save the image if it already exists
-        if os.path.isfile(save_path):
+        if os.path.isfile(save_path.replace('^', 'a')) or os.path.isfile(save_path.replace('^', 'e')):
             continue
 
         # Render the image if it doesn't
@@ -140,6 +134,13 @@ def load_images(conn, uid, outdir):
             fig.savefig(save_path, transparent=True, dpi=50)
             plt.cla()
             gc.collect()
+
+            # Classify as normal or abnormal
+            # TODO- perform at insert?
+            if CNN.classifyCNN(save_path) == 0:
+                os.path.isfile(save_path.replace('^', 'e'))
+            else:
+                os.path.isfile(save_path.replace('^', 'a'))
 
 def select_images(conn, name=None, classification=None):
     c = conn.cursor()
