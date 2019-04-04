@@ -15,23 +15,13 @@ import zipfile
 import numpy as np
 from numpy.polynomial.polynomial import polyfit
 
+
 def get_tables(conn):
     c = conn.cursor()
     c.execute('SELECT name FROM sqlite_master WHERE type=\'table\'')
     tables = [i[0] for i in c.fetchall()]
     return tables
 
-'''def create_table(conn, table):
-    c = conn.cursor()
-
-    if table == 'images':
-        sql_query = f'CREATE TABLE {table} (name VARCHAR(255) PRIMARY KEY, classification VARCHAR(255), raw_data BLOB);'
-    elif table == 'users':
-            sql_query = f'CREATE TABLE {table} (username VARCHAR(255) PRIMARY KEY, password VARCHAR(255), ' \
-                'email VARCHAR(255), first_name VARCHAR(255), mid_init CHAR(1), last_name VARCHAR(255));'
-
-    with conn:
-        c.execute(sql_query)'''
 
 # Clean ZC file and add to DB
 def insert(conn, uid, file_name, file):
@@ -63,6 +53,7 @@ def insert(conn, uid, file_name, file):
         if not any(i[0] == file_name for i in found):
             for pulse in pulses:    
                 c.execute('INSERT INTO images VALUES (?, ?, ?, ?, ?);', (file_name, str(pulse), ' ', metadata_str, uid))
+
 
 # Add zip file to DB
 def insert_zip(conn, uid, outdir, file_name, file):
@@ -99,6 +90,7 @@ def insert_zip(conn, uid, outdir, file_name, file):
 
     # Empty directory when finished
     files = glob.glob(outdir)
+
 
 # Load images from DB and render
 # 0: Source name, 1: Image data, 2: classification, 3: metadata, 4: username
@@ -142,6 +134,7 @@ def load_images(conn, uid, outdir):
             else:
                 os.path.isfile(save_path.replace('^', 'a'))
 
+
 def select_images(conn, name=None, classification=None):
     c = conn.cursor()
     if name is not None and classification is not None:  # both name==... and classification==...
@@ -158,3 +151,11 @@ def select_images(conn, name=None, classification=None):
 
     # convert binary into PNG images and store them in .../media folder
     df.apply(lambda r: data_processing.binary_to_png(r[0], r[1], r[2]), axis=1)
+
+
+# function to fetch user information (for back-end only)
+def get_users(conn):
+    c = conn.cursor()
+    c.execute('SELECT username, password, first_name, last_name, organization FROM auth_user;')
+    df = pd.DataFrame.from_records(c.fetchall(), columns=['username', 'password', 'first_name', 'last_name', 'organization'])
+    print(df)
