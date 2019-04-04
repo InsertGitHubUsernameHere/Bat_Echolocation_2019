@@ -5,7 +5,6 @@ from django.db import models
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFit
 
-
 class Album(models.Model):
     title = models.CharField(max_length=70)
     description = models.TextField(max_length=1024)
@@ -22,7 +21,6 @@ class Album(models.Model):
 
     def __unicode__(self):
         return self.title
-
 
 class AlbumImage(models.Model):
     image = ProcessedImageField(upload_to='albums', processors=[
