@@ -9,7 +9,7 @@ import sqlite3
 import ast
 from numpy.polynomial.polynomial import polyfit
 from scipy.signal import savgol_filter
-from src.util import bat
+from util import bat
 import json
 
 def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=20):

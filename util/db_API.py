@@ -1,11 +1,11 @@
-from src.util import data_processing
-from src.util import CNN
+from util import data_processing
+from util import CNN
 import pandas as pd
 import os
 import glob
 import numpy as np 
 import json
-from src.util import bat
+from util import bat
 import sqlite3
 import gc
 import matplotlib.pyplot as plt

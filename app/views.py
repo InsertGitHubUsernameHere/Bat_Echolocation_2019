@@ -9,7 +9,7 @@ while path[path.rfind('/' if path.startswith('/') else '\\') + 1:] != 'Bat_Echol
     path = os.path.dirname(path)
 sys.path.insert(0, path)
 import sqlite3
-from src.util import db_API
+from util import db_API
 import pandas as pd
 import fs
 import zipfile
