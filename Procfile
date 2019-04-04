@@ -1,1 +1,1 @@
-web: gunicorn django_photo_gallery.wsgi
+web: gunicorn django_photo_gallery.wsgi:application
