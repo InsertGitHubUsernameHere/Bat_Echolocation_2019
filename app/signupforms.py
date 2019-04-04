@@ -11,7 +11,7 @@ class SignUPForm(UserCreationForm):
 			'username',
 			'first_name',
 			'last_name',
-			'email',
+		 	'email',
 		#	'organization',
 			'password1',
 			'password2',
