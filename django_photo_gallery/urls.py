@@ -22,8 +22,8 @@ urlpatterns = [
     url(r'^(?P<slug>[-\w]+)$', app.views.AlbumDetail.as_view(), name='album'),  # app.views.AlbumView.as_view()
 
     # Auth related urls
-    url(r'^accounts/login/$', auth_views.LoginView, name='login'),
-    url(r'^accounts/logout/$', auth_views.LogoutView, {'next_page': '/', }, name='logout'),
+    url(r'^accounts/login/$', auth_views.LoginView.as_view(), name='login'),
+    url(r'^accounts/logout/$', auth_views.LogoutView.as_view(), {'next_page': '/', }, name='logout'),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', admin.site.urls),

@@ -33,6 +33,7 @@ SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -98,7 +99,7 @@ USE_L10N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 # https://docs.djangoproject.com/en/1.8/howto/static-files/deployment/
@@ -106,7 +107,7 @@ STATIC_URL = '/static/'
 # STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static/']))
 # STATIC_ROOT = BASE_DIR + '/static/'
 STATICFILES_DIR = [
-    os.path.join(BASE_DIR, 'app/static')
+    os.path.join(BASE_DIR, '/static')
 ]
 
 MEDIA_URL = '/media/'
