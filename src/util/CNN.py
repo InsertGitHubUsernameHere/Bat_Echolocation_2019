@@ -50,7 +50,7 @@ def classifyCNN(file_name):
     result = prediction[0]
 
     # TODO: if-statement cutoff: 0 for less than 0.9, 1 otherwise
-    result = (result < 0.9) ? 0 : 1
+    result = 0 if result < 0.9 else 1
 
     # return value is a float that represents the classification: ~0 = abnormal,~1 = echolocation
     return result
