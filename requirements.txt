@@ -19,3 +19,4 @@ sklearn==0.0
 tensorboard==1.13.1
 tensorflow==1.13.1
 tensorflow-estimator==1.13.0
+whitenoise >= 0.0.1
