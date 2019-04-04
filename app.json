@@ -1,0 +1,21 @@
+{
+  "name": "Batalog",
+  "description": "A tool for analyzing bat echolocationi calls",
+  "image": "heroku/python",
+  "repository": "https://github.com/InsertGitHubUsernameHere/Bat_Echolocation_2019/",
+  "keywords": ["python", "django" ],  
+  "env": {
+    "SECRET_KEY": {
+      "description": "The secret key for the Django application.",
+      "generator": "secret"
+    }
+  },
+  "environments": {
+    "test": {
+      "scripts": {
+        "test-setup": "python3 manage.py collectstatic --noinput",
+        "test": "python3 manage.py test"
+      }
+    }
+  }
+}
