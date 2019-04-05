@@ -21,7 +21,7 @@ def classifyCNN(file_name, model):
     image_height, image_width = 200, 300
 
     # resize image for desired CNN model
-    image_resize = image.resize((image_width, image_height))
+    image_resize = image.resize((image_width, image_height)).convert('RGB')
 
     '''# convert image to an array
     imagearray = img_to_array(image_resize)
@@ -35,8 +35,6 @@ def classifyCNN(file_name, model):
     # convert image to array and add 4th dimension
    # image_array = np.expand_dims(img_to_array(image_resize), 0)
     image_array = img_to_array(image_resize)
-
-    np.delete(image_array, 3, 2)
 
     image_array = np.expand_dims(image_array,0)
 

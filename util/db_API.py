@@ -121,11 +121,12 @@ def load_images(conn, uid, outdir):
         save_path = outdir + '/' + '^_' + row[0].replace('#', '') + '_' + str(i) + '.png'
 
         # Don't save the image if it already exists
-        if os.path.isfile(save_path.replace('^', 'a')) or os.path.isfile(save_path.replace('^', 'e')):
+        if row[0] in [f for f in os.listdir(outdir) if os.path.isfile(os.path.join(outdir, f))]:
             continue
 
         # Render the image if it doesn't
         else:
+
             ax.axis('off')
             ax.scatter(x, y)
             fig.savefig(save_path, transparent=True, dpi=50)
@@ -134,11 +135,10 @@ def load_images(conn, uid, outdir):
 
             # Classify as normal or abnormal
             # TODO- perform at insert?
-            if True: #CNN.classifyCNN(save_path, model) == 0:
-                os.path.isfile(save_path.replace('^', 'e'))
+            if CNN.classifyCNN(save_path, model) == 0:
+                os.rename(save_path, save_path.replace('^', 'e'))
             else:
-                os.path.isfile(save_path.replace('^', 'a'))
-
+                os.rename(save_path, save_path.replace('^', 'a'))
 
 def select_images(conn, name=None, classification=None):
     c = conn.cursor()
