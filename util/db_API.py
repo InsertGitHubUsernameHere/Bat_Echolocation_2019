@@ -164,3 +164,8 @@ def get_users(conn):
     c.execute('SELECT username, password, first_name, last_name, organization FROM auth_user;')
     df = pd.DataFrame.from_records(c.fetchall(), columns=['username', 'password', 'first_name', 'last_name', 'organization'])
     print(df)
+
+# Remove all user data from images table. Call on 'logout'
+def erase_data(conn, uid) :
+    c = conn.cursor()
+    c.execute('DELETE FROM images WHERE uid=?', (uid,))
