@@ -100,14 +100,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
+STATIC_URL = os.path.join(BASE_DIR, 'static')
 
 # https://docs.djangoproject.com/en/1.8/howto/static-files/deployment/
 # python manage.py collectstatic
 # STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static/']))
 # STATIC_ROOT = BASE_DIR + '/static/'
 STATICFILES_DIR = [
-    os.path.join(BASE_DIR, '/static')
+    os.path.join(BASE_DIR, 'static')
 ]
 
 MEDIA_URL = '/media/'
