@@ -1,58 +1,32 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Kevin's code
-import os
+from app.models import Album, AlbumImage
+from app.signupforms import SignUPForm
+from util import db_API
+
+from django.shortcuts import render, redirect
+from django.http import HttpRequest
+from django.http import HttpResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.files.storage import FileSystemStorage
+from django.views.generic import DetailView
+from django.contrib.auth.models import User
+
+from os import listdir
+from os.path import isfile, join
+import logging
+import zipfile
 import sys
+import sqlite3
+import pandas as pd
+import fs
+import shutil
+
 path = os.getcwd()
 while path[path.rfind('/' if path.startswith('/') else '\\') + 1:] != 'Bat_Echolocation_2019':
     path = os.path.dirname(path)
 sys.path.insert(0, path)
-import sqlite3
-from util import db_API
-import pandas as pd
-import fs
-import zipfile
-#import StringIO
-# End Kevin's code
-
-from django.shortcuts import render, redirect
-from django.http import HttpRequest
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.generic import DetailView
-from django.core.files.storage import FileSystemStorage
-from app.signupforms import SignUPForm
-from django.contrib.auth.models import User
-from os import listdir
-from os.path import isfile, join
-from app.models import Album, AlbumImage
-import logging
-import zipfile
-from django.http import HttpResponse
-#from io import StringIO
-
-# Kevin's code
-'''with sqlite3.connect('../django_photo_gallery/db.sqlite3') as conn:
-    c = conn.cursor()
-    c.execute('DELETE FROM images;')
-    db_API.fetch_images(conn)
-    db_API.fetch_images(conn, name='')
-    db_API.fetch_images(conn)
-    c.execute('DROP TABLE images;')
-    c.execute('DROP TABLE users;')
-    c.execute('CREATE TABLE users (username VARCHAR(255) PRIMARY KEY, password VARCHAR(255), ' \
-              'email VARCHAR(255), first_name VARCHAR(255), last_name VARCHAR(255));')
-
-    c.execute('CREATE TABLE images (username VARCHAR(255), name VARCHAR(255) PRIMARY KEY, raw BLOB,'
-              ' classification VARCHAR(255), metadata VARCHAR(255), FOREIGN KEY (username) REFERENCES users(username))')
-
-    c.execute('CREATE TABLE images (name VARCHAR(255) PRIMARY KEY, raw BLOB,'
-              ' classification VARCHAR(255), metadata VARCHAR(255))')
-
-    c.execute('SELECT * FROM users;')
-    df = pd.DataFrame.from_records(c.fetchall(), columns=['username', 'password', 'email', 'first_name', 'last_name'])
-    print(df)'''
-# End Kevin's code
 
 def getfiles(request):
     # Files (local path) to put in the .zip
@@ -190,3 +164,19 @@ def signup(request):
 
         args = {'form': form}
         return render(request, 'signup.html', args)
+
+def logout(request):
+    uid = request.user.id
+    outdir = os.path.join(os.getcwd(), 'media', str(uid))
+
+    try:
+        os.makedirs(outdir)
+    except:
+        pass
+
+    shutil.rmtree(outdir)
+
+    with sqlite3.connect('../db.sqlite3') as conn:
+        erase_data(conn, uid, outdir) :
+     
+     return auth_views.LogoutView(request)
