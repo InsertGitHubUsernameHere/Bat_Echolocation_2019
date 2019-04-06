@@ -5,21 +5,25 @@
 
 <div style="text-align:center">
     <h2> Here are your images! </h2>
+
+    <form method="post" enctype="multipart/form-data">
+        <button type="submit" value='Visualize' name='Graph' onclick=""></button>
+        <button type="submit" value='Download as zip' name='Zip' onclick=""></button>
+    </form>
 </div>
 
 <div class= "split leftcol">
-        <h3>    Abnormal</h3>
-        {% for pic in abnormfiles %}
-           <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 75%; width: 75%">
-        {% endfor %}
-    </div>
+    <h3>        Abnormal</h3>
+    {% for pic in abnormfiles %}
+       <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 150px; width: auto">
+    {% endfor %}
+</div>
 
-    <div class= "split rightcol">
-        <h3>    Echolocation</h3>
-        {% for pic in echofiles %}
-           <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 75%; width: 75%">
-        {% endfor %}
-    </div>
+<div class= "split rightcol">
+    <h3>        Echolocation</h3>
+    {% for pic in echofiles %}
+       <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 150px; width: auto">
+    {% endfor %}
 </div>
 
 {% endblock %}
