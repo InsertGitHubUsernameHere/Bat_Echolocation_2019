@@ -81,7 +81,7 @@ strong {
   z-index: -1;
   top: 0;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding-top: 20px;
 }
 
