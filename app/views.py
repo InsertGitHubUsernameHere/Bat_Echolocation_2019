@@ -136,8 +136,10 @@ def displayImages(request):
         with sqlite3.connect('../db.sqlite3') as conn:
             db_API.load_images(conn, uid, outdir)
 
-        onlyfiles = [f for f in listdir(outdir) if isfile(join(outdir, f))]
-        return render(request, 'displayImages.html', {'onlyfiles': onlyfiles})
+        echofiles = [f for f in listdir(outdir) if isfile(join(outdir, f)) and f.startswith('e_')]
+        abnormfiles = [f for f in listdir(outdir) if isfile(join(outdir, f)) and f.startswith('a_')]
+
+        return render(request, 'displayImages.html', {'echofiles': echofiles}, {'abnormfiles' : abnormfiles})
 
 
 def gallery(request):
