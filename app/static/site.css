@@ -86,12 +86,14 @@ strong {
 
 /* Control the left side */
 .leftcol {
-  left: 0;
+  clear: left;
+  float: left; 
   overflow-y: scroll;
 }
 
 /* Control the right side */
 .rightcol {
-  right: 0;
+  clear: right;
+  float: right; 
   overflow-y: scroll;
 }
