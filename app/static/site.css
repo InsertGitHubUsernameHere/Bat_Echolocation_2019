@@ -77,8 +77,8 @@ strong {
 .split {
   height: 100%;
   width: 50%;
-  position: fixed;
-  z-index: 1;
+  position: relative;
+  z-index: -1;
   top: 0;
   overflow-x: hidden;
   padding-top: 20px;
@@ -87,13 +87,11 @@ strong {
 /* Control the left side */
 .leftcol {
   left: 0;
-  background-color: #111;
   overflow-y: scroll;
 }
 
 /* Control the right side */
 .rightcol {
   right: 0;
-  background-color: red;
   overflow-y: scroll;
 }
