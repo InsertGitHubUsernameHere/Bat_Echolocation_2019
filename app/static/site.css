@@ -85,14 +85,14 @@ strong {
 }
 
 /* Control the left side */
-.left {
+.leftcol {
   left: 0;
   background-color: #111;
   overflow-y: scroll;
 }
 
 /* Control the right side */
-.right {
+.rightcol {
   right: 0;
   background-color: red;
   overflow-y: scroll;

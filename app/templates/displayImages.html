@@ -5,51 +5,20 @@
 
 <div style="text-align:center">
     <h2> Here are your images! </h2>
-    {% for pic in onlyfiles %}
-       <img src="/media/{{user.id}}/test_images/{{ pic }}" >
-    {% endfor %}
-</div>
 
-<div class="container">
-    <div class= "split left">
+    <div class= "split leftcol">
         <h2>Abnormal</h2>
-        <p>Some text</p>
-    </div>
-    <div class="row">
-        {% for album in albums %}
-
-        <div class="col">
-            <div class="card dpg-album-card">
-                <div class="card-image">
-                    <img src="{{ album.thumb.url }}" alt="{{ album.title }}" class="dpg-album-card-image" />
-                </div>
-                <div class="card-content">
-                    <span class="card-title">{{ album.title }}</span>
-                    <p>{{ album.description|truncatechars:120 }}</p>
-                </div>
-                <div class="card-action">
-                    <a href="{% url 'album' album.slug %}">
-                        More Images
-                    </a>
-                </div>
-            </div>
-        </div>
-
+        {% for pic in abnormfiles %}
+           <img src="/media/{{user.id}}/test_images/{{ pic }}" >
         {% endfor %}
-
     </div>
-</div>
 
-<div class="pagination center">
-    <span class="step-links">
-        {% if albums.has_previous %}
-        <a href="?page={{ albums.previous_page_number }}" class="waves-effect waves-light btn btn-large">Previous</a>
-        {% endif %}
-
-        {% if albums.has_next %}
-        <a href="?page={{ albums.next_page_number }}" class="waves-effect waves-light btn btn-large">Next</a>
-        {% endif %}
-    </span>
+    <div class= "split rightcol">
+        <h2>Echolocation</h2>
+        {% for pic in echofiles %}
+           <img src="/media/{{user.id}}/test_images/{{ pic }}" >
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock %}
