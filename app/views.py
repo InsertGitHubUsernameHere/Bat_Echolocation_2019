@@ -12,7 +12,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.files.storage import FileSystemStorage
 from django.views.generic import DetailView
 from django.contrib.auth.models import User
+from django.contrib.auth import views as auth_views
 
+import os
 from os import listdir
 from os.path import isfile, join
 import logging
@@ -165,7 +167,7 @@ def signup(request):
         args = {'form': form}
         return render(request, 'signup.html', args)
 
-def logout(request):
+def logout(request, next_page):
     uid = request.user.id
     outdir = os.path.join(os.getcwd(), 'media', str(uid))
 
@@ -177,6 +179,6 @@ def logout(request):
     shutil.rmtree(outdir)
 
     with sqlite3.connect('../db.sqlite3') as conn:
-        erase_data(conn, uid, outdir) :
-     
-     return auth_views.LogoutView(request)
+        db_API.erase_data(conn, uid)
+
+    return auth_views.LogoutView(request, next_page)
