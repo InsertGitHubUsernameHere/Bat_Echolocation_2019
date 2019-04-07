@@ -22,7 +22,6 @@ import zipfile
 import sys
 import sqlite3
 import pandas as pd
-import fs
 import shutil
 
 path = os.getcwd()
