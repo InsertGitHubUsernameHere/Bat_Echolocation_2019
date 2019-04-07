@@ -180,4 +180,4 @@ def logout(request, next_page):
     with sqlite3.connect('../db.sqlite3') as conn:
         db_API.erase_data(conn, uid)
 
-    return auth_views.LogoutView(request, next_page)
+    return auth_views.LogoutView.as_view()(request, next_page)
