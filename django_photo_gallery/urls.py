@@ -17,7 +17,7 @@ urlpatterns = [
     path('', include('app.urls')),
     path('upload', app.views.upload, name='upload'),
     path('display', app.views.displayImages, name='displayImages'),
-    path('$', app.views.gallery, name = 'gallery'),
+    path('', app.views.gallery, name = 'gallery'),
 
     re_path(r'^(?P<slug>[-\w]+)$', app.views.AlbumDetail.as_view(), name='album'),  # app.views.AlbumView.as_view()
 
