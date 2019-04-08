@@ -38,6 +38,7 @@ def insert(conn, uid, file_name, file):
         raw = list(bat.extract_anabat_zc(file))
     except Exception as e:
         print('Unexpected error processing file ', file, '- ', str(e))
+        return
 
     # Metadata from ZC
     metadata = raw[3]
@@ -56,7 +57,7 @@ def insert(conn, uid, file_name, file):
         found = c.fetchall()
         if not any(i[0] == file_name for i in found):
             for pulse in pulses:    
-                c.execute('INSERT INTO images VALUES (?, ?, ?, ?, ?);', (file_name, str(pulse), ' ', metadata_str, uid))
+                c.execute('INSERT INTO images VALUES (?, ?, ?, ?, ?);', (file_name, str(pulse), '0', metadata_str, uid))
 
 
 # Add zip file to DB
@@ -104,7 +105,6 @@ def load_images(conn, uid, outdir):
     c = conn.cursor()
     c.execute('SELECT * FROM images')
     table = c.fetchall()
-    table = [row for row in table if row[4] == uid]
 
     # Load CNN
     __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
@@ -112,6 +112,17 @@ def load_images(conn, uid, outdir):
 
     fig, ax = plt.subplots()
     for i, row in enumerate(table):
+
+        if not row[4] == uid:
+            continue
+
+        if row[2] == '1':
+            continue
+
+        sql = ''' UPDATE tasks
+                  SET classification = '1'
+                  WHERE ''' + str(i) + ''' = ROW_NUMBER()'''
+        c.execute(sql)
 
         # Convert DB string to 2d list
         pulse = ast.literal_eval(row[1])
@@ -123,25 +134,19 @@ def load_images(conn, uid, outdir):
         # Generate image path
         save_path = outdir + '/' + '^_' + row[0].replace('#', '') + '_' + str(i) + '.png'
 
-        # Don't save the image if it already exists
-        if row[0] in [f for f in os.listdir(outdir) if os.path.isfile(os.path.join(outdir, f))]:
-            continue
+        # Render the image
+        ax.axis('off')
+        ax.scatter(x, y)
+        fig.savefig(save_path, transparent=True, dpi=50)
+        plt.cla()
+        gc.collect()
 
-        # Render the image if it doesn't
+        # Classify as normal or abnormal
+        # TODO- perform at insert?
+        if CNN.classifyCNN(save_path, model) == 0:
+            os.rename(save_path, save_path.replace('^', 'e'))
         else:
-
-            ax.axis('off')
-            ax.scatter(x, y)
-            fig.savefig(save_path, transparent=True, dpi=50)
-            plt.cla()
-            gc.collect()
-
-            # Classify as normal or abnormal
-            # TODO- perform at insert?
-            if CNN.classifyCNN(save_path, model) == 0:
-                os.rename(save_path, save_path.replace('^', 'e'))
-            else:
-                os.rename(save_path, save_path.replace('^', 'a'))
+            os.rename(save_path, save_path.replace('^', 'a'))
 
 def select_images(conn, name=None, classification=None):
     c = conn.cursor()
