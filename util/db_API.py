@@ -113,15 +113,18 @@ def load_images(conn, uid, outdir):
     fig, ax = plt.subplots()
     for i, row in enumerate(table):
 
+        # Only render current user data
         if not row[4] == uid:
             continue
 
+        # Only render files that haven't been rendered yet
         if row[2] == '1':
             continue
 
-        sql = ''' UPDATE tasks
+        # Mark pulse as rendered
+        sql = ''' UPDATE images
                   SET classification = '1'
-                  WHERE ''' + str(i) + ''' = ROW_NUMBER()'''
+                  WHERE ''' + str(i) + ''' = ROWID'''
         c.execute(sql)
 
         # Convert DB string to 2d list
