@@ -34,7 +34,10 @@ def insert(conn, uid, file_name, file):
             c.execute('CREATE TABLE images (name VARCHAR(255), raw BLOB, classification VARCHAR(255), metadata VARCHAR(255), uid INTEGER);')
 
     # Extract data from ZC file
-    raw = list(bat.extract_anabat_zc(file))
+    try:
+        raw = list(bat.extract_anabat_zc(file))
+    except Exception as e:
+        print('Unexpected error processing file ', file, '- ', str(e))
 
     # Metadata from ZC
     metadata = raw[3]
