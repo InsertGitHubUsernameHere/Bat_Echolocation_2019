@@ -114,7 +114,10 @@ def displayImages(request):
         echofiles = [f for f in listdir(outdir) if isfile(join(outdir, f)) and f.startswith('e_')]
         abnormfiles = [f for f in listdir(outdir) if isfile(join(outdir, f)) and f.startswith('a_')]
 
-        return render(request, 'displayImages.html', {'echofiles': echofiles}, {'abnormfiles' : abnormfiles})
+        print(abnormfiles)
+        print(echofiles)
+
+        return render(request, 'displayImages.html', {'echofiles': echofiles, 'abnormfiles' : abnormfiles})
 
 
 def gallery(request):

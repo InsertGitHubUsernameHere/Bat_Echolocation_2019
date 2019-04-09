@@ -146,7 +146,7 @@ def load_images(conn, uid, outdir):
 
         # Classify as normal or abnormal
         # TODO- perform at insert?
-        if CNN.classifyCNN(save_path, model) == 0:
+        if not CNN.classifyCNN(save_path, model) == 0:
             os.rename(save_path, save_path.replace('^', 'e'))
         else:
             os.rename(save_path, save_path.replace('^', 'a'))
