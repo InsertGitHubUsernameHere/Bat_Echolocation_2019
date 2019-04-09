@@ -20,7 +20,6 @@ from os.path import isfile, join
 import logging
 import zipfile
 import sys
-import sqlite3
 import pandas as pd
 import shutil
 
@@ -81,41 +80,36 @@ def upload(request):
                 os.makedirs(outdir)
             except:
                 pass
-            with sqlite3.connect('../db.sqlite3') as conn:
-                db_API.insert_zip(conn, uid, outdir, file_name, file)
+            db_API.insert_zip(uid, outdir, file_name, file)
+
         # Upload ZC file
         else:
-            with sqlite3.connect('../db.sqlite3') as conn:
-                db_API.insert(conn, uid, file_name, file)
+            db_API.insert(uid, file_name, file)
 
     if request.POST.get('Next'):
         return redirect('displayImages')
     return render(request, 'upload.html')
 
 def displayImages(request):
-    outdir = os.path.join(os.getcwd(), 'media')
-
     if request.method == 'GET':
-
         # Get user id
         uid = request.user.id
         
         # Make output directory if it doesn't exist already
-        outdir = os.path.join(outdir, str(uid), 'test_images')
+        outdir = os.path.join(os.getcwd(), 'media', str(uid), 'test_images')
         try:
             os.makedirs(outdir)
         except:
             pass
 
         # Load images from database
-        with sqlite3.connect('../db.sqlite3') as conn:
-            db_API.load_images(conn, uid, outdir)
+        db_API.load_images(uid, outdir)
 
+        # Make list of echolocation and abnormal files
         echofiles = [f for f in listdir(outdir) if isfile(join(outdir, f)) and f.startswith('e_')]
         abnormfiles = [f for f in listdir(outdir) if isfile(join(outdir, f)) and f.startswith('a_')]
 
         return render(request, 'displayImages.html', {'echofiles': echofiles}, {'abnormfiles' : abnormfiles})
-
 
 def gallery(request):
     list = Album.objects.filter(is_visible=True).order_by('-created')
@@ -149,7 +143,6 @@ def handler404(request, exception):
     assert isinstance(request, HttpRequest)
     return render(request, 'handler404.html', None, None, 404)
 
-
 def signup(request):
     if request.method == 'POST':
         form = SignUPForm(request.POST or None)
@@ -177,7 +170,6 @@ def logout(request, next_page):
 
     shutil.rmtree(outdir)
 
-    with sqlite3.connect('../db.sqlite3') as conn:
-        db_API.erase_data(conn, uid)
+    db_API.erase_data(uid)
 
     return auth_views.LogoutView.as_view()(request, next_page)
