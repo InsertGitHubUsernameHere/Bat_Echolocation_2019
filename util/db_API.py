@@ -98,7 +98,7 @@ def insert_zip(conn, uid, outdir, file_name, file):
 
 
 # Load images from DB and render
-# 0: Source name, 1: Image data, 2: classification, 3: metadata, 4: username
+# 0: Source ZC name, 1: image data, 2: classified, 3: metadata, 4: uid
 def load_images(conn, uid, outdir):
 
     # Load users image data
@@ -168,6 +168,13 @@ def select_images(conn, name=None, classification=None):
     # convert binary into PNG images and store them in .../media folder
     df.apply(lambda r: data_processing.binary_to_png(r[0], r[1], r[2]), axis=1)
 
+
+def load_metadata(conn, uid):
+    c = conn.cursor()
+    c.execute('SELECT * FROM images')
+    table = c.fetchall()
+
+    return [[row[0], row[3]] for row in table if row[4] == uid]
 
 # function to fetch user information (for back-end only)
 def get_users(conn):
