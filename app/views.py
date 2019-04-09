@@ -94,7 +94,7 @@ def displayImages(request):
     if request.method == 'GET':
         # Get user id
         uid = request.user.id
-        
+
         # Make output directory if it doesn't exist already
         outdir = os.path.join(os.getcwd(), 'media', str(uid), 'test_images')
         try:
@@ -108,9 +108,6 @@ def displayImages(request):
         # Make list of echolocation and abnormal files
         echofiles = [f for f in listdir(outdir) if isfile(join(outdir, f)) and f.startswith('e_')]
         abnormfiles = [f for f in listdir(outdir) if isfile(join(outdir, f)) and f.startswith('a_')]
-
-        print(abnormfiles)
-        print(echofiles)
 
         return render(request, 'displayImages.html', {'echofiles': echofiles, 'abnormfiles' : abnormfiles})
 
@@ -129,7 +126,6 @@ def gallery(request):
 
     return render(request, 'gallery.html', {'albums': list})
 
-
 class AlbumDetail(DetailView):
     model = Album
 
@@ -139,7 +135,6 @@ class AlbumDetail(DetailView):
         # Add in a QuerySet of all the images
         context['images'] = AlbumImage.objects.filter(album=self.object.id)
         return context
-
 
 def handler404(request, exception):
     print(exception)

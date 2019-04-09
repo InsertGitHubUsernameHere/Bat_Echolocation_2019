@@ -30,7 +30,7 @@ def insert(uid, file_name, file):
     conn = sqlite3.connect('../db.sqlite3')
 
     # If images table doesn't exist yet, make it
-    if 'images' not in get_tables(conn):
+    if 'images' not in get_tables():
         c = conn.cursor()
         with conn:
             c.execute('CREATE TABLE images (name VARCHAR(255), raw BLOB, classification VARCHAR(255), metadata VARCHAR(255), uid INTEGER);')
