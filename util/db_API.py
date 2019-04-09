@@ -15,9 +15,10 @@ import zipfile
 import numpy as np
 from numpy.polynomial.polynomial import polyfit
 from keras.models import load_model
+import sqlite3
 
-
-def get_tables(conn):
+def get_tables():
+    conn = sqlite3.connect('../db.sqlite3')
     c = conn.cursor()
     c.execute('SELECT name FROM sqlite_master WHERE type=\'table\'')
     tables = [i[0] for i in c.fetchall()]
@@ -25,7 +26,8 @@ def get_tables(conn):
 
 
 # Clean ZC file and add to DB
-def insert(conn, uid, file_name, file):
+def insert(uid, file_name, file):
+    conn = sqlite3.connect('../db.sqlite3')
 
     # If images table doesn't exist yet, make it
     if 'images' not in get_tables(conn):
@@ -61,7 +63,8 @@ def insert(conn, uid, file_name, file):
 
 
 # Add zip file to DB
-def insert_zip(conn, uid, outdir, file_name, file):
+def insert_zip(uid, outdir, file_name, file):
+    conn = sqlite3.connect('../db.sqlite3')
 
     # Extract zip and delete it
     z_name = outdir + '/' + 'temp.zip'
@@ -98,8 +101,9 @@ def insert_zip(conn, uid, outdir, file_name, file):
 
 
 # Load images from DB and render
-# 0: Source name, 1: Image data, 2: classification, 3: metadata, 4: username
-def load_images(conn, uid, outdir):
+# 0: Source ZC name, 1: image data, 2: classified, 3: metadata, 4: uid
+def load_images(uid, outdir):
+    conn = sqlite3.connect('../db.sqlite3')
 
     # Load users image data
     c = conn.cursor()
@@ -151,7 +155,8 @@ def load_images(conn, uid, outdir):
         else:
             os.rename(save_path, save_path.replace('^', 'a'))
 
-def select_images(conn, name=None, classification=None):
+def select_images(name=None, classification=None):
+    conn = sqlite3.connect('../db.sqlite3')
     c = conn.cursor()
     if name is not None and classification is not None:  # both name==... and classification==...
         c.execute('SELECT * FROM images WHERE name=? AND classification=?;', (name, classification))
@@ -169,14 +174,24 @@ def select_images(conn, name=None, classification=None):
     df.apply(lambda r: data_processing.binary_to_png(r[0], r[1], r[2]), axis=1)
 
 
+def load_metadata(uid):
+    conn = sqlite3.connect('../db.sqlite3')
+    c = conn.cursor()
+    c.execute('SELECT * FROM images')
+    table = c.fetchall()
+
+    return [[row[0], row[3]] for row in table if row[4] == uid]
+
 # function to fetch user information (for back-end only)
-def get_users(conn):
+def get_users():
+    conn = sqlite3.connect('../db.sqlite3')
     c = conn.cursor()
     c.execute('SELECT username, password, first_name, last_name, organization FROM auth_user;')
     df = pd.DataFrame.from_records(c.fetchall(), columns=['username', 'password', 'first_name', 'last_name', 'organization'])
     print(df)
 
 # Remove all user data from images table. Call on 'logout'
-def erase_data(conn, uid) :
+def erase_data(uid) :
+    conn = sqlite3.connect('../db.sqlite3')
     c = conn.cursor()
     c.execute('DELETE FROM images WHERE uid=?', (uid,))
