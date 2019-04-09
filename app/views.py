@@ -28,32 +28,16 @@ while path[path.rfind('/' if path.startswith('/') else '\\') + 1:] != 'Bat_Echol
     path = os.path.dirname(path)
 sys.path.insert(0, path)
 
-def getfiles(request):
-    # Files (local path) to put in the .zip
-    # FIXME: Change this (get paths from DB etc)
-    # might loop through the whole folder to generate a list of images name.
-    filenames = ["media/file.png", "media/file2.png"]
-    zip_subdir = "media/zipfile"
-    zip_filename = "%s.zip" % zip_subdir
+def getzip(request):
+    uid = request.user.id
 
-    s = StringIO.StringIO()
+    outdir = os.path.join(os.getcwd(), 'media', str(uid))
+    indir = os.path.join(os.getcwd(), 'media', str(uid), 'test_images')
 
-    # The zip compressor
-    zf = zipfile.ZipFile(s, "w")
-
-    for fpath in filenames:
-        # Calculate path for file in zip
-        fdir, fname = os.path.split(fpath)
-        zip_path = os.path.join(zip_subdir, fname)
-
-        # Add file, at correct path
-        zf.write(fpath, zip_path)
-
-    # Must close zip for all contents to be written
-    zf.close()
+    zip_filename, zip_file = db_API.make_zip(indir, outdir)
 
     # Grab ZIP file from in-memory, make response with correct MIME-type
-    resp = HttpResponse(s.getvalue(), mimetype="application/x-zip-compressed")
+    resp = HttpResponse(zip_file, mimetype="application/x-zip-compressed")
     # ..and correct content-disposition
     resp['Content-Disposition'] = 'attachment; filename=%s' % zip_filename
     print(resp)
