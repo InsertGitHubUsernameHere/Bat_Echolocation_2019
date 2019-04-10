@@ -28,7 +28,7 @@ while path[path.rfind('/' if path.startswith('/') else '\\') + 1:] != 'Bat_Echol
     path = os.path.dirname(path)
 sys.path.insert(0, path)
 
-def getzip(request):
+def download_zip(request):
     uid = request.user.id
 
     outdir = os.path.join(os.getcwd(), 'media', str(uid))
