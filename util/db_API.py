@@ -16,6 +16,7 @@ import numpy as np
 from numpy.polynomial.polynomial import polyfit
 from keras.models import load_model
 import sqlite3
+import shutil
 
 def get_tables():
     conn = sqlite3.connect('../db.sqlite3')
