@@ -29,7 +29,7 @@ urlpatterns = [
 
     # Auth related urls
     path('accounts/login/$', auth_views.LoginView.as_view(), name='login'),
-    path('accounts/logout/$', app.views.logout, name='logout'),
+    path('accounts/logout/$', app.views.logout, {'next_page': '/',}, name='logout'),
 
     # Uncomment the next line to enable the admin:
     path('admin/', admin.site.urls),
