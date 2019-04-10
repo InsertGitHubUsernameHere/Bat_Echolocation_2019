@@ -14,18 +14,18 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = [
-    path('signup/', views.signup, name='signup'),
-    path('resetpassword/', PasswordResetView.as_view(template_name='registration/resetpassword.html'), name="resetpassword"),
-    path('password_reset/done/', PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'),
-    path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(template_name='registration/resetpasswordconfirm.html'), name='password_reset_confirm'),
-    path('reset/done/', PasswordResetCompleteView.as_view(template_name='registration/resetpasswordcomplete.html'), name='password_reset_complete'),
+    path('signup/', app.views.signup, name='signup'),
+    path('resetpassword/', auth_views.PasswordResetView.as_view(template_name='registration/resetpassword.html'), name="resetpassword"),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='registration/resetpasswordconfirm.html'), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='registration/resetpasswordcomplete.html'), name='password_reset_complete'),
 
     path('upload', app.views.upload, name='upload'),
     path('download', app.views.download_zip),
     path('display', app.views.displayImages, name='displayImages'),
     path('', app.views.gallery, name = 'gallery'),
 
-    re_path(r'^(?P<slug>[-\w]+)$', app.views.AlbumDetail.as_view(), name='album'),  # app.views.AlbumView.as_view()
+    re_path(r'^(?P<slug>[-\w]+)$', app.views.AlbumDetail.as_view(), name='album'),
 
     # Auth related urls
     path('accounts/login/$', auth_views.LoginView.as_view(), name='login'),
