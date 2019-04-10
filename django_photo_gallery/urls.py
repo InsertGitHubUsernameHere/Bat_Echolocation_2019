@@ -28,8 +28,13 @@ urlpatterns = [
     re_path(r'^(?P<slug>[-\w]+)$', app.views.AlbumDetail.as_view(), name='album'),
 
     # Auth related urls
-    path('accounts/login/$', auth_views.LoginView.as_view(), name='login'),
-    path('accounts/logout/$', app.views.logout, {'next_page': '/',}, name='logout'),
+    # old
+    #path('accounts/login/$', auth_views.LoginView.as_view(), name='login'),
+    #path('accounts/logout/$', app.views.logout, {'next_page': '/',}, name='logout'),
+
+    # new
+    re_path(r'accounts/login/$', auth_views.LoginView.as_view(), name='login'),
+    re_path(r'accounts/logout/$', app.views.logout, {'next_page': '/',}, name='logout'),
 
     # Uncomment the next line to enable the admin:
     path('admin/', admin.site.urls),
