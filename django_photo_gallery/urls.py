@@ -14,8 +14,6 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = [
-    path('login/', LoginView.as_view(template_name='registration/login.html'), name="login"),
-    path('logout/', LogoutView.as_view(template_name='upload.html'), name="logout"),
     path('signup/', views.signup, name='signup'),
     path('resetpassword/', PasswordResetView.as_view(template_name='registration/resetpassword.html'), name="resetpassword"),
     path('password_reset/done/', PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'),
@@ -23,7 +21,7 @@ urlpatterns = [
     path('reset/done/', PasswordResetCompleteView.as_view(template_name='registration/resetpasswordcomplete.html'), name='password_reset_complete'),
 
     path('upload', app.views.upload, name='upload'),
-    path('download', app.views.download_zip, name='download'),
+    path('download', app.views.download_zip),
     path('display', app.views.displayImages, name='displayImages'),
     path('', app.views.gallery, name = 'gallery'),
 
