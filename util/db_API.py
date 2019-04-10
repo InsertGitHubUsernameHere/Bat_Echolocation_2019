@@ -89,9 +89,9 @@ def insert_zip(uid, outdir, file_name, file):
         if file.endswith('.zip'):
             subdir = os.paths.join(outdir, os.path.basename(file))
             os.mkdir(subdir)
-            insert_zip(conn, uid, subdir, os.path.basename(file), z)
+            insert_zip(uid, subdir, os.path.basename(file), z)
         else:
-            insert(conn, uid, os.path.basename(file), z)
+            insert(uid, os.path.basename(file), z)
 
         f.close()
         os.remove(file)
@@ -198,7 +198,7 @@ def erase_data(uid) :
 
 def make_zip(indir, outdir) :
     # Make appropriate directories if possible
-    noutdir += '/buildazip'
+    noutdir = outdir + '/buildazip'
     try:
         os.makedirs(noutdir)
     except:

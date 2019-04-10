@@ -1,6 +1,6 @@
 {
   "name": "Batalog",
-  "description": "A tool for analyzing bat echolocationi calls",
+  "description": "A tool for analyzing bat echolocation calls",
   "image": "heroku/python",
   "repository": "https://github.com/InsertGitHubUsernameHere/Bat_Echolocation_2019/",
   "keywords": ["python", "django" ],  
