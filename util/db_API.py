@@ -195,3 +195,40 @@ def erase_data(uid) :
     conn = sqlite3.connect('../db.sqlite3')
     c = conn.cursor()
     c.execute('DELETE FROM images WHERE uid=?', (uid,))
+
+def make_zip(indir, outdir) :
+    # Make appropriate directories if possible
+    noutdir += '/buildazip'
+    try:
+        os.makedirs(noutdir)
+    except:
+        pass
+    try:
+        os.mkdir(noutdir + '/abnormal')
+        os.mkdir(noutdir + '/echolocation')
+    except:
+        pass
+
+    # Get all files in directory
+    onlyfiles = os.listdir(indir)
+
+    # Organize files into echolocation or abnormal
+    for file in onlyfiles:
+        f = file
+        file = indir + '/' + file
+        if f.startswith('a_') :
+            os.rename(file, os.path.join(noutdir, 'abnormal', f))
+        elif f.startswith('e_') :
+            os.rename(file, os.path.join(noutdir, 'echolocation', f))
+
+    # Make zip and load into memory
+    shutil.make_archive(outdir + '/results', 'zip', noutdir)
+    z = open(outdir + '/results.zip', 'rb')
+    m = z.read()
+    z.close()
+    
+    # Delete everything
+    shutil.rmtree(noutdir)
+    shutil.rmtree(indir)
+    
+    return 'results.zip', m
