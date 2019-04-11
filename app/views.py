@@ -4,7 +4,7 @@
 from app.models import Album, AlbumImage
 from app.signupforms import SignUPForm
 from util import db_API
-
+from util import graph
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.http import HttpResponse
@@ -13,6 +13,7 @@ from django.core.files.storage import FileSystemStorage
 from django.views.generic import DetailView
 from django.contrib.auth.models import User
 from django.contrib.auth import views as auth_views
+from plotly.offline import plot
 
 import os
 from os import listdir
@@ -37,7 +38,7 @@ def download_zip(request):
     zip_filename, zip_file = db_API.make_zip(indir, outdir)
 
     # Grab ZIP file from in-memory, make response with correct MIME-type
-    resp = HttpResponse(zip_file, mimetype="application/x-zip-compressed")
+    resp = HttpResponse(zip_file, content_type="application/x-zip-compressed")
     # ..and correct content-disposition
     resp['Content-Disposition'] = 'attachment; filename=%s' % zip_filename
     print(resp)
@@ -95,7 +96,14 @@ def displayImages(request):
 
         return render(request, 'displayImages.html', {'echofiles': echofiles, 'abnormfiles' : abnormfiles})
 
+def draw_graph(request):
+    metadata = db_API.load_metadata(request.user.id)
+    graph.draw_graph(metadata, request.user.id)
+    return render(request, 'graph.html')
+
 def gallery(request):
+    
+
     list = Album.objects.filter(is_visible=True).order_by('-created')
     paginator = Paginator(list, 10)
 
@@ -140,6 +148,7 @@ def signup(request):
 
         args = {'form': form}
         return render(request, 'signup.html', args)
+
 
 def logout(request, next_page):
     uid = request.user.id
