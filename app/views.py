@@ -9,25 +9,20 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.core.files.storage import FileSystemStorage
 from django.views.generic import DetailView
-from django.contrib.auth.models import User
 from django.contrib.auth import views as auth_views
-from plotly.offline import plot
 
 import os
 from os import listdir
 from os.path import isfile, join
-import logging
-import zipfile
 import sys
-import pandas as pd
 import shutil
 
 path = os.getcwd()
 while path[path.rfind('/' if path.startswith('/') else '\\') + 1:] != 'Bat_Echolocation_2019':
     path = os.path.dirname(path)
 sys.path.insert(0, path)
+
 
 def download_zip(request):
     uid = request.user.id
@@ -44,8 +39,8 @@ def download_zip(request):
     print(resp)
     return resp
 
+
 def upload(request):
-    context = {}
     if request.method == 'POST':
         # Get uploaded file & filename
         uploaded_file = request.FILES['document']
@@ -54,13 +49,14 @@ def upload(request):
 
         # Get user id
         uid = request.user.id
-        
+
         # Upload file to database. Switches on filetype.
         # TODO- extend list of acceptable/unacceptable filetypes
 
         # Upload ZIP containing ZC files
         if file_name.endswith('.zip'):
-            outdir = os.path.join(os.getcwd(), 'media', str(uid), 'zip_results')
+            outdir = os.path.join(os.getcwd(), 'media',
+                                  str(uid), 'zip_results')
             try:
                 os.makedirs(outdir)
             except:
@@ -74,6 +70,7 @@ def upload(request):
     if request.POST.get('Next'):
         return redirect('displayImages')
     return render(request, 'upload.html')
+
 
 def displayImages(request):
     if request.method == 'GET':
@@ -91,18 +88,23 @@ def displayImages(request):
         db_API.load_images(uid, outdir)
 
         # Make list of echolocation and abnormal files
-        echofiles = [f for f in listdir(outdir) if isfile(join(outdir, f)) and f.startswith('e_')]
-        abnormfiles = [f for f in listdir(outdir) if isfile(join(outdir, f)) and f.startswith('a_')]
+        echofiles = [f for f in listdir(outdir) if isfile(
+            join(outdir, f)) and f.startswith('e_')]
+        abnormfiles = [f for f in listdir(outdir) if isfile(
+            join(outdir, f)) and f.startswith('a_')]
 
-        return render(request, 'displayImages.html', {'echofiles': echofiles, 'abnormfiles' : abnormfiles})
+        params = {'echofiles': echofiles, 'abnormfiles': abnormfiles}
+
+        return render(request, 'displayImages.html', params)
+
 
 def draw_graph(request):
     metadata = db_API.load_metadata(request.user.id)
     graph.draw_graph(metadata, request.user.id)
     return render(request, 'graph.html')
 
+
 def gallery(request):
-    
 
     list = Album.objects.filter(is_visible=True).order_by('-created')
     paginator = Paginator(list, 10)
@@ -111,12 +113,14 @@ def gallery(request):
     try:
         albums = paginator.page(page)
     except PageNotAnInteger:
-        albums = paginator.page(1)  # If page is not an integer, deliver first page.
+        # If page is not an integer, deliver first page.
+        albums = paginator.page(1)
     except EmptyPage:
         # If page is out of range (e.g.  9999), deliver last page of results.
         albums = paginator.page(paginator.num_pages)
 
     return render(request, 'gallery.html', {'albums': list})
+
 
 class AlbumDetail(DetailView):
     model = Album
@@ -128,10 +132,12 @@ class AlbumDetail(DetailView):
         context['images'] = AlbumImage.objects.filter(album=self.object.id)
         return context
 
+
 def handler404(request, exception):
     print(exception)
     assert isinstance(request, HttpRequest)
     return render(request, 'handler404.html', None, None, 404)
+
 
 def signup(request):
     if request.method == 'POST':
