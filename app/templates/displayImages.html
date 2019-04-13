@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div style="text-align:center">
+    <h2> Here Are Your images! </h2>
+
+    <form action="/upload">
+        <input type = 'submit' value='Generate map'>
+    </form>
+
+    <form action="/download">
+        <input type = 'submit' value='Download as zip'>
+    </form>
+
+    <form action="/upload">
+        <input type = 'submit' value='Upload more files'>
+    </form>
+</div>
+
+<div class= "split leftcol">
+    <h3>        Abnormal</h3>
+    {% for pic in abnormfiles %}
+    {{ forloop.counter }}
+    <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 150px; width: auto">
+    {% empty %}
+       <li>Sorry, abnormal images in your folder files in your folder</li>
+
+    {% endfor %}
+</div>
+
+<div class= "split rightcol">
+    <h3>        Echolocation</h3>
+    {% for pic in echofiles %}
+    {{ forloop.counter }} 5
+    <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 150px; width: auto">
+    {% empty %}
+       <li>Sorry, echolocation images in your folder</li>
+    {% endfor %}
+</div>
+
+{% endblock %}

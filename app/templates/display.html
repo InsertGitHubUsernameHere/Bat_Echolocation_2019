@@ -5,7 +5,7 @@
 
 <div style="text-align:center">
     </br>
-    <h2> Here are your images! </h2>
+    <h2> Here Are Your Images! </h2>
     </br>
 
     <form action="/graph">
@@ -22,17 +22,24 @@
 </div>
 
 <div class= "split leftcol">
-    <h3>Abnormal</h3>
-    {% for pic in abnormfiles %}
-       <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 150px; width: auto">
-    {% endfor %}
+  <h3>        Abnormal</h3>
+  {% for pic in abnormfiles %}
+  {{ forloop.counter }}
+  <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 150px; width: auto">
+  {% empty %}
+     <li>Sorry, abnormal images in your folder files in your folder</li>
+
+  {% endfor %}
 </div>
 
 <div class= "split rightcol">
-    <h3>Echolocation</h3>
-    {% for pic in echofiles %}
-       <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 150px; width: auto">
-    {% endfor %}
+  <h3>        Echolocation</h3>
+  {% for pic in echofiles %}
+  {{ forloop.counter }}
+  <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 150px; width: auto">
+  {% empty %}
+     <li>Sorry, echolocation images in your folder</li>
+  {% endfor %}
 </div>
 
 {% endblock %}

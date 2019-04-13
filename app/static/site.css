@@ -50,7 +50,7 @@ strong {
   /* This works in IE 8 & 9 too */
   /* ... but also 5, 6, 7 */
   filter: alpha(opacity=60);
-  
+
   /* Modern Browsers */
   opacity: 0.6;
 }
@@ -87,11 +87,11 @@ strong {
 
 /* Control the left side */
 .leftcol {
-  float: left; 
-  
+  float: left;
+
 }
 
 /* Control the right side */
 .rightcol {
-  float: right; 
+  float: right;
 }

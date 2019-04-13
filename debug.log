@@ -1,0 +1,339 @@
+(0.002) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:26:17.678045' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:26:17.678045', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC LIMIT 3; args=(True,)
+(0.002) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:26:39.129801' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:26:39.129801', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/urls/resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLPattern 'signup/' [name='signup']>], [<URLPattern 'resetpassword/' [name='resetpassword']>], [<URLPattern 'password_reset/done/' [name='password_reset_done']>], [<URLPattern 'reset/<uidb64>/<token>/' [name='password_reset_confirm']>], [<URLPattern 'reset/done/' [name='password_reset_complete']>], [<URLPattern 'graph' [name='graph']>], [<URLPattern 'upload' [name='upload']>], [<URLPattern 'download'>], [<URLPattern 'render' [name='render']>], [<URLPattern 'display' [name='display']>], [<URLPattern '' [name='gallery']>], [<URLPattern '^(?P<slug>[-\w]+)$' [name='album']>], [<URLPattern 'accounts/login/$' [name='login']>], [<URLPattern 'accounts/logout/$' [name='logout']>], [<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLPattern '^media\/(?P<path>.*)$'>], [<URLPattern '^Users\/thienle\/Desktop\/Classes\/Spring_2019\/SeniorCapstone\/Bat_Echolocation_2019\/static\/(?P<path>.*)$'>], [<URLPattern '^media\/(?P<path>.*)$'>]], 'path': 'static/ajax-loader.gif'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /static/ajax-loader.gif
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:26:58.968800' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:26:58.968800', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+(0.002) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:27:42.606585' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:27:42.606585', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+(0.004) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:34:08.491140' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:34:08.491140', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:34:23.051724' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:34:23.051724', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:34:38.055307' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:34:38.055307', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:34:38.120021' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:34:38.120021', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+(0.004) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:35:00.658942' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:35:00.658942', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:35:17.946297' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:35:17.946297', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+(0.001) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:35:23.684262' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:35:23.684262', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC LIMIT 3; args=(True,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:35:25.838609' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:35:25.838609', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/urls/resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLPattern 'signup/' [name='signup']>], [<URLPattern 'resetpassword/' [name='resetpassword']>], [<URLPattern 'password_reset/done/' [name='password_reset_done']>], [<URLPattern 'reset/<uidb64>/<token>/' [name='password_reset_confirm']>], [<URLPattern 'reset/done/' [name='password_reset_complete']>], [<URLPattern 'graph' [name='graph']>], [<URLPattern 'upload' [name='upload']>], [<URLPattern 'download'>], [<URLPattern 'render' [name='render']>], [<URLPattern 'display' [name='display']>], [<URLPattern '' [name='gallery']>], [<URLPattern '^(?P<slug>[-\w]+)$' [name='album']>], [<URLPattern 'accounts/login/$' [name='login']>], [<URLPattern 'accounts/logout/$' [name='logout']>], [<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLPattern '^media\/(?P<path>.*)$'>], [<URLPattern '^Users\/thienle\/Desktop\/Classes\/Spring_2019\/SeniorCapstone\/Bat_Echolocation_2019\/static\/(?P<path>.*)$'>], [<URLPattern '^media\/(?P<path>.*)$'>]], 'path': 'static/ajax-loader.gif'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /static/ajax-loader.gif
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:35:29.758935' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:35:29.758935', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+(0.005) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:36:16.159402' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:36:16.159402', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC LIMIT 3; args=(True,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:36:21.039356' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:36:21.039356', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/urls/resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLPattern 'signup/' [name='signup']>], [<URLPattern 'resetpassword/' [name='resetpassword']>], [<URLPattern 'password_reset/done/' [name='password_reset_done']>], [<URLPattern 'reset/<uidb64>/<token>/' [name='password_reset_confirm']>], [<URLPattern 'reset/done/' [name='password_reset_complete']>], [<URLPattern 'graph' [name='graph']>], [<URLPattern 'upload' [name='upload']>], [<URLPattern 'download'>], [<URLPattern 'render' [name='render']>], [<URLPattern 'display' [name='display']>], [<URLPattern '' [name='gallery']>], [<URLPattern '^(?P<slug>[-\w]+)$' [name='album']>], [<URLPattern 'accounts/login/$' [name='login']>], [<URLPattern 'accounts/logout/$' [name='logout']>], [<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLPattern '^media\/(?P<path>.*)$'>], [<URLPattern '^Users\/thienle\/Desktop\/Classes\/Spring_2019\/SeniorCapstone\/Bat_Echolocation_2019\/static\/(?P<path>.*)$'>], [<URLPattern '^media\/(?P<path>.*)$'>]], 'path': 'static/ajax-loader.gif'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /static/ajax-loader.gif
+(0.007) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:36:25.852555' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:36:25.852555', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+(0.002) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:37:04.948713' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:37:04.948713', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/urls/resolvers.py", line 494, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/utils/functional.py", line 36, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/urls/resolvers.py", line 536, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/utils/functional.py", line 36, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/urls/resolvers.py", line 529, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/Users/thienle/anaconda3/lib/python3.6/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/Users/thienle/Desktop/Classes/Spring_2019/SeniorCapstone/Bat_Echolocation_2019/django_photo_gallery/urls.py", line 10, in <module>
+    import app.views
+  File "/Users/thienle/Desktop/Classes/Spring_2019/SeniorCapstone/Bat_Echolocation_2019/app/views.py", line 6, in <module>
+    from util import db_API
+  File "/Users/thienle/Desktop/Classes/Spring_2019/SeniorCapstone/Bat_Echolocation_2019/util/db_API.py", line 2, in <module>
+    from util import CNN
+  File "/Users/thienle/Desktop/Classes/Spring_2019/SeniorCapstone/Bat_Echolocation_2019/util/CNN.py", line 1, in <module>
+    from keras.preprocessing.image import img_to_array
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/keras/__init__.py", line 3, in <module>
+    from . import utils
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/keras/utils/__init__.py", line 6, in <module>
+    from . import conv_utils
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/keras/utils/conv_utils.py", line 9, in <module>
+    from .. import backend as K
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/keras/backend/__init__.py", line 88, in <module>
+    sys.stderr.write('Using TensorFlow backend.\n')
+OSError: [Errno 5] Input/output error
+(0.004) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:46:04.214888' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:46:04.214888', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/urls/resolvers.py", line 494, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/utils/functional.py", line 36, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/urls/resolvers.py", line 536, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/utils/functional.py", line 36, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/urls/resolvers.py", line 529, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/Users/thienle/anaconda3/lib/python3.6/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/Users/thienle/Desktop/Classes/Spring_2019/SeniorCapstone/Bat_Echolocation_2019/django_photo_gallery/urls.py", line 10, in <module>
+    import app.views
+  File "/Users/thienle/Desktop/Classes/Spring_2019/SeniorCapstone/Bat_Echolocation_2019/app/views.py", line 6, in <module>
+    from util import db_API
+  File "/Users/thienle/Desktop/Classes/Spring_2019/SeniorCapstone/Bat_Echolocation_2019/util/db_API.py", line 2, in <module>
+    from util import CNN
+  File "/Users/thienle/Desktop/Classes/Spring_2019/SeniorCapstone/Bat_Echolocation_2019/util/CNN.py", line 1, in <module>
+    from keras.preprocessing.image import img_to_array
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/keras/__init__.py", line 3, in <module>
+    from . import utils
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/keras/utils/__init__.py", line 6, in <module>
+    from . import conv_utils
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/keras/utils/conv_utils.py", line 9, in <module>
+    from .. import backend as K
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/keras/backend/__init__.py", line 88, in <module>
+    sys.stderr.write('Using TensorFlow backend.\n')
+OSError: [Errno 5] Input/output error
+(0.004) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:46:46.063623' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:46:46.063623', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/urls/resolvers.py", line 494, in resolve
+    for pattern in self.url_patterns:
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/utils/functional.py", line 36, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/urls/resolvers.py", line 536, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/utils/functional.py", line 36, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/urls/resolvers.py", line 529, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/Users/thienle/anaconda3/lib/python3.6/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/Users/thienle/Desktop/Classes/Spring_2019/SeniorCapstone/Bat_Echolocation_2019/django_photo_gallery/urls.py", line 10, in <module>
+    import app.views
+  File "/Users/thienle/Desktop/Classes/Spring_2019/SeniorCapstone/Bat_Echolocation_2019/app/views.py", line 6, in <module>
+    from util import db_API
+  File "/Users/thienle/Desktop/Classes/Spring_2019/SeniorCapstone/Bat_Echolocation_2019/util/db_API.py", line 2, in <module>
+    from util import CNN
+  File "/Users/thienle/Desktop/Classes/Spring_2019/SeniorCapstone/Bat_Echolocation_2019/util/CNN.py", line 1, in <module>
+    from keras.preprocessing.image import img_to_array
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/keras/__init__.py", line 3, in <module>
+    from . import utils
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/keras/utils/__init__.py", line 6, in <module>
+    from . import conv_utils
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/keras/utils/conv_utils.py", line 9, in <module>
+    from .. import backend as K
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/keras/backend/__init__.py", line 88, in <module>
+    sys.stderr.write('Using TensorFlow backend.\n')
+OSError: [Errno 5] Input/output error
+(0.004) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:51:38.751960' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:51:38.751960', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+(0.003) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:55:32.821140' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:55:32.821140', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC LIMIT 3; args=(True,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:55:38.677299' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:55:38.677299', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/urls/resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLPattern 'signup/' [name='signup']>], [<URLPattern 'resetpassword/' [name='resetpassword']>], [<URLPattern 'password_reset/done/' [name='password_reset_done']>], [<URLPattern 'reset/<uidb64>/<token>/' [name='password_reset_confirm']>], [<URLPattern 'reset/done/' [name='password_reset_complete']>], [<URLPattern 'graph' [name='graph']>], [<URLPattern 'upload' [name='upload']>], [<URLPattern 'download'>], [<URLPattern 'render' [name='render']>], [<URLPattern 'display' [name='display']>], [<URLPattern '' [name='gallery']>], [<URLPattern '^(?P<slug>[-\w]+)$' [name='album']>], [<URLPattern 'accounts/login/$' [name='login']>], [<URLPattern 'accounts/logout/$' [name='logout']>], [<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLPattern '^media\/(?P<path>.*)$'>], [<URLPattern '^Users\/thienle\/Desktop\/Classes\/Spring_2019\/SeniorCapstone\/Bat_Echolocation_2019\/static\/(?P<path>.*)$'>], [<URLPattern '^media\/(?P<path>.*)$'>]], 'path': 'static/ajax-loader.gif'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /static/ajax-loader.gif
+(0.002) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:55:43.441778' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:55:43.441778', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 22:56:23.590803' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 22:56:23.590803', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+(0.003) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 23:07:02.668925' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 23:07:02.668925', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+(0.003) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 23:07:37.912457' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 23:07:37.912457', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+(0.003) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 23:08:11.791346' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 23:08:11.791346', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
+(0.004) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-13 23:08:29.614430' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-13 23:08:29.614430', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
