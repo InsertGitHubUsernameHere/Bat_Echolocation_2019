@@ -24,23 +24,25 @@
             <a id="logo-container" href="/" class="brand-logo">Batalog</a>
             <ul class="right hide-on-med-and-down">
               <a href="https://github.com/InsertGitHubUsernameHere/Bat_Echolocation_2019" target="_blank">
-                  <img src="{% static 'social/social-github.svg' %}" class="dpg-icon" alt="Django Photo Gallery Github" />
+                  <img src="{% static 'social/social-github.svg' %}" class="dpg-icon" alt="Batalog Github" />
               </a>
             </ul>
             <ul class="right hide-on-med-and-med">
-            {% if user.is_authenticated %}
-                Hi {{ user.username }}!
-            <ul class="right hide-on-med-and-down">    
-                <a href="{% url 'logout' %}">Logout</a>
-            </ul>    
-            {% else %}
-            <ul class="right hide-on-med-and-down">
-                <a href="{% url 'login' %}">Login</a>
-            </ul>    
-            <ul class="right hide-on-med-and-down">
-                <a href="{% url 'signup' %}">Signup</a>
-            </ul>        
-            {% endif %}
+                {% if user.is_authenticated %}
+                    Hi {{ user.username }}!
+                    <ul class="right hide-on-med-and-down">    
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </ul>
+
+                {% else %}
+                    <ul class="right hide-on-med-and-down">
+                        <a href="{% url 'login' %}">Login</a>
+                    </ul>
+                    <ul class="right hide-on-med-and-down">
+                        <a href="{% url 'signup' %}">Signup</a>
+                    </ul>
+
+                {% endif %}
             </ul>
             <ul id="nav-mobile" class="sidenav" style="transform: translateX(-105%);">
                 <li>
@@ -48,12 +50,12 @@
                 </li>
             </ul>
             <a href="#" data-target="nav-mobile" class="sidenav-trigger">
-                <i class="material-icons">menu</i>
+                <i class="material-icons">Menu</i>
             </a>
         </div>
     </nav>
 
-    <main style= "margin-bottom: 75vh">
+    <main>
         {% block content %}
         {% endblock %}
     </main>
