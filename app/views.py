@@ -127,7 +127,7 @@ def gallery(request):
         # If page is out of range (e.g.  9999), deliver last page of results.
         albums = paginator.page(paginator.num_pages)
 
-    return render(request, 'gallery.html', {'albums': list})
+    return render(request, 'gallery.html', {'albums': albums})
 
 
 class AlbumDetail(DetailView):
