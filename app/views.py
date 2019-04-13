@@ -71,6 +71,7 @@ def upload(request):
         return redirect('displayImages')
     return render(request, 'upload.html')
 
+
 def renderImages(request):
     if request.method == 'GET':
         # Get user id
@@ -88,8 +89,12 @@ def renderImages(request):
 
         return displayImages(request)
 
+
 def displayImages(request):
     if request.method == 'GET':
+        uid = request.user.id
+        outdir = os.path.join(os.getcwd(), 'media', str(uid), 'test_images')
+
         # Make list of echolocation and abnormal files
         echofiles = [f for f in listdir(outdir) if isfile(
             join(outdir, f)) and f.startswith('e_')]
@@ -150,8 +155,8 @@ def signup(request):
         if form.is_valid():
             form.save()
 
-            # upon new account creations, fetch registration information here and pass to DB API
-            # below line is currently commented out until "organization" entry is created in the signup form
+            # Fetch registration information here and pass to DB API
+            # commented out until "organization" entry
             #db_API.add_user_organization(request.POST['username'], request.POST['organization'])
 
             return redirect('gallery')
