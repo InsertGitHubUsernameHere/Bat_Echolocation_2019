@@ -73,7 +73,7 @@ def upload(request):
 
 
 def renderImages(request):
-    render(request, 'render.html')
+    HttpResponseRedirect('render')
 
     # Get user id
     uid = request.user.id
