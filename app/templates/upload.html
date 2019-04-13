@@ -5,14 +5,20 @@
 
 <script type="text/javascript">// <![CDATA[
         function loading(){
-            $("#content").hide();
-            $("#loading").show();       
+            var content = document.getElementByID("content")
+            var loading = document.getElementByID("loading")
+            if (loading.style.display === "none") {
+                loading.style.display = "block";
+                content.style.display = "none";
+            } else {
+                x.style.display = "none";
+            }
         }
 // ]]></script>
 
-<div id="loading" style ="text-align:center">
-    <img src="{% static 'ajax-loader.gif' %}" alt="Loading" style="cursor: wait; display: none; left: 46%; top: 77%; z-index: 1000; margin: auto; position: absolute; width: 600px; height: 100px;">
-    <h1> Loading </h1>
+<div id="loading" style ="text-align:center; cursor: wait; display: none; left: 46%; top: 77%; z-index: 1000; margin: auto; position: absolute; width: 600px; height: 100px;">
+    <h1>Loading</h1>
+    <img src="{% static 'ajax-loader.gif' %}" alt="Loading">
 </div>
 
 <div id="content" style ="text-align:center">
