@@ -32,7 +32,7 @@ def download_zip(request):
 
     zip_filename, zip_file = db_API.make_zip(indir, outdir)
 
-    # Grab ZIP file from in-memory, make response with correct MIME-type
+    # Grab ZIP file from in-memory, make response with correct content-type
     resp = HttpResponse(zip_file, content_type="application/x-zip-compressed")
     # ..and correct content-disposition
     resp['Content-Disposition'] = 'attachment; filename=%s' % zip_filename
