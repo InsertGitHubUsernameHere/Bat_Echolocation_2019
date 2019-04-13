@@ -1,6 +1,4 @@
 import numpy as np
-import os
-import sqlite3
 from scipy.signal import savgol_filter
 
 
@@ -96,18 +94,3 @@ def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=2
             pulse, smooth_pulse) if dista(pair) < dy_cutoff / 2])
 
     return cleaner_graph
-
-# encode PNG images to binary
-
-
-def png_to_binary(file):
-    raw = sqlite3.Binary(file)
-    return raw
-
-
-def binary_to_png(name, raw, classification):
-    path = os.path.realpath(
-        f'../django_photo_gallery/media/pulses/{classification}/{name}')
-    with open(path, 'wb') as png_file:
-        png_file.write(raw)
-    os.remove(path)
