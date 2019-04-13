@@ -230,6 +230,7 @@ def erase_data(uid):
     """ Remove all user data from images table. Only call on logout """
     conn = sqlite3.connect('../db.sqlite3')
     c = conn.cursor()
+    # TODO: sometimes a user might not upload images and decides to sign out...
     c.execute('DELETE FROM images WHERE uid=?', (uid,))
 
 

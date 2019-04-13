@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import uuid
+from django.contrib.auth.models import AbstractUser  # module import for extending std User model
 from django.db import models
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFit
+
 
 class Album(models.Model):
     title = models.CharField(max_length=70)
@@ -22,6 +24,7 @@ class Album(models.Model):
     def __unicode__(self):
         return self.title
 
+
 class AlbumImage(models.Model):
     image = ProcessedImageField(upload_to='albums', processors=[
                                 ResizeToFit(1280)], format='JPEG', options={'quality': 70})
@@ -33,3 +36,8 @@ class AlbumImage(models.Model):
     width = models.IntegerField(default=0)
     height = models.IntegerField(default=0)
     slug = models.SlugField(max_length=70, default=uuid.uuid4, editable=False)
+
+
+# create custom user model - inherits from std User model
+class BatalogUser(AbstractUser):
+    organization = models.CharField(max_length=255, default='')
