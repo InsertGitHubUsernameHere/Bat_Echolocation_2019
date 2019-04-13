@@ -71,8 +71,7 @@ def upload(request):
         return redirect('displayImages')
     return render(request, 'upload.html')
 
-
-def displayImages(request):
+def renderImages(request):
     if request.method == 'GET':
         # Get user id
         uid = request.user.id
@@ -87,6 +86,10 @@ def displayImages(request):
         # Load images from database
         db_API.load_images(uid, outdir)
 
+        return displayImages(request)
+
+def displayImages(request):
+    if request.method == 'GET':
         # Make list of echolocation and abnormal files
         echofiles = [f for f in listdir(outdir) if isfile(
             join(outdir, f)) and f.startswith('e_')]
