@@ -4,16 +4,13 @@
 {% block content %}
 
 <script type="text/javascript">// <![CDATA[
-        function loading(){
-            var content = document.getElementByID("content")
-            var loading = document.getElementByID("loading")
-            if (loading.style.display === "none") {
-                loading.style.display = "block";
-                content.style.display = "none";
-            } else {
-                x.style.display = "none";
-            }
-        }
+    function loading(){
+        var content = document.getElementByID("content");
+        var loading = document.getElementByID("loading");
+
+        loading.style.display = "block";
+        content.style.display = "none";
+    }
 // ]]></script>
 
 <div id="loading" style ="text-align:center; cursor: wait; display: none; left: 46%; top: 77%; z-index: 1000; margin: auto; position: absolute; width: 600px; height: 100px;">
@@ -21,7 +18,7 @@
     <img src="{% static 'ajax-loader.gif' %}" alt="Loading">
 </div>
 
-<div id="content" style ="text-align:center">
+<div id="content" style ="text-align:center; display: block;">
     <h2>Upload</h2>
     
     </br>
