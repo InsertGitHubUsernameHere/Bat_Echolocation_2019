@@ -27,7 +27,7 @@ def get_tables():
     return tables
 
 
-def insert(uid, file_name, file):
+def insert_pulse(uid, file_name, file):
     """ Clean ZC file and add to DB """
     conn = sqlite3.connect('../db.sqlite3')
     c = conn.cursor()
@@ -99,7 +99,7 @@ def insert_zip(uid, outdir, file_name, file):
             os.mkdir(subdir)
             insert_zip(uid, subdir, os.path.basename(file), z)
         else:
-            insert(uid, os.path.basename(file), z)
+            insert_pulse(uid, os.path.basename(file), z)
 
         # Delete file after processing
         f.close()
@@ -191,24 +191,39 @@ def load_metadata(uid):
     return [[row[0], row[3]] for row in table if row[4] == uid]
 
 
-def get_users():
+"""new code (2019-04-12)"""
+def add_user_organization(username, organization):
+    # make "organizations" table if it doesn't already exist
+    if 'organizations' not in get_tables():
+        query = "CREATE TABLE organizations (username VARCHAR(255), organizations VARCHAR(255));"
+        with sqlite3.connect('../db.sqlite3') as conn:
+            conn.cursor.execute(query)
+
+    # add new user and user-defined organization to "organizations" table
+    query = "INSERT INTO organizations VALUES (?, ?);"
+    with sqlite3.connect('../db.sqlite3') as conn:
+        conn.cursor.execute(query, (username, organization))
+"""end new code (2019-04-12)"""
+
+
+'''def get_users():
     """Function to fetch user information (for back-end only)"""
     conn = sqlite3.connect('../db.sqlite3')
     c = conn.cursor()
 
-    query = '''SELECT username,
+    query = "SELECT username,
                       password,
                       first_name,
                       last_name,
                       organization
-               FROM auth_user;'''
+               FROM auth_user;"
 
     cols = ['username', 'password',
             'first_name', 'last_name', 'organization']
 
     c.execute(query)
     df = pd.DataFrame.from_records(c.fetchall(), columns=cols)
-    print(df)
+    print(df)'''
 
 
 def erase_data(uid):

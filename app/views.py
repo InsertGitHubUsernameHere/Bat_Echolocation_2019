@@ -65,7 +65,7 @@ def upload(request):
 
         # Upload ZC file
         else:
-            db_API.insert(uid, file_name, file)
+            db_API.insert_pulse(uid, file_name, file)
 
     if request.POST.get('Next'):
         return redirect('displayImages')
@@ -140,11 +140,17 @@ def handler404(request, exception):
 
 
 def signup(request):
+    #print('in signup')
     if request.method == 'POST':
         form = SignUPForm(request.POST or None)
 
         if form.is_valid():
             form.save()
+
+            # upon new account creations, fetch registration information here and pass to DB API
+            # below line is currently commented out until "organization" entry is created in the signup form
+            #db_API.add_user_organization(request.POST['username'], request.POST['organization'])
+
             return redirect('gallery')
         else:
             args = {'form': form}
