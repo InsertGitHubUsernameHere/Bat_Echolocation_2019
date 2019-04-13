@@ -1,8 +1,6 @@
-from keras.models import load_model
 from keras.preprocessing.image import img_to_array
 import numpy as np
 from PIL import Image
-from skimage.transform import resize
 
 # Input is an image-CNN runs prediction on image-Returns image prediction as a list of float(s)
 '''
@@ -14,6 +12,7 @@ output:
 - result - list of floats that represents the classification (~0 for abnormal, ~1 for echolocation)
 '''
 
+
 def classifyCNN(file_name, model):
     image = Image.open(file_name)
 
@@ -23,20 +22,10 @@ def classifyCNN(file_name, model):
     # resize image for desired CNN model
     image_resize = image.resize((image_width, image_height)).convert('RGB')
 
-    '''# convert image to an array
-    imagearray = img_to_array(image_resize)
-
-    # add 4th dimension to array for CNN -> will get error otherwise
-    imagearray=np.expand_dims(imagearray, 0)
-    
-    # convert array so that its predictions are readable
-    imagearray /= 255'''
-
     # convert image to array and add 4th dimension
-   # image_array = np.expand_dims(img_to_array(image_resize), 0)
     image_array = img_to_array(image_resize)
 
-    image_array = np.expand_dims(image_array,0)
+    image_array = np.expand_dims(image_array, 0)
 
     # rescale image array (have values b/t 0 and 1)
     image_array /= 255
