@@ -27,7 +27,7 @@
     </ul>
 </div>
 
-<div id="content">
+<div id="content" style ="text-align:center">
     <h2>Upload</h2>
     
     </br>
@@ -36,7 +36,7 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="file" name="document">
-        <button type="submit" value='next' name='uploadButton'>Upload file</button>
+        <button type="submit" value='/render' name='uploadButton'>Upload file</button>
     </form>
 </div>
 

@@ -73,37 +73,35 @@ def upload(request):
 
 
 def renderImages(request):
-    if request.method == 'GET':
-        # Get user id
-        uid = request.user.id
+    # Get user id
+    uid = request.user.id
 
-        # Make output directory if it doesn't exist already
-        outdir = os.path.join(os.getcwd(), 'media', str(uid), 'test_images')
-        try:
-            os.makedirs(outdir)
-        except:
-            pass
+    # Make output directory if it doesn't exist already
+    outdir = os.path.join(os.getcwd(), 'media', str(uid), 'test_images')
+    try:
+        os.makedirs(outdir)
+    except:
+        pass
 
-        # Load images from database
-        db_API.load_images(uid, outdir)
+    # Load images from database
+    db_API.load_images(uid, outdir)
 
-        return displayImages(request)
+    return displayImages(request)
 
 
 def displayImages(request):
-    if request.method == 'GET':
-        uid = request.user.id
-        outdir = os.path.join(os.getcwd(), 'media', str(uid), 'test_images')
+    uid = request.user.id
+    outdir = os.path.join(os.getcwd(), 'media', str(uid), 'test_images')
 
-        # Make list of echolocation and abnormal files
-        echofiles = [f for f in listdir(outdir) if isfile(
-            join(outdir, f)) and f.startswith('e_')]
-        abnormfiles = [f for f in listdir(outdir) if isfile(
-            join(outdir, f)) and f.startswith('a_')]
+    # Make list of echolocation and abnormal files
+    echofiles = [f for f in listdir(outdir) if isfile(
+        join(outdir, f)) and f.startswith('e_')]
+    abnormfiles = [f for f in listdir(outdir) if isfile(
+        join(outdir, f)) and f.startswith('a_')]
 
-        params = {'echofiles': echofiles, 'abnormfiles': abnormfiles}
+    params = {'echofiles': echofiles, 'abnormfiles': abnormfiles}
 
-        return render(request, 'displayImages.html', params)
+    return render(request, 'displayImages.html', params)
 
 
 def draw_graph(request):
