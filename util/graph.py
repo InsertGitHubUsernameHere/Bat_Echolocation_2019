@@ -8,14 +8,16 @@ import ast
 from django.shortcuts import redirect
 
 
-#def draw_graph(metadata, uid):  # <-- views.py calls this with the metadata it pulls from the uid; is uid redundant?
+# def draw_graph(metadata, uid):  # <-- views.py calls this with the metadata it pulls from the uid; is uid redundant?
 def draw_graph(metadata, uid):
     # convert string representations of dicts into dicts, extract dicts, and sort dicts by timestamp
-    metadata = sorted([ast.literal_eval(m[1]) for m in metadata], key=operator.itemgetter("timestamp"))
+    metadata = sorted([ast.literal_eval(m[1])
+                       for m in metadata], key=operator.itemgetter("timestamp"))
 
     # convert timestamps to Python's datetime format and format dates
     for m in metadata:
-        m['timestamp'] = datetime.datetime.strptime(m['timestamp'], '%Y-%m-%d %H:%M:%S.%f')
+        m['timestamp'] = datetime.datetime.strptime(
+            m['timestamp'], '%Y-%m-%d %H:%M:%S.%f')
         m['timestamp'] = m['timestamp'].date().strftime('%m/%d/%Y')
 
     # check whether GPS values are null/empty
@@ -66,7 +68,7 @@ def draw_graph(metadata, uid):
                                 'easing': 'quadratic-in-out'
                             }
                         }
-                                 ],
+                        ],
                         'label': 'Play',
                         'method': 'animate'
                     },
@@ -81,7 +83,7 @@ def draw_graph(metadata, uid):
                                 'duration': 0
                             }
                         }
-                                 ],
+                        ],
                         'label': 'Pause',
                         'method': 'animate'
                     }
@@ -100,9 +102,12 @@ def draw_graph(metadata, uid):
         figure['data'] = [
             plotly.graph_objs.Scattergeo(
                 locationmode='USA-states',
-                lon=[m['gps'][1] for m in metadata if m['timestamp'] == dates[0]],
-                lat=[m['gps'][0] for m in metadata if m['timestamp'] == dates[0]],
-                text=[m['filename'] for m in metadata if m['timestamp'] == dates[0]],
+                lon=[m['gps'][1]
+                     for m in metadata if m['timestamp'] == dates[0]],
+                lat=[m['gps'][0]
+                     for m in metadata if m['timestamp'] == dates[0]],
+                text=[m['filename']
+                      for m in metadata if m['timestamp'] == dates[0]],
                 mode='markers'
             )
         ]
@@ -164,4 +169,3 @@ def draw_graph(metadata, uid):
             sliders_dict['steps'].append(slider_step)
 
         figure['layout']['sliders'] = [sliders_dict]
-        plotly.offline.plot(figure, filename="map_test.html")
