@@ -23,9 +23,9 @@
         <div class="nav-wrapper container">
             <a id="logo-container" href="/" class="brand-logo">Batalog</a>
             <ul class="right hide-on-med-and-down">
-              <a href="https://github.com/InsertGitHubUsernameHere/Bat_Echolocation_2019" target="_blank">
-                  <img src="{% static 'social/social-github.svg' %}" class="dpg-icon" alt="Batalog Github" />
-              </a>
+                <a href="https://github.com/InsertGitHubUsernameHere/Bat_Echolocation_2019" target="_blank">
+                    <img src="{% static 'social/social-github.svg' %}" class="dpg-icon" alt="Batalog Github" />
+                </a>
             </ul>
             <ul class="right hide-on-med-and-med">
                 {% if user.is_authenticated %}
@@ -55,7 +55,7 @@
         </div>
     </nav>
 
-    <div id = "content">
+    <div id = "content" style = "display: flex; min-height: 100vh; flex-direction: column;">
         {% block content %}
         {% endblock %}
     </div>
