@@ -8,6 +8,7 @@ from util import graph
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import DetailView
 from django.contrib.auth import views as auth_views
@@ -65,37 +66,43 @@ def upload(request):
 
         # Upload ZC file
         else:
-            db_API.insert(uid, file_name, file)
+            db_API.insert_pulse(uid, file_name, file)
 
     if request.POST.get('Next'):
         return redirect('displayImages')
     return render(request, 'upload.html')
 
 
+def renderImages(request):
+    # Get user id
+    uid = request.user.id
+
+    # Make output directory if it doesn't exist already
+    outdir = os.path.join(os.getcwd(), 'media', str(uid), 'test_images')
+    try:
+        os.makedirs(outdir)
+    except:
+        pass
+
+    # Load images from database
+    db_API.load_images(uid, outdir)
+
+    return redirect('display')
+
+
 def displayImages(request):
-    if request.method == 'GET':
-        # Get user id
-        uid = request.user.id
+    uid = request.user.id
+    outdir = os.path.join(os.getcwd(), 'media', str(uid), 'test_images')
 
-        # Make output directory if it doesn't exist already
-        outdir = os.path.join(os.getcwd(), 'media', str(uid), 'test_images')
-        try:
-            os.makedirs(outdir)
-        except:
-            pass
+    # Make list of echolocation and abnormal files
+    echofiles = [f for f in listdir(outdir) if isfile(
+        join(outdir, f)) and f.startswith('e_')]
+    abnormfiles = [f for f in listdir(outdir) if isfile(
+        join(outdir, f)) and f.startswith('a_')]
 
-        # Load images from database
-        db_API.load_images(uid, outdir)
+    params = {'echofiles': echofiles, 'abnormfiles': abnormfiles}
 
-        # Make list of echolocation and abnormal files
-        echofiles = [f for f in listdir(outdir) if isfile(
-            join(outdir, f)) and f.startswith('e_')]
-        abnormfiles = [f for f in listdir(outdir) if isfile(
-            join(outdir, f)) and f.startswith('a_')]
-
-        params = {'echofiles': echofiles, 'abnormfiles': abnormfiles}
-
-        return render(request, 'displayImages.html', params)
+    return render(request, 'display.html', params)
 
 
 def draw_graph(request):
@@ -119,7 +126,7 @@ def gallery(request):
         # If page is out of range (e.g.  9999), deliver last page of results.
         albums = paginator.page(paginator.num_pages)
 
-    return render(request, 'gallery.html', {'albums': list})
+    return render(request, 'gallery.html', {'albums': albums})
 
 
 class AlbumDetail(DetailView):
@@ -140,11 +147,17 @@ def handler404(request, exception):
 
 
 def signup(request):
+    #print('in signup')
     if request.method == 'POST':
         form = SignUPForm(request.POST or None)
 
         if form.is_valid():
             form.save()
+
+            # Fetch registration information here and pass to DB API
+            # commented out until "organization" entry
+            #db_API.add_user_organization(request.POST['username'], request.POST['organization'])
+
             return redirect('gallery')
         else:
             args = {'form': form}

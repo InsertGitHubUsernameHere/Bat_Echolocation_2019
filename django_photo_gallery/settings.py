@@ -1,5 +1,4 @@
 import os
-import django_heroku
 #import posixpath
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -11,7 +10,7 @@ SECRET_KEY = '8ace3072-47a0-4910-b522-dc3601f38c35'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.241.154.200', 'batalog.herokuapp.com', 'www.echobatalog.com', 'echobatalog.com', '0.0.0.0', '127.0.0.1', 'localhost', 'django-photo-gallery.velingeorgiev.pro']
+ALLOWED_HOSTS = ['www.echobatalog.com', 'echobatalog.com', '0.0.0.0', '127.0.0.1', 'localhost']
 INTERNAL_IPS = ('0.0.0.0', '127.0.0.1', 'localhost',)
 
 INSTALLED_APPS = [
@@ -100,7 +99,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = os.path.join(BASE_DIR, 'static')
+#STATIC_URL = os.path.join(BASE_DIR, 'static')
+STATIC_URL = os.path.join(BASE_DIR, 'static/')
 
 # https://docs.djangoproject.com/en/1.8/howto/static-files/deployment/
 # python manage.py collectstatic
@@ -158,4 +158,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'aasdsa203@gmail.com'
 EMAIL_HOST_PASSWORD = 'hitman007'
 
-django_heroku.settings(locals())
+AUTH_USER_MODEL = 'app.BatalogUser'  # connect Django to custom user model over std user model

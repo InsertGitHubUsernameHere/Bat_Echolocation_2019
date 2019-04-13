@@ -1,43 +1,24 @@
-{% extends "layout.html" %}
+{% extends "sliders.html" %}
 {% load staticfiles %}
 
-{% block content %}
-
-<div class="slider">
-    <ul class="slides">
-        <li>
-            <img src="{% static 'images/bat1.jpg' %}" alt="Bat Data Gallery" class="opaque">
-            <div class="caption center-align">
-                <h1>
-                    Our Goals<br/>
-                    <small class="light text-lighten-3 hide-on-small-only">Extraction, Clustering and Classification</small>
-                </h1>
-
-            </div>
-        </li>
-        <li>
-            <img src="{% static 'images/bat2.jpg' %}" alt="Bat Data Gallery" class="opaque">
-            <div class="caption left-align">
-                <h1>
-                    Members<br />
-                    <small class="light text-lighten-3 hide-on-small-only">Hadi Soufi, Thien Le, Kevin Keomalaythong, David Massey, Rahim Jawaid (Yang Peng, Bety Rostandy)</small>
-                </h1>
-            </div>
-        </li>
-    </ul>
-</div>
+{% block page %}
 
 <div style="text-align:center">
-{% if user.is_authenticated %}
-  <h2 align='center'>File Analysis</h2>
-  <form action="/upload">
-      <input type="submit" value="Click Here to Begin!" />
-  </form>
-  {% else %}
-            <h2 align='center'>Login or Signup to upload a file</h2>
-  {% endif %}
-</div>
+    {% if user.is_authenticated %}
+        </br>
+        <h2 align='center'>File Analysis</h2>
+        </br>
+        <form action="/upload">
+            <input type="submit" value="Click Here to Begin!" />
+        </form>
 
+    {% else %}
+        </br>
+        <h2 align='center'>Login or Signup to upload a file</h2>
+        </br>
+
+    {% endif %}
+</div>
 
 <div class="container">
     <div class="row">
@@ -68,11 +49,11 @@
 <div class="pagination center">
     <span class="step-links">
         {% if albums.has_previous %}
-        <a href="?page={{ albums.previous_page_number }}" class="waves-effect waves-light btn btn-large">Previous</a>
+            <a href="?page={{ albums.previous_page_number }}" class="waves-effect waves-light btn btn-large">Previous</a>
         {% endif %}
 
         {% if albums.has_next %}
-        <a href="?page={{ albums.next_page_number }}" class="waves-effect waves-light btn btn-large">Next</a>
+            <a href="?page={{ albums.next_page_number }}" class="waves-effect waves-light btn btn-large">Next</a>
         {% endif %}
     </span>
 </div>

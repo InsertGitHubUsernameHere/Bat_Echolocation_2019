@@ -23,7 +23,8 @@ urlpatterns = [
     path('graph', app.views.draw_graph, name='graph'),
     path('upload', app.views.upload, name='upload'),
     path('download', app.views.download_zip),
-    path('display', app.views.displayImages, name='displayImages'),
+    path('render', app.views.renderImages, name='render'),
+    path('display', app.views.displayImages, name='display'),
     path('', app.views.gallery, name = 'gallery'),
 
     re_path(r'^(?P<slug>[-\w]+)$', app.views.AlbumDetail.as_view(), name='album'),
