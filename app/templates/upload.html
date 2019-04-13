@@ -11,20 +11,7 @@
 // ]]></script>
 
 <div id="loading" style ="text-align:center">
-    <style>
-        div#loading {
-            margin: auto;
-            position: absolute;
-            z-index: 1000;
-            width: 600px;
-            height: 100px;
-            top: 77%;
-            left: 46%;
-            display: none;
-            background: url(/static/ajax-loader.gif) no-repeat;
-            cursor: wait;
-            }
-    </style>
+    <img src="{% static ajax-loader.gif %}" alt="Loading" style="cursor: wait; display: none; left: 46%; top: 77%; z-index: 1000; margin: auto; position: absolute; width: 600px; height: 100px;">
 </div>
 
 <div id="content" style ="text-align:center">
