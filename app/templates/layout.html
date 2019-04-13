@@ -18,7 +18,7 @@
     <meta name="theme-color" content="#ffffff">
 </head>
 
-<body>
+<body style= "display: flex; min-height: 100vh; flex-direction: column;">
     <nav role="navigation">
         <div class="nav-wrapper container">
             <a id="logo-container" href="/" class="brand-logo">Batalog</a>
@@ -55,7 +55,7 @@
         </div>
     </nav>
 
-    <div id = "content" style = "display: flex; min-height: 100vh; flex-direction: column;">
+    <div id = "content" style = "flex: 1;">
         {% block content %}
         {% endblock %}
     </div>
