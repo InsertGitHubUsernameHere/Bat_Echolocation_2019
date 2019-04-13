@@ -73,6 +73,8 @@ def upload(request):
 
 
 def renderImages(request):
+    render(request, 'render.html')
+
     # Get user id
     uid = request.user.id
 
@@ -86,7 +88,7 @@ def renderImages(request):
     # Load images from database
     db_API.load_images(uid, outdir)
 
-    return redirect('displayImages')
+    return redirect('display')
 
 
 def displayImages(request):
@@ -101,7 +103,7 @@ def displayImages(request):
 
     params = {'echofiles': echofiles, 'abnormfiles': abnormfiles}
 
-    return render(request, 'displayImages.html', params)
+    return render(request, 'display.html', params)
 
 
 def draw_graph(request):
