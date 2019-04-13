@@ -86,7 +86,7 @@ def renderImages(request):
     # Load images from database
     db_API.load_images(uid, outdir)
 
-    return displayImages(request)
+    return redirect('displayImages')
 
 
 def displayImages(request):
