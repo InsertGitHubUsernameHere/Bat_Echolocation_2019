@@ -6,17 +6,16 @@
 <div class="slider">
     <ul class="slides">
         <li>
-            <img src="{% static 'images/bat1.jpg' %}" alt="Bat Data Gallery" class="opaque">
+            <img src="{% static "images/bat1.jpg" %}" alt="Bat Data Gallery" class="opaque">
             <div class="caption center-align">
                 <h1>
                     Our Goals<br/>
                     <small class="light text-lighten-3 hide-on-small-only">Extraction, Clustering and Classification</small>
                 </h1>
-
             </div>
         </li>
         <li>
-            <img src="{% static 'images/bat2.jpg' %}" alt="Bat Data Gallery" class="opaque">
+            <img src="{% static "images/bat2.jpg" %}" alt="Bat Data Gallery" class="opaque">
             <div class="caption left-align">
                 <h1>
                     Members<br/>
@@ -27,16 +26,40 @@
     </ul>
 </div>
 
+<script type="text/javascript">// <![CDATA[
+        function loading(){
+            $("#content").hide();
+            $("#loading").show();       
+        }
+// ]]></script>
+
+<div id="loading" style ="text-align:center">
+    <style>
+        div#loading {
+            margin: auto;
+            position: absolute;
+            z-index: 1000;
+            width: 600px;
+            height: 100px;
+            top: 77%;
+            left: 46%;
+            display: none;
+            background: url(/static/ajax-loader.gif) no-repeat;
+            cursor: wait;
+            }
+    </style>
+</div>
+
 <div id="content" style ="text-align:center">
     <h2>Upload</h2>
     
     </br>
     </br>
 
-    <form action = 'render' method="post" enctype="multipart/form-data">
+    <form action = "render" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="file" name="document">
-        <button type="submit" value='/render' name='uploadButton'>Upload file</button>
+        <button type="submit" value="/render" name="uploadButton" onclick="loading();">Upload file</button>
     </form>
 </div>
 
