@@ -2264,7 +2264,7 @@ ul.staggered-list li {
   background-color: #424242; }
   .page-footer .footer-copyright {
     overflow: hidden;
-    min-height: calc(100% - 50px);
+    min-height: 50px;
     display: flex;
     flex-shrink: 0;
     -webkit-box-align: center;
