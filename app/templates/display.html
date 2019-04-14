@@ -7,32 +7,42 @@
     </br>
     <h2> Here Are Your Images! </h2>
     </br>
-
-    <form action="/graph">
-        <input type = 'submit' value='Generate map'>
-    </form>
-
-    <form action="/download">
-        <input type = 'submit' value='Download as zip'>
-    </form>
-
-    <form action="/upload">
-        <input type = 'submit' value='Upload more files'>
-    </form>
+    <div style="float: left; width: 33%">
+        <form action="/graph">
+            <input class="button" type = 'submit' value='Generate map'>
+        </form>
+    </div>
+    <div style="float: left; width: 33%">
+      <form action="/download">
+          <input class="button" type = 'submit' value='Download as zip'>
+      </form>
+    </div>
+    <div style="float: left; width: 33%">
+      <form action="/upload">
+          <input class="button" type = 'submit' value='Upload more files'>
+      </form>
+    </div>
 </div>
 
+
 <div class= "split leftcol">
+  <hr>
   <h3>        Abnormal</h3>
   {% for pic in abnormfiles %}
-  {{ forloop.counter }}
-  <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 150px; width: auto">
+  {% if forloop.counter0 >= 5 %}
+      <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 0px; width: auto">
+  {% else %}
+      <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 150px; width: auto">
+  {% endif %}
   {% empty %}
      <li>Sorry, abnormal images in your folder files in your folder</li>
 
   {% endfor %}
+  <button class="button">Show More</button>
 </div>
 
 <div class= "split rightcol">
+  <hr>
   <h3>        Echolocation</h3>
   {% for pic in echofiles %}
   {{ forloop.counter }}

@@ -1,7 +1,7 @@
 <script type="text/javascript">// <![CDATA[
     function loading(){
         $("#content").hide();
-        $("#loading").show();  
+        $("#loading").show();
     }
 // ]]></script>
 {% extends "sliders.html" %}
@@ -30,16 +30,16 @@
     <div id="loading">
         <h1>Rendering</h1>
     </div>
-    <div id="content"> 
+    <div id="content">
         <h1>Upload</h1>
-        
+
         </br>
         </br>
 
         <form action = "render" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="file" name="document">
-            <button type="submit" value='/render' name='uploadButton' onclick="loading();">Upload</button>
+            <input class="button" type="file" name="document">
+            <button class="button" type="submit" value='/render' name='uploadButton' onclick="loading();">Upload</button>
         </form>
     </div>
 </div>
