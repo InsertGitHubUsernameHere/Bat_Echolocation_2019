@@ -27,7 +27,7 @@
 
 <div class= "split leftcol">
   <hr>
-  <h3>        Abnormal</h3>
+  <h3>        Abnormal({{ abnormfiles|length }})</h3>
   {% for pic in abnormfiles %}
   {% if forloop.counter0 >= 5 %}
       <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 0px; width: auto">
@@ -54,7 +54,7 @@
 
 <div class= "split rightcol">
   <hr>
-  <h3>        Echolocation</h3>
+  <h3>        Echolocation({{ echofiles|length }})</h3>
   {% for pic in echofiles %}
   <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 150px; width: auto">
   {% empty %}
