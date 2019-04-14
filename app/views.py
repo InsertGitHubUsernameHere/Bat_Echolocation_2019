@@ -101,6 +101,8 @@ def displayImages(request):
         join(outdir, f)) and f.startswith('a_')]
 
     params = {'echofiles': echofiles, 'abnormfiles': abnormfiles}
+    if request.POST.get('MoreImages'):
+        print('user clicked moreImages')
 
     return render(request, 'display.html', params)
 
