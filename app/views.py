@@ -68,10 +68,7 @@ def upload(request):
         else:
             db_API.insert_pulse(uid, file_name, file)
 
-    if request.POST.get('Next'):
-        return redirect('displayImages')
-    return render(request, 'upload.html')
-
+        return redirect('render')
 
 def renderImages(request):
     # Get user id
