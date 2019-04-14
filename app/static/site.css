@@ -133,7 +133,7 @@ strong {
 }
 
 .button {
-  background-color: #4CAF50;
+  background-color: #e19900;
   border: none;
   color: white;
   padding: 15px 25px;
@@ -143,7 +143,7 @@ strong {
 }
 
 .button:hover {
-  background-color: green;
+  background-color: orange;
 }
 
 /* Other style */
@@ -167,4 +167,4 @@ hr {
   margin-right: auto;
   border-style: inset;
   border-width: 1px;
-} 
+}
