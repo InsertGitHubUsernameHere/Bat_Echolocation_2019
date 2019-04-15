@@ -2,19 +2,15 @@
 # coding: utf-8
 
 from plotly.offline import plot, init_notebook_mode
-import json
-import random
 import plotly
 import plotly.plotly as py
 import plotly.graph_objs as go
 import glob
 import datetime
 import operator
-import random
 from util import db_API
 import ast
-from django.shortcuts import render, redirect
-from django.http import HttpRequest
+from django.shortcuts import redirect
 
 
 # def draw_graph(metadata, uid):  # <-- views.py calls this with the metadata it pulls from the uid; is uid redundant?
