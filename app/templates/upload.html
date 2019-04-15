@@ -29,8 +29,6 @@
 
     <div id="loading">
         <h1>Rendering</h1>
-        </br>
-        </br>
     </div>
     <div id="content">
         <h1>Upload</h1>
@@ -38,21 +36,20 @@
         </br>
         </br>
 
-        <form action = "upload" method="post" enctype="multipart/form-data">
+        <form action="render" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-<<<<<<< HEAD
-            <input type="file" name="document">
-            <button type="submit" value='/upload' name='uploadButton' onclick="loading();">Upload</button>
-=======
+
+            <!--kkeomalaythong edit 2019-04-15: Hadi's patch-->
+            <!--<input type="file" name="document">
+            <button type="submit" value='/upload' name='uploadButton' onclick="loading();">Upload</button>-->
+            <!--end kkeomalaythong edit 2019-04-15-->
+
             <div style="float: left; width: 70%">
             <input class="buttonborder" type="file" name="document">
             </div>
             <div style="float: left; width: 1%">
             <button style="float: left;" class="buttonOption" type="submit" value='/render' name='uploadButton' onclick="loading();">Upload</button>
             </div>
-
-            </div>
->>>>>>> 820d8c722189fab5cdf1a5b2dd1ced0dc52bbffc
         </form>
     </div>
 </div>
