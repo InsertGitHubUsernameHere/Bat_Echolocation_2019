@@ -37,22 +37,13 @@
 
         </br>
         </br>
-
         <form action = "upload" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-<<<<<<< HEAD
-            <input type="file" name="document">
-            <button type="submit" value='/upload' name='uploadButton' onclick="loading();">Upload</button>
-=======
             <div style="float: left; width: 70%">
-            <input class="buttonborder" type="file" name="document">
+                <input class="buttonborder" type="file" name="document">
             </div>
             <div style="float: left; width: 1%">
-            <button style="float: left;" class="buttonOption" type="submit" value='/render' name='uploadButton' onclick="loading();">Upload</button>
+                <button style="float: left;" class="buttonOption" type="submit" value='/upload' name='uploadButton' onclick="loading();">Upload</button>
             </div>
-
-            </div>
->>>>>>> 820d8c722189fab5cdf1a5b2dd1ced0dc52bbffc
         </form>
     </div>
 </div>
