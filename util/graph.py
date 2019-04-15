@@ -1,11 +1,20 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+from plotly.offline import plot, init_notebook_mode
+import json
+import random
 import plotly
+import plotly.plotly as py
+import plotly.graph_objs as go
+import glob
 import datetime
 import operator
+import random
+from util import db_API
 import ast
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect
+from django.http import HttpRequest
 
 
 # def draw_graph(metadata, uid):  # <-- views.py calls this with the metadata it pulls from the uid; is uid redundant?
@@ -169,3 +178,4 @@ def draw_graph(metadata, uid):
             sliders_dict['steps'].append(slider_step)
 
         figure['layout']['sliders'] = [sliders_dict]
+        plot(figure, filename="graph.html")
