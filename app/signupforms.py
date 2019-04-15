@@ -1,14 +1,14 @@
 from django import forms
-from django.contrib.auth import get_user_model  # module import for fetching custom user model
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.validators import validate_email
-
-# set variable for custom user model
-User = get_user_model()
 
 
 class SignUPForm(UserCreationForm):
     email = forms.EmailField(required=True)
+    # kkeomalaythong edit 2019-04-14: create input entry for "organization" field
+    organization = forms.CharField(required=True)
+    # end kkeomalaythong edit 2019-04-14
 
     class Meta:
         model = User
@@ -17,7 +17,7 @@ class SignUPForm(UserCreationForm):
             'first_name',
             'last_name',
             'email',
-            'organization',
+            'organization',  # kkeomalaythong edit 2019-04-14
             'password1',
             'password2',
         )
@@ -50,7 +50,6 @@ class SignUPForm(UserCreationForm):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.email = self.cleaned_data['email']
-        user.organization = self.cleaned_data['organization']
 
         if commit:
             user.save()

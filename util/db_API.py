@@ -8,40 +8,59 @@ from util import bat
 import sqlite3
 import gc
 import matplotlib.pyplot as plt
-import datetime
 import ast
 import zipfile
-import numpy as np
-from numpy.polynomial.polynomial import polyfit
 from keras.models import load_model
 import shutil
 
+# kkeomalaythong edit 2019-04-14: added in a specific path location for local db file
+#     -project ended up creating the db file outside Bat_Echolocation_2019 folder instead of using existing one
+db_path = os.path.realpath('../Bat_Echolocation_2019/db.sqlite3')
+# end kkeomalaythong edit 2019-04-14
+
 
 # 0: Source ZC name, 1: image data, 2: classified, 3: metadata, 4: uid
-
 def get_tables():
-    conn = sqlite3.connect('../db.sqlite3')
+    conn = sqlite3.connect(db_path)
     c = conn.cursor()
-    c.execute('SELECT name FROM sqlite_master WHERE type=\'table\'')
+    c.execute("SELECT name FROM sqlite_master WHERE type='table'")
     tables = [i[0] for i in c.fetchall()]
     return tables
 
 
+# kkeomalaythong edit 2019-04-14: added function for obtaining output of a specific table - may remove later on
+def select_table(table):
+    if table not in get_tables():
+        print(f'table "{table}" does not exist')
+    else:
+        conn = sqlite3.connect(db_path)
+        c = conn.cursor()
+
+        # get column names of table
+        c.execute(f'PRAGMA table_info({table});')
+        columns = pd.DataFrame.from_records(c.fetchall()).iloc[:, 1]
+
+        # get table
+        c.execute(f'SELECT * FROM {table};')
+        df_table = pd.DataFrame.from_records(c.fetchall(), columns=columns)
+        return df_table
+# end kkeomalaythong edit 2019-04-14
+
+
 def insert_pulse(uid, file_name, file):
     """ Clean ZC file and add to DB """
-    conn = sqlite3.connect('../db.sqlite3')
+    conn = sqlite3.connect(db_path)
     c = conn.cursor()
 
     # If images table doesn't exist yet, make it
     if 'images' not in get_tables():
-
-        query = '''CREATE TABLE images (name VARCHAR(255),
-                                        raw BLOB,
-                                        classification VARCHAR(255),
-                                        metadata VARCHAR(255),
-                                        uid INTEGER);'''
-        c = conn.cursor()
-        c.execute(query)
+        with conn:
+            query = '''CREATE TABLE images (name VARCHAR(255),
+                                                    raw BLOB,
+                                                    classification VARCHAR(255),
+                                                    metadata VARCHAR(255),
+                                                    uid INTEGER);'''
+            c.execute(query)
 
     # Extract data from ZC file
     try:
@@ -61,13 +80,25 @@ def insert_pulse(uid, file_name, file):
     pulses = data_processing.clean_graph(filename='', graph=[raw[0], raw[1]])
 
     # Add each pulse and associated metadata to DB
-    with conn:
+    # kkeomalaythong edit 2019-04-14: original "with conn:"code block is rearranged
+    '''    with conn:
+        c = conn.cursor()
         c.execute('SELECT * from images',)
         found = c.fetchall()
         if not any(i[0] == file_name and i[4] == uid for i in found):
             for pulse in pulses:
                 c.execute('INSERT INTO images VALUES (?, ?, ?, ?, ?);',
+                          (file_name, str(pulse), '0', metadata_str, uid))'''
+
+    c.execute('SELECT * from images', )
+    found = c.fetchall()
+
+    if not any(i[0] == file_name and i[4] == uid for i in found):
+        with conn:
+            for pulse in pulses:
+                c.execute('INSERT INTO images VALUES (?, ?, ?, ?, ?);',
                           (file_name, str(pulse), '0', metadata_str, uid))
+    # end kkeomalaythong edit 2019-04-14
 
 
 def insert_zip(uid, outdir, file_name, file):
@@ -108,8 +139,7 @@ def insert_zip(uid, outdir, file_name, file):
 
 def load_images(uid, outdir):
     """ Load images from DB and render """
-
-    conn = sqlite3.connect('../db.sqlite3')
+    conn = sqlite3.connect(db_path)
     c = conn.cursor()
 
     # Load users image data
@@ -130,8 +160,8 @@ def load_images(uid, outdir):
         # Mark pulse as rendered
         sql = '''UPDATE images
                  SET classification = '1'
-                 WHERE ''' + str(i) + ''' = ROWID'''
-        c.execute(sql)
+                 WHERE ''' + str(i) + ''' = ROWID;'''
+        conn.cursor().execute(sql)
 
         # Convert DB string to 2d list
         pulse = ast.literal_eval(row[1])
@@ -159,7 +189,8 @@ def load_images(uid, outdir):
             os.rename(save_path, save_path.replace('^', 'a'))
 
 
-def select_images(name=None, classification=None):
+# kkeomalaythong edit 2019-04-14: method is commented out until purpose is either reevaluated or method is deleted
+'''def select_images(name=None, classification=None):
     conn = sqlite3.connect('../db.sqlite3')
     c = conn.cursor()
     # both name==... and classification==...
@@ -179,11 +210,12 @@ def select_images(name=None, classification=None):
     print(df)  # temporary
 
     # convert binary into PNG images and store them in .../media folder
-    df.apply(lambda r: data_processing.binary_to_png(r[0], r[1], r[2]), axis=1)
+    df.apply(lambda r: data_processing.binary_to_png(r[0], r[1], r[2]), axis=1)'''
+# end kkeomalaythong edit 2019-04-14
 
 
 def load_metadata(uid):
-    conn = sqlite3.connect('../db.sqlite3')
+    conn = sqlite3.connect(db_path)
     c = conn.cursor()
     c.execute('SELECT * FROM images')
     table = c.fetchall()
@@ -191,47 +223,28 @@ def load_metadata(uid):
     return [[row[0], row[3]] for row in table if row[4] == uid]
 
 
-"""new code (2019-04-12)"""
+# kkeomalaythong edit 2019-04-14: changed db utility call lines
 def add_user_organization(username, organization):
-    # make "organizations" table if it doesn't already exist
-    if 'organizations' not in get_tables():
-        query = "CREATE TABLE organizations (username VARCHAR(255), organizations VARCHAR(255));"
-        with sqlite3.connect('../db.sqlite3') as conn:
-            conn.cursor.execute(query)
-
-    # add new user and user-defined organization to "organizations" table
-    query = "INSERT INTO organizations VALUES (?, ?);"
-    with sqlite3.connect('../db.sqlite3') as conn:
-        conn.cursor.execute(query, (username, organization))
-"""end new code (2019-04-12)"""
-
-
-'''def get_users():
-    """Function to fetch user information (for back-end only)"""
-    conn = sqlite3.connect('../db.sqlite3')
+    conn = sqlite3.connect(db_path)
     c = conn.cursor()
 
-    query = "SELECT username,
-                      password,
-                      first_name,
-                      last_name,
-                      organization
-               FROM auth_user;"
+    # make "organizations" table if it doesn't already exist
+    if 'organizations' not in get_tables():
+        query = 'CREATE TABLE organizations (username VARCHAR(255), organization VARCHAR(255));'
+        with conn:
+            c.execute(query)
 
-    cols = ['username', 'password',
-            'first_name', 'last_name', 'organization']
-
-    c.execute(query)
-    df = pd.DataFrame.from_records(c.fetchall(), columns=cols)
-    print(df)'''
+    # add new user and user-defined organization to "organizations" table
+    with conn:
+        query = 'INSERT INTO organizations VALUES (?, ?);'
+        c.execute(query, (username, organization))
+# end kkeomalaythong edit 2019-04-14
 
 
 def erase_data(uid):
     """ Remove all user data from images table. Only call on logout """
-    conn = sqlite3.connect('../db.sqlite3')
-    c = conn.cursor()
-    # TODO: sometimes a user might not upload images and decides to sign out...
-    c.execute('DELETE FROM images WHERE uid=?', (uid,))
+    conn = sqlite3.connect(db_path)
+    conn.cursor().execute('DELETE FROM images WHERE uid=?', (uid,))
 
 
 def make_zip(indir, outdir):
