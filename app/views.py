@@ -70,9 +70,6 @@ def upload(request):
 
 
 def render_images(request):
-    print("in render_images()")
-
-    # kkeomalaythong edit 2019-04-14: below block is borrowed from upload(), minus second outer if-stmt block
     # Get uploaded file & filename
     uploaded_file = request.FILES['document']
     file_name = uploaded_file.name
@@ -97,10 +94,6 @@ def render_images(request):
     # Upload ZC file
     else:
         db_API.insert_pulse(uid, file_name, file)
-    # end kkeomalaythong edit 2019-04-14
-
-    # Get user id
-    uid = request.user.id
 
     # Make output directory if it doesn't exist already
     outdir = os.path.join(os.getcwd(), 'media', str(uid), 'test_images')
@@ -109,8 +102,8 @@ def render_images(request):
     except:
         pass
 
-    # Load images from database
-    db_API.load_images(uid, outdir)
+    # Render images to local storage
+    db_API.render_images(uid, outdir)
 
     return redirect('display')
 

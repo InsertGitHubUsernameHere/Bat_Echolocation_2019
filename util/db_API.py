@@ -137,7 +137,7 @@ def insert_zip(uid, outdir, file_name, file):
         os.remove(file)
 
 
-def load_images(uid, outdir):
+def render_images(uid, outdir):
     """ Load images from DB and render """
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
