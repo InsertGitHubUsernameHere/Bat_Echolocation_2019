@@ -9,7 +9,7 @@
         <h2 align='center'>File Analysis</h2>
         </br>
         <form action="/upload">
-            <input type="submit" value="Click Here to Begin!" />
+            <button class="button" style="vertical-align:middle"><span>Click Here to Begin</span></button>
         </form>
 
     {% else %}
@@ -36,7 +36,7 @@
                 <div class="card-action">
                     <a href="{% url 'album' album.slug %}">
                         More Images
-                    </a> 
+                    </a>
                 </div>
             </div>
         </div>

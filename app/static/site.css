@@ -50,7 +50,7 @@ strong {
   /* This works in IE 8 & 9 too */
   /* ... but also 5, 6, 7 */
   filter: alpha(opacity=60);
-  
+
   /* Modern Browsers */
   opacity: 0.6;
 }
@@ -87,11 +87,152 @@ strong {
 
 /* Control the left side */
 .leftcol {
-  float: left; 
-  
+  float: left;
+
 }
 
 /* Control the right side */
 .rightcol {
-  float: right; 
+  float: right;
+}
+
+.read-more-state {
+  display: none;
+}
+
+.read-more-target {
+  opacity: 0;
+  max-height: 0;
+  font-size: 0;
+  transition: .25s ease;
+}
+
+.read-more-state:checked ~ .read-more-wrap .read-more-target {
+  opacity: 1;
+  font-size: inherit;
+  max-height: 999em;
+}
+
+.read-more-state ~ .read-more-trigger:before {
+  content: 'Show more';
+}
+
+.read-more-state:checked ~ .read-more-trigger:before {
+  content: 'Show less';
+}
+
+.read-more-trigger {
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 .5em;
+  color: #666;
+  font-size: .9em;
+  line-height: 2;
+  border: 1px solid #ddd;
+  border-radius: .25em;
+}
+
+.buttonNorm {
+  background-color: #e19900;
+  border: none;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 500px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button:hover {
+  background-color: orange;
+}
+
+.buttonborder {
+  background-color: white;
+  border: 2px solid #e19900;
+  color: black;
+  padding: 15px 25px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.buttonborder:hover {
+  background-color: orange;
+  color:white
+}
+
+.buttonOption {
+  float: left;
+  border: 1px solid orange;
+  background-color: #e19900;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+
+}
+
+/* Other style */
+body {
+  padding: 2%;
+}
+
+p {
+  padding: 2%;
+  background: #fff9c6;
+  color: #c7b27e;
+  border: 1px solid #fce29f;
+  border-radius: .25em;
+}
+
+hr {
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
 }

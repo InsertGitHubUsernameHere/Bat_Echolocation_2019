@@ -33,7 +33,7 @@ def download_zip(request):
 
     zip_filename, zip_file = db_API.make_zip(indir, outdir)
 
-    # Grab ZIP file from in-memory, make response with correct MIME-type
+    # Grab ZIP file from in-memory, make response with correct content-type
     resp = HttpResponse(zip_file, content_type="application/x-zip-compressed")
     # ..and correct content-disposition
     resp['Content-Disposition'] = 'attachment; filename=%s' % zip_filename
@@ -98,6 +98,8 @@ def displayImages(request):
         join(outdir, f)) and f.startswith('a_')]
 
     params = {'echofiles': echofiles, 'abnormfiles': abnormfiles}
+    if request.POST.get('MoreImages'):
+        print('user clicked moreImages')
 
     return render(request, 'display.html', params)
 

@@ -99,7 +99,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = os.path.join(BASE_DIR, 'static')
+#STATIC_URL = os.path.join(BASE_DIR, 'static')
+STATIC_URL = os.path.join(BASE_DIR, 'static/')
 
 # https://docs.djangoproject.com/en/1.8/howto/static-files/deployment/
 # python manage.py collectstatic
@@ -156,3 +157,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'aasdsa203@gmail.com'
 EMAIL_HOST_PASSWORD = 'hitman007'
+
+AUTH_USER_MODEL = 'app.BatalogUser'  # connect Django to custom user model over std user model
