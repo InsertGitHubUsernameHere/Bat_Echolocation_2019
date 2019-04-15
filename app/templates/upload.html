@@ -35,16 +35,14 @@
 
         </br>
         </br>
-
-        <form action = "render" method="post" enctype="multipart/form-data">
+        
+        <form action="render" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div style="float: left; width: 70%">
-            <input class="buttonborder" type="file" name="document">
+                <input class="buttonborder" type="file" name="document">
             </div>
             <div style="float: left; width: 1%">
-            <button style="float: left;" class="buttonOption" type="submit" value='/render' name='uploadButton' onclick="loading();">Upload</button>
-            </div>
-
+                <button style="float: left;" class="buttonOption" type="submit" value='/render' name='uploadButton' onclick="loading();">Upload</button>
             </div>
         </form>
     </div>

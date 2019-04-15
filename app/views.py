@@ -3,8 +3,6 @@
 
 from app.models import Album, AlbumImage
 from app.signupforms import SignUPForm
-from util import db_API
-from util import graph
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.http import HttpResponse
@@ -13,16 +11,12 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import DetailView
 from django.contrib.auth import views as auth_views
 
+from util import db_API
+from util import graph
 import os
 from os import listdir
 from os.path import isfile, join
-import sys
 import shutil
-
-path = os.getcwd()
-while path[path.rfind('/' if path.startswith('/') else '\\') + 1:] != 'Bat_Echolocation_2019':
-    path = os.path.dirname(path)
-sys.path.insert(0, path)
 
 
 def download_zip(request):
@@ -42,7 +36,8 @@ def download_zip(request):
 
 
 def upload(request):
-    if request.method == 'POST':
+    # kkeomalaythong edit 2019-04-14: below block is commented out due to being skipped over during initial fcn call
+    """    if request.method == 'POST':
         # Get uploaded file & filename
         uploaded_file = request.FILES['document']
         file_name = uploaded_file.name
@@ -52,7 +47,6 @@ def upload(request):
         uid = request.user.id
 
         # Upload file to database. Switches on filetype.
-        # TODO- extend list of acceptable/unacceptable filetypes
 
         # Upload ZIP containing ZC files
         if file_name.endswith('.zip'):
@@ -69,11 +63,42 @@ def upload(request):
             db_API.insert_pulse(uid, file_name, file)
 
     if request.POST.get('Next'):
-        return redirect('displayImages')
+        return redirect('display_images')"""
+    # end kkeomalaythong edit 2019-04-14
+
     return render(request, 'upload.html')
 
 
-def renderImages(request):
+def render_images(request):
+    print("in render_images()")
+
+    # kkeomalaythong edit 2019-04-14: below block is borrowed from upload(), minus second outer if-stmt block
+    # Get uploaded file & filename
+    uploaded_file = request.FILES['document']
+    file_name = uploaded_file.name
+    file = uploaded_file.read()
+
+    # Get user id
+    uid = request.user.id
+
+    # Upload file to database. Switches on filetype.
+    # TODO- extend list of acceptable/unacceptable filetypes
+
+    # Upload ZIP containing ZC files
+    if file_name.endswith('.zip'):
+        outdir = os.path.join(os.getcwd(), 'media',
+                              str(uid), 'zip_results')
+        try:
+            os.makedirs(outdir)
+        except:
+            pass
+        db_API.insert_zip(uid, outdir, file_name, file)
+
+    # Upload ZC file
+    else:
+        db_API.insert_pulse(uid, file_name, file)
+    # end kkeomalaythong edit 2019-04-14
+
     # Get user id
     uid = request.user.id
 
@@ -90,7 +115,7 @@ def renderImages(request):
     return redirect('display')
 
 
-def displayImages(request):
+def display_images(request):
     uid = request.user.id
     outdir = os.path.join(os.getcwd(), 'media', str(uid), 'test_images')
 
@@ -114,7 +139,6 @@ def draw_graph(request):
 
 
 def gallery(request):
-
     list = Album.objects.filter(is_visible=True).order_by('-created')
     paginator = Paginator(list, 10)
 
@@ -149,7 +173,6 @@ def handler404(request, exception):
 
 
 def signup(request):
-    #print('in signup')
     if request.method == 'POST':
         form = SignUPForm(request.POST or None)
 
@@ -157,8 +180,7 @@ def signup(request):
             form.save()
 
             # Fetch registration information here and pass to DB API
-            # commented out until "organization" entry
-            #db_API.add_user_organization(request.POST['username'], request.POST['organization'])
+            db_API.add_user_organization(request.POST['username'], request.POST['organization'])
 
             return redirect('gallery')
         else:
