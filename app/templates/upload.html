@@ -1,7 +1,10 @@
 <script type="text/javascript">// <![CDATA[
     function loading(){
-        $("#content").hide();
-        $("#loading").show();
+        var x = document.getElementById('content');
+        if(x.style.display !== "none") {
+            x.style.display = "none";
+            document.getElementById('loading').style.display = "block";
+        }
     }
 // ]]></script>
 {% extends "sliders.html" %}
