@@ -53,8 +53,7 @@ def render_images(request):
 
     # Upload ZIP containing ZC files
     if file_name.endswith('.zip'):
-        outdir = os.path.join(os.getcwd(), 'media',
-                              str(uid), 'zip_results')
+        outdir = os.path.join(os.getcwd(), 'media', str(uid), 'zip_results')
         try:
             os.makedirs(outdir)
         except:

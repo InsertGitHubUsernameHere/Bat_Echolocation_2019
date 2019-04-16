@@ -29,7 +29,7 @@
   <hr>
   <h3>        Abnormal({{ abnormfiles|length }})</h3>
   {% for pic in abnormfiles %}
-  {% if forloop.counter0 >= 5 %}
+  {% if forloop.counter0 >= 8 %}
       <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 0px; width: auto">
   {% else %}
       <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 150px; width: auto">
@@ -41,9 +41,9 @@
 
   <button class="buttonborder" onclick="myFunction()">More Images</button>
 
-  <div id="myDIV">
+  <div id="myDIV" style="display:none;">
     {% for pic in abnormfiles %}
-    {% if forloop.counter0 <= 5 %}
+    {% if forloop.counter0 <= 8 %}
         <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 0px; width: auto">
     {% else %}
         <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 150px; width: auto">

@@ -1,9 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+from plotly.offline import plot, init_notebook_mode
 import plotly
+import plotly.plotly as py
+import plotly.graph_objs as go
+import glob
 import datetime
 import operator
+from util import db_API
 import ast
 from django.shortcuts import redirect
 
@@ -169,3 +174,4 @@ def draw_graph(metadata, uid):
             sliders_dict['steps'].append(slider_step)
 
         figure['layout']['sliders'] = [sliders_dict]
+        plot(figure, filename="graph.html")
