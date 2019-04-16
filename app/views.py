@@ -31,51 +31,21 @@ def download_zip(request):
     resp = HttpResponse(zip_file, content_type="application/x-zip-compressed")
     # ..and correct content-disposition
     resp['Content-Disposition'] = 'attachment; filename=%s' % zip_filename
-    print(resp)
+
+    # Remove Zip file once it's been processed
+    os.remove(os.path.join(outdir, zip_filename))
+
     return resp
 
 
 def upload(request):
-    # kkeomalaythong edit 2019-04-14: below block is commented out due to being skipped over during initial fcn call
-    """    if request.method == 'POST':
-        # Get uploaded file & filename
-        uploaded_file = request.FILES['document']
-        file_name = uploaded_file.name
-        file = uploaded_file.read()
-
-        # Get user id
-        uid = request.user.id
-
-        # Upload file to database. Switches on filetype.
-
-        # Upload ZIP containing ZC files
-        if file_name.endswith('.zip'):
-            outdir = os.path.join(os.getcwd(), 'media',
-                                  str(uid), 'zip_results')
-            try:
-                os.makedirs(outdir)
-            except:
-                pass
-            db_API.insert_zip(uid, outdir, file_name, file)
-
-        # Upload ZC file
-        else:
-            db_API.insert_pulse(uid, file_name, file)
-
-    if request.POST.get('Next'):
-        return redirect('display_images')"""
-    # end kkeomalaythong edit 2019-04-14
-
     return render(request, 'upload.html')
 
 
 def render_images(request):
-    # Get uploaded file & filename
-    uploaded_file = request.FILES['document']
-    file_name = uploaded_file.name
-    file = uploaded_file.read()
-
-    # Get user id
+    # Get request data
+    file_name = request.FILES['document'].name
+    file = request.FILES['document'].read()
     uid = request.user.id
 
     # Upload file to database. Switches on filetype.
@@ -119,8 +89,6 @@ def display_images(request):
         join(outdir, f)) and f.startswith('a_')]
 
     params = {'echofiles': echofiles, 'abnormfiles': abnormfiles}
-    if request.POST.get('MoreImages'):
-        print('user clicked moreImages')
 
     return render(request, 'display.html', params)
 

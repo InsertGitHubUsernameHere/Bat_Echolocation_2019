@@ -282,6 +282,5 @@ def make_zip(indir, outdir):
 
     # Delete everything
     shutil.rmtree(noutdir)
-    shutil.rmtree(indir)
 
     return 'results.zip', m
