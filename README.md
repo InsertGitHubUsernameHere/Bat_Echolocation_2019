@@ -27,6 +27,8 @@ Bat scientists at UNCG record bat calls from all over the state. Doing research 
 
 [Batalog Project Document](https://docs.google.com/document/d/1jJgxoAWclTfXR5WuWl7eNxvBmqgRZZZUhYIx0BMW1Hs/edit?usp=sharing)
 
+[Progress Report 3](https://docs.google.com/presentation/d/1bcQKZUBc3wwKHkR5AEyLSz5nDF7gJZVRbPa4vWUJplM/edit#slide=id.g558d802864_1_0)
+
 ## Members
 
 Current:
