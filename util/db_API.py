@@ -1,3 +1,4 @@
+# kkeomalaythong edit 2019-04-16: renamed "images" table to "pulses"
 from util import CNN
 import pandas as pd
 import os
@@ -14,14 +15,10 @@ import shutil
 import numpy as np
 from scipy.signal import savgol_filter
 
-# kkeomalaythong edit 2019-04-14: added in a specific path location for local db file
-#     -project ended up creating the db file outside Bat_Echolocation_2019 folder instead of using existing one
 db_path = os.path.realpath('../Bat_Echolocation_2019/db.sqlite3')
-# end kkeomalaythong edit 2019-04-14
 
 
 # TODO: consider whether to put all of clean_graph() into insert_pulse()
-# kkeomalaythong edit 2019-04-15: moved clean_graph() out of data_processing.py and into this .py file
 def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=20):
     if graph is None:
         print('File is empty')
@@ -114,7 +111,6 @@ def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=2
             pulse, smooth_pulse) if dista(pair) < dy_cutoff / 2])
 
     return cleaner_graph
-# end kkeomalaythong edit 2019-04-15
 
 
 # 0: Source ZC name, 1: image data, 2: classified, 3: metadata, 4: uid
@@ -126,7 +122,7 @@ def get_tables():
     return tables
 
 
-# kkeomalaythong edit 2019-04-14: added function for obtaining output of a specific table - may remove later on
+# TODO: consider whether to remove select_table()
 def select_table(table):
     if table not in get_tables():
         print(f'table "{table}" does not exist')
@@ -142,7 +138,6 @@ def select_table(table):
         c.execute(f'SELECT * FROM {table};')
         df_table = pd.DataFrame.from_records(c.fetchall(), columns=columns)
         return df_table
-# end kkeomalaythong edit 2019-04-14
 
 
 def insert_pulse(uid, file_name, file):
@@ -153,7 +148,7 @@ def insert_pulse(uid, file_name, file):
     # If images table doesn't exist yet, make it
     if 'images' not in get_tables():
         with conn:
-            query = '''CREATE TABLE images (name VARCHAR(255),
+            query = '''CREATE TABLE pulses (name VARCHAR(255),
                                                     raw BLOB,
                                                     classification VARCHAR(255),
                                                     metadata VARCHAR(255),
@@ -178,25 +173,14 @@ def insert_pulse(uid, file_name, file):
     pulses = clean_graph(filename='', graph=[raw[0], raw[1]])
 
     # Add each pulse and associated metadata to DB
-    # kkeomalaythong edit 2019-04-14: original "with conn:"code block is rearranged
-    '''    with conn:
-        c = conn.cursor()
-        c.execute('SELECT * from images',)
-        found = c.fetchall()
-        if not any(i[0] == file_name and i[4] == uid for i in found):
-            for pulse in pulses:
-                c.execute('INSERT INTO images VALUES (?, ?, ?, ?, ?);',
-                          (file_name, str(pulse), '0', metadata_str, uid))'''
-
-    c.execute('SELECT * from images', )
+    c.execute('SELECT * from pulses;')
     found = c.fetchall()
 
     if not any(i[0] == file_name and i[4] == uid for i in found):
         with conn:
             for pulse in pulses:
-                c.execute('INSERT INTO images VALUES (?, ?, ?, ?, ?);',
+                c.execute('INSERT INTO pulses VALUES (?, ?, ?, ?, ?);',
                           (file_name, str(pulse), '0', metadata_str, uid))
-    # end kkeomalaythong edit 2019-04-14
 
 
 def insert_zip(uid, outdir, file_name, file):
@@ -241,7 +225,7 @@ def render_images(uid, outdir):
     c = conn.cursor()
 
     # Load users image data
-    c.execute('SELECT * FROM images WHERE uid=?', (uid,))
+    c.execute('SELECT * FROM pulses WHERE uid=?;', (uid,))
     table = c.fetchall()
     table = [t for t in table if t[4] == uid]
     # Load CNN
@@ -256,7 +240,7 @@ def render_images(uid, outdir):
             continue
 
         # Mark pulse as rendered
-        sql = '''UPDATE images
+        sql = '''UPDATE pulses
                  SET classification = '1'
                  WHERE ''' + str(i) + ''' = ROWID;'''
         conn.cursor().execute(sql)
@@ -287,41 +271,15 @@ def render_images(uid, outdir):
             os.rename(save_path, save_path.replace('^', 'a'))
 
 
-# kkeomalaythong edit 2019-04-14: method is commented out until purpose is either reevaluated or method is deleted
-'''def select_images(name=None, classification=None):
-    conn = sqlite3.connect('../db.sqlite3')
-    c = conn.cursor()
-    # both name==... and classification==...
-    if name is not None and classification is not None:
-        c.execute('SELECT * FROM images WHERE name=? AND classification=?;',
-                  (name, classification))
-    elif name is not None:  # name==...
-        c.execute('SELECT * FROM images WHERE name=?;', (name,))
-    elif classification is not None:  # classification==...
-        c.execute('SELECT * FROM images WHERE classification=?;',
-                  (classification,))
-    else:  # both name==None and classification==None
-        c.execute('SELECT * FROM images;')
-
-    df = pd.DataFrame.from_records(
-        c.fetchall(), columns=['name', 'raw', 'classification', 'metadata'])
-    print(df)  # temporary
-
-    # convert binary into PNG images and store them in .../media folder
-    df.apply(lambda r: data_processing.binary_to_png(r[0], r[1], r[2]), axis=1)'''
-# end kkeomalaythong edit 2019-04-14
-
-
 def load_metadata(uid):
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
-    c.execute('SELECT * FROM images')
+    c.execute('SELECT * FROM pulses;')
     table = c.fetchall()
 
     return [[row[0], row[3]] for row in table if row[4] == uid]
 
 
-# kkeomalaythong edit 2019-04-14: changed db utility call lines
 def add_user_organization(username, organization):
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
@@ -336,13 +294,12 @@ def add_user_organization(username, organization):
     with conn:
         query = 'INSERT INTO organizations VALUES (?, ?);'
         c.execute(query, (username, organization))
-# end kkeomalaythong edit 2019-04-14
 
 
 def erase_data(uid):
-    """ Remove all user data from images table. Only call on logout """
+    """ Remove all user data from pulses table. Only call on logout """
     conn = sqlite3.connect(db_path)
-    conn.cursor().execute('DELETE FROM images WHERE uid=?', (uid,))
+    conn.cursor().execute('DELETE FROM pulses WHERE uid=?;', (uid,))
 
 
 def make_zip(indir, outdir):

@@ -5772,3 +5772,136 @@ Bad Request: /
 (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
 (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 17:40:56.693146' AND "django_session"."session_key" = 'ha2n4dgrmkjh8hmrku0hvr4lorxbhkqj'); args=('2019-04-16 17:40:56.693146', 'ha2n4dgrmkjh8hmrku0hvr4lorxbhkqj')
 (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 2; args=(2,)
+Watching for file changes with StatReloader
+Waiting for apps ready_event.
+Apps ready_event triggered. Sending autoreload_started signal.
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.014) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.001) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 3; args=(True,)
+"GET / HTTP/1.1" 200 7765
+"GET /home/kevin/Bat_Echolocation_2019/static/material/fonts/material-design-icons/material-icons.css HTTP/1.1" 200 970
+"GET /home/kevin/Bat_Echolocation_2019/static/material/css/materialize.forms.css HTTP/1.1" 200 3121
+"GET /home/kevin/Bat_Echolocation_2019/static/material/fonts/roboto/style.css HTTP/1.1" 200 5045
+"GET /home/kevin/Bat_Echolocation_2019/static/material/js/jquery.datetimepicker.full.js HTTP/1.1" 304 0
+"GET /home/kevin/Bat_Echolocation_2019/static/material/css/jquery.datetimepicker.css HTTP/1.1" 200 18419
+"GET /home/kevin/Bat_Echolocation_2019/static/material/js/jquery.formset.js HTTP/1.1" 304 0
+"GET /home/kevin/Bat_Echolocation_2019/static/material/css/materialize.css HTTP/1.1" 200 180714
+"GET /home/kevin/Bat_Echolocation_2019/static/material/js/jquery-2.2.0.js HTTP/1.1" 304 0
+"GET /home/kevin/Bat_Echolocation_2019/static/site.css HTTP/1.1" 200 3712
+"GET /home/kevin/Bat_Echolocation_2019/static/material/js/materialize.js HTTP/1.1" 304 0
+"GET /home/kevin/Bat_Echolocation_2019/static/material/js/materialize.forms.js HTTP/1.1" 304 0
+"GET /home/kevin/Bat_Echolocation_2019/static/app.js HTTP/1.1" 304 0
+"GET /home/kevin/Bat_Echolocation_2019/static/images/bat1.jpg HTTP/1.1" 304 0
+"GET /home/kevin/Bat_Echolocation_2019/static/social/social-github.svg HTTP/1.1" 200 1351
+"GET /home/kevin/Bat_Echolocation_2019/static/images/bat2.jpg HTTP/1.1" 304 0
+"GET /media/albums/P7122118.44_45.jpg HTTP/1.1" 200 4243
+"GET /media/albums/56110716.41_7.jpg HTTP/1.1" 200 4371
+"GET /media/albums/P6072107.02_8.jpg HTTP/1.1" 200 5372
+"GET /home/kevin/Bat_Echolocation_2019/static/apple-touch-icon.png HTTP/1.1" 200 1589
+"GET /home/kevin/Bat_Echolocation_2019/static/favicon-32x32.png HTTP/1.1" 200 471
+(0.001) SELECT "django_site"."id", "django_site"."domain", "django_site"."name" FROM "django_site" WHERE "django_site"."id" = 1; args=(1,)
+"GET /accounts/login/ HTTP/1.1" 200 5026
+"GET /home/kevin/Bat_Echolocation_2019/static/material/fonts/material-design-icons/material-icons.css HTTP/1.1" 304 0
+"GET /home/kevin/Bat_Echolocation_2019/static/material/fonts/roboto/style.css HTTP/1.1" 304 0
+"GET /home/kevin/Bat_Echolocation_2019/static/material/css/materialize.css HTTP/1.1" 304 0
+"GET /home/kevin/Bat_Echolocation_2019/static/material/css/materialize.forms.css HTTP/1.1" 304 0
+"GET /home/kevin/Bat_Echolocation_2019/static/material/css/jquery.datetimepicker.css HTTP/1.1" 304 0
+"GET /home/kevin/Bat_Echolocation_2019/static/site.css HTTP/1.1" 304 0
+"GET /home/kevin/Bat_Echolocation_2019/static/social/social-github.svg HTTP/1.1" 304 0
+"GET /home/kevin/Bat_Echolocation_2019/static/material/fonts/roboto/fonts/Roboto-Regular.woff2 HTTP/1.1" 200 66016
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."username" = 'kkeomalaythong'; args=('kkeomalaythong',)
+(0.000) SELECT (1) AS "a" FROM "django_session" WHERE "django_session"."session_key" = 'g9nevpwvpa7pw3xh4mf96y1grhvjkgnx'  LIMIT 1; args=('g9nevpwvpa7pw3xh4mf96y1grhvjkgnx',)
+(0.000) BEGIN; args=None
+(0.000) INSERT INTO "django_session" ("session_key", "session_data", "expire_date") SELECT 'g9nevpwvpa7pw3xh4mf96y1grhvjkgnx', 'ZTc5Mzk1NWQ0NmRjMjdlYjU4MTZhODkwMTI2ODVmZDQ4Yzk0MGIwODp7fQ==', '2019-04-30 18:09:03.029443'; args=('g9nevpwvpa7pw3xh4mf96y1grhvjkgnx', 'ZTc5Mzk1NWQ0NmRjMjdlYjU4MTZhODkwMTI2ODVmZDQ4Yzk0MGIwODp7fQ==', '2019-04-30 18:09:03.029443')
+(0.007) UPDATE "auth_user" SET "last_login" = '2019-04-16 18:09:03.049434' WHERE "auth_user"."id" = 5; args=('2019-04-16 18:09:03.049434', 5)
+(0.000) BEGIN; args=None
+(0.000) UPDATE "django_session" SET "session_data" = 'NmNmYTkzYTY2Y2JhZDI4ZTUyZTQ0ZThkMmMyNTU4OGM5ZTdkZTI0NDp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJiMmRmM2E3ZmY3NWMwMDA0ZDI2ZTYyNDJlOWI4YWZhMGIyMzA3ODcyIn0=', "expire_date" = '2019-04-30 18:09:03.059837' WHERE "django_session"."session_key" = 'g9nevpwvpa7pw3xh4mf96y1grhvjkgnx'; args=('NmNmYTkzYTY2Y2JhZDI4ZTUyZTQ0ZThkMmMyNTU4OGM5ZTdkZTI0NDp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJiMmRmM2E3ZmY3NWMwMDA0ZDI2ZTYyNDJlOWI4YWZhMGIyMzA3ODcyIn0=', '2019-04-30 18:09:03.059837', 'g9nevpwvpa7pw3xh4mf96y1grhvjkgnx')
+"POST /accounts/login/ HTTP/1.1" 302 0
+(0.001) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 18:09:03.087426' AND "django_session"."session_key" = 'g9nevpwvpa7pw3xh4mf96y1grhvjkgnx'); args=('2019-04-16 18:09:03.087426', 'g9nevpwvpa7pw3xh4mf96y1grhvjkgnx')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 5; args=(5,)
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 3; args=(True,)
+"GET / HTTP/1.1" 200 7806
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 18:09:05.132815' AND "django_session"."session_key" = 'g9nevpwvpa7pw3xh4mf96y1grhvjkgnx'); args=('2019-04-16 18:09:05.132815', 'g9nevpwvpa7pw3xh4mf96y1grhvjkgnx')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 5; args=(5,)
+"GET /upload HTTP/1.1" 200 5534
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/kevin/.local/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/kevin/.local/lib/python3.6/site-packages/django/core/handlers/base.py", line 100, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/kevin/.local/lib/python3.6/site-packages/django/urls/resolvers.py", line 558, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLPattern 'signup/' [name='signup']>], [<URLPattern 'resetpassword/' [name='resetpassword']>], [<URLPattern 'password_reset/done/' [name='password_reset_done']>], [<URLPattern 'reset/<uidb64>/<token>/' [name='password_reset_confirm']>], [<URLPattern 'reset/done/' [name='password_reset_complete']>], [<URLPattern 'graph' [name='graph']>], [<URLPattern 'upload' [name='upload']>], [<URLPattern 'download'>], [<URLPattern 'render' [name='render']>], [<URLPattern 'display' [name='display']>], [<URLPattern '' [name='gallery']>], [<URLPattern '^(?P<slug>[-\w]+)$' [name='album']>], [<URLPattern 'accounts/login/$' [name='login']>], [<URLPattern 'accounts/logout/$' [name='logout']>], [<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLPattern '^media\/(?P<path>.*)$'>], [<URLPattern '^home\/kevin\/Bat_Echolocation_2019\/static\/(?P<path>.*)$'>], [<URLPattern '^media\/(?P<path>.*)$'>]], 'path': 'static/ajax-loader.gif'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/kevin/.local/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/kevin/.local/lib/python3.6/site-packages/django/template/base.py", line 837, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/kevin/.local/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/kevin/.local/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /static/ajax-loader.gif
+"GET /static/ajax-loader.gif HTTP/1.1" 404 4258
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 18:09:11.441967' AND "django_session"."session_key" = 'g9nevpwvpa7pw3xh4mf96y1grhvjkgnx'); args=('2019-04-16 18:09:11.441967', 'g9nevpwvpa7pw3xh4mf96y1grhvjkgnx')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 5; args=(5,)
+"POST /render HTTP/1.1" 302 0
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 18:09:20.577183' AND "django_session"."session_key" = 'g9nevpwvpa7pw3xh4mf96y1grhvjkgnx'); args=('2019-04-16 18:09:20.577183', 'g9nevpwvpa7pw3xh4mf96y1grhvjkgnx')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 5; args=(5,)
+"GET /display HTTP/1.1" 200 9287
+"GET /media/5/test_images/a_P7172114.09_2.png HTTP/1.1" 200 2420
+"GET /media/5/test_images/a_P7172114.09_11.png HTTP/1.1" 200 2501
+"GET /media/5/test_images/a_P7172114.09_12.png HTTP/1.1" 200 2553
+"GET /media/5/test_images/a_P7172114.09_7.png HTTP/1.1" 200 1690
+"GET /media/5/test_images/a_P7172114.09_6.png HTTP/1.1" 200 1801
+"GET /media/5/test_images/a_P7172114.09_10.png HTTP/1.1" 200 1956
+"GET /media/5/test_images/a_P7172114.09_17.png HTTP/1.1" 200 2483
+"GET /media/5/test_images/a_P7172114.09_0.png HTTP/1.1" 200 2102
+"GET /media/5/test_images/a_P7172114.09_16.png HTTP/1.1" 200 2896
+"GET /media/5/test_images/a_P7172114.09_3.png HTTP/1.1" 200 1636
+"GET /media/5/test_images/a_P7172114.09_15.png HTTP/1.1" 200 2715
+"GET /media/5/test_images/a_P7172114.09_22.png HTTP/1.1" 200 1689
+"GET /media/5/test_images/a_P7172114.09_18.png HTTP/1.1" 200 2552
+"GET /media/5/test_images/a_P7172114.09_4.png HTTP/1.1" 200 2674
+"GET /media/5/test_images/a_P7172114.09_19.png HTTP/1.1" 200 1997
+"GET /media/5/test_images/a_P7172114.09_20.png HTTP/1.1" 200 2326
+"GET /media/5/test_images/e_P7172114.09_5.png HTTP/1.1" 200 2645
+"GET /media/5/test_images/e_P7172114.09_21.png HTTP/1.1" 200 1938
+"GET /media/5/test_images/e_P7172114.09_14.png HTTP/1.1" 200 3089
+"GET /media/5/test_images/e_P7172114.09_9.png HTTP/1.1" 200 2729
+"GET /media/5/test_images/e_P7172114.09_1.png HTTP/1.1" 200 2557
+"GET /media/5/test_images/e_P7172114.09_13.png HTTP/1.1" 200 2636
+"GET /media/5/test_images/e_P7172114.09_8.png HTTP/1.1" 200 2279
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 18:09:42.464143' AND "django_session"."session_key" = 'g9nevpwvpa7pw3xh4mf96y1grhvjkgnx'); args=('2019-04-16 18:09:42.464143', 'g9nevpwvpa7pw3xh4mf96y1grhvjkgnx')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 5; args=(5,)
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE "django_session"."session_key" = 'g9nevpwvpa7pw3xh4mf96y1grhvjkgnx'; args=('g9nevpwvpa7pw3xh4mf96y1grhvjkgnx',)
+(0.012) DELETE FROM "django_session" WHERE "django_session"."session_key" IN ('g9nevpwvpa7pw3xh4mf96y1grhvjkgnx'); args=('g9nevpwvpa7pw3xh4mf96y1grhvjkgnx',)
+"GET /accounts/logout/ HTTP/1.1" 302 0
+(0.000) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 3; args=(True,)
+"GET / HTTP/1.1" 200 7765
