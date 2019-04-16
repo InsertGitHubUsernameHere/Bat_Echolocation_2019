@@ -368,9 +368,9 @@ def make_zip(indir, outdir):
         f = file
         file = indir + '/' + file
         if f.startswith('a_'):
-            os.rename(file, os.path.join(noutdir, 'abnormal', f))
+            shutil.copy2(file, os.path.join(noutdir, 'abnormal', f))
         elif f.startswith('e_'):
-            os.rename(file, os.path.join(noutdir, 'echolocation', f))
+            shutil.copy2(file, os.path.join(noutdir, 'echolocation', f))
 
     # Make zip and load into memory
     shutil.make_archive(outdir + '/results', 'zip', noutdir)
