@@ -16,7 +16,7 @@ from scipy.signal import savgol_filter
 
 # kkeomalaythong edit 2019-04-14: added in a specific path location for local db file
 #     -project ended up creating the db file outside Bat_Echolocation_2019 folder instead of using existing one
-db_path = os.path.realpath('../db.sqlite3')
+db_path = os.path.realpath('../Bat_Echolocation_2019/db.sqlite3')
 # end kkeomalaythong edit 2019-04-14
 
 
