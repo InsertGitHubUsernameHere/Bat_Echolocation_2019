@@ -5244,3 +5244,37 @@ Not Found: /static/ajax-loader.gif
 (0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 03:07:07.639237' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-16 03:07:07.639237', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
 (0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 3; args=(3,)
 (0.001) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC LIMIT 3; args=(True,)
+Watching for file changes with StatReloader
+Waiting for apps ready_event.
+Apps ready_event triggered. Sending autoreload_started signal.
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.001) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 19:34:54.442139' AND "django_session"."session_key" = 't2ccw9oa4jwmslsz6kh3o8kqtjvvwmz6'); args=('2019-04-16 19:34:54.442139', 't2ccw9oa4jwmslsz6kh3o8kqtjvvwmz6')
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 3; args=(True,)
+"GET / HTTP/1.1" 200 8095
+"GET /Users/rahim/Downloads/bat/Bat_Echolocation_2019/static/material/fonts/material-design-icons/material-icons.css HTTP/1.1" 200 970
+"GET /Users/rahim/Downloads/bat/Bat_Echolocation_2019/static/material/css/jquery.datetimepicker.css HTTP/1.1" 200 18419
+"GET /Users/rahim/Downloads/bat/Bat_Echolocation_2019/static/material/css/materialize.forms.css HTTP/1.1" 200 3121
+"GET /Users/rahim/Downloads/bat/Bat_Echolocation_2019/static/material/css/materialize.css HTTP/1.1" 200 180714
+"GET /Users/rahim/Downloads/bat/Bat_Echolocation_2019/static/social/social-github.svg HTTP/1.1" 200 1351
+"GET /Users/rahim/Downloads/bat/Bat_Echolocation_2019/static/material/fonts/roboto/style.css HTTP/1.1" 200 5045
+"GET /Users/rahim/Downloads/bat/Bat_Echolocation_2019/static/site.css HTTP/1.1" 200 3712
+"GET /Users/rahim/Downloads/bat/Bat_Echolocation_2019/static/material/js/materialize.forms.js HTTP/1.1" 200 2053
+"GET /Users/rahim/Downloads/bat/Bat_Echolocation_2019/static/material/js/jquery.formset.js HTTP/1.1" 200 8479
+"GET /Users/rahim/Downloads/bat/Bat_Echolocation_2019/static/material/js/jquery.datetimepicker.full.js HTTP/1.1" 200 105563
+"GET /Users/rahim/Downloads/bat/Bat_Echolocation_2019/static/material/js/materialize.js HTTP/1.1" 200 353966
+"GET /Users/rahim/Downloads/bat/Bat_Echolocation_2019/static/material/js/jquery-2.2.0.js HTTP/1.1" 200 258388
+"GET /Users/rahim/Downloads/bat/Bat_Echolocation_2019/static/app.js HTTP/1.1" 200 1417
+"GET /media/albums/P7122118.44_45.jpg HTTP/1.1" 200 4243
+"GET /media/albums/P6072107.02_8.jpg HTTP/1.1" 200 5372
+"GET /media/albums/56110716.41_7.jpg HTTP/1.1" 200 4371
+"GET /Users/rahim/Downloads/bat/Bat_Echolocation_2019/static/Ubuntu-Regular.ttf HTTP/1.1" 200 353824
+"GET /Users/rahim/Downloads/bat/Bat_Echolocation_2019/static/images/bat2.jpg HTTP/1.1" 200 1977645
+"GET /Users/rahim/Downloads/bat/Bat_Echolocation_2019/static/images/bat1.jpg HTTP/1.1" 200 6344233
+"GET /Users/rahim/Downloads/bat/Bat_Echolocation_2019/static/safari-pinned-tab.svg HTTP/1.1" 200 1647
+"GET /Users/rahim/Downloads/bat/Bat_Echolocation_2019/static/favicon-32x32.png HTTP/1.1" 200 471
+"GET /Users/rahim/Downloads/bat/Bat_Echolocation_2019/static/favicon-16x16.png HTTP/1.1" 200 365
