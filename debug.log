@@ -5240,3 +5240,17 @@ Traceback (most recent call last):
     (bit, current))  # missing attribute
 django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
 Not Found: /static/ajax-loader.gif
+Not Found: /media/albums/P7122118.44_45.jpg
+Not Found: /media/albums/56110716.41_7.jpg
+Not Found: /media/albums/P6072107.02_8.jpg
+Not Found: /home/batalog/venv/Bat_Echolocation_2019/static/site.webmanifest
+Not Found: /media/albums/56110716.41_7.jpg
+Not Found: /media/albums/P6072107.02_8.jpg
+Not Found: /media/albums/56110716.41_7.jpg
+Not Found: /media/albums/P7122118.44_45.jpg
+Not Found: /media/albums/56110716.41_7.jpg
+Not Found: /media/albums/P7122118.44_45.jpg
+Not Found: /media/albums/P6072107.02_8.jpg
+Not Found: /media/albums/P7122118.44_45.jpg
+Not Found: /media/albums/P6072107.02_8.jpg
+Not Found: /media/albums/56110716.41_7.jpg
