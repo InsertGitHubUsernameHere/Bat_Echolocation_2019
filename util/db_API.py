@@ -1,4 +1,4 @@
-from util import data_processing
+# kkeomalaythong edit 2019-04-16: renamed "images" table to "pulses"
 from util import CNN
 import pandas as pd
 import os
@@ -12,11 +12,105 @@ import ast
 import zipfile
 from keras.models import load_model
 import shutil
+import numpy as np
+from scipy.signal import savgol_filter
 
-# kkeomalaythong edit 2019-04-14: added in a specific path location for local db file
-#     -project ended up creating the db file outside Bat_Echolocation_2019 folder instead of using existing one
 db_path = os.path.realpath('../Bat_Echolocation_2019/db.sqlite3')
-# end kkeomalaythong edit 2019-04-14
+
+
+# TODO: consider whether to put all of clean_graph() into insert_pulse()
+def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=20):
+    if graph is None:
+        print('File is empty')
+
+    zc_x, zc_y = graph[0], graph[1]
+
+    # Identify pulses
+    graph = list()
+    pulse = list()
+    prev_x = 0
+    for x, y in zip(zc_x, zc_y):
+        if x - prev_x <= dx_cutoff:
+            pulse.append([x, y])
+        elif len(pulse) < pulse_size:
+            pulse = [[x, y]]
+        else:
+            graph.append(pulse)
+            pulse = [[x, y]]
+        prev_x = x
+
+    # Get 1st derivative
+    graph_dy = list()
+    prev_y = 0
+    for pulse in graph:
+        dy = list()
+        for x, y in pulse:
+            dy.append(abs(y - prev_y))
+            prev_y = y
+        graph_dy.append(dy)
+
+    # Smooth holes
+    for dy, pulse in zip(graph_dy, graph):
+        i = 1
+        while i < (len(dy) - 2):
+            if dy[i] > dy_cutoff:
+                if dy[i - 1] < dy_cutoff:
+                    if dy[i + 1] < dy_cutoff:
+                        pulse[i][1] = (pulse[i - 1][1] + pulse[i + 1][1]) / 2
+                    elif dy[i + 2] < dy_cutoff:
+                        pulse[i][1] = (pulse[i - 1][1] + pulse[i + 2][1]) / 2
+                elif dy[i - 2] < dy_cutoff:
+                    if dy[i + 1] < dy_cutoff:
+                        pulse[i][1] = (pulse[i - 2][1] + pulse[i + 1][1]) / 2
+                    elif dy[i + 2] < dy_cutoff:
+                        pulse[i][1] = (pulse[i - 2][1] + pulse[i + 2][1]) / 2
+            i += 1
+
+    # Clean pulses
+    clean_graph = list()
+    for k, pulse in enumerate(graph):
+        i = 1
+        while i < len(pulse):
+            j = i
+
+            # Count neighboring points
+            while j < len(pulse) - 1 and graph_dy[k][j] <= dy_cutoff:
+                j += 1
+
+            # If there are enough neighbors, it's good
+            if j - i >= pulse_size:
+                clean_graph.append(pulse[i:j])
+
+            i = j + 1
+
+    # Distance functions
+    def dist(ax, ay, bx, by):
+        return np.sqrt((ax - bx)**2 + (ay - by)**2)
+
+    def dista(pair):
+        return dist(pair[0][0], pair[0][1], pair[1][0], pair[1][1])
+
+    # Clean pulses more
+    cleaner_graph = list()
+    smooth_graph = list()
+    for pulse in clean_graph:
+
+        # Build smooth graph using Savitzky-Golay filter
+        # Left param is all x values in current pulse, right param is smoothed y values
+        # Params are zipped together then converted to list
+        # This is the dark side of pythonic code
+        smooth_pulse = list(zip([point[0] for point in pulse], savgol_filter(
+            [point[1] for point in pulse], 17, 3)))
+        smooth_graph.extend(smooth_pulse)
+
+        # Build clean pulse
+        # Iterate through zipped list of smooth_pulse and pulse, producing [[ax, ay],[bx, by]]
+        # Keep only those where the absolute distance between pair 1 and pair 2 is less than 1/2 dy_cutoff
+        # This is the even darker side of pythonic code
+        cleaner_graph.append([pair[0] for pair in zip(
+            pulse, smooth_pulse) if dista(pair) < dy_cutoff / 2])
+
+    return cleaner_graph
 
 
 # 0: Source ZC name, 1: image data, 2: classified, 3: metadata, 4: uid
@@ -28,7 +122,7 @@ def get_tables():
     return tables
 
 
-# kkeomalaythong edit 2019-04-14: added function for obtaining output of a specific table - may remove later on
+# TODO: consider whether to remove select_table()
 def select_table(table):
     if table not in get_tables():
         print(f'table "{table}" does not exist')
@@ -44,7 +138,6 @@ def select_table(table):
         c.execute(f'SELECT * FROM {table};')
         df_table = pd.DataFrame.from_records(c.fetchall(), columns=columns)
         return df_table
-# end kkeomalaythong edit 2019-04-14
 
 
 def insert_pulse(uid, file_name, file):
@@ -53,9 +146,9 @@ def insert_pulse(uid, file_name, file):
     c = conn.cursor()
 
     # If images table doesn't exist yet, make it
-    if 'images' not in get_tables():
+    if 'pulses' not in get_tables():
         with conn:
-            query = '''CREATE TABLE images (name VARCHAR(255),
+            query = '''CREATE TABLE pulses (name VARCHAR(255),
                                                     raw BLOB,
                                                     classification VARCHAR(255),
                                                     metadata VARCHAR(255),
@@ -77,28 +170,17 @@ def insert_pulse(uid, file_name, file):
     metadata_str = json.dumps(metadata)
 
     # Get cleaned pulse data
-    pulses = data_processing.clean_graph(filename='', graph=[raw[0], raw[1]])
+    pulses = clean_graph(filename='', graph=[raw[0], raw[1]])
 
     # Add each pulse and associated metadata to DB
-    # kkeomalaythong edit 2019-04-14: original "with conn:"code block is rearranged
-    '''    with conn:
-        c = conn.cursor()
-        c.execute('SELECT * from images',)
-        found = c.fetchall()
-        if not any(i[0] == file_name and i[4] == uid for i in found):
-            for pulse in pulses:
-                c.execute('INSERT INTO images VALUES (?, ?, ?, ?, ?);',
-                          (file_name, str(pulse), '0', metadata_str, uid))'''
-
-    c.execute('SELECT * from images', )
+    c.execute('SELECT * from pulses;')
     found = c.fetchall()
 
     if not any(i[0] == file_name and i[4] == uid for i in found):
         with conn:
             for pulse in pulses:
-                c.execute('INSERT INTO images VALUES (?, ?, ?, ?, ?);',
+                c.execute('INSERT INTO pulses VALUES (?, ?, ?, ?, ?);',
                           (file_name, str(pulse), '0', metadata_str, uid))
-    # end kkeomalaythong edit 2019-04-14
 
 
 def insert_zip(uid, outdir, file_name, file):
@@ -143,7 +225,7 @@ def render_images(uid, outdir):
     c = conn.cursor()
 
     # Load users image data
-    c.execute('SELECT * FROM images WHERE uid=?', (uid,))
+    c.execute('SELECT * FROM pulses WHERE uid=?;', (uid,))
     table = c.fetchall()
     table = [t for t in table if t[4] == uid]
     # Load CNN
@@ -158,7 +240,7 @@ def render_images(uid, outdir):
             continue
 
         # Mark pulse as rendered
-        sql = '''UPDATE images
+        sql = '''UPDATE pulses
                  SET classification = '1'
                  WHERE ''' + str(i) + ''' = ROWID;'''
         conn.cursor().execute(sql)
@@ -189,41 +271,15 @@ def render_images(uid, outdir):
             os.rename(save_path, save_path.replace('^', 'a'))
 
 
-# kkeomalaythong edit 2019-04-14: method is commented out until purpose is either reevaluated or method is deleted
-'''def select_images(name=None, classification=None):
-    conn = sqlite3.connect('../db.sqlite3')
-    c = conn.cursor()
-    # both name==... and classification==...
-    if name is not None and classification is not None:
-        c.execute('SELECT * FROM images WHERE name=? AND classification=?;',
-                  (name, classification))
-    elif name is not None:  # name==...
-        c.execute('SELECT * FROM images WHERE name=?;', (name,))
-    elif classification is not None:  # classification==...
-        c.execute('SELECT * FROM images WHERE classification=?;',
-                  (classification,))
-    else:  # both name==None and classification==None
-        c.execute('SELECT * FROM images;')
-
-    df = pd.DataFrame.from_records(
-        c.fetchall(), columns=['name', 'raw', 'classification', 'metadata'])
-    print(df)  # temporary
-
-    # convert binary into PNG images and store them in .../media folder
-    df.apply(lambda r: data_processing.binary_to_png(r[0], r[1], r[2]), axis=1)'''
-# end kkeomalaythong edit 2019-04-14
-
-
 def load_metadata(uid):
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
-    c.execute('SELECT * FROM images')
+    c.execute('SELECT * FROM pulses;')
     table = c.fetchall()
 
     return [[row[0], row[3]] for row in table if row[4] == uid]
 
 
-# kkeomalaythong edit 2019-04-14: changed db utility call lines
 def add_user_organization(username, organization):
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
@@ -238,13 +294,12 @@ def add_user_organization(username, organization):
     with conn:
         query = 'INSERT INTO organizations VALUES (?, ?);'
         c.execute(query, (username, organization))
-# end kkeomalaythong edit 2019-04-14
 
 
 def erase_data(uid):
-    """ Remove all user data from images table. Only call on logout """
+    """ Remove all user data from pulses table. Only call on logout """
     conn = sqlite3.connect(db_path)
-    conn.cursor().execute('DELETE FROM images WHERE uid=?', (uid,))
+    conn.cursor().execute('DELETE FROM pulses WHERE uid=?;', (uid,))
 
 
 def make_zip(indir, outdir):
@@ -270,9 +325,9 @@ def make_zip(indir, outdir):
         f = file
         file = indir + '/' + file
         if f.startswith('a_'):
-            os.rename(file, os.path.join(noutdir, 'abnormal', f))
+            shutil.copy2(file, os.path.join(noutdir, 'abnormal', f))
         elif f.startswith('e_'):
-            os.rename(file, os.path.join(noutdir, 'echolocation', f))
+            shutil.copy2(file, os.path.join(noutdir, 'echolocation', f))
 
     # Make zip and load into memory
     shutil.make_archive(outdir + '/results', 'zip', noutdir)
@@ -282,6 +337,5 @@ def make_zip(indir, outdir):
 
     # Delete everything
     shutil.rmtree(noutdir)
-    shutil.rmtree(indir)
 
     return 'results.zip', m

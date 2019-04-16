@@ -1,51 +1,35 @@
 <script type="text/javascript">// <![CDATA[
-    function loading(){
-        $("#content").hide();
-        $("#loading").show();
-    }
+        function loading(){
+            
+            $("#loading").show();    
+            $("#upload").hide();   
+        }
 // ]]></script>
-{% extends "sliders.html" %}
+{% extends "layout.html" %}
 {% load staticfiles %}
 
 {% block content %}
 
 
+<div id="loading" style="text-align:center; display:none; cursor:wait;">
+    <img src="{% static 'ajax-loader.gif' %}" alt="Rendering">
+    
+</div>
+<div id="upload" style="text-align:center">
+    <h1>Upload</h1>
 
-<div style="text-align:center">
-    <style>
-        div #loading {
-            margin: auto;
-            position: absolute;
-            z-index: 1000;
-            width: 600px;
-            height: 100px;
-            top: 77%;
-            left: 46%;
-            display: none;
-            background: url(/static/ajax-loader.gif) no-repeat;
-            cursor: wait;
-        }
-    </style>
+    </br>
+    </br>
 
-    <div id="loading">
-        <h1>Rendering</h1>
-    </div>
-    <div id="content">
-        <h1>Upload</h1>
-
-        </br>
-        </br>
-        
-        <form action="render" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div style="float: left; width: 70%">
-                <input class="buttonborder" type="file" name="document">
-            </div>
-            <div style="float: left; width: 1%">
-                <button style="float: left;" class="buttonOption" type="submit" value='/render' name='uploadButton' onclick="loading();">Upload</button>
-            </div>
-        </form>
-    </div>
+    <form action="render" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div style="float: left; width: 70%">
+            <input class="buttonborder" type="file" name="document">
+        </div>
+        <div style="float: left; width: 1%">
+            <button style="float: left;" class="buttonOption" type="submit" name='uploadButton' onclick="loading();">Upload</button>
+        </div>
+    </form>
 </div>
 
 {% endblock %}
