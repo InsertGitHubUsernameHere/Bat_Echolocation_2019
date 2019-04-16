@@ -146,7 +146,7 @@ def insert_pulse(uid, file_name, file):
     c = conn.cursor()
 
     # If images table doesn't exist yet, make it
-    if 'images' not in get_tables():
+    if 'pulses' not in get_tables():
         with conn:
             query = '''CREATE TABLE pulses (name VARCHAR(255),
                                                     raw BLOB,

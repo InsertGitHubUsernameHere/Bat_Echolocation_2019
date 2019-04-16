@@ -11,21 +11,8 @@
 {% block content %}
 
 
-<div id="loading" style="text-align:center">
-    <style>
-        div #loading {
-            margin: auto;
-            position: absolute;
-            z-index: 1000;
-            width: 600px;
-            height: 100px;
-            top: 40%;
-            left: 46%;
-            display: none;
-            background: url(/static/ajax-loader.gif) no-repeat;
-            cursor: wait;
-        }
-    </style>
+<div id="loading" style="text-align:center; display:none; cursor:wait;">
+    <img src="{% static 'ajax-loader.gif' %}" alt="Rendering">
     
 </div>
 <div id="upload" style="text-align:center">
