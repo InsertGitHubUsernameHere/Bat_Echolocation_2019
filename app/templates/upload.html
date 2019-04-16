@@ -10,8 +10,7 @@
 {% block content %}
 
 
-
-<div style="text-align:center">
+<div id="loading" style="text-align:center">
     <style>
         div #loading {
             margin: auto;
@@ -26,26 +25,23 @@
             cursor: wait;
         }
     </style>
+    <h1>Rendering</h1>
+</div>
+<div id="content" style="text-align:center">
+    <h1>Upload</h1>
 
-    <div id="loading">
-        <h1>Rendering</h1>
-    </div>
-    <div id="content">
-        <h1>Upload</h1>
+    </br>
+    </br>
 
-        </br>
-        </br>
-        
-        <form action="render" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div style="float: left; width: 70%">
-                <input class="buttonborder" type="file" name="document">
-            </div>
-            <div style="float: left; width: 1%">
-                <button style="float: left;" class="buttonOption" type="submit" value='/render' name='uploadButton' onclick="loading();">Upload</button>
-            </div>
-        </form>
-    </div>
+    <form action="render" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div style="float: left; width: 70%">
+            <input class="buttonborder" type="file" name="document">
+        </div>
+        <div style="float: left; width: 1%">
+            <button style="float: left;" class="buttonOption" type="submit" value='/render' name='uploadButton' onclick="loading();">Upload</button>
+        </div>
+    </form>
 </div>
 
 {% endblock %}
