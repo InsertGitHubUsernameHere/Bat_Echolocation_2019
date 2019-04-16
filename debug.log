@@ -5048,3 +5048,195 @@ django.template.base.VariableDoesNotExist: Failed lookup for key [totalloops] in
 (0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-14 05:47:40.950781' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-14 05:47:40.950781', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
 (0.000) SELECT "app_bataloguser"."id", "app_bataloguser"."password", "app_bataloguser"."last_login", "app_bataloguser"."is_superuser", "app_bataloguser"."username", "app_bataloguser"."first_name", "app_bataloguser"."last_name", "app_bataloguser"."email", "app_bataloguser"."is_staff", "app_bataloguser"."is_active", "app_bataloguser"."date_joined", "app_bataloguser"."organization" FROM "app_bataloguser" WHERE "app_bataloguser"."id" = 3; args=(3,)
 (0.001) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC LIMIT 3; args=(True,)
+(0.005) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 00:42:51.502747' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-16 00:42:51.502747', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 3; args=(3,)
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC LIMIT 3; args=(True,)
+(0.003) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 00:42:57.094484' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-16 00:42:57.094484', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 3; args=(3,)
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/urls/resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLPattern 'signup/' [name='signup']>], [<URLPattern 'resetpassword/' [name='resetpassword']>], [<URLPattern 'password_reset/done/' [name='password_reset_done']>], [<URLPattern 'reset/<uidb64>/<token>/' [name='password_reset_confirm']>], [<URLPattern 'reset/done/' [name='password_reset_complete']>], [<URLPattern 'graph' [name='graph']>], [<URLPattern 'upload' [name='upload']>], [<URLPattern 'download'>], [<URLPattern 'render' [name='render']>], [<URLPattern 'display' [name='display']>], [<URLPattern '' [name='gallery']>], [<URLPattern '^(?P<slug>[-\w]+)$' [name='album']>], [<URLPattern 'accounts/login/$' [name='login']>], [<URLPattern 'accounts/logout/$' [name='logout']>], [<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLPattern '^media\/(?P<path>.*)$'>], [<URLPattern '^Users\/thienle\/Desktop\/Classes\/Spring_2019\/SeniorCapstone\/Bat_Echolocation_2019\/static\/(?P<path>.*)$'>], [<URLPattern '^media\/(?P<path>.*)$'>]], 'path': 'static/ajax-loader.gif'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /static/ajax-loader.gif
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 00:43:15.774411' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-16 00:43:15.774411', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 3; args=(3,)
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 00:43:59.568690' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-16 00:43:59.568690', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 3; args=(3,)
+(0.008) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 00:46:55.462558' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-16 00:46:55.462558', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.002) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 3; args=(3,)
+(0.005) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 00:47:07.876201' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-16 00:47:07.876201', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 3; args=(3,)
+(0.003) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 00:47:50.985026' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-16 00:47:50.985026', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 3; args=(3,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 00:48:36.729224' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-16 00:48:36.729224', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 3; args=(3,)
+(0.012) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.002) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 01:30:54.519845' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-16 01:30:54.519845', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 3; args=(3,)
+(0.001) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC LIMIT 3; args=(True,)
+(0.008) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 01:33:30.468963' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-16 01:33:30.468963', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 3; args=(3,)
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/urls/resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLPattern 'signup/' [name='signup']>], [<URLPattern 'resetpassword/' [name='resetpassword']>], [<URLPattern 'password_reset/done/' [name='password_reset_done']>], [<URLPattern 'reset/<uidb64>/<token>/' [name='password_reset_confirm']>], [<URLPattern 'reset/done/' [name='password_reset_complete']>], [<URLPattern 'graph' [name='graph']>], [<URLPattern 'upload' [name='upload']>], [<URLPattern 'download'>], [<URLPattern 'render' [name='render']>], [<URLPattern 'display' [name='display']>], [<URLPattern '' [name='gallery']>], [<URLPattern '^(?P<slug>[-\w]+)$' [name='album']>], [<URLPattern 'accounts/login/$' [name='login']>], [<URLPattern 'accounts/logout/$' [name='logout']>], [<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLPattern '^media\/(?P<path>.*)$'>], [<URLPattern '^Users\/thienle\/Desktop\/Classes\/Spring_2019\/SeniorCapstone\/Bat_Echolocation_2019\/static\/(?P<path>.*)$'>], [<URLPattern '^media\/(?P<path>.*)$'>]], 'path': 'static/ajax-loader.gif'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /static/ajax-loader.gif
+(0.003) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 01:34:20.893431' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-16 01:34:20.893431', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 3; args=(3,)
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/urls/resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLPattern 'signup/' [name='signup']>], [<URLPattern 'resetpassword/' [name='resetpassword']>], [<URLPattern 'password_reset/done/' [name='password_reset_done']>], [<URLPattern 'reset/<uidb64>/<token>/' [name='password_reset_confirm']>], [<URLPattern 'reset/done/' [name='password_reset_complete']>], [<URLPattern 'graph' [name='graph']>], [<URLPattern 'upload' [name='upload']>], [<URLPattern 'download'>], [<URLPattern 'render' [name='render']>], [<URLPattern 'display' [name='display']>], [<URLPattern '' [name='gallery']>], [<URLPattern '^(?P<slug>[-\w]+)$' [name='album']>], [<URLPattern 'accounts/login/$' [name='login']>], [<URLPattern 'accounts/logout/$' [name='logout']>], [<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLPattern '^media\/(?P<path>.*)$'>], [<URLPattern '^Users\/thienle\/Desktop\/Classes\/Spring_2019\/SeniorCapstone\/Bat_Echolocation_2019\/static\/(?P<path>.*)$'>], [<URLPattern '^media\/(?P<path>.*)$'>]], 'path': 'static/ajax-loader.gif'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /static/ajax-loader.gif
+(0.009) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 03:01:32.620953' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-16 03:01:32.620953', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.002) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 3; args=(3,)
+(0.004) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC LIMIT 3; args=(True,)
+(0.003) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 03:01:38.165060' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-16 03:01:38.165060', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 3; args=(3,)
+(0.002) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC LIMIT 3; args=(True,)
+(0.003) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 03:02:00.182427' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-16 03:02:00.182427', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 3; args=(3,)
+(0.001) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC LIMIT 3; args=(True,)
+(0.005) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-16 03:02:55.202431' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-16 03:02:55.202431', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 3; args=(3,)
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/urls/resolvers.py", line 523, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLPattern 'signup/' [name='signup']>], [<URLPattern 'resetpassword/' [name='resetpassword']>], [<URLPattern 'password_reset/done/' [name='password_reset_done']>], [<URLPattern 'reset/<uidb64>/<token>/' [name='password_reset_confirm']>], [<URLPattern 'reset/done/' [name='password_reset_complete']>], [<URLPattern 'graph' [name='graph']>], [<URLPattern 'upload' [name='upload']>], [<URLPattern 'download'>], [<URLPattern 'render' [name='render']>], [<URLPattern 'display' [name='display']>], [<URLPattern '' [name='gallery']>], [<URLPattern '^(?P<slug>[-\w]+)$' [name='album']>], [<URLPattern 'accounts/login/$' [name='login']>], [<URLPattern 'accounts/logout/$' [name='logout']>], [<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLPattern '^media\/(?P<path>.*)$'>], [<URLPattern '^Users\/thienle\/Desktop\/Classes\/Spring_2019\/SeniorCapstone\/Bat_Echolocation_2019\/static\/(?P<path>.*)$'>], [<URLPattern '^media\/(?P<path>.*)$'>]], 'path': 'static/ajax-loader.gif'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 849, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/thienle/anaconda3/lib/python3.6/site-packages/django/template/base.py", line 856, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /static/ajax-loader.gif
