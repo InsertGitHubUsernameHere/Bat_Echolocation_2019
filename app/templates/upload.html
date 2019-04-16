@@ -1,19 +1,19 @@
 <script type="text/javascript">// <![CDATA[
-    function loading(){
-        var x = document.getElementById('content');
-        if(x.style.display !== "none") {
-            x.style.display = "none";
-            document.getElementById('loading').style.display = "block";
+        function loading(){
+            
+            $("#loading").show();    
+            $("#upload").hide();   
         }
-    }
 // ]]></script>
-{% extends "sliders.html" %}
+{% extends "layout.html" %}
 {% load staticfiles %}
 
 {% block content %}
 
 
 <div id="loading" style="text-align:center">
+    <h1>Rendering</h1>
+</br>
     <style>
         div #loading {
             margin: auto;
@@ -21,16 +21,16 @@
             z-index: 1000;
             width: 600px;
             height: 100px;
-            top: 77%;
+            top: 40%;
             left: 46%;
             display: none;
             background: url(/static/ajax-loader.gif) no-repeat;
             cursor: wait;
         }
     </style>
-    <h1>Rendering</h1>
+    
 </div>
-<div id="content" style="text-align:center">
+<div id="upload" style="text-align:center">
     <h1>Upload</h1>
 
     </br>
@@ -42,7 +42,7 @@
             <input class="buttonborder" type="file" name="document">
         </div>
         <div style="float: left; width: 1%">
-            <button style="float: left;" class="buttonOption" type="submit" value='/render' name='uploadButton' onclick="loading();">Upload</button>
+            <button style="float: left;" class="buttonOption" type="submit" name='uploadButton' onclick="loading();">Upload</button>
         </div>
     </form>
 </div>
