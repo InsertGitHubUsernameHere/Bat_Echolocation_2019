@@ -1,7 +1,39 @@
+<script type="text/javascript">// <![CDATA[
+        function getName(name){
+          img = name;
+          name = name.replace('a_', '');
+          name = name.replace('e_', '');
+          name = name.substring(0, name.indexOf('_'));
+          document.getElementById(name).innerHTML = name;
+          return name;
+        }
+// ]]></script>
+
 {% extends "layout.html" %}
 {% load staticfiles %}
 
 {% block content %}
+
+<style>
+  div.gallery {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 300px;
+    font-size:80%;
+    align:center;
+  }
+
+  div.gallery:hover {
+    border: 1px solid #777;
+  }
+
+  div.gallery img {
+    width: 100%;
+    height: auto;
+    padding-bottom:0.5em;
+  }
+</style>
 
 <div style="text-align:center">
     </br>
@@ -22,20 +54,25 @@
           <input class="buttonNorm" type = 'submit' value='Upload more files'>
       </form>
     </div>
+    </br>
+    <hr>
 </div>
 
-
 <div class= "split leftcol">
-  <hr>
-  <h3>        Abnormal({{ abnormfiles|length }})</h3>
+  <h3>Abnormal({{ abnormfiles|length }})</h3>
+
   {% for pic in abnormfiles %}
-  {% if forloop.counter0 >= 8 %}
-      <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 0px; width: auto">
-  {% else %}
-      <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 150px; width: auto">
-  {% endif %}
-  {% empty %}
-     <li>We didn't find any abnormal pulses</li>
+    <div class = "gallery">
+      {% if forloop.counter0 >= 20 %}
+      
+      {% else %}
+          <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')"> 
+
+      {% endif %}
+    </div>
+
+    {% empty %}
+       <li>We didn't find any abnormal pulses</li>
 
   {% endfor %}
 
@@ -43,22 +80,28 @@
 
   <div id="myDIV" style="display:none;">
     {% for pic in abnormfiles %}
-    {% if forloop.counter0 <= 8 %}
-        <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 0px; width: auto">
-    {% else %}
-        <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 150px; width: auto">
-    {% endif %}
+      <div class = "gallery">
+        {% if forloop.counter0 <= 20 %}
+
+        {% else %}
+            <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName("{{ pic }}")">
+
+        {% endif %}
+      </div>
     {% endfor %}
   </div>
 </div>
 
 <div class= "split rightcol">
-  <hr>
-  <h3>        Echolocation({{ echofiles|length }})</h3>
+  <h3>Echolocation({{ echofiles|length }})</h3>
   {% for pic in echofiles %}
-  <img src="/media/{{user.id}}/test_images/{{ pic }}" style="height: 150px; width: auto">
-  {% empty %}
-     <li>We didn't find any echolocation pulses</li>
+    <div class = "gallery">
+      <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName("{{ pic }}")">
+
+      {% empty %}
+         <li>We didn't find any echolocation pulses</li>
+
+     </div>
   {% endfor %}
 </div>
 
