@@ -54,11 +54,11 @@
           <input class="buttonNorm" type = 'submit' value='Upload more files'>
       </form>
     </div>
-    </br>
 </div>
 
-<hr>
+
 <div style="text-align:center">
+  </br>
   <div style="float: left; width: 50%">
     <h3>Abnormal({{ abnormfiles|length }})</h3>
   </div>
@@ -68,13 +68,19 @@
   </div>
 </div>
 
+<hr>
+
 <div class= "split leftcol">
   {% for pic in abnormfiles %}
     {% if forloop.counter0 >= 20 %}
     
     {% else %}
       <div class = "gallery">
-        <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')"> 
+        <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')">
+          <script>
+            getName("{{ pic }}");
+          </script>
+        </img>
       </div>
 
     {% endif %}
@@ -92,7 +98,11 @@
 
       {% else %}
         <div class = "gallery">
-          <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName("{{ pic }}")">
+          <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')">
+            <script>
+              getName("{{ pic }}");
+            </script>
+          </img>
         </div>
 
       {% endif %}
@@ -103,7 +113,11 @@
 <div class= "split rightcol">
   {% for pic in echofiles %}
     <div class = "gallery">
-      <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName("{{ pic }}")">
+      <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')">
+        <script>
+          getName("{{ pic }}");
+        </script>
+      </img>  
     </div>
 
     {% empty %}
