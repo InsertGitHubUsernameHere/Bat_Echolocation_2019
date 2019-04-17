@@ -259,7 +259,7 @@ def render_images(uid, outdir):
         # Render the image
         ax.axis('off')
         ax.scatter(x, y)
-        fig.savefig(save_path, transparent=True, dpi=50)
+        fig.savefig(save_path, transparent=False, dpi=50)
         plt.cla()
         gc.collect()
 
