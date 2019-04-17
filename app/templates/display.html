@@ -55,22 +55,30 @@
       </form>
     </div>
     </br>
-    <hr>
+</div>
+
+<hr>
+<div style="text-align:center">
+  <div style="float: left; width: 50%">
+    <h3>Abnormal({{ abnormfiles|length }})</h3>
+  </div>
+
+  <div style="float: left; width: 50%">
+    <h3>Echolocation({{ echofiles|length }})</h3>
+  </div>
 </div>
 
 <div class= "split leftcol">
-  <h3>Abnormal({{ abnormfiles|length }})</h3>
-
   {% for pic in abnormfiles %}
-    <div class = "gallery">
-      {% if forloop.counter0 >= 20 %}
-      
-      {% else %}
-          <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')"> 
+    {% if forloop.counter0 >= 20 %}
+    
+    {% else %}
+      <div class = "gallery">
+        <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')"> 
+      </div>
 
-      {% endif %}
-    </div>
-
+    {% endif %}
+    
     {% empty %}
        <li>We didn't find any abnormal pulses</li>
 
@@ -80,28 +88,27 @@
 
   <div id="myDIV" style="display:none;">
     {% for pic in abnormfiles %}
-      <div class = "gallery">
-        {% if forloop.counter0 <= 20 %}
+      {% if forloop.counter0 <= 20 %}
 
-        {% else %}
-            <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName("{{ pic }}")">
+      {% else %}
+        <div class = "gallery">
+          <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName("{{ pic }}")">
+        </div>
 
-        {% endif %}
-      </div>
+      {% endif %}
     {% endfor %}
   </div>
 </div>
 
 <div class= "split rightcol">
-  <h3>Echolocation({{ echofiles|length }})</h3>
   {% for pic in echofiles %}
     <div class = "gallery">
       <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName("{{ pic }}")">
+    </div>
 
-      {% empty %}
-         <li>We didn't find any echolocation pulses</li>
+    {% empty %}
+       <li>We didn't find any echolocation pulses</li>
 
-     </div>
   {% endfor %}
 </div>
 
