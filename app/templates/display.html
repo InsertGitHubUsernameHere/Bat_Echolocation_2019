@@ -4,8 +4,7 @@
           name = name.replace('a_', '');
           name = name.replace('e_', '');
           name = name.substring(0, name.indexOf('_'));
-          //document.getElementById(img).innerHTML = name;
-          return name;
+          document.getElementById(img).innerHTML = name;
         }
 // ]]></script>
 
@@ -19,13 +18,14 @@
     margin: 5px;
     border: 1px solid #ccc;
     float: left;
-    width: 300px;
+    width: 150px;
     font-size:80%;
     align:center;
   }
 
   div.gallery:hover {
     border: 1px solid #777;
+    width: 300px;
   }
 
   div.gallery img {
@@ -75,11 +75,9 @@
     {% if forloop.counter0 >= 20 %}
     
     {% else %}
-      <div class = "gallery">
-        <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')" />
-        <script>
-          getName("{{ pic }}");
-        </script>
+      <div name="{{ pic }}" class = "gallery">
+        <img src="/media/{{user.id}}/test_images/{{ pic }}" alt="{{ pic }}" />
+        <script>getName("{{ pic }}");</script>
       </div>
 
     {% endif %}
@@ -96,11 +94,9 @@
       {% if forloop.counter0 <= 20 %}
 
       {% else %}
-        <div class = "gallery">
-          <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')" />
-          <script>
-            getName("{{ pic }}");
-          </script>
+        <div name="{{ pic }}" class = "gallery">
+          <img src="/media/{{user.id}}/test_images/{{ pic }}" alt="{{ pic }}" />
+          <script>getName("{{ pic }}");</script>
         </div>
 
       {% endif %}
@@ -110,11 +106,9 @@
 
 <div class= "split rightcol">
   {% for pic in echofiles %}
-    <div class = "gallery">
-      <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')" />
-      <script>
-        getName("{{ pic }}");
-      </script>
+    <div name="{{ pic }}" class = "gallery">
+      <img src="/media/{{user.id}}/test_images/{{ pic }}" alt="{{ pic }}" />
+      <script>getName("{{ pic }}");</script>
     </div>
 
     {% empty %}
