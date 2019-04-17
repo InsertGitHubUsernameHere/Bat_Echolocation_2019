@@ -29,7 +29,7 @@
   }
 
   div.gallery img {
-    width: 50%;
+    width: 100%;
     height: auto;
     padding-bottom:0.5em;
   }
@@ -77,7 +77,7 @@
     {% else %}
       <div name="{{ pic }}" class = "gallery">
         <img src="/media/{{user.id}}/test_images/{{ pic }}" alt="{{ pic }}" />
-        <script>getName("{{ pic }}");</script>
+        <script type="text/javascript">getName("{{ pic }}");</script>
       </div>
 
     {% endif %}
@@ -96,7 +96,7 @@
       {% else %}
         <div name="{{ pic }}" class = "gallery">
           <img src="/media/{{user.id}}/test_images/{{ pic }}" alt="{{ pic }}" />
-          <script>getName("{{ pic }}");</script>
+          <script type="text/javascript">getName("{{ pic }}");</script>
         </div>
 
       {% endif %}
@@ -108,7 +108,7 @@
   {% for pic in echofiles %}
     <div name="{{ pic }}" class = "gallery">
       <img src="/media/{{user.id}}/test_images/{{ pic }}" alt="{{ pic }}" />
-      <script>getName("{{ pic }}");</script>
+      <script type="text/javascript">getName("{{ pic }}");</script>
     </div>
 
     {% empty %}
