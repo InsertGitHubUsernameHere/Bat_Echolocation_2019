@@ -75,7 +75,7 @@
     {% if forloop.counter0 >= 20 %}
     
     {% else %}
-      <div name="{{ pic }}" class = "gallery">
+      <div id="{{ pic }}" class = "gallery">
         <img src="/media/{{user.id}}/test_images/{{ pic }}" alt="{{ pic }}" />
         <script type="text/javascript">getName("{{ pic }}");</script>
       </div>
@@ -94,7 +94,7 @@
       {% if forloop.counter0 <= 20 %}
 
       {% else %}
-        <div name="{{ pic }}" class = "gallery">
+        <div id="{{ pic }}" class = "gallery">
           <img src="/media/{{user.id}}/test_images/{{ pic }}" alt="{{ pic }}" />
           <script type="text/javascript">getName("{{ pic }}");</script>
         </div>
@@ -106,7 +106,7 @@
 
 <div class= "split rightcol">
   {% for pic in echofiles %}
-    <div name="{{ pic }}" class = "gallery">
+    <div id="{{ pic }}" class = "gallery">
       <img src="/media/{{user.id}}/test_images/{{ pic }}" alt="{{ pic }}" />
       <script type="text/javascript">getName("{{ pic }}");</script>
     </div>
