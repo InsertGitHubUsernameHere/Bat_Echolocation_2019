@@ -15,9 +15,10 @@
 
 <style>
   div.gallery {
+    padding: 10px;
     margin: 5px;
     border: 1px solid #ccc;
-    background-color: #f9f9f9;
+    background-color: #fefefe;
     float: left;
     width: 150px;
     font-size:80%;
@@ -39,7 +40,6 @@
 </style>
 
 <div style="text-align:center">
-    </br>
     <h2> Here Are Your Images! </h2>
     </br>
     <div style="float: left; width: 33%">
@@ -75,36 +75,15 @@
 
 <div class= "split leftcol">
   {% for pic in abnormfiles %}
-    {% if forloop.counter0 >= 20 %}
-    
-    {% else %}
       <div id="{{ pic }}" class = "gallery">
         <img src="/media/{{user.id}}/test_images/{{ pic }}" alt="{{ pic }}" />
         <script type="text/javascript">getName("{{ pic }}");</script>
       </div>
-
-    {% endif %}
     
     {% empty %}
        <li>We didn't find any abnormal pulses</li>
 
   {% endfor %}
-
-  <button class="buttonborder" onclick="myFunction()">More Images</button>
-
-  <div id="myDIV" style="display:none;">
-    {% for pic in abnormfiles %}
-      {% if forloop.counter0 <= 20 %}
-
-      {% else %}
-        <div id="{{ pic }}" class = "gallery">
-          <img src="/media/{{user.id}}/test_images/{{ pic }}" alt="{{ pic }}" />
-          <script type="text/javascript">getName("{{ pic }}");</script>
-        </div>
-
-      {% endif %}
-    {% endfor %}
-  </div>
 </div>
 
 <div class= "split rightcol">
