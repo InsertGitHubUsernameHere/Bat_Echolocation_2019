@@ -76,11 +76,10 @@
     
     {% else %}
       <div class = "gallery">
-        <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')">
-          <script>
-            getName("{{ pic }}");
-          </script>
-        </img>
+        <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')" />
+        <script>
+          getName("{{ pic }}");
+        </script>
       </div>
 
     {% endif %}
@@ -98,11 +97,10 @@
 
       {% else %}
         <div class = "gallery">
-          <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')">
-            <script>
-              getName("{{ pic }}");
-            </script>
-          </img>
+          <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')" />
+          <script>
+            getName("{{ pic }}");
+          </script>
         </div>
 
       {% endif %}
@@ -113,11 +111,10 @@
 <div class= "split rightcol">
   {% for pic in echofiles %}
     <div class = "gallery">
-      <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')">
-        <script>
-          getName("{{ pic }}");
-        </script>
-      </img>  
+      <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')" />
+      <script>
+        getName("{{ pic }}");
+      </script>
     </div>
 
     {% empty %}
