@@ -1,6 +1,6 @@
-# kkeomalaythong edit 2019-04-16: renamed "images" table to "pulses"
+# kkeomalaythong edit 2019-04-17: improved runtime of render_images()
+# TODO: implement multithreading for DB API
 from util import CNN
-import pandas as pd
 import os
 import glob
 import json
@@ -15,8 +15,6 @@ import shutil
 import numpy as np
 from scipy.signal import savgol_filter
 
-db_path = os.path.realpath('../Bat_Echolocation_2019/db.sqlite3')
-
 
 # TODO: consider whether to put all of clean_graph() into insert_pulse()
 def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=20):
@@ -26,9 +24,9 @@ def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=2
     zc_x, zc_y = graph[0], graph[1]
 
     # Identify pulses
-    graph = list()
-    pulse = list()
+    graph, pulse = list(), list()
     prev_x = 0
+
     for x, y in zip(zc_x, zc_y):
         if x - prev_x <= dx_cutoff:
             pulse.append([x, y])
@@ -67,7 +65,7 @@ def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=2
             i += 1
 
     # Clean pulses
-    clean_graph = list()
+    cg = list()
     for k, pulse in enumerate(graph):
         i = 1
         while i < len(pulse):
@@ -79,7 +77,7 @@ def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=2
 
             # If there are enough neighbors, it's good
             if j - i >= pulse_size:
-                clean_graph.append(pulse[i:j])
+                cg.append(pulse[i:j])
 
             i = j + 1
 
@@ -93,7 +91,7 @@ def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=2
     # Clean pulses more
     cleaner_graph = list()
     smooth_graph = list()
-    for pulse in clean_graph:
+    for pulse in cg:
 
         # Build smooth graph using Savitzky-Golay filter
         # Left param is all x values in current pulse, right param is smoothed y values
@@ -115,44 +113,27 @@ def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=2
 
 # 0: Source ZC name, 1: image data, 2: classified, 3: metadata, 4: uid
 def get_tables():
-    conn = sqlite3.connect(db_path)
+    conn = sqlite3.connect('../Bat_Echolocation_2019/db.sqlite3')
     c = conn.cursor()
-    c.execute("SELECT name FROM sqlite_master WHERE type='table'")
+    c.execute("SELECT name FROM sqlite_master WHERE type='table';")
     tables = [i[0] for i in c.fetchall()]
     return tables
 
 
-# TODO: consider whether to remove select_table()
-def select_table(table):
-    if table not in get_tables():
-        print(f'table "{table}" does not exist')
-    else:
-        conn = sqlite3.connect(db_path)
-        c = conn.cursor()
-
-        # get column names of table
-        c.execute(f'PRAGMA table_info({table});')
-        columns = pd.DataFrame.from_records(c.fetchall()).iloc[:, 1]
-
-        # get table
-        c.execute(f'SELECT * FROM {table};')
-        df_table = pd.DataFrame.from_records(c.fetchall(), columns=columns)
-        return df_table
-
-
+# TODO: try adding the contents of clean_graph() to this function
 def insert_pulse(uid, file_name, file):
     """ Clean ZC file and add to DB """
-    conn = sqlite3.connect(db_path)
+    conn = sqlite3.connect('../Bat_Echolocation_2019/db.sqlite3')
     c = conn.cursor()
 
     # If images table doesn't exist yet, make it
     if 'pulses' not in get_tables():
         with conn:
             query = '''CREATE TABLE pulses (name VARCHAR(255),
-                                                    raw BLOB,
-                                                    classification VARCHAR(255),
-                                                    metadata VARCHAR(255),
-                                                    uid INTEGER);'''
+                                            raw BLOB,
+                                            classification VARCHAR(255),
+                                            metadata VARCHAR(255),
+                                            uid INTEGER);'''
             c.execute(query)
 
     # Extract data from ZC file
@@ -221,29 +202,28 @@ def insert_zip(uid, outdir, file_name, file):
 
 def render_images(uid, outdir):
     """ Load images from DB and render """
-    conn = sqlite3.connect(db_path)
+    conn = sqlite3.connect('../Bat_Echolocation_2019/db.sqlite3')
     c = conn.cursor()
 
     # Load users image data
     c.execute('SELECT * FROM pulses WHERE uid=?;', (uid,))
     table = c.fetchall()
     table = [t for t in table if t[4] == uid]
+
     # Load CNN
-    __location__ = os.path.realpath(os.path.join(
-        os.getcwd(), os.path.dirname(__file__)))
+    __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
     model = load_model(__location__ + '/CNN200x300ep30.h5')
 
     fig, ax = plt.subplots()
+
     for i, row in enumerate(table):
         # Only render files that haven't been rendered yet
         if row[2] == '1':
             continue
 
         # Mark pulse as rendered
-        sql = '''UPDATE pulses
-                 SET classification = '1'
-                 WHERE ''' + str(i) + ''' = ROWID;'''
-        conn.cursor().execute(sql)
+        with conn:
+            c.execute(f"UPDATE pulses SET classification = '1' WHERE {str(i)} = ROWID;")
 
         # Convert DB string to 2d list
         pulse = ast.literal_eval(row[1])
@@ -253,15 +233,13 @@ def render_images(uid, outdir):
         y = [point[1] for point in pulse]
 
         # Generate image path
-        save_path = outdir + '/' + '^_' + \
-            row[0].replace('#', '') + '_' + str(i) + '.png'
+        save_path = f"{outdir}/^_{row[0].replace('#', '')}_{i}.png"
 
         # Render the image
         ax.axis('off')
         ax.scatter(x, y)
         fig.savefig(save_path, format='png', dpi=50)
         plt.cla()
-        gc.collect()
 
         # Classify as normal or abnormal
         # TODO- perform at insert?
@@ -270,9 +248,11 @@ def render_images(uid, outdir):
         else:
             os.rename(save_path, save_path.replace('^', 'a'))
 
+    gc.collect()
+
 
 def load_metadata(uid):
-    conn = sqlite3.connect(db_path)
+    conn = sqlite3.connect('../Bat_Echolocation_2019/db.sqlite3')
     c = conn.cursor()
     c.execute('SELECT * FROM pulses;')
     table = c.fetchall()
@@ -281,7 +261,7 @@ def load_metadata(uid):
 
 
 def add_user_organization(username, organization):
-    conn = sqlite3.connect(db_path)
+    conn = sqlite3.connect('../Bat_Echolocation_2019/db.sqlite3')
     c = conn.cursor()
 
     # make "organizations" table if it doesn't already exist
@@ -298,8 +278,10 @@ def add_user_organization(username, organization):
 
 def erase_data(uid):
     """ Remove all user data from pulses table. Only call on logout """
-    conn = sqlite3.connect(db_path)
-    conn.cursor().execute('DELETE FROM pulses WHERE uid=?;', (uid,))
+    conn = sqlite3.connect('../Bat_Echolocation_2019/db.sqlite3')
+    with conn:
+        c = conn.cursor()
+        c.execute('DELETE FROM pulses WHERE uid=?;', (uid,))
 
 
 def make_zip(indir, outdir):
