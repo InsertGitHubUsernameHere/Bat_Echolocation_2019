@@ -240,15 +240,13 @@ def render_images(uid, outdir):
         ax.scatter(x, y)
         fig.savefig(save_path, format='png', Transparency=True, dpi=50)
         plt.cla()
-
+        gc.collect()
         # Classify as normal or abnormal
         # TODO- perform at insert?
         if not CNN.classifyCNN(save_path, model) == 0:
             os.rename(save_path, save_path.replace('^', 'e'))
         else:
             os.rename(save_path, save_path.replace('^', 'a'))
-
-    gc.collect()
 
 
 def load_metadata(uid):
