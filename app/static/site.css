@@ -75,7 +75,7 @@ strong {
 
 /* Split the screen in half */
 .split {
-  height: 75vh;
+  height: 65vh;
   width: 50%;
   position: static;
   z-index: -1;
