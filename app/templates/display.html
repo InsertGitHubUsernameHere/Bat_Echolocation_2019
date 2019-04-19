@@ -19,7 +19,7 @@
     margin: 5px;
     border: 1px solid #ccc;
     float: left;
-    width: 300px;
+    width: 340px;
     font-size:80%;
     align:center;
   }
@@ -68,22 +68,27 @@
   </div>
 </div>
 
-<hr>
-
+<br>
+  <br>
+    <hr>
+  </br>
+</br>
 <div class= "split leftcol">
   {% for pic in abnormfiles %}
     {% if forloop.counter0 >= 20 %}
-    
+
     {% else %}
-      <div class = "gallery">
-        <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')" />
-        <script>
-          getName("{{ pic }}");
-        </script>
-      </div>
+        <div class = "gallery">
+          {{ forloop.counter }}
+          <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')" />
+          {{ pic }}
+          <script>
+            getName("{{ pic }}");
+          </script>
+        </div>
 
     {% endif %}
-    
+
     {% empty %}
        <li>We didn't find any abnormal pulses</li>
 
@@ -97,7 +102,9 @@
 
       {% else %}
         <div class = "gallery">
+          {{ forloop.counter }}
           <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')" />
+          {{ pic }}
           <script>
             getName("{{ pic }}");
           </script>
@@ -111,7 +118,9 @@
 <div class= "split rightcol">
   {% for pic in echofiles %}
     <div class = "gallery">
+      {{ forloop.counter }}
       <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')" />
+      {{ pic }}
       <script>
         getName("{{ pic }}");
       </script>
