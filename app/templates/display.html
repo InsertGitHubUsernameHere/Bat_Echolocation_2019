@@ -4,8 +4,7 @@
           name = name.replace('a_', '');
           name = name.replace('e_', '');
           name = name.substring(0, name.indexOf('_'));
-          //document.getElementById(img).innerHTML = name;
-          return name;
+          document.getElementById(img).insertAdjacentHTML('beforeend', name);
         }
 // ]]></script>
 
@@ -16,27 +15,31 @@
 
 <style>
   div.gallery {
+    padding: 10px;
     margin: 5px;
     border: 1px solid #ccc;
+    background-color: #fefefe;
     float: left;
     width: 340px;
     font-size:80%;
     align:center;
+    text-align: center;
+    transition: transform .1s;
   }
 
   div.gallery:hover {
     border: 1px solid #777;
+    transform: scale(1.5);
   }
 
   div.gallery img {
-    width: 50%;
+    width: 100%;
     height: auto;
     padding-bottom:0.5em;
   }
 </style>
 
 <div style="text-align:center">
-    </br>
     <h2> Here Are Your Images! </h2>
     </br>
     <div style="float: left; width: 33%">
@@ -117,13 +120,10 @@
 
 <div class= "split rightcol">
   {% for pic in echofiles %}
-    <div class = "gallery">
+    <div id="{{ pic }}" class = "gallery">
       {{ forloop.counter }}
-      <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')" />
-      {{ pic }}
-      <script>
-        getName("{{ pic }}");
-      </script>
+      <img src="/media/{{user.id}}/test_images/{{ pic }}" alt="{{ pic }}" />
+      <script type="text/javascript">getName("{{ pic }}");</script>
     </div>
 
     {% empty %}

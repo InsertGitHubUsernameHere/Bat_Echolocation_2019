@@ -11,19 +11,11 @@
 {% block content %}
 
 
-<div id="loading" style="text-align:center; display:none; cursor:wait;">
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    <img src="{% static 'ajax-loader.gif' %}" alt="Rendering">
-    
+<div id="loading" style="text-align:center; display:none; cursor:wait; height:calc(100% - 150px);">
+    <img src="{% static 'ajax-loader.gif' %}" alt="Rendering" style="position:absolute; margin:auto; left:0; right:0; top:0; bottom:0; display:block;">     
 </div>
-<div id="upload" style="text-align:center">
+
+<div id="upload" style="text-align:center;">
     <h1>Upload</h1>
 
     </br>
