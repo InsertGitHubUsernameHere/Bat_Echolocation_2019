@@ -15,12 +15,8 @@ import shutil
 import numpy as np
 from scipy.signal import savgol_filter
 
-<<<<<<< HEAD
-=======
 db_path = os.path.realpath('../Bat_Echolocation_2019/db.sqlite3')
 
-
->>>>>>> 7ff9e40b3fa6acf15572a63d6e6b197a8585443a
 # TODO: consider whether to put all of clean_graph() into insert_pulse()
 def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=20):
     if graph is None:
