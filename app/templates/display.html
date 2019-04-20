@@ -20,7 +20,7 @@
     border: 1px solid #ccc;
     background-color: #fefefe;
     float: left;
-    width: 150px;
+    width: 340px;
     font-size:80%;
     align:center;
     text-align: center;
@@ -71,24 +71,57 @@
   </div>
 </div>
 
-<hr>
-
+<br>
+  <br>
+    <hr>
+  </br>
+</br>
 <div class= "split leftcol">
   {% for pic in abnormfiles %}
-      <div id="{{ pic }}" class = "gallery">
-        <img src="/media/{{user.id}}/test_images/{{ pic }}" alt="{{ pic }}" />
-        <script type="text/javascript">getName("{{ pic }}");</script>
-      </div>
-    
+    {% if forloop.counter0 >= 20 %}
+
+    {% else %}
+        <div class = "gallery">
+          {{ forloop.counter }}
+          <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')" />
+          {{ pic }}
+          <script>
+            getName("{{ pic }}");
+          </script>
+        </div>
+
+    {% endif %}
+
     {% empty %}
        <li>We didn't find any abnormal pulses</li>
 
   {% endfor %}
+
+  <button class="buttonborder" onclick="myFunction()">More Images</button>
+
+  <div id="myDIV" style="display:none;">
+    {% for pic in abnormfiles %}
+      {% if forloop.counter0 <= 20 %}
+
+      {% else %}
+        <div class = "gallery">
+          {{ forloop.counter }}
+          <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')" />
+          {{ pic }}
+          <script>
+            getName("{{ pic }}");
+          </script>
+        </div>
+
+      {% endif %}
+    {% endfor %}
+  </div>
 </div>
 
 <div class= "split rightcol">
   {% for pic in echofiles %}
     <div id="{{ pic }}" class = "gallery">
+      {{ forloop.counter }}
       <img src="/media/{{user.id}}/test_images/{{ pic }}" alt="{{ pic }}" />
       <script type="text/javascript">getName("{{ pic }}");</script>
     </div>

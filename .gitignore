@@ -1,4 +1,5 @@
 *.pyc
 *.h
 *.sqlite3
+*.DS_Store
 media/
