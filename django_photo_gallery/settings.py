@@ -25,7 +25,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
-    'django.contrib.sites'
+    'django.contrib.sites',
+    'django_celery_results',
 ]
 
 SITE_ID = 1
@@ -159,3 +160,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'aasdsa203@gmail.com'
 EMAIL_HOST_PASSWORD = 'hitman007'
+
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'django-cache'

@@ -16,6 +16,7 @@ import os
 from os import listdir
 from os.path import isfile, join
 import shutil
+from django_photo_gallery.tasks import render_images
 
 #first commit
 def download_zip(request):
@@ -71,7 +72,7 @@ def render_images(request):
         pass
 
     # Render images to local storage
-    db_API.render_images(uid, outdir)
+    result = render_images.delay(uid, outdir)
 
     return redirect('display')
 

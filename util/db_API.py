@@ -15,7 +15,6 @@ import shutil
 import numpy as np
 from scipy.signal import savgol_filter
 
-
 # TODO: consider whether to put all of clean_graph() into insert_pulse()
 def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=20):
     if graph is None:
@@ -198,7 +197,6 @@ def insert_zip(uid, outdir, file_name, file):
         # Delete file after processing
         f.close()
         os.remove(file)
-
 
 def render_images(uid, outdir):
     """ Load images from DB and render """
