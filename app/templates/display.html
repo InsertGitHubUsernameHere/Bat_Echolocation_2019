@@ -81,13 +81,10 @@
     {% if forloop.counter0 >= 20 %}
 
     {% else %}
-        <div class = "gallery">
+        <div id="{{ pic }}" class = "gallery">
           {{ forloop.counter }}
           <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')" />
-          {{ pic }}
-          <script>
-            getName("{{ pic }}");
-          </script>
+          <script type="text/javascript">getName("{{ pic }}");</script>
         </div>
 
     {% endif %}
@@ -104,13 +101,10 @@
       {% if forloop.counter0 <= 20 %}
 
       {% else %}
-        <div class = "gallery">
+        <div id="{{ pic }}" class = "gallery">
           {{ forloop.counter }}
           <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')" />
-          {{ pic }}
-          <script>
-            getName("{{ pic }}");
-          </script>
+          <script type="text/javascript">getName("{{ pic }}");</script>
         </div>
 
       {% endif %}
