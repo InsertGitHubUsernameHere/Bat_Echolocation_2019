@@ -6,7 +6,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-#import app.forms
 import app.views
 
 from django.conf.urls import include
@@ -29,6 +28,7 @@ urlpatterns = [
     path('download', app.views.download_zip),
     path('render', app.views.render_images, name='render'),
     path('display', app.views.display_images, name='display'),
+    path(r'^(?P<task_id>[\w-]+)/$', app.views.render_status, name='render_status')
     path('', app.views.gallery, name='gallery'),
 
     re_path(r'^(?P<slug>[-\w]+)$', app.views.AlbumDetail.as_view(), name='album'),

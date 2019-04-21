@@ -10,13 +10,14 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import DetailView
 from django.contrib.auth import views as auth_views
 
+from django_photo_gallery.tasks import render_images
 from util import db_API
 from util import graph
+
 import os
 from os import listdir
 from os.path import isfile, join
 import shutil
-from django_photo_gallery.tasks import render_images
 
 #first commit
 def download_zip(request):
@@ -72,10 +73,14 @@ def render_images(request):
         pass
 
     # Render images to local storage
-    result = render_images.delay(uid, outdir)
+    render_status = render_images.delay(uid, outdir)
 
-    return redirect('display')
+    return redirect('gallery', {'task_id': render_status.task_id})
 
+def render_status(request, task_id):
+    result = AsyncResult(task_id)
+
+    return HttpResponse({'status': result.successful()}, content_type='application/json')
 
 def display_images(request):
     uid = request.user.id
