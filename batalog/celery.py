@@ -2,8 +2,8 @@ from __future__ import absolute_import, unicode_literals
 from celery import Celery
 import os
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_photo_gallery.settings')
-app = Celery('django_photo_gallery', include = ['django_photo_gallery.tasks'])
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'batalog.settings')
+app = Celery('batalog', broker='amqp://localhost', include = ['batalog.tasks'])
 
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
