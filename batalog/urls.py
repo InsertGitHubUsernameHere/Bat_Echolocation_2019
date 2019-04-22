@@ -29,7 +29,7 @@ urlpatterns = [
     path('render', app.views.render_images, name='render'),
     path('display', app.views.display_images, name='display'),
     path(r'^render_status/(?P<task_id>[\w-]+)/$','app.views.render_status', name='render_status'),
-    path('', app.views.gallery, name='gallery'),
+    path(r'^(?P<task_id>[\w-]+)/$', app.views.gallery, name='gallery'),
 
     re_path(r'^(?P<slug>[-\w]+)$', app.views.AlbumDetail.as_view(), name='album'),
 
