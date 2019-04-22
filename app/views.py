@@ -10,7 +10,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import DetailView
 from django.contrib.auth import views as auth_views
 
-from batalog.tasks import render_images
+from batalog.tasks import render_images as render_pulses
 from util import db_API
 from util import graph
 
@@ -73,9 +73,9 @@ def render_images(request):
         pass
 
     # Render images to local storage
-    render_status = render_images.delay(uid, outdir)
+    status = render_pulses.delay(uid, outdir)
 
-    return redirect('gallery', {'task_id': render_status.task_id})
+    return redirect('gallery', {'task_id': status.task_id})
 
 def render_status(request, task_id):
     result = AsyncResult(task_id)
