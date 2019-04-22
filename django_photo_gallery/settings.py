@@ -42,7 +42,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
-ROOT_URLCONF = 'django_photo_gallery.urls'
+ROOT_URLCONF = 'batalog.urls'
 
 TEMPLATES = [
     {
@@ -60,7 +60,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'django_photo_gallery.wsgi.application'
+WSGI_APPLICATION = 'batalog.wsgi.application'
 
 DATABASES = {
     'default': {

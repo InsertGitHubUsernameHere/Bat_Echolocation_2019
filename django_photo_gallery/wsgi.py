@@ -1,5 +1,5 @@
 """
-WSGI config for django_photo_gallery project.
+WSGI config for batalog project.
 
 This module contains the WSGI application used by Django's development server
 and any production WSGI deployments. It should expose a module-level variable
@@ -15,7 +15,7 @@ framework.
 """
 import os
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_photo_gallery.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "batalog.settings")
 
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION

@@ -176,7 +176,7 @@ Traceback (most recent call last):
   File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
   File "<frozen importlib._bootstrap_external>", line 678, in exec_module
   File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
-  File "/Users/thienle/Desktop/Classes/Spring_2019/SeniorCapstone/Bat_Echolocation_2019/django_photo_gallery/urls.py", line 10, in <module>
+  File "/Users/thienle/Desktop/Classes/Spring_2019/SeniorCapstone/Bat_Echolocation_2019/batalog/urls.py", line 10, in <module>
     import app.views
   File "/Users/thienle/Desktop/Classes/Spring_2019/SeniorCapstone/Bat_Echolocation_2019/app/views.py", line 6, in <module>
     from util import db_API
@@ -219,7 +219,7 @@ Traceback (most recent call last):
   File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
   File "<frozen importlib._bootstrap_external>", line 678, in exec_module
   File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
-  File "/Users/thienle/Desktop/Classes/Spring_2019/SeniorCapstone/Bat_Echolocation_2019/django_photo_gallery/urls.py", line 10, in <module>
+  File "/Users/thienle/Desktop/Classes/Spring_2019/SeniorCapstone/Bat_Echolocation_2019/batalog/urls.py", line 10, in <module>
     import app.views
   File "/Users/thienle/Desktop/Classes/Spring_2019/SeniorCapstone/Bat_Echolocation_2019/app/views.py", line 6, in <module>
     from util import db_API
@@ -262,7 +262,7 @@ Traceback (most recent call last):
   File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
   File "<frozen importlib._bootstrap_external>", line 678, in exec_module
   File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
-  File "/Users/thienle/Desktop/Classes/Spring_2019/SeniorCapstone/Bat_Echolocation_2019/django_photo_gallery/urls.py", line 10, in <module>
+  File "/Users/thienle/Desktop/Classes/Spring_2019/SeniorCapstone/Bat_Echolocation_2019/batalog/urls.py", line 10, in <module>
     import app.views
   File "/Users/thienle/Desktop/Classes/Spring_2019/SeniorCapstone/Bat_Echolocation_2019/app/views.py", line 6, in <module>
     from util import db_API

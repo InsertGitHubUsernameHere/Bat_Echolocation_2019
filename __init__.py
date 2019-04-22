@@ -1,3 +1,3 @@
 """
-Package for django_photo_gallery.
+Package for batalog.
 """
