@@ -8322,3 +8322,2021 @@ django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '
 (0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-19 22:18:24.759016' AND "django_session"."session_key" = 'y6p4ew92dmhce39s8031qehhijpyr4i9'); args=('2019-04-19 22:18:24.759016', 'y6p4ew92dmhce39s8031qehhijpyr4i9')
 (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 3; args=(3,)
 >>>>>>> 7ff9e40b3fa6acf15572a63d6e6b197a8585443a
+(0.001) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 470, in parse
+    compile_func = self.tags[command]
+KeyError: 'render_status'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 127, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 124, in get_parent
+    return self.find_template(parent, context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 104, in find_template
+    template_name, skip=history,
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loaders/base.py", line 30, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 156, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 194, in compile_nodelist
+    return parser.parse()
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 472, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 534, in invalid_block_tag
+    "or load this tag?" % (token.lineno, command)
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 17: 'render_status'. Did you forget to register or load this tag?
+(0.002) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 470, in parse
+    compile_func = self.tags[command]
+KeyError: 'render_status'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 127, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 124, in get_parent
+    return self.find_template(parent, context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 104, in find_template
+    template_name, skip=history,
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loaders/base.py", line 30, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 156, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 194, in compile_nodelist
+    return parser.parse()
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 472, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 534, in invalid_block_tag
+    "or load this tag?" % (token.lineno, command)
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 17: 'render_status'. Did you forget to register or load this tag?
+(0.000) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 470, in parse
+    compile_func = self.tags[command]
+KeyError: 'render_status'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 127, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 124, in get_parent
+    return self.find_template(parent, context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 104, in find_template
+    template_name, skip=history,
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loaders/base.py", line 30, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 156, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 194, in compile_nodelist
+    return parser.parse()
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 472, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 534, in invalid_block_tag
+    "or load this tag?" % (token.lineno, command)
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 17: 'render_status'. Did you forget to register or load this tag?
+(0.002) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 470, in parse
+    compile_func = self.tags[command]
+KeyError: 'render_status'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 127, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 124, in get_parent
+    return self.find_template(parent, context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 104, in find_template
+    template_name, skip=history,
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loaders/base.py", line 30, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 156, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 194, in compile_nodelist
+    return parser.parse()
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 472, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 534, in invalid_block_tag
+    "or load this tag?" % (token.lineno, command)
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 17: 'render_status'. Did you forget to register or load this tag?
+Internal Server Error: /graph
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 470, in parse
+    compile_func = self.tags[command]
+KeyError: 'render_status'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 103, in draw_graph
+    return render(request, 'graph.html')
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 127, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 124, in get_parent
+    return self.find_template(parent, context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 104, in find_template
+    template_name, skip=history,
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loaders/base.py", line 30, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 156, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 194, in compile_nodelist
+    return parser.parse()
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 472, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 534, in invalid_block_tag
+    "or load this tag?" % (token.lineno, command)
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 17: 'render_status'. Did you forget to register or load this tag?
+Internal Server Error: /display
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 90, in display_images
+    echofiles = [f for f in listdir(outdir) if isfile(
+FileNotFoundError: [Errno 2] No such file or directory: '/home/batalog/batalogvenv/Bat_Echolocation_2019/media/None/test_images'
+(0.001) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."slug" = 'signup'; args=('signup',)
+Not Found: /signup
+(0.001) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+Exception while resolving variable 'task_id' in template 'gallery.html'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [task_id] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f200e709158>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x7f200e7092f0>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f200e6a8f98>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f200e667d30>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}, 'modules': [], 'current_module': None}, {}, {'albums': <Page 1 of 1>}]
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/base.py", line 90, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/resolvers.py", line 660, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'render_status' with arguments '('',)' not found. 1 pattern(s) tried: ['\\^\\(\\?P(?P<task_id>[^/]+)\\[\\\\w\\-\\]\\+\\)\\/\\$$']
+(0.000) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+Exception while resolving variable 'task_id' in template 'gallery.html'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [task_id] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f200e709158>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x7f200e6b91e0>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f200e6617b8>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f200e652278>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}, 'modules': [], 'current_module': None}, {}, {'albums': <Page 1 of 1>}]
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/base.py", line 90, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/resolvers.py", line 660, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'render_status' with arguments '('',)' not found. 1 pattern(s) tried: ['\\^\\(\\?P(?P<task_id>[^/]+)\\[\\\\w\\-\\]\\+\\)\\/\\$$']
+(0.001) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+Exception while resolving variable 'task_id' in template 'gallery.html'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [task_id] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f200e77f9d8>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x7f200e77fa60>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f200e679240>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f200e67d438>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}, 'modules': [], 'current_module': None}, {}, {'albums': <Page 1 of 1>}]
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/base.py", line 90, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/resolvers.py", line 660, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'render_status' with arguments '('',)' not found. 1 pattern(s) tried: ['\\^\\(\\?P(?P<task_id>[^/]+)\\[\\\\w\\-\\]\\+\\)\\/\\$$']
+(0.000) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+Exception while resolving variable 'task_id' in template 'gallery.html'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [task_id] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f200e709158>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x7f200e709048>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f200e70a278>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f200e660940>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}, 'modules': [], 'current_module': None}, {}, {'albums': <Page 1 of 1>}]
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/base.py", line 90, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/resolvers.py", line 660, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'render_status' with arguments '('',)' not found. 1 pattern(s) tried: ['\\^\\(\\?P(?P<task_id>[^/]+)\\[\\\\w\\-\\]\\+\\)\\/\\$$']
+(0.001) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+Exception while resolving variable 'task_id' in template 'gallery.html'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [task_id] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f200e6432f0>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x7f200e643d90>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f200e664d68>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f200e644400>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}, 'modules': [], 'current_module': None}, {}, {'albums': <Page 1 of 1>}]
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/base.py", line 90, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/resolvers.py", line 660, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'render_status' with arguments '('',)' not found. 1 pattern(s) tried: ['\\^\\(\\?P(?P<task_id>[^/]+)\\[\\\\w\\-\\]\\+\\)\\/\\$$']
+(0.001) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+Exception while resolving variable 'task_id' in template 'gallery.html'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [task_id] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f200e5b6ea0>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x7f200e5b6d08>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f200e601780>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f200e644cc0>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}, 'modules': [], 'current_module': None}, {}, {'albums': <Page 1 of 1>}]
+Exception while resolving variable 'login' in template 'gallery.html'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'login'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'login'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'login'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [login] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f200e5b6ea0>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x7f200e5b6d08>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f200e601780>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f200e644cc0>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}, 'modules': [], 'current_module': None}, {}, {'albums': <Page 1 of 1>}]
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/base.py", line 90, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/resolvers.py", line 660, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for '' not found. '' is not a valid view function or pattern name.
+(0.000) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+Exception while resolving variable 'task_id' in template 'gallery.html'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [task_id] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f200e77fd08>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x7f200e77ff28>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f200e664208>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f200e652908>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}, 'modules': [], 'current_module': None}, {}, {'albums': <Page 1 of 1>}]
+Exception while resolving variable 'app' in template 'gallery.html'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'app'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'app'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'app'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [app] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f200e77fd08>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x7f200e77ff28>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f200e664208>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f200e652908>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}, 'modules': [], 'current_module': None}, {}, {'albums': <Page 1 of 1>}]
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/base.py", line 90, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/resolvers.py", line 660, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for '' not found. '' is not a valid view function or pattern name.
+(0.000) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+Exception while resolving variable 'task_id' in template 'gallery.html'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [task_id] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f200e77fc80>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x7f200e77fd08>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f200e664ac8>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f200e660fd0>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}, 'modules': [], 'current_module': None}, {}, {'albums': <Page 1 of 1>}]
+Exception while resolving variable 'app' in template 'gallery.html'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'app'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'app'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'app'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [app] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f200e77fc80>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x7f200e77fd08>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f200e664ac8>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f200e660fd0>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}, 'modules': [], 'current_module': None}, {}, {'albums': <Page 1 of 1>}]
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/base.py", line 90, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/resolvers.py", line 660, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for '' not found. '' is not a valid view function or pattern name.
+(0.001) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 127, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 124, in get_parent
+    return self.find_template(parent, context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 104, in find_template
+    template_name, skip=history,
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loaders/base.py", line 30, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 156, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 194, in compile_nodelist
+    return parser.parse()
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 478, in parse
+    raise self.error(token, e)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/defaulttags.py", line 1376, in url
+    args.append(parser.compile_filter(value))
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 563, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 663, in __init__
+    "from '%s'" % (token[upto:], token))
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '=' from '='
+(0.000) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+Exception while resolving variable 'task_id' in template 'gallery.html'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [task_id] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f200e671510>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x7f200e709488>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f200e554dd8>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f200e6797f0>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}, 'modules': [], 'current_module': None}, {}, {'albums': <Page 1 of 1>}]
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/base.py", line 90, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/resolvers.py", line 660, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'app.views.render_status' not found. 'app.views.render_status' is not a valid view function or pattern name.
+(0.001) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+Exception while resolving variable 'task_id' in template 'gallery.html'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [task_id] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f200e77f950>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x7f200e77f9d8>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f200e5a4710>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f200e644358>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}, 'modules': [], 'current_module': None}, {}, {'albums': <Page 1 of 1>}]
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/base.py", line 90, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/resolvers.py", line 660, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'app.views.render_status' not found. 'app.views.render_status' is not a valid view function or pattern name.
+(0.001) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+Exception while resolving variable 'task_id' in template 'gallery.html'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [task_id] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f200e549c80>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x7f200e549e18>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f200e4c3048>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f200e526e80>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}, 'modules': [], 'current_module': None}, {}, {'albums': <Page 1 of 1>}]
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/base.py", line 90, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/resolvers.py", line 660, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'app.views.render_status' not found. 'app.views.render_status' is not a valid view function or pattern name.
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 100, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/resolvers.py", line 558, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLPattern 'signup/' [name='signup']>], [<URLPattern 'resetpassword/' [name='resetpassword']>], [<URLPattern 'password_reset/done/' [name='password_reset_done']>], [<URLPattern 'reset/<uidb64>/<token>/' [name='password_reset_confirm']>], [<URLPattern 'reset/done/' [name='password_reset_complete']>], [<URLPattern 'graph' [name='graph']>], [<URLPattern 'upload' [name='upload']>], [<URLPattern 'download'>], [<URLPattern 'render' [name='render']>], [<URLPattern 'display' [name='display']>], [<URLPattern '^(?P<task_id>[\w-]+)/$' [name='render_status']>], [<URLPattern '' [name='gallery']>], [<URLPattern '^(?P<slug>[-\w]+)$' [name='album']>], [<URLPattern 'accounts/login/$' [name='login']>], [<URLPattern 'accounts/logout/$' [name='logout']>], [<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLPattern '^media\/(?P<path>.*)$'>], [<URLPattern '^home\/batalog\/batalogvenv\/Bat_Echolocation_2019\/static\/(?P<path>.*)$'>], [<URLPattern '^media\/(?P<path>.*)$'>]], 'path': 'robots.txt'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 837, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /robots.txt
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 100, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/resolvers.py", line 558, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLPattern 'signup/' [name='signup']>], [<URLPattern 'resetpassword/' [name='resetpassword']>], [<URLPattern 'password_reset/done/' [name='password_reset_done']>], [<URLPattern 'reset/<uidb64>/<token>/' [name='password_reset_confirm']>], [<URLPattern 'reset/done/' [name='password_reset_complete']>], [<URLPattern 'graph' [name='graph']>], [<URLPattern 'upload' [name='upload']>], [<URLPattern 'download'>], [<URLPattern 'render' [name='render']>], [<URLPattern 'display' [name='display']>], [<URLPattern '^(?P<task_id>[\w-]+)/$' [name='render_status']>], [<URLPattern '' [name='gallery']>], [<URLPattern '^(?P<slug>[-\w]+)$' [name='album']>], [<URLPattern 'accounts/login/$' [name='login']>], [<URLPattern 'accounts/logout/$' [name='logout']>], [<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLPattern '^media\/(?P<path>.*)$'>], [<URLPattern '^home\/batalog\/batalogvenv\/Bat_Echolocation_2019\/static\/(?P<path>.*)$'>], [<URLPattern '^media\/(?P<path>.*)$'>]], 'path': 'home/batalog/venv/Bat_Echolocation_2019/static/safari-pinned-tab.svg'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 837, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /home/batalog/venv/Bat_Echolocation_2019/static/safari-pinned-tab.svg
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 100, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/resolvers.py", line 558, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLPattern 'signup/' [name='signup']>], [<URLPattern 'resetpassword/' [name='resetpassword']>], [<URLPattern 'password_reset/done/' [name='password_reset_done']>], [<URLPattern 'reset/<uidb64>/<token>/' [name='password_reset_confirm']>], [<URLPattern 'reset/done/' [name='password_reset_complete']>], [<URLPattern 'graph' [name='graph']>], [<URLPattern 'upload' [name='upload']>], [<URLPattern 'download'>], [<URLPattern 'render' [name='render']>], [<URLPattern 'display' [name='display']>], [<URLPattern '^(?P<task_id>[\w-]+)/$' [name='render_status']>], [<URLPattern '' [name='gallery']>], [<URLPattern '^(?P<slug>[-\w]+)$' [name='album']>], [<URLPattern 'accounts/login/$' [name='login']>], [<URLPattern 'accounts/logout/$' [name='logout']>], [<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLPattern '^media\/(?P<path>.*)$'>], [<URLPattern '^home\/batalog\/batalogvenv\/Bat_Echolocation_2019\/static\/(?P<path>.*)$'>], [<URLPattern '^media\/(?P<path>.*)$'>]], 'path': 'robots.txt'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 837, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /robots.txt
+(0.001) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."slug" = 'echolocation-calls'; args=('echolocation-calls',)
+(0.001) SELECT "app_albumimage"."id", "app_albumimage"."image", "app_albumimage"."thumb", "app_albumimage"."album_id", "app_albumimage"."alt", "app_albumimage"."created", "app_albumimage"."width", "app_albumimage"."height", "app_albumimage"."slug" FROM "app_albumimage" WHERE "app_albumimage"."album_id" = 5  LIMIT 21; args=(5,)
+Exception while resolving variable 'task_id' in template 'app/album_detail.html'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [task_id] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f200e587ea0>>, 'request': <WSGIRequest: GET '/echolocation-calls?_escaped_fragment_='>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x7f200e549c80>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f200e52a2e8>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f200e4c46a0>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}, 'modules': [], 'current_module': None}, {}, {'object': <Album: Album object (5)>, 'album': <Album: Album object (5)>, 'view': <app.views.AlbumDetail object at 0x7f200e4c4668>, 'images': <QuerySet [<AlbumImage: AlbumImage object (208)>, <AlbumImage: AlbumImage object (209)>, <AlbumImage: AlbumImage object (210)>, <AlbumImage: AlbumImage object (211)>, <AlbumImage: AlbumImage object (212)>, <AlbumImage: AlbumImage object (213)>, <AlbumImage: AlbumImage object (214)>, <AlbumImage: AlbumImage object (215)>, <AlbumImage: AlbumImage object (216)>, <AlbumImage: AlbumImage object (217)>, <AlbumImage: AlbumImage object (218)>, <AlbumImage: AlbumImage object (219)>, <AlbumImage: AlbumImage object (220)>, <AlbumImage: AlbumImage object (221)>, <AlbumImage: AlbumImage object (222)>, <AlbumImage: AlbumImage object (223)>, <AlbumImage: AlbumImage object (224)>, <AlbumImage: AlbumImage object (225)>, <AlbumImage: AlbumImage object (226)>, <AlbumImage: AlbumImage object (227)>, '...(remaining elements truncated)...']>}]
+(0.000) SELECT "app_albumimage"."id", "app_albumimage"."image", "app_albumimage"."thumb", "app_albumimage"."album_id", "app_albumimage"."alt", "app_albumimage"."created", "app_albumimage"."width", "app_albumimage"."height", "app_albumimage"."slug" FROM "app_albumimage" WHERE "app_albumimage"."album_id" = 5  LIMIT 21; args=(5,)
+(0.000) SELECT "app_albumimage"."id", "app_albumimage"."image", "app_albumimage"."thumb", "app_albumimage"."album_id", "app_albumimage"."alt", "app_albumimage"."created", "app_albumimage"."width", "app_albumimage"."height", "app_albumimage"."slug" FROM "app_albumimage" WHERE "app_albumimage"."album_id" = 5  LIMIT 21; args=(5,)
+(0.000) SELECT "app_albumimage"."id", "app_albumimage"."image", "app_albumimage"."thumb", "app_albumimage"."album_id", "app_albumimage"."alt", "app_albumimage"."created", "app_albumimage"."width", "app_albumimage"."height", "app_albumimage"."slug" FROM "app_albumimage" WHERE "app_albumimage"."album_id" = 5  LIMIT 21; args=(5,)
+(0.000) SELECT "app_albumimage"."id", "app_albumimage"."image", "app_albumimage"."thumb", "app_albumimage"."album_id", "app_albumimage"."alt", "app_albumimage"."created", "app_albumimage"."width", "app_albumimage"."height", "app_albumimage"."slug" FROM "app_albumimage" WHERE "app_albumimage"."album_id" = 5  LIMIT 21; args=(5,)
+(0.000) SELECT "app_albumimage"."id", "app_albumimage"."image", "app_albumimage"."thumb", "app_albumimage"."album_id", "app_albumimage"."alt", "app_albumimage"."created", "app_albumimage"."width", "app_albumimage"."height", "app_albumimage"."slug" FROM "app_albumimage" WHERE "app_albumimage"."album_id" = 5  LIMIT 21; args=(5,)
+(0.000) SELECT "app_albumimage"."id", "app_albumimage"."image", "app_albumimage"."thumb", "app_albumimage"."album_id", "app_albumimage"."alt", "app_albumimage"."created", "app_albumimage"."width", "app_albumimage"."height", "app_albumimage"."slug" FROM "app_albumimage" WHERE "app_albumimage"."album_id" = 5  LIMIT 21; args=(5,)
+(0.000) SELECT "app_albumimage"."id", "app_albumimage"."image", "app_albumimage"."thumb", "app_albumimage"."album_id", "app_albumimage"."alt", "app_albumimage"."created", "app_albumimage"."width", "app_albumimage"."height", "app_albumimage"."slug" FROM "app_albumimage" WHERE "app_albumimage"."album_id" = 5  LIMIT 21; args=(5,)
+(0.000) SELECT "app_albumimage"."id", "app_albumimage"."image", "app_albumimage"."thumb", "app_albumimage"."album_id", "app_albumimage"."alt", "app_albumimage"."created", "app_albumimage"."width", "app_albumimage"."height", "app_albumimage"."slug" FROM "app_albumimage" WHERE "app_albumimage"."album_id" = 5  LIMIT 21; args=(5,)
+(0.000) SELECT "app_albumimage"."id", "app_albumimage"."image", "app_albumimage"."thumb", "app_albumimage"."album_id", "app_albumimage"."alt", "app_albumimage"."created", "app_albumimage"."width", "app_albumimage"."height", "app_albumimage"."slug" FROM "app_albumimage" WHERE "app_albumimage"."album_id" = 5  LIMIT 21; args=(5,)
+(0.000) SELECT "app_albumimage"."id", "app_albumimage"."image", "app_albumimage"."thumb", "app_albumimage"."album_id", "app_albumimage"."alt", "app_albumimage"."created", "app_albumimage"."width", "app_albumimage"."height", "app_albumimage"."slug" FROM "app_albumimage" WHERE "app_albumimage"."album_id" = 5  LIMIT 21; args=(5,)
+(0.000) SELECT "app_albumimage"."id", "app_albumimage"."image", "app_albumimage"."thumb", "app_albumimage"."album_id", "app_albumimage"."alt", "app_albumimage"."created", "app_albumimage"."width", "app_albumimage"."height", "app_albumimage"."slug" FROM "app_albumimage" WHERE "app_albumimage"."album_id" = 5  LIMIT 21; args=(5,)
+(0.000) SELECT "app_albumimage"."id", "app_albumimage"."image", "app_albumimage"."thumb", "app_albumimage"."album_id", "app_albumimage"."alt", "app_albumimage"."created", "app_albumimage"."width", "app_albumimage"."height", "app_albumimage"."slug" FROM "app_albumimage" WHERE "app_albumimage"."album_id" = 5  LIMIT 21; args=(5,)
+Internal Server Error: /echolocation-calls
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 145, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 143, in _get_response
+    response = response.render()
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/response.py", line 106, in render
+    self.content = self.rendered_content
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/response.py", line 83, in rendered_content
+    content = template.render(context, self._request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/base.py", line 90, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/resolvers.py", line 660, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'app.views.render_status' not found. 'app.views.render_status' is not a valid view function or pattern name.
+Invalid HTTP_HOST header: '157.230.189.156'. You may need to add '157.230.189.156' to ALLOWED_HOSTS.
+Bad Request: /
+(0.000) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+Exception while resolving variable 'task_id' in template 'gallery.html'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [task_id] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f200e5b8950>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x7f200e5b8ea0>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f200e527358>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f200e528c88>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}, 'modules': [], 'current_module': None}, {}, {'albums': <Page 1 of 1>}]
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/base.py", line 90, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/resolvers.py", line 660, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'app.views.render_status' not found. 'app.views.render_status' is not a valid view function or pattern name.
+(0.001) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+Exception while resolving variable 'task_id' in template 'gallery.html'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [task_id] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f200e6bb378>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x7f200e6bb510>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f200e6a8a20>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f200e528828>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}, 'modules': [], 'current_module': None}, {}, {'albums': <Page 1 of 1>}]
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/base.py", line 90, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/resolvers.py", line 660, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'app.views.render_status' not found. 'app.views.render_status' is not a valid view function or pattern name.
+(0.000) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+Exception while resolving variable 'task_id' in template 'gallery.html'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [task_id] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f200e77f9d8>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x7f200e77f840>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f200e6793c8>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f200e5094a8>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}, 'modules': [], 'current_module': None}, {}, {'albums': <Page 1 of 1>}]
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/base.py", line 90, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/resolvers.py", line 660, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'app.views.render_status' not found. 'app.views.render_status' is not a valid view function or pattern name.
+(0.000) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+Exception while resolving variable 'task_id' in template 'gallery.html'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [task_id] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f200e549d90>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x7f200e549ea0>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f200e61dda0>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f200e652c50>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}, 'modules': [], 'current_module': None}, {}, {'albums': <Page 1 of 1>}]
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/base.py", line 90, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/resolvers.py", line 660, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'app.views.render_status' not found. 'app.views.render_status' is not a valid view function or pattern name.
+(0.000) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+Exception while resolving variable 'task_id' in template 'gallery.html'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [task_id] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f200e643840>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x7f200e6431e0>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f200e67d080>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f200e557358>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}, 'modules': [], 'current_module': None}, {}, {'albums': <Page 1 of 1>}]
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/base.py", line 90, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/resolvers.py", line 660, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'render_status' with keyword arguments '{'task_id': ''}' not found. 1 pattern(s) tried: ['\\^\\(\\?P(?P<task_id>[^/]+)\\[\\\\w\\-\\]\\+\\)\\/\\$$']
+(0.000) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+Exception while resolving variable 'task_id' in template 'gallery.html'.
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 829, in _resolve_lookup
+    current = current[bit]
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 835, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(type(current), bit):
+AttributeError: type object 'RequestContext' has no attribute 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 843, in _resolve_lookup
+    current = current[int(bit)]
+ValueError: invalid literal for int() with base 10: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 850, in _resolve_lookup
+    (bit, current))  # missing attribute
+django.template.base.VariableDoesNotExist: Failed lookup for key [task_id] in [{'True': True, 'False': False, 'None': None}, {'csrf_token': <SimpleLazyObject: <function csrf.<locals>._get_val at 0x7f200e587158>>, 'request': <WSGIRequest: GET '/'>, 'user': <SimpleLazyObject: <function AuthenticationMiddleware.process_request.<locals>.<lambda> at 0x7f200e5870d0>>, 'perms': <django.contrib.auth.context_processors.PermWrapper object at 0x7f200e526b70>, 'messages': <django.contrib.messages.storage.fallback.FallbackStorage object at 0x7f200e52a710>, 'DEFAULT_MESSAGE_LEVELS': {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}, 'modules': [], 'current_module': None}, {}, {'albums': <Page 1 of 1>}]
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/base.py", line 90, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/urls/resolvers.py", line 660, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'render_status' with keyword arguments '{'task_id': ''}' not found. 1 pattern(s) tried: ['\\^\\(\\?P(?P<task_id>[^/]+)\\[\\\\w\\-\\]\\+\\)\\/\\$$']
+(0.000) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 21; args=(True,)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 470, in parse
+    compile_func = self.tags[command]
+KeyError: 'task_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 120, in gallery
+    return render(request, 'gallery.html', {'albums': albums})
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 127, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 124, in get_parent
+    return self.find_template(parent, context)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 104, in find_template
+    template_name, skip=history,
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/loaders/base.py", line 30, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 156, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 194, in compile_nodelist
+    return parser.parse()
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 472, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/batalog/batalogvenv/lib/python3.6/site-packages/django/template/base.py", line 534, in invalid_block_tag
+    "or load this tag?" % (token.lineno, command)
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 3: 'task_id'. Did you forget to register or load this tag?

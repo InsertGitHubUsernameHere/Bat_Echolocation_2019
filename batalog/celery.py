@@ -3,7 +3,7 @@ from celery import Celery
 import os
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'batalog.settings')
-app = Celery('batalog', include = ['batalog.tasks'])
+app = Celery('batalog', broker='amqp://localhost', include = ['batalog.tasks'])
 
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
