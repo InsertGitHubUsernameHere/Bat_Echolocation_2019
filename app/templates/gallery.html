@@ -5,17 +5,13 @@
 
 <div style="text-align:center">
     {% if user.is_authenticated %}
-        </br>
-        <img src="{% static 'social/batalogFileAnalysis.svg' %}" alt="Batalog Github" width="720" height="150" />
-        </br>
+        <img src="{% static 'social/batalogFileAnalysis.svg' %}" alt="Batalog Github" width=55% height=20% />
         <form action="/upload">
             <button class="button" style="vertical-align:middle"><span>Click Here to Begin</span></button>
         </form>
 
     {% else %}
-        </br>
-        <img src="{% static 'social/batalogSignUp.svg' %}" alt="Batalog Github"  width="1080" height="200"/>
-        </br>
+        <img src="{% static 'social/batalogSignUp.svg' %}" alt="Batalog Github" width="1080" height="150" />
 
     {% endif %}
 </div>
