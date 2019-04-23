@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -11,42 +10,27 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import DetailView
 from django.contrib.auth import views as auth_views
 
-from celery import current_app
-from batalog.tasks import render_images
 from util import db_API
 from util import graph
-
-=======
-# TODO: implement multithreading for DB API
-from util import CNN
->>>>>>> Stashed changes
 import os
-import glob
-import json
-from util import bat
-import sqlite3
-import gc
-import matplotlib.pyplot as plt
-import ast
-import zipfile
-from keras.models import load_model
+from os import listdir
+from os.path import isfile, join
 import shutil
-import numpy as np
-from scipy.signal import savgol_filter
 
 
-# TODO: consider whether to put all of clean_graph() into insert_pulse()
-def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=20):
-    if graph is None:
-        print('File is empty')
+def download_zip(request):
+    uid = request.user.id
 
-    zc_x, zc_y = graph[0], graph[1]
+    outdir = os.path.join(os.getcwd(), 'media', str(uid))
+    indir = os.path.join(os.getcwd(), 'media', str(uid), 'test_images')
 
-    # Identify pulses
-    graph, pulse = list(), list()
-    prev_x = 0
+    zip_filename, zip_file = db_API.make_zip(indir, outdir)
 
-<<<<<<< Updated upstream
+    # Grab ZIP file from in-memory, make response with correct content-type
+    resp = HttpResponse(zip_file, content_type="application/x-zip-compressed")
+    # ..and correct content-disposition
+    resp['Content-Disposition'] = 'attachment; filename=%s' % zip_filename
+
     # Remove Zip file once it's been processed
     os.remove(os.path.join(outdir, zip_filename))
 
@@ -57,7 +41,7 @@ def upload(request):
     return render(request, 'upload.html')
 
 
-def render_pulses(request):
+def render_images(request):
     # Get request data
     file_name = request.FILES['document'].name
     file = request.FILES['document'].read()
@@ -81,313 +65,104 @@ def render_pulses(request):
 
     # Make output directory if it doesn't exist already
     outdir = os.path.join(os.getcwd(), 'media', str(uid), 'test_images')
-=======
-    for x, y in zip(zc_x, zc_y):
-        if x - prev_x <= dx_cutoff:
-            pulse.append([x, y])
-        elif len(pulse) < pulse_size:
-            pulse = [[x, y]]
-        else:
-            graph.append(pulse)
-            pulse = [[x, y]]
-        prev_x = x
-
-    # Get 1st derivative
-    graph_dy = list()
-    prev_y = 0
-    for pulse in graph:
-        dy = list()
-        for x, y in pulse:
-            dy.append(abs(y - prev_y))
-            prev_y = y
-        graph_dy.append(dy)
-
-    # Smooth holes
-    for dy, pulse in zip(graph_dy, graph):
-        i = 1
-        while i < (len(dy) - 2):
-            if dy[i] > dy_cutoff:
-                if dy[i - 1] < dy_cutoff:
-                    if dy[i + 1] < dy_cutoff:
-                        pulse[i][1] = (pulse[i - 1][1] + pulse[i + 1][1]) / 2
-                    elif dy[i + 2] < dy_cutoff:
-                        pulse[i][1] = (pulse[i - 1][1] + pulse[i + 2][1]) / 2
-                elif dy[i - 2] < dy_cutoff:
-                    if dy[i + 1] < dy_cutoff:
-                        pulse[i][1] = (pulse[i - 2][1] + pulse[i + 1][1]) / 2
-                    elif dy[i + 2] < dy_cutoff:
-                        pulse[i][1] = (pulse[i - 2][1] + pulse[i + 2][1]) / 2
-            i += 1
-
-    # Clean pulses
-    cg = list()
-    for k, pulse in enumerate(graph):
-        i = 1
-        while i < len(pulse):
-            j = i
-
-            # Count neighboring points
-            while j < len(pulse) - 1 and graph_dy[k][j] <= dy_cutoff:
-                j += 1
-
-            # If there are enough neighbors, it's good
-            if j - i >= pulse_size:
-                cg.append(pulse[i:j])
-
-            i = j + 1
-
-    # Distance functions
-    def dist(ax, ay, bx, by):
-        return np.sqrt((ax - bx)**2 + (ay - by)**2)
-
-    def dista(pair):
-        return dist(pair[0][0], pair[0][1], pair[1][0], pair[1][1])
-
-    # Clean pulses more
-    cleaner_graph = list()
-    smooth_graph = list()
-    for pulse in cg:
-
-        # Build smooth graph using Savitzky-Golay filter
-        # Left param is all x values in current pulse, right param is smoothed y values
-        # Params are zipped together then converted to list
-        # This is the dark side of pythonic code
-        smooth_pulse = list(zip([point[0] for point in pulse], savgol_filter(
-            [point[1] for point in pulse], 17, 3)))
-        smooth_graph.extend(smooth_pulse)
-
-        # Build clean pulse
-        # Iterate through zipped list of smooth_pulse and pulse, producing [[ax, ay],[bx, by]]
-        # Keep only those where the absolute distance between pair 1 and pair 2 is less than 1/2 dy_cutoff
-        # This is the even darker side of pythonic code
-        cleaner_graph.append([pair[0] for pair in zip(
-            pulse, smooth_pulse) if dista(pair) < dy_cutoff / 2])
-
-    return cleaner_graph
-
-
-# 0: Source ZC name, 1: image data, 2: classified, 3: metadata, 4: uid
-def get_tables():
-    conn = sqlite3.connect('../Bat_Echolocation_2019/db.sqlite3')
-    c = conn.cursor()
-    c.execute("SELECT name FROM sqlite_master WHERE type='table';")
-    tables = [i[0] for i in c.fetchall()]
-    return tables
-
-
-# TODO: try adding the contents of clean_graph() to this function
-def insert_pulse(uid, file_name, file):
-    """ Clean ZC file and add to DB """
-    conn = sqlite3.connect('../Bat_Echolocation_2019/db.sqlite3')
-    c = conn.cursor()
-
-    # If images table doesn't exist yet, make it
-    if 'pulses' not in get_tables():
-        with conn:
-            query = '''CREATE TABLE pulses (name VARCHAR(255),
-                                            raw BLOB,
-                                            classification VARCHAR(255),
-                                            metadata VARCHAR(255),
-                                            uid INTEGER);'''
-            c.execute(query)
-
-    # Extract data from ZC file
->>>>>>> Stashed changes
     try:
-        raw = list(bat.extract_anabat_zc(file))
-    except Exception as e:
-        print('Unexpected error processing file ', file, '- ', str(e))
-        return
+        os.makedirs(outdir)
+    except:
+        pass
 
-    # Metadata from ZC
-    metadata = raw[3]
-    metadata['date'] = metadata['date'].decode()
-    metadata['pos'] = 0
-    metadata['timestamp'] = str(metadata['timestamp'])
-    metadata_str = json.dumps(metadata)
-
-    # Get cleaned pulse data
-    pulses = clean_graph(filename='', graph=[raw[0], raw[1]])
-
-    # Add each pulse and associated metadata to DB
-    c.execute('SELECT * from pulses;')
-    found = c.fetchall()
-
-    if not any(i[0] == file_name and i[4] == uid for i in found):
-        with conn:
-            for pulse in pulses:
-                c.execute('INSERT INTO pulses VALUES (?, ?, ?, ?, ?);',
-                          (file_name, str(pulse), '0', metadata_str, uid))
-
-
-def insert_zip(uid, outdir, file_name, file):
-    """Add all contents of zip file to DB"""
-
-    # Extract zip and delete it
-    z_name = outdir + '/' + 'temp.zip'
-    z = open(z_name, 'wb')
-    z.write(file)
-    zip_data = zipfile.ZipFile(z_name, 'r')
-    zip_data.extractall(outdir)
-    zip_data.close()
-    os.remove(z_name)
-
-    # Select all valid files for processing
-    # TODO- Extend with more filetypes.
-    #       Make global list of accepted extensions?
-    filenames = glob.glob(outdir + '/**/*#', recursive=True)
-    filenames.extend(glob.glob(outdir + '/**/*.zip', recursive=True))
-    filenames.extend(glob.glob(outdir + '/**/*.zca', recursive=True))
-
-    # Recursively handle zip files, insert others to database.
-    # TODO- extend with more filetypes
-    for file in filenames:
-        f = open(file, 'rb')
-        z = f.read()
-        if file.endswith('.zip'):
-            subdir = os.paths.join(outdir, os.path.basename(file))
-            os.mkdir(subdir)
-            insert_zip(uid, subdir, os.path.basename(file), z)
-        else:
-            insert_pulse(uid, os.path.basename(file), z)
-
-        # Delete file after processing
-        f.close()
-        os.remove(file)
-
-
-def render_images(uid, outdir):
-    """ Load images from DB and render """
-    conn = sqlite3.connect('../Bat_Echolocation_2019/db.sqlite3')
-    c = conn.cursor()
-
-    # Load users image data
-    c.execute('SELECT * FROM pulses WHERE uid=?;', (uid,))
-    table = c.fetchall()
-    table = [t for t in table if t[4] == uid]
-
-    # Load CNN
-    __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-    model = load_model(__location__ + '/CNN200x300ep30.h5')
-
-    fig, ax = plt.subplots()
-
-    for i, row in enumerate(table):
-        # Only render files that haven't been rendered yet
-        if row[2] == '1':
-            continue
-
-        # Mark pulse as rendered
-        with conn:
-            c.execute(f"UPDATE pulses SET classification = '1' WHERE {str(i)} = ROWID;")
-
-        # Convert DB string to 2d list
-        pulse = ast.literal_eval(row[1])
-
-        # Split pulse into x and y coords
-        x = [point[0] for point in pulse]
-        y = [point[1] for point in pulse]
-
-        # Generate image path
-        save_path = f"{outdir}/^_{row[0].replace('#', '')}_{i}.png"
-
-        # Render the image
-        ax.axis('off')
-        ax.scatter(x, y)
-        fig.savefig(save_path, format='png', Transparency=True, dpi=50)
-        plt.cla()
-        gc.collect()
-        # Classify as normal or abnormal
-        # TODO- perform at insert?
-        if not CNN.classifyCNN(save_path, model) == 0:
-            os.rename(save_path, save_path.replace('^', 'e'))
-        else:
-            os.rename(save_path, save_path.replace('^', 'a'))
-
-<<<<<<< Updated upstream
     # Render images to local storage
-    current_app.tasks['render_images'].delay(uid, outdir)
+    db_API.render_images(uid, outdir)
 
-    return redirect('gallery')
-
-def render_status(request):
-    result = db_API.get_render_status(request.user.id)
-
-    return HttpResponse({'status': result}, content_type='application/json')
-=======
-
-def load_metadata(uid):
-    conn = sqlite3.connect('../Bat_Echolocation_2019/db.sqlite3')
-    c = conn.cursor()
-    c.execute('SELECT * FROM pulses;')
-    table = c.fetchall()
-
-    return [[row[0], row[3]] for row in table if row[4] == uid]
->>>>>>> Stashed changes
+    return redirect('display')
 
 
-def add_user_organization(username, organization):
-    conn = sqlite3.connect('../Bat_Echolocation_2019/db.sqlite3')
-    c = conn.cursor()
+def display_images(request):
+    uid = request.user.id
+    outdir = os.path.join(os.getcwd(), 'media', str(uid), 'test_images')
 
-    # make "organizations" table if it doesn't already exist
-    if 'organizations' not in get_tables():
-        query = 'CREATE TABLE organizations (username VARCHAR(255), organization VARCHAR(255));'
-        with conn:
-            c.execute(query)
+    # Make list of echolocation and abnormal files
+    echofiles = [f for f in listdir(outdir) if isfile(
+        join(outdir, f)) and f.startswith('e_')]
+    abnormfiles = [f for f in listdir(outdir) if isfile(
+        join(outdir, f)) and f.startswith('a_')]
 
-    # add new user and user-defined organization to "organizations" table
-    with conn:
-        query = 'INSERT INTO organizations VALUES (?, ?);'
-        c.execute(query, (username, organization))
+    params = {'echofiles': echofiles, 'abnormfiles': abnormfiles}
 
-
-def erase_data(uid):
-    """ Remove all user data from pulses table. Only call on logout """
-    conn = sqlite3.connect('../Bat_Echolocation_2019/db.sqlite3')
-    with conn:
-        c = conn.cursor()
-        c.execute('DELETE FROM pulses WHERE uid=?;', (uid,))
+    return render(request, 'display.html', params)
 
 
-def make_zip(indir, outdir):
-    """ Make a zip file with all generated pulses """
+def draw_graph(request):
+    metadata = db_API.load_metadata(request.user.id)
+    graph.draw_graph(metadata, request.user.id)
+    return render(request, 'graph.html')
 
-    # Make appropriate directories if possible
-    noutdir = outdir + '/buildazip'
+
+def gallery(request):
+    list = Album.objects.filter(is_visible=True).order_by('-created')
+    paginator = Paginator(list, 10)
+
+    page = request.GET.get('page')
     try:
-        os.makedirs(noutdir)
+        albums = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        albums = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g.  9999), deliver last page of results.
+        albums = paginator.page(paginator.num_pages)
+
+    return render(request, 'gallery.html', {'albums': albums})
+
+
+class AlbumDetail(DetailView):
+    model = Album
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(AlbumDetail, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the images
+        context['images'] = AlbumImage.objects.filter(album=self.object.id)
+        return context
+
+
+def handler404(request, exception):
+    print(exception)
+    assert isinstance(request, HttpRequest)
+    return render(request, 'handler404.html', None, None, 404)
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUPForm(request.POST or None)
+
+        if form.is_valid():
+            form.save()
+
+            # Fetch registration information here and pass to DB API
+            db_API.add_user_organization(request.POST['username'], request.POST['organization'])
+
+            return redirect('gallery')
+        else:
+            args = {'form': form}
+            return render(request, 'signup.html', args)
+    else:
+        form = SignUPForm()
+
+        args = {'form': form}
+        return render(request, 'signup.html', args)
+
+
+def logout(request, next_page):
+    uid = request.user.id
+    outdir = os.path.join(os.getcwd(), 'media', str(uid))
+
+    try:
+        os.makedirs(outdir)
     except:
         pass
-    try:
-        os.mkdir(noutdir + '/abnormal')
-        os.mkdir(noutdir + '/echolocation')
-    except:
-        pass
 
-    # Get all files in directory
-    onlyfiles = os.listdir(indir)
+    shutil.rmtree(outdir)
 
-    # Organize files into echolocation or abnormal
-    for file in onlyfiles:
-        f = file
-        file = indir + '/' + file
-        if f.startswith('a_'):
-            shutil.copy2(file, os.path.join(noutdir, 'abnormal', f))
-        elif f.startswith('e_'):
-            shutil.copy2(file, os.path.join(noutdir, 'echolocation', f))
+    db_API.erase_data(uid)
 
-    # Make zip and load into memory
-    shutil.make_archive(outdir + '/results', 'zip', noutdir)
-    z = open(outdir + '/results.zip', 'rb')
-    m = z.read()
-    z.close()
-
-    # Delete everything
-    shutil.rmtree(noutdir)
-
-<<<<<<< Updated upstream
     return auth_views.LogoutView.as_view()(request, next_page)
-=======
-    return 'results.zip', m
->>>>>>> Stashed changes

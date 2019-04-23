@@ -15,7 +15,6 @@ import numpy as np
 from scipy.signal import savgol_filter
 
 
-# TODO: consider whether to put all of clean_graph() into insert_pulse()
 def clean_graph(filename, graph=None, dy_cutoff=2000, dx_cutoff=.2, pulse_size=20):
     if graph is None:
         print('File is empty')
@@ -119,33 +118,6 @@ def get_tables():
     return tables
 
 
-def set_render_status(uid, completed=False) {
-    conn = sqlite3.connect('../Bat_Echolocation_2019/db.sqlite3')
-    c = conn.cursor()
-    
-    if 'status' not in get_tables():
-        query = 'CREATE TABLE status (uid INTEGER PRIMARY KEY, status BIT default "FALSE")'
-        c.execute(query)
-
-    c.execute('INSERT OR REPLACE INTO status VALUES (?, ?);', (uid, completed,))
-}
-
-
-def get_render_status(uid) {
-    if 'status' not in get_tables():
-        return True
-
-    c.execute('SELECT * FROM status WHERE uid = ?', (uid,))
-    user_status = c.fetchall()
-
-    if user_status is None:
-        return True
-
-    return user_status[1]
-}
-
-
-# TODO: try adding the contents of clean_graph() to this function
 def insert_pulse(uid, file_name, file):
     """ Clean ZC file and add to DB """
     conn = sqlite3.connect('../Bat_Echolocation_2019/db.sqlite3')
@@ -237,7 +209,8 @@ def render_images(uid, outdir):
 
     # Load CNN
     __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-    model = load_model(__location__ + '/CNN200x300ep30.h5')
+    #model = load_model(__location__ + '/CNN200x300ep30.h5')
+    model = load_model(__location__ + '/CNN200x300ep383.h5')
 
     fig, ax = plt.subplots()
 
