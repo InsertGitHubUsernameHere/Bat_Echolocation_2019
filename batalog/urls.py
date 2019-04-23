@@ -26,10 +26,10 @@ urlpatterns = [
     path('graph', app.views.draw_graph, name='graph'),
     path('upload', app.views.upload, name='upload'),
     path('download', app.views.download_zip),
-    path('render', app.views.render_images, name='render'),
+    path('render', app.views.render_pulses, name='render'),
     path('display', app.views.display_images, name='display'),
-    re_path(r'^render_status/(?P<task_id>[\w-]+)/$', app.views.render_status, name='render_status'),
-    re_path(r'^(?P<task_id>[\w-]+)/$', app.views.gallery, name='gallery'),
+    path('render_status', app.views.render_status, name='render_status'),
+    path('', app.views.gallery, name='gallery'),
 
     re_path(r'^(?P<slug>[-\w]+)$', app.views.AlbumDetail.as_view(), name='album'),
 
