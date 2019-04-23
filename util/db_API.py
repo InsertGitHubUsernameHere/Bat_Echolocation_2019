@@ -119,7 +119,7 @@ def get_tables():
     return tables
 
 
-def set_render_status(uid, completed=False) {
+def set_render_status(uid, completed=False):
     conn = sqlite3.connect('../Bat_Echolocation_2019/db.sqlite3')
     c = conn.cursor()
     
@@ -128,21 +128,20 @@ def set_render_status(uid, completed=False) {
         c.execute(query)
 
     c.execute('INSERT OR REPLACE INTO status VALUES (?, ?);', (uid, completed,))
-}
 
 
-def get_render_status(uid) {
+def get_render_status(uid):
     if 'status' not in get_tables():
-        return True
+        return -1
 
     c.execute('SELECT * FROM status WHERE uid = ?', (uid,))
     user_status = c.fetchall()
 
     if user_status is None:
-        return True
+        return -1
 
     return user_status[1]
-}
+
 
 
 # TODO: try adding the contents of clean_graph() to this function
@@ -226,6 +225,8 @@ def insert_zip(uid, outdir, file_name, file):
 
 
 def render_images(uid, outdir):
+    set_render_status(uid, False)
+
     """ Load images from DB and render """
     conn = sqlite3.connect('../Bat_Echolocation_2019/db.sqlite3')
     c = conn.cursor()
@@ -272,6 +273,8 @@ def render_images(uid, outdir):
             os.rename(save_path, save_path.replace('^', 'e'))
         else:
             os.rename(save_path, save_path.replace('^', 'a'))
+
+    set_render_status(uid, True)
 
 
 def load_metadata(uid):
