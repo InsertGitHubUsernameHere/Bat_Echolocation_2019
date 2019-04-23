@@ -1,6 +1,7 @@
 <script type="text/javascript">// <![CDATA[
     function get_status() {
-        fetch('{% url 'render_status' %}').then(function(response) {
+	var urlStatus = '{% url "render_status" %}';
+        fetch(urlStatus).then(function(response) {
            	response.json().then(function(data) {
                 if(data.status) {
                     // show render link

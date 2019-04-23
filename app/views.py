@@ -74,7 +74,7 @@ def render_pulses(request):
         pass
 
     # Render images to local storage
-    current_app.tasks['render_images'].delay(uid, outdir)
+    render_images.delay(uid, outdir)
 
     return redirect('gallery')
 
