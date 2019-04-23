@@ -119,6 +119,32 @@ def get_tables():
     return tables
 
 
+def set_render_status(uid, completed=False) {
+    conn = sqlite3.connect('../Bat_Echolocation_2019/db.sqlite3')
+    c = conn.cursor()
+    
+    if 'status' not in get_tables():
+        query = 'CREATE TABLE status (uid INTEGER PRIMARY KEY, status BIT default "FALSE")'
+        c.execute(query)
+
+    c.execute('INSERT OR REPLACE INTO status VALUES (?, ?);', (uid, completed,))
+}
+
+
+def get_render_status(uid) {
+    if 'status' not in get_tables():
+        return True
+
+    c.execute('SELECT * FROM status WHERE uid = ?', (uid,))
+    user_status = c.fetchall()
+
+    if user_status is None:
+        return True
+
+    return user_status[1]
+}
+
+
 # TODO: try adding the contents of clean_graph() to this function
 def insert_pulse(uid, file_name, file):
     """ Clean ZC file and add to DB """

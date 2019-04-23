@@ -1,10 +1,11 @@
 <script type="text/javascript">// <![CDATA[
     function get_status() {
-	if({% task_id %} === '') {
+	print({task_id});
+	if({ task_id } == '') {
 	    get_status();
 	}
 	else {
-            fetch('{% url 'render_status' task_id=task_id %}').then(function(response) {
+            fetch('{% url 'render_status' task_id=0 %}').then(function(response) {
            	 response.json().then(function(data) {
                       if(data.status) {
                     // show render link
