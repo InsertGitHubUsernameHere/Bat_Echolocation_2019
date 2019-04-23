@@ -73,14 +73,14 @@ def render_images(request):
         pass
 
     # Render images to local storage
-    status = render_pulses.delay(uid, outdir)
+    render_pulses.delay(uid, outdir)
 
     return redirect('gallery', {'task_id': status.task_id})
 
-def render_status(request, task_id):
-    result = AsyncResult(task_id)
+def render_status(request):
+    result = db_API.get_render_status(request.user.id)
 
-    return HttpResponse({'status': result.successful()}, content_type='application/json')
+    return HttpResponse({'status': result}, content_type='application/json')
 
 def display_images(request):
     uid = request.user.id
