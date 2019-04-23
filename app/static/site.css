@@ -146,7 +146,7 @@ strong {
 .button {
   display: inline-block;
   border-radius: 4px;
-  background-color: #f4511e;
+  background-color: #b37500;
   border: none;
   color: #FFFFFF;
   text-align: center;
@@ -221,9 +221,9 @@ body {
 
 p {
   padding: 2%;
-  background: #fff9c6;
-  color: #c7b27e;
-  border: 1px solid #fce29f;
+  background: #ffe6c6;
+  color: #c7a47e;
+  border: 1px solid #fccd9f;
   border-radius: .25em;
 }
 

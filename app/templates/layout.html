@@ -44,10 +44,11 @@
                     <img src="{% static 'social/social-github.svg' %}" class="dpg-icon" alt="Batalog Github" />
                 </a>
             </ul>
+
             <ul class="right hide-on-med-and-med">
                 {% if user.is_authenticated %}
                     Hi {{ user.username }}!
-                    <ul class="right hide-on-med-and-down">    
+                    <ul class="right hide-on-med-and-down">
                         <a href="{% url 'logout' %}">Logout</a>
                     </ul>
 
