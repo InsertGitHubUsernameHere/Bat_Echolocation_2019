@@ -14059,3 +14059,157 @@ Traceback (most recent call last):
   File "/home/batalog/batalogvenv/Bat_Echolocation_2019/app/views.py", line 76, in render_images
     # Render images to local storage
 AttributeError: 'function' object has no attribute 'delay'
+Watching for file changes with StatReloader
+Waiting for apps ready_event.
+Watching for file changes with StatReloader
+Waiting for apps ready_event.
+Apps ready_event triggered. Sending autoreload_started signal.
+(0.004) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.003) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-23 20:38:25.800245' AND "django_session"."session_key" = '3mrrzszx1x42e9h8fni3gthshfnvg4ie'); args=('2019-04-23 20:38:25.800245', '3mrrzszx1x42e9h8fni3gthshfnvg4ie')
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 3; args=(True,)
+"GET / HTTP/1.1" 200 7038
+"GET /static/site.css HTTP/1.1" 200 4013
+(0.001) SELECT "django_site"."id", "django_site"."domain", "django_site"."name" FROM "django_site" WHERE "django_site"."id" = 1; args=(1,)
+"GET /accounts/login/ HTTP/1.1" 200 4365
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."username" = 'kkeomalaythong'; args=('kkeomalaythong',)
+(0.000) SELECT (1) AS "a" FROM "django_session" WHERE "django_session"."session_key" = 'q0be3bqvdd6x3np6tbupcdku7p1mmq2g'  LIMIT 1; args=('q0be3bqvdd6x3np6tbupcdku7p1mmq2g',)
+(0.000) BEGIN; args=None
+(0.010) INSERT INTO "django_session" ("session_key", "session_data", "expire_date") SELECT 'q0be3bqvdd6x3np6tbupcdku7p1mmq2g', 'ZTc5Mzk1NWQ0NmRjMjdlYjU4MTZhODkwMTI2ODVmZDQ4Yzk0MGIwODp7fQ==', '2019-05-07 20:38:34.822711'; args=('q0be3bqvdd6x3np6tbupcdku7p1mmq2g', 'ZTc5Mzk1NWQ0NmRjMjdlYjU4MTZhODkwMTI2ODVmZDQ4Yzk0MGIwODp7fQ==', '2019-05-07 20:38:34.822711')
+(0.013) UPDATE "auth_user" SET "last_login" = '2019-04-23 20:38:34.845549' WHERE "auth_user"."id" = 5; args=('2019-04-23 20:38:34.845549', 5)
+(0.000) BEGIN; args=None
+(0.004) UPDATE "django_session" SET "session_data" = 'NmNmYTkzYTY2Y2JhZDI4ZTUyZTQ0ZThkMmMyNTU4OGM5ZTdkZTI0NDp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJiMmRmM2E3ZmY3NWMwMDA0ZDI2ZTYyNDJlOWI4YWZhMGIyMzA3ODcyIn0=', "expire_date" = '2019-05-07 20:38:34.860235' WHERE "django_session"."session_key" = 'q0be3bqvdd6x3np6tbupcdku7p1mmq2g'; args=('NmNmYTkzYTY2Y2JhZDI4ZTUyZTQ0ZThkMmMyNTU4OGM5ZTdkZTI0NDp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJiMmRmM2E3ZmY3NWMwMDA0ZDI2ZTYyNDJlOWI4YWZhMGIyMzA3ODcyIn0=', '2019-05-07 20:38:34.860235', 'q0be3bqvdd6x3np6tbupcdku7p1mmq2g')
+"POST /accounts/login/ HTTP/1.1" 302 0
+(0.000) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.002) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-23 20:38:34.903193' AND "django_session"."session_key" = 'q0be3bqvdd6x3np6tbupcdku7p1mmq2g'); args=('2019-04-23 20:38:34.903193', 'q0be3bqvdd6x3np6tbupcdku7p1mmq2g')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 5; args=(5,)
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 3; args=(True,)
+"GET / HTTP/1.1" 200 7079
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-23 20:38:37.084442' AND "django_session"."session_key" = 'q0be3bqvdd6x3np6tbupcdku7p1mmq2g'); args=('2019-04-23 20:38:37.084442', 'q0be3bqvdd6x3np6tbupcdku7p1mmq2g')
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 5; args=(5,)
+"GET /upload? HTTP/1.1" 200 4717
+"GET /static/ajax-loader.gif HTTP/1.1" 304 0
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-23 20:38:44.361192' AND "django_session"."session_key" = 'q0be3bqvdd6x3np6tbupcdku7p1mmq2g'); args=('2019-04-23 20:38:44.361192', 'q0be3bqvdd6x3np6tbupcdku7p1mmq2g')
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 5; args=(5,)
+"POST /render HTTP/1.1" 302 0
+(0.002) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-23 20:38:55.779373' AND "django_session"."session_key" = 'q0be3bqvdd6x3np6tbupcdku7p1mmq2g'); args=('2019-04-23 20:38:55.779373', 'q0be3bqvdd6x3np6tbupcdku7p1mmq2g')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 5; args=(5,)
+"GET /display HTTP/1.1" 200 13628
+"GET /static/site.css HTTP/1.1" 304 0
+"GET /media/5/test_images/a_P7272107.25_10.png HTTP/1.1" 200 1732
+"GET /media/5/test_images/a_P7272107.25_1.png HTTP/1.1" 200 2046
+"GET /media/5/test_images/a_P7272107.25_0.png HTTP/1.1" 200 2038
+"GET /media/5/test_images/a_P7272107.25_14.png HTTP/1.1" 200 2403
+"GET /media/5/test_images/a_P7272107.25_15.png HTTP/1.1" 200 2690
+"GET /media/5/test_images/a_P7272107.25_16.png HTTP/1.1" 200 2408
+"GET /media/5/test_images/a_P7272107.25_17.png HTTP/1.1" 200 1804
+"GET /media/5/test_images/a_P7272107.25_11.png HTTP/1.1" 200 2589
+"GET /media/5/test_images/a_P7272107.25_19.png HTTP/1.1" 200 2519
+"GET /media/5/test_images/a_P7272107.25_20.png HTTP/1.1" 200 2504
+"GET /media/5/test_images/a_P7272107.25_2.png HTTP/1.1" 200 2518
+"GET /media/5/test_images/a_P7272107.25_21.png HTTP/1.1" 200 2298
+"GET /media/5/test_images/a_P7272107.25_18.png HTTP/1.1" 200 2329
+"GET /media/5/test_images/a_P7272107.25_23.png HTTP/1.1" 200 2251
+"GET /media/5/test_images/a_P7272107.25_22.png HTTP/1.1" 200 2519
+"GET /media/5/test_images/a_P7272107.25_12.png HTTP/1.1" 200 2277
+"GET /media/5/test_images/a_P7272107.25_24.png HTTP/1.1" 200 2087
+"GET /media/5/test_images/a_P7272107.25_4.png HTTP/1.1" 200 2760
+"GET /media/5/test_images/a_P7272107.25_3.png HTTP/1.1" 200 2074
+"GET /media/5/test_images/a_P7272107.25_13.png HTTP/1.1" 200 2485
+"GET /media/5/test_images/a_P7272107.25_6.png HTTP/1.1" 200 2389
+"GET /media/5/test_images/a_P7272107.25_7.png HTTP/1.1" 200 2185
+"GET /media/5/test_images/a_P7272107.25_8.png HTTP/1.1" 200 2072
+"GET /media/5/test_images/a_P7272107.25_9.png HTTP/1.1" 200 2071
+File C:\Users\theot\Desktop\Uni\CSC490\Bat_Echolocation_2019\util\CNN.py. is_changed: False, is_new: True
+File C:\Users\theot\Desktop\Uni\CSC490\Bat_Echolocation_2019\util\CNN.py previous mtime: None, current mtime: 1556052131.5696144
+C:\Users\theot\Desktop\Uni\CSC490\Bat_Echolocation_2019\util\CNN.py notified as changed. Signal results: [].
+C:\Users\theot\Desktop\Uni\CSC490\Bat_Echolocation_2019\util\CNN.py changed, reloading.
+Watching for file changes with StatReloader
+Waiting for apps ready_event.
+Apps ready_event triggered. Sending autoreload_started signal.
+(0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-23 20:42:30.390042' AND "django_session"."session_key" = 'q0be3bqvdd6x3np6tbupcdku7p1mmq2g'); args=('2019-04-23 20:42:30.390042', 'q0be3bqvdd6x3np6tbupcdku7p1mmq2g')
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 5; args=(5,)
+"GET /upload? HTTP/1.1" 200 4717
+"GET /static/site.css HTTP/1.1" 304 0
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-23 20:42:32.300988' AND "django_session"."session_key" = 'q0be3bqvdd6x3np6tbupcdku7p1mmq2g'); args=('2019-04-23 20:42:32.300988', 'q0be3bqvdd6x3np6tbupcdku7p1mmq2g')
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 5; args=(5,)
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE "django_session"."session_key" = 'q0be3bqvdd6x3np6tbupcdku7p1mmq2g'; args=('q0be3bqvdd6x3np6tbupcdku7p1mmq2g',)
+(0.020) DELETE FROM "django_session" WHERE "django_session"."session_key" IN ('q0be3bqvdd6x3np6tbupcdku7p1mmq2g'); args=('q0be3bqvdd6x3np6tbupcdku7p1mmq2g',)
+"GET /accounts/logout/ HTTP/1.1" 302 0
+(0.000) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.004) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 3; args=(True,)
+"GET / HTTP/1.1" 200 7038
+(0.001) SELECT "django_site"."id", "django_site"."domain", "django_site"."name" FROM "django_site" WHERE "django_site"."id" = 1; args=(1,)
+"GET /accounts/login/ HTTP/1.1" 200 4365
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."username" = 'kkeomalaythong'; args=('kkeomalaythong',)
+(0.000) SELECT (1) AS "a" FROM "django_session" WHERE "django_session"."session_key" = 'efk671hijwo3xve2aka4oequtn308x97'  LIMIT 1; args=('efk671hijwo3xve2aka4oequtn308x97',)
+(0.000) BEGIN; args=None
+(0.007) INSERT INTO "django_session" ("session_key", "session_data", "expire_date") SELECT 'efk671hijwo3xve2aka4oequtn308x97', 'ZTc5Mzk1NWQ0NmRjMjdlYjU4MTZhODkwMTI2ODVmZDQ4Yzk0MGIwODp7fQ==', '2019-05-07 20:42:45.697139'; args=('efk671hijwo3xve2aka4oequtn308x97', 'ZTc5Mzk1NWQ0NmRjMjdlYjU4MTZhODkwMTI2ODVmZDQ4Yzk0MGIwODp7fQ==', '2019-05-07 20:42:45.697139')
+(0.015) UPDATE "auth_user" SET "last_login" = '2019-04-23 20:42:45.720522' WHERE "auth_user"."id" = 5; args=('2019-04-23 20:42:45.720522', 5)
+(0.000) BEGIN; args=None
+(0.001) UPDATE "django_session" SET "session_data" = 'NmNmYTkzYTY2Y2JhZDI4ZTUyZTQ0ZThkMmMyNTU4OGM5ZTdkZTI0NDp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJiMmRmM2E3ZmY3NWMwMDA0ZDI2ZTYyNDJlOWI4YWZhMGIyMzA3ODcyIn0=', "expire_date" = '2019-05-07 20:42:45.736360' WHERE "django_session"."session_key" = 'efk671hijwo3xve2aka4oequtn308x97'; args=('NmNmYTkzYTY2Y2JhZDI4ZTUyZTQ0ZThkMmMyNTU4OGM5ZTdkZTI0NDp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJiMmRmM2E3ZmY3NWMwMDA0ZDI2ZTYyNDJlOWI4YWZhMGIyMzA3ODcyIn0=', '2019-05-07 20:42:45.736360', 'efk671hijwo3xve2aka4oequtn308x97')
+"POST /accounts/login/ HTTP/1.1" 302 0
+(0.000) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-23 20:42:45.777788' AND "django_session"."session_key" = 'efk671hijwo3xve2aka4oequtn308x97'); args=('2019-04-23 20:42:45.777788', 'efk671hijwo3xve2aka4oequtn308x97')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 5; args=(5,)
+(0.000) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 3; args=(True,)
+"GET / HTTP/1.1" 200 7079
+(0.010) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-23 20:42:47.471928' AND "django_session"."session_key" = 'efk671hijwo3xve2aka4oequtn308x97'); args=('2019-04-23 20:42:47.471928', 'efk671hijwo3xve2aka4oequtn308x97')
+(0.001) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 5; args=(5,)
+"GET /upload? HTTP/1.1" 200 4717
+(0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-23 20:42:53.661839' AND "django_session"."session_key" = 'efk671hijwo3xve2aka4oequtn308x97'); args=('2019-04-23 20:42:53.661839', 'efk671hijwo3xve2aka4oequtn308x97')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 5; args=(5,)
+"POST /render HTTP/1.1" 302 0
+(0.002) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-23 20:43:03.597928' AND "django_session"."session_key" = 'efk671hijwo3xve2aka4oequtn308x97'); args=('2019-04-23 20:43:03.597928', 'efk671hijwo3xve2aka4oequtn308x97')
+(0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 5; args=(5,)
+"GET /display HTTP/1.1" 200 13628
+"GET /media/5/test_images/a_P7272107.25_0.png HTTP/1.1" 200 2038
+"GET /media/5/test_images/a_P7272107.25_1.png HTTP/1.1" 200 2046
+"GET /media/5/test_images/a_P7272107.25_10.png HTTP/1.1" 200 1732
+"GET /media/5/test_images/a_P7272107.25_15.png HTTP/1.1" 200 2690
+"GET /media/5/test_images/a_P7272107.25_16.png HTTP/1.1" 200 2408
+"GET /media/5/test_images/a_P7272107.25_17.png HTTP/1.1" 200 1804
+"GET /media/5/test_images/a_P7272107.25_11.png HTTP/1.1" 200 2589
+"GET /media/5/test_images/a_P7272107.25_18.png HTTP/1.1" 200 2329
+"GET /media/5/test_images/a_P7272107.25_12.png HTTP/1.1" 200 2277
+"GET /media/5/test_images/a_P7272107.25_13.png HTTP/1.1" 200 2485
+"GET /media/5/test_images/a_P7272107.25_14.png HTTP/1.1" 200 2403
+"GET /media/5/test_images/a_P7272107.25_19.png HTTP/1.1" 200 2519
+"GET /media/5/test_images/a_P7272107.25_21.png HTTP/1.1" 200 2298
+"GET /media/5/test_images/a_P7272107.25_22.png HTTP/1.1" 200 2519
+"GET /media/5/test_images/a_P7272107.25_20.png HTTP/1.1" 200 2504
+"GET /media/5/test_images/a_P7272107.25_24.png HTTP/1.1" 200 2087
+"GET /media/5/test_images/a_P7272107.25_2.png HTTP/1.1" 200 2518
+"GET /media/5/test_images/a_P7272107.25_23.png HTTP/1.1" 200 2251
+"GET /media/5/test_images/a_P7272107.25_8.png HTTP/1.1" 200 2072
+"GET /media/5/test_images/a_P7272107.25_9.png HTTP/1.1" 200 2071
+"GET /media/5/test_images/a_P7272107.25_7.png HTTP/1.1" 200 2185
+"GET /media/5/test_images/a_P7272107.25_3.png HTTP/1.1" 200 2074
+"GET /media/5/test_images/a_P7272107.25_4.png HTTP/1.1" 200 2760
+"GET /media/5/test_images/a_P7272107.25_6.png HTTP/1.1" 200 2389
+Watching for file changes with StatReloader
+Waiting for apps ready_event.
+Apps ready_event triggered. Sending autoreload_started signal.
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.004) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2019-04-23 20:59:04.724837' AND "django_session"."session_key" = 'efk671hijwo3xve2aka4oequtn308x97'); args=('2019-04-23 20:59:04.724837', 'efk671hijwo3xve2aka4oequtn308x97')
+(0.002) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 5; args=(5,)
+(0.004) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE "django_session"."session_key" = 'efk671hijwo3xve2aka4oequtn308x97'; args=('efk671hijwo3xve2aka4oequtn308x97',)
+(0.010) DELETE FROM "django_session" WHERE "django_session"."session_key" IN ('efk671hijwo3xve2aka4oequtn308x97'); args=('efk671hijwo3xve2aka4oequtn308x97',)
+"GET /accounts/logout/ HTTP/1.1" 302 0
+(0.000) SELECT COUNT(*) AS "__count" FROM "app_album" WHERE "app_album"."is_visible" = 1; args=(True,)
+(0.002) SELECT "app_album"."id", "app_album"."title", "app_album"."description", "app_album"."thumb", "app_album"."tags", "app_album"."is_visible", "app_album"."created", "app_album"."modified", "app_album"."slug" FROM "app_album" WHERE "app_album"."is_visible" = 1 ORDER BY "app_album"."created" DESC  LIMIT 3; args=(True,)
+"GET / HTTP/1.1" 200 7038
+"GET /static/site.css HTTP/1.1" 304 0
