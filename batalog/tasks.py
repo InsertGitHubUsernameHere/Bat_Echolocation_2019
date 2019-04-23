@@ -1,6 +1,10 @@
 from __future__ import absolute_import, unicode_literals
 from celery import shared_task
 import sqlite3
+import matplotlib.pyplot as plt
+import ast
+import os
+from util import CNN
 
 @shared_task
 def render_images(uid, outdir):
@@ -60,4 +64,4 @@ def render_images(uid, outdir):
         else:
             os.rename(save_path, save_path.replace('^', 'a'))
 
-    c.execute('INSERT OR REPLACE INTO status VALUES (?, ?);', (uid, True,))
+    c.execute(f'INSERT OR REPLACE INTO status VALUES ({uid}, {True});')
