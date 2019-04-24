@@ -5,8 +5,9 @@
 
 <div style="text-align:center">
     {% if user.is_authenticated %}
-        <h3 align='center'>It looks like your files don't have any GPS coordinates associated with them. Please upload at least one file containing GPS coordinates.</h3>
+        <h3 align='center'>It looks like your files don't have any GPS coordinates associated with them. Please upload at least one file containing GPS coordinates. If the files have gps coordinates then it look like this.</h3>
         </br>
+        <a href="https://youtu.be/sTESjH9xbvU" target="_blank">GPS Map</a>
         <form action="/display">
             <input class="button" type="submit" value="Go back" />
         </form>
