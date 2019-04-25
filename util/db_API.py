@@ -225,7 +225,8 @@ def insert_zip(uid, outdir, file_name, file):
 
 
 def render_images(uid, outdir):
-    set_render_status(uid, False)
+    # Celery stuff
+    #set_render_status(uid, False)
 
     """ Load images from DB and render """
     conn = sqlite3.connect('../Bat_Echolocation_2019/db.sqlite3')
@@ -274,7 +275,8 @@ def render_images(uid, outdir):
         else:
             os.rename(save_path, save_path.replace('^', 'a'))
 
-    set_render_status(uid, True)
+    # Celery stuff
+    #set_render_status(uid, True)
 
 
 def load_metadata(uid):

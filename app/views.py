@@ -74,9 +74,9 @@ def render_pulses(request):
         pass
 
     # Render images to local storage
-    render_images.delay(uid, outdir)
+    db_API.render_images(uid, outdir)
 
-    return render(request, 'gallery.html')
+    return redirect('display')
 
 def render_status(request):
     result = db_API.get_render_status(request.user.id)
