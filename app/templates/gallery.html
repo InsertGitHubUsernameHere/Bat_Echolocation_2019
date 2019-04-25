@@ -5,17 +5,17 @@
 
 <div style="text-align:center">
     {% if user.is_authenticated %}
-        </br>
+        <br>
         <h2 align='center'>File Analysis</h2>
-        </br>
+        <br>
         <form action="/upload">
             <button class="button" style="vertical-align:middle"><span>Click Here to Begin</span></button>
         </form>
 
     {% else %}
-        </br>
+        <br>
         <h2 align='center'>Login or Signup to upload a file</h2>
-        </br>
+        <br>
 
     {% endif %}
 </div>
