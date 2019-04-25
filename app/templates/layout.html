@@ -13,6 +13,7 @@
             });
         });
 	    get_status();
+    }
 // ]]></script>
 
 <!DOCTYPE html>
@@ -38,7 +39,9 @@
 <body style= "display: flex; min-height: 100vh; flex-direction: column;">
     <nav role="navigation">
         <div class="nav-wrapper container">
-            <a id="logo-container" href="/" class="brand-logo">Batalog</a>
+            <a id="logo-container" href="/" class="brand-logo">
+                <img src = "{%static 'images/batalog_logo.png' %}" style="max-height:60px" alt = "Home" />
+            </a>
             <ul class="right hide-on-med-and-down">
                 <a href="https://github.com/InsertGitHubUsernameHere/Bat_Echolocation_2019" target="_blank">
                     <img src="{% static 'social/social-github.svg' %}" class="dpg-icon" alt="Batalog Github" />
@@ -87,7 +90,7 @@
             <div class="container">
                 Fall 2018/Spring 2019 UNCG
                 <a href="https://drive.google.com/file/d/1P1CmdfE1jpIdIrNz4O4QAAwQivVcs3jP/view?usp=sharing">(For More Infomation)</a>
-                <a class="grey-text text-lighten-4 right" href="#!">Hadi S., Thien L., Kevin K., David M., Rahim I. (Yang P., Bety R.)</a>
+                <div class="grey-text text-lighten-4 right"><a href="https://github.com/HadiSoufi">Hadi S.</a>, <a href="https://github.com/InsertGitHubUsernameHere">Thien L.</a>, <a href="https://github.com/kkeomalaythong">Kevin K.</a>, <a href = "https://github.com/aRahimIqbal">Rahim I.</a>, <a href="https://github.com/dlmassey">David M.</a> (<a href = "https://github.com/yangp18">Yang P.</a>, <a href = "https://github.com/brostandy">Bety R.</a>)</div>
             </div>
         </div>
     </footer>

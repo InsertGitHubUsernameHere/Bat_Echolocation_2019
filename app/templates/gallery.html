@@ -5,56 +5,19 @@
 
 <div style="text-align:center">
     {% if user.is_authenticated %}
-        <img src="{% static 'social/batalogFileAnalysis.svg' %}" alt="Batalog Github" width=55% height=20% />
+        <br>
+        <h2 align='center'>File Analysis</h2>
+        <br>
         <form action="/upload">
             <button class="button" style="vertical-align:middle"><span>Click Here to Begin</span></button>
         </form>
 
     {% else %}
-        <img src="{% static 'social/batalogSignUp.svg' %}" alt="Batalog Github" width="1080" height="150" />
+        <br>
+        <h2 align='center'>Login or Signup to upload a file</h2>
+        <br>
 
     {% endif %}
-</div>
-
-</br>
-</br>
-
-<div class="container">
-    <div class="row">
-        {% for album in albums %}
-
-        <div class="col">
-            <div class="card dpg-album-card">
-                <div class="card-image">
-                    <img src="{{ album.thumb.url }}" alt="{{ album.title }}" class="dpg-album-card-image" />
-                </div>
-                <div class="card-content">
-                    <span class="card-title">{{ album.title }}</span>
-                    <p>{{ album.description|truncatechars:120 }}</p>
-                </div>
-                <div class="card-action">
-                    <a href="{% url 'album' album.slug %}">
-                        More Images
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        {% endfor %}
-
-    </div>
-</div>
-
-<div class="pagination center">
-    <span class="step-links">
-        {% if albums.has_previous %}
-            <a href="?page={{ albums.previous_page_number }}" class="waves-effect waves-light btn btn-large">Previous</a>
-        {% endif %}
-
-        {% if albums.has_next %}
-            <a href="?page={{ albums.next_page_number }}" class="waves-effect waves-light btn btn-large">Next</a>
-        {% endif %}
-    </span>
 </div>
 
 {% endblock %}

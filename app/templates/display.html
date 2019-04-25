@@ -20,9 +20,8 @@
     border: 1px solid #ccc;
     background-color: #fefefe;
     float: left;
-    width: 340px;
+    width: 150px;
     font-size:80%;
-    align:center;
     text-align: center;
     transition: transform .1s;
   }
@@ -30,6 +29,7 @@
   div.gallery:hover {
     border: 1px solid #777;
     transform: scale(1.5);
+    z-index: 5;
   }
 
   div.gallery img {
@@ -40,8 +40,7 @@
 </style>
 
 <div style="text-align:center">
-    <h2> Here Are Your Images! </h2>
-    </br>
+  <br>
     <div style="float: left; width: 33%">
         <form action="/graph">
             <input class="buttonNorm" type = 'submit' value='Generate map'>
@@ -61,7 +60,7 @@
 
 
 <div style="text-align:center">
-  </br>
+  <br>
   <div style="float: left; width: 50%">
     <h3>Abnormal({{ abnormfiles|length }})</h3>
   </div>
@@ -72,44 +71,25 @@
 </div>
 
 <br>
-  <br>
-    <hr>
-  </br>
-</br>
+<br>
+
+<hr>
+
+<br>
+<br>
+
 <div class= "split leftcol">
   {% for pic in abnormfiles %}
-    {% if forloop.counter0 >= 20 %}
-
-    {% else %}
-        <div id="{{ pic }}" class = "gallery">
-          {{ forloop.counter }}
-          <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')" />
-          <script type="text/javascript">getName("{{ pic }}");</script>
-        </div>
-
-    {% endif %}
+    <div id="{{ pic }}" class = "gallery">
+      {{ forloop.counter }}
+      <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')" />
+      <script type="text/javascript">getName("{{ pic }}");</script>
+    </div>
 
     {% empty %}
        <li>We didn't find any abnormal pulses</li>
 
   {% endfor %}
-
-  <button class="buttonborder" onclick="myFunction()">More Images</button>
-
-  <div id="myDIV" style="display:none;">
-    {% for pic in abnormfiles %}
-      {% if forloop.counter0 <= 20 %}
-
-      {% else %}
-        <div id="{{ pic }}" class = "gallery">
-          {{ forloop.counter }}
-          <img name="{{ pic }}" src="/media/{{user.id}}/test_images/{{ pic }}" alt="getName('{{ pic }}')" />
-          <script type="text/javascript">getName("{{ pic }}");</script>
-        </div>
-
-      {% endif %}
-    {% endfor %}
-  </div>
 </div>
 
 <div class= "split rightcol">

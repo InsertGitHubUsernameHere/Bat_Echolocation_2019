@@ -1,8 +1,7 @@
 <script type="text/javascript">// <![CDATA[
         function loading(){
-            
-            $("#loading").show();    
-            $("#upload").hide();   
+            $("#loading").show();
+            $("#upload").hide();
         }
 // ]]></script>
 {% extends "layout.html" %}
@@ -16,10 +15,15 @@
 </div>
 
 <div id="upload" style="text-align:center;">
+    <br>
+    <br>
+    <br>
+    <br>
+
     <h1>Upload</h1>
 
-    </br>
-    </br>
+    <br>
+    <br>
 
     <form action="render" method="post" enctype="multipart/form-data">
         {% csrf_token %}
