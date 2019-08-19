@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from plotly.offline import plot, init_notebook_mode
-import plotly
-import plotly.plotly as py
-import plotly.graph_objs as go
+import chart_studio
+import chart_studio.plotly as py
+import plotly.graph_objects as go
 import glob
 import datetime
 import operator

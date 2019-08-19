@@ -10,7 +10,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import DetailView
 from django.contrib.auth import views as auth_views
 
-from celery import current_app
+#from celery import current_app
 from batalog.tasks import render_images
 from util import db_API
 from util import graph
