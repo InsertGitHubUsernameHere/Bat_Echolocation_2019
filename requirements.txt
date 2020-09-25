@@ -19,6 +19,6 @@ scikit-learn==0.20.3
 scipy==1.2.1
 sklearn==0.0
 tensorboard==1.13.1
-tensorflow==1.13.1
+tensorflow==1.15.4
 tensorflow-estimator==1.13.0
 whitenoise >= 0.0.1
